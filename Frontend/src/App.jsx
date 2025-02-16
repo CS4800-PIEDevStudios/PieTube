@@ -1,35 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
 import './App.css'
-import { Button } from 'react-bootstrap';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Home = lazy(() => import('./components/Home'));
+const Page1 = lazy(() => import('./components/Page1'));
 
+const App = () => {
   return (
-    <>
-      <div>
-        <h1>This is the first page</h1>
-        <Button variant="primary"> This is a button </Button>
-        {/* <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p> */}
-      </div>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/page1" element={<Page1 />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
