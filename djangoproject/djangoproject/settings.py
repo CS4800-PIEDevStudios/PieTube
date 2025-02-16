@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'djangoproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pietube-database',
+        'NAME': 'PieTube',
         'USER': 'admin',
         'PASSWORD': 'OvCCanRNLvBjdfiKUt3I',
         'HOST': 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com',  # e.g., AWS RDS endpoint
