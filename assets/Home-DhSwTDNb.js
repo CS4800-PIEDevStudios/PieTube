@@ -1,0 +1,1 @@
+import{j as e,L as o}from"./index-Ss1AHUea.js";import{B as r}from"./Button-BY76SBf3.js";const a=()=>e.jsxs("div",{children:[e.jsx("h1",{children:"Home Page"}),e.jsx("p",{children:"Welcome to the Home Page!"}),e.jsx(o,{to:"/page1",children:e.jsx(r,{variant:"primary",children:" Page 1 "})})]});export{a as default};
