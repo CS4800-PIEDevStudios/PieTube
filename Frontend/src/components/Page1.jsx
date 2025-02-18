@@ -6,7 +6,7 @@ const Page1 = () => (
   <div>
     <h1>Page 1</h1>
     <p>This is Page 1.</p>
-    <Link to="/">
+    <Link to="/PieTube">
         <Button variant="primary"> Home </Button>
     </Link>
   </div>
