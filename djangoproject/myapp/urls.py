@@ -19,5 +19,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('http://127.0.0.1:8000/', views.index, name="index"),
+    path('api/get-data', views.index, name="index"),
 ]

@@ -19,18 +19,39 @@
  
 // export default Home;
 
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const Home = () => (
+const Home = () => {
+
+  const [data, setData] = useState('');
+
+  const fetchData = () => {
+    console.log("fetching...")
+
+    axios.get('http://127.0.0.1:8000/api/get-data')
+        .then(response => {
+            setData(response.data);
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+    }
+  return (
   <div>
     <h1>Home Page</h1>
     <p>Welcome to the Home Page!</p>
-    <Link to="/page1">
-      <Button variant="primary"> Page 1 </Button>
-    </Link>
+    <Button variant="primary" onClick = {fetchData}> Fetch Data </Button>
+    <p>{data}</p>
   </div>
-);
+  );
+};
+
+
+
+
+
 
 export default Home;
