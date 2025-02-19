@@ -25,10 +25,11 @@ SECRET_KEY = 'django-insecure-zm#=^#g3v^i^k1a#(-&7j)l7+56u9v-0ir!y9(7%!)5oe=8o)_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['23.20.205.143']
+ALLOWED_HOSTS = ['23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com']
 
 # For development only
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ORIGIN = True
 
 
 # Application definition
