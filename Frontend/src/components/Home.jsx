@@ -31,7 +31,7 @@ const Home = () => {
   const fetchData = () => {
     console.log("fetching...")
 
-    axios.get('http://127.0.0.1:8000/api/get-data')
+    axios.get('https://23.20.205.143/api/get-data')
         .then(response => {
             setData(response.data);
         })
