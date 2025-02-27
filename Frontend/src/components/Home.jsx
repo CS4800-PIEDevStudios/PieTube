@@ -30,7 +30,7 @@ const Home = () => {
 
     const fetchData = () => {
         console.log("fetching...");
-        axios.get('http://127.0.0.1:8000/api/get-movie-data')
+        axios.get('https://23.20.205.143/api/get-movie-data')
             .then(response => {
                 console.log(response.data)
                 setMovieData(response.data); // Assuming the response data is an array of objects
@@ -39,7 +39,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('http://127.0.0.1:8000/api/get-user-data')
+            axios.get('https://23.20.205.143/api/get-user-data')
             .then(response => {
                 console.log(response.data)
                 setUserData(response.data); // Assuming the response data is an array of objects
