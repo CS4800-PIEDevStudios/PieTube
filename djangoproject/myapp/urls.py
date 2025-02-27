@@ -19,5 +19,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('api/get-data', views.index, name="index"),
+    path('api/get-movie-data', views.getMovieData, name="getMovieData"),
+    path('api/get-user-data', views.getUserData, name="getUserData"),
 ]

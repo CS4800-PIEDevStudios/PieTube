@@ -4,8 +4,8 @@ import mysql.connector
 
 
 
-# Create your views here.
-def index(request):
+
+def getMovieData(request):
 	# Connect to server
 	cnx = mysql.connector.connect(
 		host="pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com",
@@ -14,16 +14,37 @@ def index(request):
 		password="OvCCanRNLvBjdfiKUt3I")
 
 	# Get a cursor
-	cur = cnx.cursor()
+	cur = cnx.cursor(dictionary=True)
 
-	cur.execute("SELECT * FROM PieTube.Student")
+	cur.execute("SELECT * FROM PieTube.Movie")
 
 	result = cur.fetchall()
-	string = ""
-	for x in result:
-		string += str(x) + "\n"
 
-	# Close connection
 	cnx.close()
+	cur.close()
 
-	return JsonResponse(string, safe=False)
+	print(result)
+
+	return JsonResponse(result, safe=False)
+
+def getUserData(request):
+	# Connect to server
+	cnx = mysql.connector.connect(
+		host="pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com",
+		port=3306,
+		user="admin",
+		password="OvCCanRNLvBjdfiKUt3I")
+
+	# Get a cursor
+	cur = cnx.cursor(dictionary=True)
+
+	cur.execute("SELECT * FROM PieTube.User")
+
+	result = cur.fetchall()
+
+	cnx.close()
+	cur.close()
+
+	print(result)
+
+	return JsonResponse(result, safe=False)
