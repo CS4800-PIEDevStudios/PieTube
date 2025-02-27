@@ -21,4 +21,11 @@ from . import views
 urlpatterns = [
     path('api/get-movie-data', views.getMovieData, name="getMovieData"),
     path('api/get-user-data', views.getUserData, name="getUserData"),
+    path('api/get-actor-data', views.getActorData, name="getActorData"),
+    path('api/get-genre-data', views.getGenreData, name="getGenreData"),
+    path('api/get-movie-role-data', views.getMovieRoleData, name="getMovieRoleData"),
+    path('api/get-movie-genre-data', views.getMovieGenreData, name="getMovieGenreData"),
+    path('api/get-trailer-data', views.getTrailerData, name="getTrailerData"),
+    path('api/get-director-data', views.getDirectorData, name="getDirectorData"),
+    path('api/get-recommendation-data', views.getRecommendationData, name="getRecommendationData"),
 ]
