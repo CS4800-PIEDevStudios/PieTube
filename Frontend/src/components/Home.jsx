@@ -1,24 +1,3 @@
-// import React from 'react';
-// import { Button } from 'react-bootstrap';
-
-// const Home = () => {
-//   // const { error, isPending, data: blogs } = useFetch('http://localhost:8000/blogs')
-
-//   return (
-//     <div className="home">
-//       {/* { error && <div>{ error }</div> }
-//       { isPending && <div>Loading...</div> }
-//       { blogs && <BlogList blogs={blogs} /> } */}
-//       <div>
-//         <h1>This is the first page</h1>
-//         <Button variant="primary"> This is a button </Button>
-//       </div>
-//     </div>
-//   );
-// }
- 
-// export default Home;
-
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -34,11 +13,6 @@ const Home = () => {
     const [directorData, setDirectorData] = useState([]);
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
-
-
-
-
-
 
     const fetchData = () => {
         console.log("fetching...");
@@ -123,13 +97,14 @@ const Home = () => {
             });
     };
 
-    
-
     return (
         <div>
             <h1>Home Page</h1>
             <p>Welcome to the Home Page!</p>
             <Button variant="primary" onClick={fetchData}>Fetch Data</Button>
+            <Link to="/page1">
+                <Button variant="primary"> Login </Button>
+            </Link>
 
             <h2>Movie Table</h2>
             <Table striped bordered hover>
