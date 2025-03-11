@@ -4,14 +4,14 @@ import { lazy } from 'react';
 import './App.css'
 
 const Home = lazy(() => import('./components/Home'));
-const Page1 = lazy(() => import('./components/Page1'));
+const Login = lazy(() => import('./components/Login'));
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/PieTube" element={<Home />} />
-        <Route path="/page1" element={<Page1 />} />
+        <Route path="/Login" element={<Login />} />
       </Routes>
     </Router>
   );

@@ -102,7 +102,7 @@ const Home = () => {
             <h1>Home Page</h1>
             <p>Welcome to the Home Page!</p>
             <Button variant="primary" onClick={fetchData}>Fetch Data</Button>
-            <Link to="/page1">
+            <Link to="/Login">
                 <Button variant="primary"> Login </Button>
             </Link>
 
