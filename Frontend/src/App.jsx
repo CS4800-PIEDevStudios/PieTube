@@ -5,6 +5,7 @@ import './App.css'
 
 const Home = lazy(() => import('./components/Home'));
 const Login = lazy(() => import('./components/Login'));
+const Signup = lazy(() => import('./components/Signup'));
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/PieTube" element={<Home />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
       </Routes>
     </Router>
   );
