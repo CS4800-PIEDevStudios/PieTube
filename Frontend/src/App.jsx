@@ -4,10 +4,11 @@ import { lazy } from 'react';
 import './App.css';
 
 const Home = lazy(() => import('./components/Home'));
-const Login = lazy(() => import('./components/Login'));
-const Signup = lazy(() => import('./components/Signup'));
 const Logoheader = lazy(() => import('./components/Logoheader'));
 const Header = lazy(() => import('./components/Header'));
+const Login = lazy(() => import('./components/Login'));
+const Signup = lazy(() => import('./components/Signup'));
+const Changepassword = lazy(() => import('./components/Changepassword'));
 
 const Layout = ({ children, header }) => {
   return (
@@ -22,27 +23,28 @@ const App = () => {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
+      <Header/>
+      <div className='d-flex align-items-center justify-content-center'>
         <Routes>
           <Route path="/PieTube" element={
-              <Layout header={<Header />}>
-                <Home />
-              </Layout>
+            <Home />
             }/>
-          <Route
-            path="/Login"
-            element={
-              <Layout header={<Logoheader />}>
-                <Login />
-              </Layout>
-            }
-          />
+          <Route path="/Changepassword" element={
+            <Changepassword />
+            }/>    
+          <Route path="/Login" element={
+            <Layout header={<Logoheader />}>
+              <Login />
+            </Layout>
+            }/>
           <Route path="/Signup" element={
-              <Layout header={<Logoheader />}>
-                <Signup />
-              </Layout>
-            }
-          />
+            <Layout header={<Logoheader />}>
+              <Signup />
+            </Layout>
+            }/>
         </Routes>
+      </div>
+
       </Suspense>
     </Router>
   );
