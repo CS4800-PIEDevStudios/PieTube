@@ -6,6 +6,7 @@ import './App.css';
 const Home = lazy(() => import('./components/Home'));
 const Login = lazy(() => import('./components/Login'));
 const Signup = lazy(() => import('./components/Signup'));
+const Profile = lazy(() => import('./components/Profile'));
 const Logoheader = lazy(() => import('./components/Logoheader'));
 const Header = lazy(() => import('./components/Header'));
 
@@ -39,6 +40,13 @@ const App = () => {
           <Route path="/Signup" element={
               <Layout header={<Logoheader />}>
                 <Signup />
+              </Layout>
+            }
+          />
+          <Route path="/profile"
+            element={
+              <Layout header={<Header />}>
+                <Profile />
               </Layout>
             }
           />

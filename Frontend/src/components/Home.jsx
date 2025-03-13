@@ -108,6 +108,11 @@ const Home = () => {
                 <Button variant="primary"> Login </Button>
             </Link>
 
+              <Link to="/profile">
+              <Button variant="primary" className="ms-2">Profile</Button>
+              </Link>
+
+
             <h2>Movie Table</h2>
             <Table striped bordered hover>
                 <thead>
