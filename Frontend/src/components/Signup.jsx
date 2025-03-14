@@ -9,6 +9,10 @@ const Signup = () => {
   const host = "http://127.0.0.1:8000";
   const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [displayMessage, setDisplayMessage] = useState('');
+
 
   const handleEmailChange = (event) => {
     setEmailAddress(event.target.value);
@@ -18,17 +22,26 @@ const Signup = () => {
     setUsername(event.target.value);
   };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       // Send the input data to the Django backend
       const response = await axios.post(host + '/login-api/createAccount', {
-        data: {username: username, emailAddress: emailAddress},
+        data: {username: username, emailAddress: emailAddress, password: password, confirmPassword: confirmPassword},
       });
-
+      setDisplayMessage('Account created successfully!')
       console.log('Response from Django:', response.data);
     } catch (error) {
+      setDisplayMessage('Something went wrong.')
       console.error('Error sending data to Django:', error);
     }
   };
@@ -64,6 +77,9 @@ const Signup = () => {
             <p>Enter Password</p>
             <InputGroup className="mb-3">
               <Form.Control
+                type = "text"
+                value = {password}
+                onChange = {handlePasswordChange}
                 placeholder="Password"
                 aria-label="Password"
                 aria-describedby="basic-addon2"
@@ -72,13 +88,18 @@ const Signup = () => {
             <p>Confirm Password</p>
             <InputGroup className="mb-3">
               <Form.Control
+                type = "text"
+                value = {confirmPassword}
+                onChange = {handleConfirmPasswordChange}
                 placeholder="Confirm Password"
                 aria-label="Confirm Password"
                 aria-describedby="basic-addon2"
               />
             </InputGroup>
-            <button class="custom-btn" type="submit">Submit</button>
-          </div>        
+            <button class="custom-btn" type="submit">Create Account</button>
+            
+          </div>
+          <div>{displayMessage}</div>
         </div>
       </div>
     </form>

@@ -34,7 +34,8 @@ CORS_ORIGIN_ALLOW_ORIGIN = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://localhost:5471"
+    "http://localhost:5471",
+    "http://localhost:5173"
 ]
 
 # Application definition
