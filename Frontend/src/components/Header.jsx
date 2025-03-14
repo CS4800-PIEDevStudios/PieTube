@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import mepic from '../assets/me.png';
 import pietubelogo from '../assets/pietubelogo.png';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
@@ -26,12 +27,13 @@ const Header = () => {
               placeholder="Search"
               aria-label="Search"
               aria-describedby="basic-addon2"
-              style={{backgroundColor:'#E1E1E1', borderRadius:'10px'}}
+              style={{backgroundColor:'#E1E1E1', borderRadius:'10px', border:'none', height:'50px'}}
             />
           </InputGroup>
-          <div className='mx-5'>
-            <Image className='rounded-circle object-fit-scale' src={pietubelogo} width="50" height="50"/>
-            {/* <div>Change Profile Photo</div> */}
+          <div className='mx-5 rounded-circle'style={{ width:'90px', height:'90px', overflow:'hidden'}}>
+            <Link to="/Profile" >
+                <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+            </Link>
           </div>
       </Navbar>
     );

@@ -45,9 +45,7 @@ const App = () => {
             }/>
           <Route path="/profile"
             element={
-              <Layout header={<Header />}>
-                <Profile />
-              </Layout>
+              <Profile />
             }/>
         </Routes>
       </div>

@@ -27,7 +27,7 @@ const Login = () => {
             />
           </InputGroup>
           <Link to="/Changepassword">
-                <Button variant="link"> Forgot password? </Button>
+                <Button variant="link"> Forgor password? </Button>
           </Link>
           <button class="custom-btn mt-4" type="submit">Submit</button>
           <Link to="/Signup">
