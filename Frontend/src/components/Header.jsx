@@ -10,7 +10,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 const Header = () => {
     return (
-      <Navbar bg="light" data-bs-theme="light" className='w-100 shadow-lg mb-5 px-5 justify-content-between'>
+      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow-lg mb-5 px-5 justify-content-between'>
         <Navbar.Brand>
           <Link to="/PieTube" className='flex-fill' >
               <img src={pietubelogo} className='mr-3' style={{maxHeight: "40px"}}/> 
@@ -18,7 +18,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav>
-            <div className='d-flex text-nowrap flex-fill'> 
+            <div className='d-flex text-nowrap flex-fill flex-grow-1'> 
               <Nav.Link> <Link to="/PieTube" className='flex-even' style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link> </Nav.Link>
               <Nav.Link> <Link to="/Login" className='flex-even' style={{color:'#000000', fontSize:'1.5rem'}}> Trending </Link> </Nav.Link>
               <Nav.Link> <Link to="/Signup" className='flex-even' style={{color:'#000000', fontSize:'1.5rem'}}> Watch List </Link> </Nav.Link>
@@ -30,10 +30,10 @@ const Header = () => {
               placeholder="Search"
               aria-label="Search"
               aria-describedby="basic-addon2"
-              style={{backgroundColor:'#E1E1E1', borderRadius:'10px', border:'none', height:'50px'}}
+              style={{backgroundColor:'#E1E1E1', borderRadius:'10px', border:'none', height:'50px', maxWidth:'1000px'}}
             />
           </InputGroup>
-          <div className='mx-5 rounded-circle   'style={{ width:'80px', height:'80px', overflow:'hidden'}}>
+          <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
             <Link to="/Profile" >
                 <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
             </Link>
