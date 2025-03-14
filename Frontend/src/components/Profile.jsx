@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Profile = () => {
-    const host = "23.20.205.143";
+    const host = "https://23.20.205.143";
     const [email, setEmail] = useState("first.last@gmail.com");
     const [username, setUsername] = useState("Username");
     const [about, setAbout] = useState("");

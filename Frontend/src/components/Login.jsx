@@ -10,10 +10,10 @@ import axios from 'axios';
 
 const Login = () => {
   const api = axios.create({
-    baseURL: "23.20.205.143",  // Adjust for your backend URL
+    baseURL: "https://23.20.205.143",  // Adjust for your backend URL
     withCredentials: true,  // Required to send cookies with requests
   });
-  const host = "23.20.205.143";
+  const host = "https://23.20.205.143";
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');

@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 
 const Signup = () => {
-  const host = "23.20.205.143";
+  const host = "https://23.20.205.143";
   const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');

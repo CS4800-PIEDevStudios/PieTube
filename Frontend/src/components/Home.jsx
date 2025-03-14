@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Table } from 'react-bootstrap';
 
 const Home = () => {
-    const host = "23.20.205.143";
+    const host = "https://23.20.205.143";
     const [movieData, setMovieData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [actorData, setActorData] = useState([]);
