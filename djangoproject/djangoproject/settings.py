@@ -45,7 +45,7 @@ ALLOWED_HOSTS = ['23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ORIGIN = True
 CORS_ALLOW_CREDENTIALS = True
-
+CORS_ALLOW_ALL_ORIGINS = True
 # CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 # CSRF_COOKIE_HTTPONLY = False  # Set to False if React needs to access it
 
