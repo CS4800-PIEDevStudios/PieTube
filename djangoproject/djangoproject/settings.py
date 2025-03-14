@@ -25,27 +25,47 @@ SECRET_KEY = 'django-insecure-zm#=^#g3v^i^k1a#(-&7j)l7+56u9v-0ir!y9(7%!)5oe=8o)_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['https://23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default: stores sessions in DB
+SESSION_COOKIE_NAME = "sessionid"  # Default session cookie name
+# Session expires after 1 hour of inactivity
+SESSION_COOKIE_AGE = 3600
+
+# Save the session to the database on every request
+SESSION_SAVE_EVERY_REQUEST = True
+
+# Use a secure cookie for sessions (only over HTTPS)
+SESSION_COOKIE_SECURE = False
+
+# Prevent client-side JavaScript from accessing the session cookie
+SESSION_COOKIE_HTTPONLY = False
 
 # For development only
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ORIGIN = True
+CORS_ALLOW_CREDENTIALS = True
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_COOKIE_HTTPONLY = False  # Set to False if React needs to access it
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://localhost:5471"
+    "http://localhost:5471",
+    "http://localhost:5173",
+    "http://localhost:5175",
+    "http://localhost:8000"
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sessions',  
+    'django.contrib.auth',      
+    'django.contrib.messages',  
     'rest_framework',
     'myapp',
     'LoginAPI',
