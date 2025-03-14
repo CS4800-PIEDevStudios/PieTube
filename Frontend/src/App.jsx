@@ -10,6 +10,8 @@ const Login = lazy(() => import('./components/Login'));
 const Signup = lazy(() => import('./components/Signup'));
 const Profile = lazy(() => import('./components/Profile'));
 const Changepassword = lazy(() => import('./components/Changepassword'));
+const Changeusername = lazy(() => import('./components/Changeusername'));
+const EditAbout = lazy(() => import('./components/EditAbout'));
 
 const Layout = ({ children, header }) => {
   return (
@@ -24,31 +26,43 @@ const App = () => {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
-      <Header/>
-      <div className='d-flex align-items-center justify-content-center'>
-        <Routes>
-          <Route path="/PieTube" element={
-            <Home />
-            }/>
-          <Route path="/Changepassword" element={
-            <Changepassword />
-            }/>    
-          <Route path="/Login" element={
-            <Layout header={<Logoheader />}>
-              <Login />
-            </Layout>
-            }/>
-          <Route path="/Signup" element={
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
+        <Header/>
+        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Routes>
+            <Route path="/PieTube" element={
+              <Home />
+              }/>
+            <Route path="/Changepassword" element={
+              <Changepassword />
+              }/>    
+            <Route path="/Login" element={
+              <Layout header={<Logoheader />}>
+                <Login />
+              </Layout>
+              }/>
+            <Route path="/Signup" element={
               <Layout header={<Logoheader />}>
                 <Signup />
               </Layout>
-            }/>
-          <Route path="/profile"
-            element={
-              <Profile />
-            }/>
-        </Routes>
+              }/>
+            <Route path="/profile"
+              element={
+                <Profile />
+              }/>
+            <Route path="/Changepassword" element={
+              <Changepassword />
+              }/>
+            <Route path="/Changeusername" element={
+              <Changeusername />
+              } />
+            <Route path="/EditAbout" element={
+              <EditAbout />
+              } />
+          </Routes>
+        </div>
       </div>
+
 
       </Suspense>
     </Router>

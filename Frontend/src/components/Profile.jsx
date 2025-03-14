@@ -1,59 +1,27 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom"; 
 
 const Profile = () => {
-    const [username, setUsername] = useState("first.last@gmail.com");
-    const [newUsername, setNewUsername] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [email, setEmail] = useState("first.last@gmail.com");
+    const [username, setUsername] = useState("Username");
     const [about, setAbout] = useState("");
 
-    // State for modals
-    const [showUsernameModal, setShowUsernameModal] = useState(false);
-    const [showPasswordModal, setShowPasswordModal] = useState(false);
-    const [showAboutModal, setShowAboutModal] = useState(false);
-
-    // Handlers for opening and closing modals
-    const handleShowUsernameModal = () => setShowUsernameModal(true);
-    const handleCloseUsernameModal = () => setShowUsernameModal(false);
-
-    const handleShowPasswordModal = () => setShowPasswordModal(true);
-    const handleClosePasswordModal = () => setShowPasswordModal(false);
-
-    const handleShowAboutModal = () => setShowAboutModal(true);
-    const handleCloseAboutModal = () => setShowAboutModal(false);
-
-    const handleSaveUsername = () => {
-        if (newUsername) setUsername(newUsername); // Update the username state
-        setNewUsername(""); // Clear the input field
-        handleCloseUsernameModal(); // Close the modal
-    };
-
-    const handleSavePassword = () => {
-        console.log("New Password:", newPassword);
-        setNewPassword("");
-        handleClosePasswordModal();
-    };
-
-    const handleSaveAbout = () => {
-        console.log("About Me:", about);
-        handleCloseAboutModal();
-    };
+    // Navigation hook
+    const navigate = useNavigate(); 
 
     const handleSignOut = () => {
         console.log("User signed out");
     };
 
     return (
-        <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center">
             <div
                 className="p-4 bg-light"
                 style={{
                     borderRadius: "20px",
                     boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)",
-                    maxWidth: "500px",
-                    width: "100%",
+                    maxWidth: "1400px",
+                    width: "50pw",
                 }}
             >
                 <h1 className="text-center mb-4">Settings</h1>
@@ -69,101 +37,36 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    {/* Username Display */}
+                    {/* Username and Email Display */}
                     <div className="col-9">
                         <p className="mb-1">Username</p>
-                        <p className="text-muted">{username}</p> 
+                        <p className="text-muted">{username}</p>
+                        <p className="mb-1">Email</p>
+                        <p className="text-muted">{email}</p>
                     </div>
                 </div>
 
                 {/* Buttons for changing username, password, and about */}
-                <Button variant="outline-secondary" className="w-100 mb-2" onClick={handleShowUsernameModal}>
+                <button className="custom-btn mb-3" onClick={() => navigate("/Changeusername")}>
                     Change Username
-                </Button>
+                </button>
 
-                <Button variant="outline-secondary" className="w-100 mb-2" onClick={handleShowPasswordModal}>
+                <button className="custom-btn mb-3" onClick={() => navigate("/Changepassword")}>
                     Change Password
-                </Button>
+                </button>
 
-                <Button variant="outline-secondary" className="w-100 mb-2" onClick={handleShowAboutModal}>
+                <button
+                    className="custom-btn mb-3"
+                    onClick={() => navigate("/EditAbout", { state: { about } })}
+                >
                     Edit About
-                </Button>
+                </button>
 
                 {/* Sign Out Button */}
-                <button class="custom-btn" className="w-100" onClick={handleSignOut}>
+                <button className="custom-btn mb-3" onClick={handleSignOut}>
                     Sign Out
                 </button>
             </div>
-
-            {/* Username Modal */}
-            <Modal show={showUsernameModal} onHide={handleCloseUsernameModal} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Change Username</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter new username"
-                        value={newUsername}
-                        onChange={(e) => setNewUsername(e.target.value)}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseUsernameModal}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveUsername}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            {/* Password Modal */}
-            <Modal show={showPasswordModal} onHide={handleClosePasswordModal} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Change Password</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form.Control
-                        type="password"
-                        placeholder="Enter new password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClosePasswordModal}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleSavePassword}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            {/* About Modal */}
-            <Modal show={showAboutModal} onHide={handleCloseAboutModal} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>About</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form.Control
-                        as="textarea"
-                        rows={5}
-                        placeholder="Write whatever..."
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseAboutModal}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveAbout}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 };

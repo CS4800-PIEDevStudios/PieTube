@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import pietubelogo from '../assets/pietubelogo.png';
 import axios from 'axios';
 
 const Signup = () => {
@@ -48,7 +47,6 @@ const Signup = () => {
 
   return (
     <form onSubmit = {handleSubmit}>
-      <div>
         <div class="p-5 bg-light" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
           <h1>Sign up</h1>
           <div class="text-left">
