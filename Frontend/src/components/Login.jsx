@@ -7,7 +7,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 const Login = () => {
   return (
     <div>
-      <div class="p-5 bg-light" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
+      <div class="p-5 bg-light" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px", minHeight:"500px"}}>
         <h1>Sign in</h1>
         <div class="text-left">
           <Form.Label htmlFor="basic-url">Enter Username</Form.Label>
@@ -19,14 +19,17 @@ const Login = () => {
             />
           </InputGroup>
           <p>Enter Password</p>
-          <InputGroup className="mb-3">
+          <InputGroup >
             <Form.Control
               placeholder="Password"
               aria-label="Password"
               aria-describedby="basic-addon2"
             />
           </InputGroup>
-          <button class="custom-btn" type="submit">Submit</button>
+          <Link to="/Changepassword">
+                <Button variant="link"> Forgot password? </Button>
+          </Link>
+          <button class="custom-btn mt-4" type="submit">Submit</button>
           <Link to="/Signup">
                 <Button variant="link"> Don't have an account? </Button>
           </Link>
