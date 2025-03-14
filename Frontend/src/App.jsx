@@ -10,6 +10,8 @@ const Login = lazy(() => import('./components/Login'));
 const Signup = lazy(() => import('./components/Signup'));
 const Profile = lazy(() => import('./components/Profile'));
 const Changepassword = lazy(() => import('./components/Changepassword'));
+const Changeusername = lazy(() => import('./components/Changeusername'));
+const EditAbout = lazy(() => import('./components/EditAbout'));
 
 const Layout = ({ children, header }) => {
   return (
@@ -32,7 +34,13 @@ const App = () => {
             }/>
           <Route path="/Changepassword" element={
             <Changepassword />
-            }/>    
+            }/>
+            <Route path="/Changeusername" element={
+              <Changeusername />
+              } />
+            <Route path="/EditAbout" element={
+              <EditAbout />
+              } />
           <Route path="/Login" element={
             <Layout header={<Logoheader />}>
               <Login />
