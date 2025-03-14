@@ -20,5 +20,6 @@ from . import views
 
 urlpatterns = [
     path('login-api/createAccount', views.createAccount, name="createAccount"),
+    path('login-api/loginAccount', views.loginAccount, name="loginAccount"),
 
 ]

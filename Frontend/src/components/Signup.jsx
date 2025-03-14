@@ -99,8 +99,8 @@ const Signup = () => {
             <button class="custom-btn" type="submit">Create Account</button>
             
           </div>
-          <div>{displayMessage}</div>
         </div>
+        <div>{displayMessage}</div>
       </div>
     </form>
   );
