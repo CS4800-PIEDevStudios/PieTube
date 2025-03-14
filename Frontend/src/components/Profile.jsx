@@ -4,7 +4,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const Profile = () => {
-    const [username, setUsername] = useState("first.last@gmail.com");
+    const [email, setEmail] = useState("first.last@gmail.com");
+    const [username, setUsername] = useState("Username");
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [about, setAbout] = useState("");
@@ -25,9 +26,9 @@ const Profile = () => {
     const handleCloseAboutModal = () => setShowAboutModal(false);
 
     const handleSaveUsername = () => {
-        if (newUsername) setUsername(newUsername); // Update the username state
-        setNewUsername(""); // Clear the input field
-        handleCloseUsernameModal(); // Close the modal
+        if (newUsername) setUsername(newUsername); 
+        setNewUsername("");
+        handleCloseUsernameModal();
     };
 
     const handleSavePassword = () => {
@@ -45,6 +46,10 @@ const Profile = () => {
         console.log("User signed out");
     };
 
+    const handleForgotPassword = () => {
+        console.log("Forgot Password clicked");
+    };
+
     return (
         <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
             <div
@@ -53,7 +58,7 @@ const Profile = () => {
                     borderRadius: "20px",
                     boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)",
                     maxWidth: "500px",
-                    width: "100%",
+                    width: "80pw",
                 }}
             >
                 <h1 className="text-center mb-4">Settings</h1>
@@ -68,29 +73,31 @@ const Profile = () => {
                             Change <br /> Profile <br /> Picture
                         </div>
                     </div>
-
-                    {/* Username Display */}
-                    <div className="col-9">
-                        <p className="mb-1">Username</p>
-                        <p className="text-muted">{username}</p> 
-                    </div>
+                
+                {/* Username and Email Display */}
+                <div className="col-9">
+                     <p className="mb-1">Username</p>
+                     <p className="text-muted">{username}</p>
+                     <p className="mb-1">Email</p>
+                     <p className="text-muted">{email}</p> 
+                </div>
                 </div>
 
                 {/* Buttons for changing username, password, and about */}
-                <Button variant="outline-secondary" className="w-100 mb-2" onClick={handleShowUsernameModal}>
+                <button className="custom-btn mb-3"  onClick={handleShowUsernameModal}>
                     Change Username
-                </Button>
+                </button>
 
-                <Button variant="outline-secondary" className="w-100 mb-2" onClick={handleShowPasswordModal}>
+                <button className="custom-btn mb-3" onClick={handleShowPasswordModal}>
                     Change Password
-                </Button>
+                </button>
 
-                <Button variant="outline-secondary" className="w-100 mb-2" onClick={handleShowAboutModal}>
+                <button className="custom-btn mb-3" onClick={handleShowAboutModal}>
                     Edit About
-                </Button>
+                </button>
 
                 {/* Sign Out Button */}
-                <button class="custom-btn" className="w-100" onClick={handleSignOut}>
+                <button className="custom-btn mb-3"  onClick={handleSignOut}>
                     Sign Out
                 </button>
             </div>
@@ -130,6 +137,13 @@ const Profile = () => {
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
+                    {/* Add "Forgot Password?" link */}
+                    <div style= {{textAlign: 'right', marginTop: '10px'}}>
+                        <a href="#" onClick={handleForgotPassword}>
+                            Forgot Password?
+                        </a>
+                    </div>
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClosePasswordModal}>
