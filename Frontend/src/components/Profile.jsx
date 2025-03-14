@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
+import {CaretRightFill} from "react-bootstrap-icons"
 
 const Profile = () => {
     const [email, setEmail] = useState("first.last@gmail.com");
@@ -14,59 +15,45 @@ const Profile = () => {
     };
 
     return (
-        <div className="d-flex justify-content-center">
-            <div
-                className="p-4 bg-light"
-                style={{
-                    borderRadius: "20px",
-                    boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)",
-                    maxWidth: "1400px",
-                    width: "50pw",
-                }}
-            >
-                <h1 className="text-center mb-4">Settings</h1>
+        <div className="justify-content-center p-5 bg-light" style={{minWidth:"500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px"}}>
+            <h1 className="text-center mb-4">Settings</h1>
 
-                <div className="row align-items-center mb-4">
-                    {/* Profile Picture Placeholder */}
-                    <div className="col-3">
-                        <div
-                            className="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center"
-                            style={{ width: "80px", height: "80px", fontSize: "12px" }}
-                        >
-                            Change <br /> Profile <br /> Picture
-                        </div>
-                    </div>
-
-                    {/* Username and Email Display */}
-                    <div className="col-9">
-                        <p className="mb-1">Username</p>
-                        <p className="text-muted">{username}</p>
-                        <p className="mb-1">Email</p>
-                        <p className="text-muted">{email}</p>
-                    </div>
-                </div>
-
-                {/* Buttons for changing username, password, and about */}
-                <button className="custom-btn mb-3" onClick={() => navigate("/Changeusername")}>
-                    Change Username
-                </button>
-
-                <button className="custom-btn mb-3" onClick={() => navigate("/Changepassword")}>
-                    Change Password
-                </button>
-
-                <button
-                    className="custom-btn mb-3"
-                    onClick={() => navigate("/EditAbout", { state: { about } })}
+            <div className="d-flex align-items-center mb-4">
+                {/* Profile Picture Placeholder gonna need to change this to a button eventually */}
+                <div
+                    className="d-flex rounded-circle bg-secondary text-white justify-content-center align-items-center"
+                    style={{ width: "80px", height: "80px", fontSize: "12px" }}
                 >
-                    Edit About
-                </button>
-
-                {/* Sign Out Button */}
-                <button className="custom-btn mb-3" onClick={handleSignOut}>
-                    Sign Out
-                </button>
+                    Change <br /> Profile <br /> Picture
+                </div>
+                <h5 className="text-start mx-3">{username}</h5>
+                <h5 className="flex-fill">{email}</h5>
             </div>
+
+            {/* Buttons for changing username, password, and about */}
+            <button className="d-flex custom-btn2 mb-3 px-2 justify-content-between align-items-center" onClick={() => navigate("/Changeusername")}>
+                <div>Change Username</div>
+                <div className="text-muted">Last changed 03/14/2025</div>
+                <CaretRightFill/>
+            </button>
+
+            <button className="d-flex custom-btn2 mb-3 px-2 justify-content-between align-items-center" onClick={() => navigate("/Changepassword")}>
+                <div>Change Password</div>
+                <div className="text-muted">Last changed 03/14/2025</div>
+                <CaretRightFill/>
+            </button>
+
+            <button
+                className="custom-btn2 mb-3"
+                onClick={() => navigate("/EditAbout", { state: { about } })}
+            >
+                Edit About
+            </button>
+
+            {/* Sign Out Button */}
+            <button className="custom-btn mb-3" onClick={handleSignOut}>
+                Sign Out
+            </button>
         </div>
     );
 };
