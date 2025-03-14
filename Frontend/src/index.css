@@ -14,3 +14,7 @@
   width: 100%;
   padding-block: 5px;
 }
+
+flex-even {
+  flex: 1;
+}
