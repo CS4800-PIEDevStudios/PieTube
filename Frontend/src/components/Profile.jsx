@@ -46,7 +46,7 @@ const Profile = () => {
     };
 
     return (
-        <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center">
             <div
                 className="p-4 bg-light"
                 style={{

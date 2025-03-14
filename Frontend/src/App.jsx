@@ -24,31 +24,34 @@ const App = () => {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
-      <Header/>
-      <div className='d-flex align-items-center justify-content-center'>
-        <Routes>
-          <Route path="/PieTube" element={
-            <Home />
-            }/>
-          <Route path="/Changepassword" element={
-            <Changepassword />
-            }/>    
-          <Route path="/Login" element={
-            <Layout header={<Logoheader />}>
-              <Login />
-            </Layout>
-            }/>
-          <Route path="/Signup" element={
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
+        <Header/>
+        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Routes>
+            <Route path="/PieTube" element={
+              <Home />
+              }/>
+            <Route path="/Changepassword" element={
+              <Changepassword />
+              }/>    
+            <Route path="/Login" element={
               <Layout header={<Logoheader />}>
-                <Signup />
+                <Login />
               </Layout>
-            }/>
-          <Route path="/profile"
-            element={
-              <Profile />
-            }/>
-        </Routes>
+              }/>
+            <Route path="/Signup" element={
+                <Layout header={<Logoheader />}>
+                  <Signup />
+                </Layout>
+              }/>
+            <Route path="/profile"
+              element={
+                <Profile />
+              }/>
+          </Routes>
+        </div>
       </div>
+
 
       </Suspense>
     </Router>

@@ -17,13 +17,10 @@ const Header = () => {
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Nav>
-            <div className='d-flex text-nowrap flex-fill flex-grow-1'> 
-              <Nav.Link> <Link to="/PieTube" className='flex-even' style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link> </Nav.Link>
-              <Nav.Link> <Link to="/Login" className='flex-even' style={{color:'#000000', fontSize:'1.5rem'}}> Trending </Link> </Nav.Link>
-              <Nav.Link> <Link to="/Signup" className='flex-even' style={{color:'#000000', fontSize:'1.5rem'}}> Watch List </Link> </Nav.Link>
-            </div>
-						
+					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
+              <Nav.Link className='flex-fill'> <Link to="/PieTube" style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link> </Nav.Link>
+              <Nav.Link className='flex-fill'> <Link to="/Login" style={{color:'#000000', fontSize:'1.5rem'}}> Trending </Link> </Nav.Link>
+              <Nav.Link className='flex-fill'> <Link to="/Signup" style={{color:'#000000', fontSize:'1.5rem'}}> Watch List </Link> </Nav.Link>						
 					</Nav>
           <InputGroup className="ml-5 w-25 flex-fill">
             <Form.Control
