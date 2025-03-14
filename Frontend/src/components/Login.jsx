@@ -5,8 +5,15 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 
+
+
+
 const Login = () => {
-  const host = "http://127.0.0.1:8000";
+  const api = axios.create({
+    baseURL: "23.20.205.143",  // Adjust for your backend URL
+    withCredentials: true,  // Required to send cookies with requests
+  });
+  const host = "23.20.205.143";
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
@@ -25,15 +32,28 @@ const Login = () => {
 
     try {
       // Send the input data to the Django backend
-      const response = await axios.post(host + '/login-api/loginAccount', {
-        data: {username: username, password: password},
+      const response = await api.post(host + '/login-api/loginAccount', {
+        username: username,
+        password: password,
       });
       setDisplayMessage('Account Login Successful')
       console.log('Response from Django:', response.data);
+
+      
+      // const response2 = await axios.get(host + '/login-api/checkAuth');
+      // console.log('User is authenticated:', response2.data.username);
+      if (response.data.status === 'success') {
+        window.location.href = '/PieTube/';  // Redirect to the homepage
+      }
     } catch (error) {
       setDisplayMessage('Something went wrong.')
       console.error('Error sending data to Django:', error);
     }
+    
+    // api.get(host + '/login-api/checkAuth')
+    //         .then(response => {
+    //             console.log(response.data)
+    //         })
   };
 
   return (

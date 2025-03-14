@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
+import axios from 'axios';
 
 const Profile = () => {
+    const host = "23.20.205.143";
     const [email, setEmail] = useState("first.last@gmail.com");
     const [username, setUsername] = useState("Username");
     const [about, setAbout] = useState("");
+    // Function to run when the page is loaded
+    const onPageLoad = () => {
+        console.log('Page has loaded!');
+        axios.get(host + '/login-api/accountInfo')
+            .then(response => {
+                console.log(response.data)
+            })
+    };
+
+        // useEffect with an empty dependency array runs only once on mount
+    useEffect(() => {
+        onPageLoad();
+    }, []); // Empty dependency array means this runs only once
 
     // Navigation hook
     const navigate = useNavigate(); 

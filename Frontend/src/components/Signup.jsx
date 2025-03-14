@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 
 const Signup = () => {
-  const host = "http://127.0.0.1:8000";
+  const host = "23.20.205.143";
   const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
@@ -95,11 +95,9 @@ const Signup = () => {
               />
             </InputGroup>
             <button class="custom-btn" type="submit">Create Account</button>
-            
           </div>
         </div>
         <div>{displayMessage}</div>
-      </div>
     </form>
   );
 };

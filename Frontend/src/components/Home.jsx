@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Table } from 'react-bootstrap';
 
 const Home = () => {
-    const host = "http://127.0.0.1:8000";
+    const host = "23.20.205.143";
     const [movieData, setMovieData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [actorData, setActorData] = useState([]);
@@ -171,13 +171,13 @@ const Home = () => {
                 <tbody>
                     {userData.map((item, index) => (
                         <tr key={index}>
-                            <td>{item.UserID}</td>
-                            <td>{item.Username}</td>
-                            <td>{item.Email}</td>
-                            <td>{item.PasswordHash}</td>
-                            <td>{item.FirstName}</td>
-                            <td>{item.LastName}</td>
-                            <td>{item.DateOfBirth}</td>
+                            <td>{item.id}</td>
+                            <td>{item.username}</td>
+                            <td>{item.email}</td>
+                            <td>{item.password}</td>
+                            <td>{item.first_name}</td>
+                            <td>{item.last_name}</td>
+                            <td>{item.date_joined}</td>
                             {/* Add more cells as needed */}
                         </tr>
                     ))}

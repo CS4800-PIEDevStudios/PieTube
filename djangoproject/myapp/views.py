@@ -12,7 +12,7 @@ def getMovieData(request):
 
 def getUserData(request):
 
-	result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.User")
+	result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.auth_user")
 
 	print(result)
 
