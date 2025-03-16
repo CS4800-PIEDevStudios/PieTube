@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import { Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 
 const Signup = () => {

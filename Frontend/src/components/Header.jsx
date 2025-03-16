@@ -1,16 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Nav, Navbar, Image, Form, InputGroup } from 'react-bootstrap';
 import mepic from '../assets/me.png';
 import pietubelogo from '../assets/pietubelogo.png';
-import Image from 'react-bootstrap/Image';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import { Filter } from 'react-bootstrap-icons';
 
 const Header = () => {
     return (
-      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow-lg mb-5 px-5 justify-content-between'>
+      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow mb-5 px-5 justify-content-between'>
         <Navbar.Brand>
           <Link to="/PieTube" className='flex-fill' >
               <img src={pietubelogo} className='mr-3' style={{maxHeight: "40px"}}/> 
@@ -29,6 +26,9 @@ const Header = () => {
               aria-describedby="basic-addon2"
               style={{backgroundColor:'#E1E1E1', borderRadius:'10px', border:'none', height:'50px', maxWidth:'1000px'}}
             />
+            <button className="mx-3" style={{border:"none", backgroundColor:"transparent"}}>
+              <Filter width="40" height="40"></Filter>
+            </button>
           </InputGroup>
           <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
             <Link to="/Profile" >

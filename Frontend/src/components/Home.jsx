@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Button, Table } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 
 const Home = () => {
     const host = "http://127.0.0.1:8000";
@@ -99,221 +100,141 @@ const Home = () => {
             });
     };
 
+    const ref = useRef(null);
+    const [scrollInterval, setScrollInterval] = useState(null);
+
+
+    const startScrolling = (scrollOffset) => {
+        if (scrollInterval) return; // Prevent multiple intervals
+
+        const interval = setInterval(() => {
+            if (ref.current) {
+                ref.current.scrollBy({ left: scrollOffset, behavior: 'smooth' });
+            }
+        }, 60); // Adjust the interval duration for faster/slower scrolling
+
+        setScrollInterval(interval);
+    };
+
+    const stopScrolling = () => {
+        if (scrollInterval) {
+            clearInterval(scrollInterval);
+            setScrollInterval(null);
+        }
+    };
+
+
     return (
-        <div>
-            <h1>Home Page</h1>
-            <p>Welcome to the Home Page!</p>
-            <Button variant="primary" onClick={fetchData}>Fetch Data</Button>
-            <Link to="/Login">
-                <Button variant="primary"> Login </Button>
-            </Link>
+        <div className='d-flex flex-column' style={{ marginInline: "150px", overflowX: "hidden" }}>
+            {/* Genres */}
+            <div className='mb-5 position-relative'>
+                {/* Left Arrow Button */}
+                <button 
+                    onMouseEnter={() => startScrolling(-20)} 
+                    onMouseLeave={stopScrolling} 
+                    className='scroll-arrow position-absolute top-50 start-0 translate-middle-y' style={{ border: "none", backgroundColor: "transparent", zIndex: 1, left:"0" }}>
+                    <ChevronLeft width="40" height="40" />
+                </button>
 
-              <Link to="/profile">
-              <Button variant="primary" className="ms-2">Profile</Button>
-              </Link>
+                {/* Right Arrow Button */}
+                <button                     
+                    onMouseEnter={() => startScrolling(20)} 
+                    onMouseLeave={stopScrolling} 
+                    className='scroll-arrow position-absolute top-50 end-0 translate-middle-y' style={{ border: "none", backgroundColor: "transparent", zIndex: 1, right: "0" }}>
+                    <ChevronRight width="40" height="40" />
+                </button>
 
+                {/* Scrollable Container */}
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 mx-0" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                </Row>
+            </div>
 
-            <h2>Movie Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>MovieID</th>
-                        <th>DirectorID</th>
-                        <th>GenreID</th>
-                        <th>ActorID</th>
-                        <th>Title</th>
-                        <th>Age Rating</th>
-                        <th>Duration</th>
-                        <th>Language</th>
-                        <th>Rating</th>
-                        <th>Release Date</th>
-                        <th>Subtitles</th>
-                        <th>Summary</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.MovieID}</td>
-                            <td>{item.DirectorID}</td>
-                            <td>{item.GenreID}</td>
-                            <td>{item.ActorID}</td>
-                            <td>{item.Title}</td>
-                            <td>{item.AgeRating}</td>
-                            <td>{item.Duration}</td>
-                            <td>{item.Language}</td>
-                            <td>{item.Rating}</td>
-                            <td>{item.ReleaseDate}</td>
-                            <td>{item.SubtitleAvailability}</td>
-                            <td>{item.Summary}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            {/* Trending */}
+            <h1 className='float-start mb-3'>Trending</h1>
+            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+            </div>
 
+            {/* Recommended by Genre*/}
+            <h1 className='float-start mb-3'>Recommended by Genre</h1>
+            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+           </div>
 
-            <h2>User Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>UserID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password Hash</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>DOB</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {userData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.UserID}</td>
-                            <td>{item.Username}</td>
-                            <td>{item.Email}</td>
-                            <td>{item.PasswordHash}</td>
-                            <td>{item.FirstName}</td>
-                            <td>{item.LastName}</td>
-                            <td>{item.DateOfBirth}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-
-            <h2>Actor Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>ActorID</th>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {actorData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.ActorID}</td>
-                            <td>{item.Name}</td>
-                            <td>{item.DateOfBirth}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Genre Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>GenreID</th>
-                        <th>Genre Name</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {genreData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.GenreID}</td>
-                            <td>{item.GenreName}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Trailer Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>TrailerID</th>
-                        <th>URL</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {trailerData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.TrailerID}</td>
-                            <td>{item.URL}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Movie Genre Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>MovieGenreID</th>
-                        <th>GenreID</th>
-                        <th>MovieID</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieGenreData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.MovieGenreID}</td>
-                            <td>{item.GenreID}</td>
-                            <td>{item.MovieID}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-            <h2>Director Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>DirectorID</th>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {directorData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.DirectorID}</td>
-                            <td>{item.Name}</td>
-                            <td>{item.DateOfBirth}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Recommendations Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>RecommendationID</th>
-                        <th>MovieID</th>
-                        <th>UserID</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {recommendationData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.RecommendationID}</td>
-                            <td>{item.MovieID}</td>
-                            <td>{item.UserID}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            {/* Recommended Movies*/}
+            <h1 className='float-start mb-3'>Recommended Movies</h1>
+            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+            </div>
         </div>
     );
 };
 
 
 export default Home;
+
+            
