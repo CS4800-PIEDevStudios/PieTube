@@ -145,7 +145,7 @@ const Home = () => {
                 </button>
 
                 {/* Scrollable Container */}
-                <Row ref={ref} className="d-flex flex-nowrap gx-5 mx-0" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <div className='genre-blob'> Genre </div>
                     <div className='genre-blob'> Genre </div>
                     <div className='genre-blob'> Genre </div>
