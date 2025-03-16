@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import axios from 'axios';
-
-
-
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 const Login = () => {
   const api = axios.create({

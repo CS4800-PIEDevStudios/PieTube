@@ -23,6 +23,35 @@ body {
   padding-block: 5px;
 }
 
-flex-even {
-  flex: 1;
+.genre-blob {
+  margin-inline: 10px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #CD853F;
+  color: #f5f5f5;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
+.thumbnail {
+  margin-inline: 12px;
+  background-color: #E1E1E1;
+  color: #f5f5f5;
+  border-radius: 20px;
+  height: 198px;
+  min-width: 352px;
+  aspect-ratio: 16 / 9;
+
+}
+
+h1 {
+  text-align: left;
+  margin-left: 15px;
+}
+
+.scroll-arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

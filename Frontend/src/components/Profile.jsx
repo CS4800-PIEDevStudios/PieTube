@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; 
-import {CaretRightFill} from "react-bootstrap-icons"
+import { CaretRightFill } from "react-bootstrap-icons"
 
 const Profile = () => {
     const [email, setEmail] = useState("first.last@gmail.com");
