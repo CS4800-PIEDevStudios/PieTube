@@ -60,7 +60,7 @@ const Login = () => {
             <Form.Label htmlFor="basic-url">Enter Username</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
-                type = "text"
+                type = "password"
                 value = {username}
                 onChange = {handleUsernameChange}
                 placeholder="Username"
@@ -71,7 +71,7 @@ const Login = () => {
             <p>Enter Password</p>
             <InputGroup >
               <Form.Control
-                type = "text"
+                type = "password"
                 value = {password}
                 onChange = {handlePasswordChange}
                 placeholder="Password"

@@ -51,7 +51,7 @@ const Signup = () => {
             <Form.Label htmlFor="basic-url">Enter Username</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
-                type = "text"
+                type = "password"
                 value = {username}
                 onChange = {handleUsernameChange}
                 placeholder="Username"
@@ -62,7 +62,7 @@ const Signup = () => {
             <p>Enter Email Address</p>
             <InputGroup className="mb-3">
               <Form.Control
-                type = "text"
+                type = "password"
                 value = {emailAddress}
                 onChange = {handleEmailChange}
                 placeholder="Email Address"
@@ -73,7 +73,7 @@ const Signup = () => {
             <p>Enter Password</p>
             <InputGroup className="mb-3">
               <Form.Control
-                type = "text"
+                type = "password"
                 value = {password}
                 onChange = {handlePasswordChange}
                 placeholder="Password"
@@ -84,7 +84,7 @@ const Signup = () => {
             <p>Confirm Password</p>
             <InputGroup className="mb-3">
               <Form.Control
-                type = "text"
+                type = "password"
                 value = {confirmPassword}
                 onChange = {handleConfirmPasswordChange}
                 placeholder="Confirm Password"
