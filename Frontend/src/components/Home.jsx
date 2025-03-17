@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Row } from 'react-bootstrap';
+import { Row, Ratio } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
+import pietubelogo from '../assets/pietubelogo.png';
+import mepic from '../assets/me.png';
 
 const Home = () => {
     const host = "http://127.0.0.1:8000";
@@ -125,6 +127,7 @@ const Home = () => {
 
 
     return (
+        
         <div className='d-flex flex-column' style={{ marginInline: "150px", overflowX: "hidden" }}>
             {/* Genres */}
             <div className='mb-5 position-relative'>
@@ -181,18 +184,34 @@ const Home = () => {
             </div>
 
             {/* Trending */}
-            <h1 className='float-start mb-3'>Trending</h1>
+            <div className='headerrecommend float-start mb-3'>Trending</div>
             <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                {/* <div className='thumbnail ratio-16x9'> </div> */}
+                {/* <div className='thumbnail'> </div>
                 <div className='thumbnail'> </div>
                 <div className='thumbnail'> </div>
                 <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div> */}
+                     {/* <div className='ratio-16x9'>
+                        <img src={mepic} className='img-fluid' style={{backgroundColor:"#8B8B8B"}}/>
+                    </div>
+                <div className="ratio ratio-16x9">
+                    <iframe
+                        src="https://www.youtube.com/embed/vlDzYIIOYmM"
+                        title="YouTube video"
+                        allowfullscreen
+                    ></iframe>
+                </div> */}                <>
+                {['1x1', '4x3', '16x9', '21x9'].map((ratio) => (
+                    <Ratio key={ratio} aspectRatio={ratio}>
+                    <div style={{backgroundColor:"grey"}}>{ratio}</div>
+                    </Ratio>
+                ))}
+                </>
             </div>
 
             {/* Recommended by Genre*/}
-            <h1 className='float-start mb-3'>Recommended by Genre</h1>
+            <div className='headerrecommend float-start mb-3'>Recommended by Genre</div>
             <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
                 <div className='thumbnail'> </div>
                 <div className='thumbnail'> </div>
@@ -203,7 +222,7 @@ const Home = () => {
            </div>
 
             {/* Recommended Movies*/}
-            <h1 className='float-start mb-3'>Recommended Movies</h1>
+            <div className='headerrecommend float-start mb-3'>Recommended Movies</div>
             <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
                 <div className='thumbnail'> </div>
                 <div className='thumbnail'> </div>

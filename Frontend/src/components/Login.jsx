@@ -22,6 +22,7 @@ const Login = () => {
               placeholder="Password"
               aria-label="Password"
               aria-describedby="basic-addon2"
+              type='password'
             />
           </InputGroup>
           <Link to="/Changepassword">

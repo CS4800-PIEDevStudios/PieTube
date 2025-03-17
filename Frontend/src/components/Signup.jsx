@@ -63,6 +63,7 @@ const Signup = () => {
               placeholder="Password"
               aria-label="Password"
               aria-describedby="basic-addon2"
+              type='password'
             />
           </InputGroup>
           <p>Confirm Password</p>
@@ -71,6 +72,7 @@ const Signup = () => {
               placeholder="Confirm Password"
               aria-label="Confirm Password"
               aria-describedby="basic-addon2"
+              type='password'
             />
           </InputGroup>
           <button class="custom-btn" type="submit">Submit</button>
