@@ -27,19 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
 
-# SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default: stores sessions in DB
-# SESSION_COOKIE_NAME = "sessionid"  # Default session cookie name
-# # Session expires after 1 hour of inactivity
-# SESSION_COOKIE_AGE = 3600
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default: stores sessions in DB
+SESSION_COOKIE_NAME = "sessionid"  # Default session cookie name
+# Session expires after 1 hour of inactivity
+SESSION_COOKIE_AGE = 3600
 
-# # Save the session to the database on every request
-# SESSION_SAVE_EVERY_REQUEST = True
+# Save the session to the database on every request
+SESSION_SAVE_EVERY_REQUEST = True
 
-# # Use a secure cookie for sessions (only over HTTPS)
-# SESSION_COOKIE_SECURE = False
+# Use a secure cookie for sessions (only over HTTPS)
+SESSION_COOKIE_SECURE = False
 
-# # Prevent client-side JavaScript from accessing the session cookie
-# SESSION_COOKIE_HTTPONLY = False
+# Prevent client-side JavaScript from accessing the session cookie
+SESSION_COOKIE_HTTPONLY = False
 
 # For development only
 CORS_ORIGIN_ALLOW_ALL = True

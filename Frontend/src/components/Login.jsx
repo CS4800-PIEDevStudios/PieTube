@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
+import {host} from '../App.jsx'
 
 const Login = () => {
   const api = axios.create({
-    baseURL: "https://23.20.205.143",  // Adjust for your backend URL
+    baseURL: host,  // Adjust for your backend URL
     withCredentials: true,  // Required to send cookies with requests
   });
-  const host = "https://23.20.205.143";
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');

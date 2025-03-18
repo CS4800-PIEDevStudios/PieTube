@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
+import {host} from '../App.jsx'
 
 const Signup = () => {
-  const host = "https://23.20.205.143";
   const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');

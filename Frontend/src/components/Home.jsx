@@ -5,9 +5,9 @@ import { Row, Ratio } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
+import {host} from '../App.jsx'
 
 const Home = () => {
-    const host = "https://23.20.205.143";
     const [movieData, setMovieData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [actorData, setActorData] = useState([]);

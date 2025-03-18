@@ -15,7 +15,7 @@ const Profile = lazy(() => import('./components/Profile'));
 const Changepassword = lazy(() => import('./components/Changepassword'));
 const Changeusername = lazy(() => import('./components/Changeusername'));
 const EditAbout = lazy(() => import('./components/EditAbout'));
-
+export const host = 'http://127.0.0.1:8000' // Change host here
 const Layout = ({ children, header }) => {
   return (
     <div>
