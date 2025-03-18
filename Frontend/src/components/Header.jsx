@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup } from 'react-bootstrap';
 import mepic from '../assets/me.png';
 import pietubelogo from '../assets/pietubelogo.png';
-import { Filter } from 'react-bootstrap-icons';
+import { Filter, EmojiSunglasses } from 'react-bootstrap-icons';
 
 const Header = () => {
     return (
@@ -16,7 +16,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
               <Nav.Link className='flex-fill'> <Link to="/PieTube" style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link> </Nav.Link>
-              <Nav.Link className='flex-fill'> <Link to="/Login" style={{color:'#000000', fontSize:'1.5rem'}}> Trending </Link> </Nav.Link>
+              <Nav.Link className='flex-fill'> <Link to="/Profile" style={{color:'#000000', fontSize:'1.5rem'}}> Trending </Link> </Nav.Link>
               <Nav.Link className='flex-fill'> <Link to="/Signup" style={{color:'#000000', fontSize:'1.5rem'}}> Watch List </Link> </Nav.Link>						
 					</Nav>
           <InputGroup className="ml-5 w-25 flex-fill">
@@ -30,11 +30,18 @@ const Header = () => {
               <Filter width="40" height="40"></Filter>
             </button>
           </InputGroup>
-          <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
+          {/* <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
             <Link to="/Profile" >
-                <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                <div src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
             </Link>
-          </div>
+          </div> */}
+          <Link to="/Signup">
+            <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
+              <EmojiSunglasses width="20" height="30" className='mr-2'></EmojiSunglasses>
+              Sign Up
+            </button>
+          </Link>
+
       </Navbar>
     );
   };
