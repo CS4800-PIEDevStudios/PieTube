@@ -130,12 +130,12 @@ const Home = () => {
         
         <div className='d-flex flex-column' style={{ marginInline: "150px", overflowX: "hidden" }}>
             {/* Genres */}
-            <div className='mb-5 position-relative'>
+            <div className='mb-5 ml-3 position-relative' style={{background: "linear-gradient(to left, rgba(0, 0, 0, 0.8 ) 0%, transparent 10%)"}}>
                 {/* Left Arrow Button */}
                 <button 
                     onMouseEnter={() => startScrolling(-20)} 
                     onMouseLeave={stopScrolling} 
-                    className='scroll-arrow position-absolute top-50 start-0 translate-middle-y' style={{ border: "none", backgroundColor: "transparent", zIndex: 1, left:"0" }}>
+                    className='scroll-arrow' style={{zIndex: 1, left:"0" }}>
                     <ChevronLeft width="40" height="40" />
                 </button>
 
@@ -143,12 +143,23 @@ const Home = () => {
                 <button                     
                     onMouseEnter={() => startScrolling(20)} 
                     onMouseLeave={stopScrolling} 
-                    className='scroll-arrow position-absolute top-50 end-0 translate-middle-y' style={{ border: "none", backgroundColor: "transparent", zIndex: 1, right: "0" }}>
+                    className='scroll-arrow' style={{zIndex: 1, right: "0" }}>
                     <ChevronRight width="40" height="40" />
                 </button>
 
+                {/* <div 
+            style={{ 
+                position: "absolute",
+                right: 0,
+                width:"1000px",
+                height:"50px",
+                pointerEvents: "none", // Ensure clicks pass through to the buttons
+                background: "linear-gradient(to left, rgba(0, 0, 0, 0.8 ) 0%, transparent 10%)",
+                zIndex: 0 // Place it below the buttons but above the genre blobs
+            }}
+        /> */}
                 {/* Scrollable Container */}
-                <Row ref={ref} className="d-flex flex-nowrap gx-5 mx-0" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
                     <div className='genre-blob'> Genre </div>
                     <div className='genre-blob'> Genre </div>
                     <div className='genre-blob'> Genre </div>
