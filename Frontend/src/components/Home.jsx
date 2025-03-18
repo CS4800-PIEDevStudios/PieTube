@@ -7,7 +7,7 @@ import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
 
 const Home = () => {
-    const host = "http://127.0.0.1:8000";
+    const host = "https://23.20.205.143";
     const [movieData, setMovieData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [actorData, setActorData] = useState([]);
@@ -159,7 +159,7 @@ const Home = () => {
             }}
         /> */}
                 {/* Scrollable Container */}
-                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <div className='genre-blob'> Genre </div>
                     <div className='genre-blob'> Genre </div>
                     <div className='genre-blob'> Genre </div>

@@ -2,6 +2,9 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import './App.css';
+import axios from 'axios';
+
+
 
 const Home = lazy(() => import('./components/Home'));
 const Logoheader = lazy(() => import('./components/Logoheader'));
@@ -21,6 +24,9 @@ const Layout = ({ children, header }) => {
     </div>
   );
 };
+
+
+
 
 const App = () => {
   return (

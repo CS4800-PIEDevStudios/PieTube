@@ -15,3 +15,10 @@ def fetchData(query):
             results.append(dict(zip(columns, row)))
         
     return results
+
+def insertData(query):
+    with connection.cursor() as cursor:
+        
+        # Execute the query
+        cursor.execute(query)
+        print("Inserted data results: " + str(cursor.fetchall()))
