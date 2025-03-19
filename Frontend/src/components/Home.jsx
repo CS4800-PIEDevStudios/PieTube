@@ -1,30 +1,13 @@
-// import React from 'react';
-// import { Button } from 'react-bootstrap';
-
-// const Home = () => {
-//   // const { error, isPending, data: blogs } = useFetch('http://localhost:8000/blogs')
-
-//   return (
-//     <div className="home">
-//       {/* { error && <div>{ error }</div> }
-//       { isPending && <div>Loading...</div> }
-//       { blogs && <BlogList blogs={blogs} /> } */}
-//       <div>
-//         <h1>This is the first page</h1>
-//         <Button variant="primary"> This is a button </Button>
-//       </div>
-//     </div>
-//   );
-// }
- 
-// export default Home;
-
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Button, Table } from 'react-bootstrap';
+import { Row, Ratio } from 'react-bootstrap';
+import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
+import pietubelogo from '../assets/pietubelogo.png';
+import mepic from '../assets/me.png';
 
 const Home = () => {
+    const host = "https://23.20.205.143";
     const [movieData, setMovieData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [actorData, setActorData] = useState([]);
@@ -34,15 +17,11 @@ const Home = () => {
     const [directorData, setDirectorData] = useState([]);
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
-
-
-
-
-
+    
 
     const fetchData = () => {
         console.log("fetching...");
-        axios.get('https://23.20.205.143/api/get-movie-data')
+        axios.get(host + '/api/get-movie-data')
             .then(response => {
                 console.log(response.data)
                 setMovieData(response.data); // Assuming the response data is an array of objects
@@ -51,7 +30,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-user-data')
+            axios.get(host + '/api/get-user-data')
             .then(response => {
                 console.log(response.data)
                 setUserData(response.data); // Assuming the response data is an array of objects
@@ -60,7 +39,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-actor-data')
+            axios.get(host + '/api/get-actor-data')
             .then(response => {
                 console.log(response.data)
                 setActorData(response.data); // Assuming the response data is an array of objects
@@ -69,7 +48,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-genre-data')
+            axios.get(host + '/api/get-genre-data')
             .then(response => {
                 console.log(response.data)
                 setGenreData(response.data); // Assuming the response data is an array of objects
@@ -77,7 +56,7 @@ const Home = () => {
             .catch(error => {
                 console.error('There was an error!', error);
             });
-            axios.get('https://23.20.205.143/api/get-movie-role-data')
+            axios.get(host + '/api/get-movie-role-data')
             .then(response => {
                 console.log(response.data)
                 setMovieRoleData(response.data); // Assuming the response data is an array of objects
@@ -86,7 +65,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-movie-genre-data')
+            axios.get(host + '/api/get-movie-genre-data')
             .then(response => {
                 console.log(response.data)
                 setMovieGenreData(response.data); // Assuming the response data is an array of objects
@@ -95,7 +74,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-director-data')
+            axios.get(host + '/api/get-director-data')
             .then(response => {
                 console.log(response.data)
                 setDirectorData(response.data); // Assuming the response data is an array of objects
@@ -104,7 +83,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-trailer-data')
+            axios.get(host + '/api/get-trailer-data')
             .then(response => {
                 console.log(response.data)
                 setTrailerData(response.data); // Assuming the response data is an array of objects
@@ -113,7 +92,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get('https://23.20.205.143/api/get-recommendation-data')
+            axios.get(host + '/api/get-recommendation-data')
             .then(response => {
                 console.log(response.data)
                 setRecommendationData(response.data); // Assuming the response data is an array of objects
@@ -123,215 +102,169 @@ const Home = () => {
             });
     };
 
-    
+    const ref = useRef(null);
+    const [scrollInterval, setScrollInterval] = useState(null);
+
+
+    const startScrolling = (scrollOffset) => {
+        if (scrollInterval) return; // Prevent multiple intervals
+
+        const interval = setInterval(() => {
+            if (ref.current) {
+                ref.current.scrollBy({ left: scrollOffset, behavior: 'smooth' });
+            }
+        }, 60); // Adjust the interval duration for faster/slower scrolling
+
+        setScrollInterval(interval);
+    };
+
+    const stopScrolling = () => {
+        if (scrollInterval) {
+            clearInterval(scrollInterval);
+            setScrollInterval(null);
+        }
+    };
+
 
     return (
-        <div>
-            <h1>Home Page</h1>
-            <p>Welcome to the Home Page!</p>
-            <Button variant="primary" onClick={fetchData}>Fetch Data</Button>
+        
+        <div className='d-flex flex-column' style={{ marginInline: "150px", overflowX: "hidden" }}>
+            {/* Genres */}
+            <div className='mb-5 ml-3 position-relative' style={{background: "linear-gradient(to left, rgba(0, 0, 0, 0.8 ) 0%, transparent 10%)"}}>
+                {/* Left Arrow Button */}
+                <button 
+                    onMouseEnter={() => startScrolling(-20)} 
+                    onMouseLeave={stopScrolling} 
+                    className='scroll-arrow' style={{zIndex: 1, left:"0" }}>
+                    <ChevronLeft width="40" height="40" />
+                </button>
 
-            <h2>Movie Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>MovieID</th>
-                        <th>DirectorID</th>
-                        <th>GenreID</th>
-                        <th>ActorID</th>
-                        <th>Title</th>
-                        <th>Age Rating</th>
-                        <th>Duration</th>
-                        <th>Language</th>
-                        <th>Rating</th>
-                        <th>Release Date</th>
-                        <th>Subtitles</th>
-                        <th>Summary</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.MovieID}</td>
-                            <td>{item.DirectorID}</td>
-                            <td>{item.GenreID}</td>
-                            <td>{item.ActorID}</td>
-                            <td>{item.Title}</td>
-                            <td>{item.AgeRating}</td>
-                            <td>{item.Duration}</td>
-                            <td>{item.Language}</td>
-                            <td>{item.Rating}</td>
-                            <td>{item.ReleaseDate}</td>
-                            <td>{item.SubtitleAvailability}</td>
-                            <td>{item.Summary}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+                {/* Right Arrow Button */}
+                <button                     
+                    onMouseEnter={() => startScrolling(20)} 
+                    onMouseLeave={stopScrolling} 
+                    className='scroll-arrow' style={{zIndex: 1, right: "0" }}>
+                    <ChevronRight width="40" height="40" />
+                </button>
 
+                {/* <div 
+            style={{ 
+                position: "absolute",
+                right: 0,
+                width:"1000px",
+                height:"50px",
+                pointerEvents: "none", // Ensure clicks pass through to the buttons
+                background: "linear-gradient(to left, rgba(0, 0, 0, 0.8 ) 0%, transparent 10%)",
+                zIndex: 0 // Place it below the buttons but above the genre blobs
+            }}
+        /> */}
+                {/* Scrollable Container */}
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3" style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                    <div className='genre-blob'> Genre </div>
+                </Row>
+            </div>
 
-            <h2>User Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>UserID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password Hash</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>DOB</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {userData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.UserID}</td>
-                            <td>{item.Username}</td>
-                            <td>{item.Email}</td>
-                            <td>{item.PasswordHash}</td>
-                            <td>{item.FirstName}</td>
-                            <td>{item.LastName}</td>
-                            <td>{item.DateOfBirth}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            {/* Trending */}
+            <div className='headerrecommend float-start mb-3'>Trending</div>
+            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                {/* <div className='thumbnail ratio-16x9'> </div> */}
+                {/* <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div> */}
+                     {/* <div className='ratio-16x9'>
+                        <img src={mepic} className='img-fluid' style={{backgroundColor:"#8B8B8B"}}/>
+                    </div>
+                <div className="ratio ratio-16x9">
+                    <iframe
+                        src="https://www.youtube.com/embed/vlDzYIIOYmM"
+                        title="YouTube video"
+                        allowfullscreen
+                    ></iframe>
+                </div> */}                <>
+                {['1x1', '4x3', '16x9', '21x9'].map((ratio) => (
+                    <Ratio key={ratio} aspectRatio={ratio}>
+                    <div style={{backgroundColor:"grey"}}>{ratio}</div>
+                    </Ratio>
+                ))}
+                </>
+            </div>
 
+            {/* Recommended by Genre*/}
+            <div className='headerrecommend float-start mb-3'>Recommended by Genre</div>
+            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+           </div>
 
-            <h2>Actor Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>ActorID</th>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {actorData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.ActorID}</td>
-                            <td>{item.Name}</td>
-                            <td>{item.DateOfBirth}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Genre Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>GenreID</th>
-                        <th>Genre Name</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {genreData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.GenreID}</td>
-                            <td>{item.GenreName}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Trailer Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>TrailerID</th>
-                        <th>URL</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {trailerData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.TrailerID}</td>
-                            <td>{item.URL}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Movie Genre Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>MovieGenreID</th>
-                        <th>GenreID</th>
-                        <th>MovieID</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieGenreData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.MovieGenreID}</td>
-                            <td>{item.GenreID}</td>
-                            <td>{item.MovieID}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-            <h2>Director Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>DirectorID</th>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {directorData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.DirectorID}</td>
-                            <td>{item.Name}</td>
-                            <td>{item.DateOfBirth}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <h2>Recommendations Table</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>RecommendationID</th>
-                        <th>MovieID</th>
-                        <th>UserID</th>
-                        {/* Add more headers as needed */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {recommendationData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.RecommendationID}</td>
-                            <td>{item.MovieID}</td>
-                            <td>{item.UserID}</td>
-                            {/* Add more cells as needed */}
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+            {/* Recommended Movies*/}
+            <div className='headerrecommend float-start mb-3'>Recommended Movies</div>
+            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+                <div className='thumbnail'> </div>
+            </div>
         </div>
     );
 };
 
 
 export default Home;
+
+            
