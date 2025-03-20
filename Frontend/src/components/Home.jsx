@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Ratio } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
 import axiosInstance from '../axiosConfig.js'
-
-import Cookies from 'js-cookie';
 
 const Home = () => {
     const [movieData, setMovieData] = useState([]);
@@ -20,16 +17,16 @@ const Home = () => {
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
     
-    // useEffect(() => {
-    //     axiosInstance.get('login-api/checkAuth')
-    //       .then(res => {
-    //         if (res.data.authenticated) {
-    //           console.log(res.data.username)
-    //         } else {
-    //           console.log('User not authenticated')
-    //         }
-    //       });
-    //   }, []);
+    useEffect(() => {
+        axiosInstance.get('login-api/checkAuth')
+          .then(res => {
+            if (res.data.authenticated) {
+              console.log(res.data.username)
+            } else {
+              console.log('User not authenticated')
+            }
+          });
+      }, []);
 
     const fetchData = () => {
         console.log("fetching...");

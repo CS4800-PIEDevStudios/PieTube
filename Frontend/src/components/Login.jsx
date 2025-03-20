@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import axios from 'axios';
 import axiosInstance from '../axiosConfig.js'
-
-import Cookies from 'js-cookie';
 
 
 
@@ -55,6 +52,7 @@ const Login = () => {
         axiosInstance.get('login-api/checkAuth').then(res => {
           console.log('CSRF Token Set, Authenticated:', res.data);
         });
+        window.location.href = '/PieTube/';
       }
     } catch (error) {
       setDisplayMessage('Something went wrong.');

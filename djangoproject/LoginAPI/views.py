@@ -4,13 +4,12 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_p
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.middleware.csrf import get_token
-
+import djangoproject.DatabaseManager
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import json
 
-# @csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
 @csrf_protect
 def createAccount(request):
     if request.method == 'POST':
@@ -39,7 +38,6 @@ def createAccount(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
-# @csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
 @csrf_protect
 def loginAccount(request):
     if request.method == 'POST':
@@ -71,6 +69,12 @@ def checkAuth(request):
     else:
         print("USER IS NOT AUTHENTICATED")
         return JsonResponse({'authenticated': False})
+
+
+# Fetches profile data (ensure that user is logged in before this)
+def getProfileData(request):
+    result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.auth_user WHERE Username = '" + str(request.user.username)+ "';")
+    return JsonResponse(result, safe=False)
 
 def logoutAccount(request):
     if request.method == 'POST':
