@@ -13,11 +13,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
 
-  useEffect(() => {
-    axiosInstance.get('login-api/checkAuth').then(res => {
-      console.log('CSRF Token Set, Authenticated:', res.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axiosInstance.get('login-api/checkAuth').then(res => {
+  //     console.log('CSRF Token Set, Authenticated:', res.data);
+  //   });
+  // }, []);
 
 
   const handleUsernameChange = (event) => {
@@ -33,11 +33,15 @@ const Login = () => {
     event.preventDefault();
   
     try {
-      // First, fetch the CSRF token cookie by making a GET request
-      await axiosInstance.get('login-api/checkAuth');
+
+      await axiosInstance.get('login-api/checkAuth').then(res => {
+        console.log('CSRF Token Set, Authenticated:', res.data);
+        console.log('COOKIE', res);
+      });
   
       // Now, send the login POST request
       const response = await axiosInstance.post('login-api/loginAccount', {
+        withCredentials: true,
         username: username,
         password: password,
       });
@@ -45,6 +49,8 @@ const Login = () => {
       setDisplayMessage('Account Login Successful');
       console.log('Response from Django:', response.data);
   
+      
+
       if (response.data.status === 'success') {
         axiosInstance.get('login-api/checkAuth').then(res => {
           console.log('CSRF Token Set, Authenticated:', res.data);

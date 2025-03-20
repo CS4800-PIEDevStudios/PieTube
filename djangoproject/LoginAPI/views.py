@@ -40,12 +40,14 @@ def createAccount(request):
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
 # @csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
+@csrf_protect
 def loginAccount(request):
     if request.method == 'POST':
         try:
             # Parse the JSON data from the request body
             data = json.loads(request.body)
             csrf_token = get_token(request)
+            print("CSRF TOKEN " + str(csrf_token))
             user = authenticate(request, username=data.get('username'), password=data.get('password'))
             if user is not None:
                 login(request, user)
@@ -63,7 +65,6 @@ def checkAuth(request):
     print("User:", request.user)
     print("Is Authenticated:", request.user.is_authenticated)
     print("Session Data:", request.session.items())
-    
     if request.user.is_authenticated:
         print("USER IS AUTHENTICATED")
         return JsonResponse({'authenticated': True, 'username': request.user.username})

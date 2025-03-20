@@ -20,16 +20,16 @@ const Home = () => {
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
     
-    useEffect(() => {
-        axiosInstance.get('login-api/checkAuth')
-          .then(res => {
-            if (res.data.authenticated) {
-              console.log(res.data.username)
-            } else {
-              console.log('User not authenticated')
-            }
-          });
-      }, []);
+    // useEffect(() => {
+    //     axiosInstance.get('login-api/checkAuth')
+    //       .then(res => {
+    //         if (res.data.authenticated) {
+    //           console.log(res.data.username)
+    //         } else {
+    //           console.log('User not authenticated')
+    //         }
+    //       });
+    //   }, []);
 
     const fetchData = () => {
         console.log("fetching...");
