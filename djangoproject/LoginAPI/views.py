@@ -1,11 +1,8 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth.hashers import make_password
+from django.views.decorators.http import require_POST
 from django.middleware.csrf import get_token
 import djangoproject.DatabaseManager
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import json
@@ -73,16 +70,16 @@ def checkAuth(request):
 
 # Fetches profile data (ensure that user is logged in before this)
 def getProfileData(request):
-    result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.auth_user WHERE Username = '" + str(request.user.username)+ "';")
-    return JsonResponse(result, safe=False)
-
+    if request.user.is_authenticated:
+        result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.auth_user WHERE id = '" + str(request.user.id)+ "';")
+        return JsonResponse(result, safe=False)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'User Not Logged In'}, status=405)
+    
+@require_POST  # Ensure only POST requests are allowed
 def logoutAccount(request):
-    if request.method == 'POST':
-        try:
-            logout(request)    
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+    logout(request)  # Log the user out
+    return JsonResponse({'status': 'success', 'message': 'Logged out successfully'})
 
 @csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
 def accountInfo(request):
