@@ -1,13 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
-import {axiosInstance} from '../axiosConfig.js'
+import axiosInstance from '../axiosConfig.js'
+
+import Cookies from 'js-cookie';
+
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
+
+  useEffect(() => {
+    axiosInstance.get('login-api/checkAuth').then(res => {
+      console.log('CSRF Token Set, Authenticated:', res.data);
+    });
+  }, []);
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -20,24 +31,31 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
-      // Send the input data to the Django backend
+      // First, fetch the CSRF token cookie by making a GET request
+      await axiosInstance.get('login-api/checkAuth');
+  
+      // Now, send the login POST request
       const response = await axiosInstance.post('login-api/loginAccount', {
         username: username,
         password: password,
       });
-      setDisplayMessage('Account Login Successful')
+  
+      setDisplayMessage('Account Login Successful');
       console.log('Response from Django:', response.data);
-      
+  
       if (response.data.status === 'success') {
-        window.location.href = '/PieTube/';  // Redirect to the homepage
+        axiosInstance.get('login-api/checkAuth').then(res => {
+          console.log('CSRF Token Set, Authenticated:', res.data);
+        });
       }
     } catch (error) {
-      setDisplayMessage('Something went wrong.')
+      setDisplayMessage('Something went wrong.');
       console.error('Error sending data to Django:', error);
     }
   };
+  
 
   return (
     <form onSubmit = {handleSubmit}>

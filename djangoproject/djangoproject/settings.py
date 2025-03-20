@@ -27,27 +27,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
 
-SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default: stores sessions in DB
-
-
 SESSION_COOKIE_SAMESITE = 'Lax'
-
 SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+CSRF_COOKIE_PATH = '/' 
 
 # For development only
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_ALLOW_ORIGIN = True
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ORIGIN = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
-
+# CORS_ALLOW_ALL_ORIGINS = True
+CSRF_COOKIE_SECURE = False  # Disable if not using HTTPS in development
+CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
+CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:5471",
     "http://localhost:5173",
-    "http://localhost:5175",
-    "http://localhost:8000"
+	'http://127.0.0.1:3000',
+
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+	'http://127.0.0.1:3000',
+	'http://localhost:5173'
+]
+
 
 # Application definition
 
@@ -65,6 +68,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+	'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,8 +76,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'djangoproject.urls'

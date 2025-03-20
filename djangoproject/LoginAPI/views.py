@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
+from django.middleware.csrf import get_token
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import json
 
-@csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
+# @csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
+@csrf_protect
 def createAccount(request):
     if request.method == 'POST':
         try:
@@ -37,12 +39,13 @@ def createAccount(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
-@csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
+# @csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
 def loginAccount(request):
     if request.method == 'POST':
         try:
             # Parse the JSON data from the request body
             data = json.loads(request.body)
+            csrf_token = get_token(request)
             user = authenticate(request, username=data.get('username'), password=data.get('password'))
             if user is not None:
                 login(request, user)
@@ -54,7 +57,13 @@ def loginAccount(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
+@ensure_csrf_cookie
 def checkAuth(request):
+    print("Session Key:", request.session.session_key)
+    print("User:", request.user)
+    print("Is Authenticated:", request.user.is_authenticated)
+    print("Session Data:", request.session.items())
+    
     if request.user.is_authenticated:
         print("USER IS AUTHENTICATED")
         return JsonResponse({'authenticated': True, 'username': request.user.username})

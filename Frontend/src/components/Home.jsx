@@ -1,11 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Ratio } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
-import {axiosInstance} from '../axiosConfig.js'
+import axiosInstance from '../axiosConfig.js'
+
+import Cookies from 'js-cookie';
 
 const Home = () => {
     const [movieData, setMovieData] = useState([]);
