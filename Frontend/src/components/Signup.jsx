@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
+import axiosInstance from '../axiosConfig.js'
 
 const Signup = () => {
-  const host = "https://23.20.205.143";
   const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +32,7 @@ const Signup = () => {
 
     try {
       // Send the input data to the Django backend
-      const response = await axios.post(host + '/login-api/createAccount', {
+      const response = await axiosInstance.post('login-api/createAccount', {
         data: {username: username, emailAddress: emailAddress, password: password, confirmPassword: confirmPassword},
       });
       setDisplayMessage('Account created successfully!')

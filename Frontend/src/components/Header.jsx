@@ -15,9 +15,9 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-              <Nav.Link className='flex-fill'> <Link to="/PieTube" style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link> </Nav.Link>
-              <Nav.Link className='flex-fill'> <Link to="/Profile" style={{color:'#000000', fontSize:'1.5rem'}}> Trending </Link> </Nav.Link>
-              <Nav.Link className='flex-fill'> <Link to="/Login" style={{color:'#000000', fontSize:'1.5rem'}}> Watch List </Link> </Nav.Link>						
+              <Link to="/PieTube" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link>
+              <Link to="/Profile" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Profile </Link>
+              <Link to="/Login" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Login </Link>					
 					</Nav>
           <InputGroup className="ml-5 w-25 flex-fill">
             <Form.Control
@@ -30,18 +30,12 @@ const Header = () => {
               <Filter width="40" height="40"></Filter>
             </button>
           </InputGroup>
-          {/* <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
-            <Link to="/Profile" >
-                <div src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
-            </Link>
-          </div> */}
           <Link to="/Signup">
             <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
               <EmojiSunglasses width="20" height="30" className='mr-2'></EmojiSunglasses>
               Sign Up
             </button>
           </Link>
-
       </Navbar>
     );
   };
