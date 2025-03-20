@@ -1,17 +1,21 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link, redirect } from 'react-router-dom';
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import axios from 'axios';
+import axiosInstance from '../axiosConfig.js'
+
+
 
 const Login = () => {
-  const api = axios.create({
-    baseURL: "https://23.20.205.143",  // Adjust for your backend URL
-    withCredentials: true,  // Required to send cookies with requests
-  });
-  const host = "https://23.20.205.143";
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
+
+  // useEffect(() => {
+  //   axiosInstance.get('login-api/checkAuth').then(res => {
+  //     console.log('CSRF Token Set, Authenticated:', res.data);
+  //   });
+  // }, []);
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -24,32 +28,38 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
-      // Send the input data to the Django backend
-      const response = await api.post(host + '/login-api/loginAccount', {
+
+      await axiosInstance.get('login-api/checkAuth').then(res => {
+        console.log('CSRF Token Set, Authenticated:', res.data);
+        console.log('COOKIE', res);
+      });
+  
+      // Now, send the login POST request
+      const response = await axiosInstance.post('login-api/loginAccount', {
+        withCredentials: true,
         username: username,
         password: password,
       });
-      setDisplayMessage('Account Login Successful')
+  
+      setDisplayMessage('Account Login Successful');
       console.log('Response from Django:', response.data);
-
+  
       
-      // const response2 = await axios.get(host + '/login-api/checkAuth');
-      // console.log('User is authenticated:', response2.data.username);
+
       if (response.data.status === 'success') {
-        window.location.href = '/PieTube/';  // Redirect to the homepage
+        axiosInstance.get('login-api/checkAuth').then(res => {
+          console.log('CSRF Token Set, Authenticated:', res.data);
+        });
+        window.location.href = '/PieTube/';
       }
     } catch (error) {
-      setDisplayMessage('Something went wrong.')
+      setDisplayMessage('Something went wrong.');
       console.error('Error sending data to Django:', error);
     }
-    
-    // api.get(host + '/login-api/checkAuth')
-    //         .then(response => {
-    //             console.log(response.data)
-    //         })
   };
+  
 
   return (
     <form onSubmit = {handleSubmit}>

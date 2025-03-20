@@ -1,13 +1,12 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Ratio } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
+import axiosInstance from '../axiosConfig.js'
 
 const Home = () => {
-    const host = "https://23.20.205.143";
     const [movieData, setMovieData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [actorData, setActorData] = useState([]);
@@ -18,10 +17,20 @@ const Home = () => {
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
     
+    useEffect(() => {
+        axiosInstance.get('login-api/checkAuth')
+          .then(res => {
+            if (res.data.authenticated) {
+              console.log(res.data.username)
+            } else {
+              console.log('User not authenticated')
+            }
+          });
+      }, []);
 
     const fetchData = () => {
         console.log("fetching...");
-        axios.get(host + '/api/get-movie-data')
+        axiosInstance.get('api/get-movie-data')
             .then(response => {
                 console.log(response.data)
                 setMovieData(response.data); // Assuming the response data is an array of objects
@@ -30,7 +39,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-user-data')
+            axiosInstance.get('api/get-user-data')
             .then(response => {
                 console.log(response.data)
                 setUserData(response.data); // Assuming the response data is an array of objects
@@ -39,7 +48,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-actor-data')
+            axiosInstance.get('api/get-actor-data')
             .then(response => {
                 console.log(response.data)
                 setActorData(response.data); // Assuming the response data is an array of objects
@@ -48,7 +57,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-genre-data')
+            axiosInstance.get('api/get-genre-data')
             .then(response => {
                 console.log(response.data)
                 setGenreData(response.data); // Assuming the response data is an array of objects
@@ -56,7 +65,7 @@ const Home = () => {
             .catch(error => {
                 console.error('There was an error!', error);
             });
-            axios.get(host + '/api/get-movie-role-data')
+            axiosInstance.get('api/get-movie-role-data')
             .then(response => {
                 console.log(response.data)
                 setMovieRoleData(response.data); // Assuming the response data is an array of objects
@@ -65,7 +74,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-movie-genre-data')
+            axiosInstance.get('api/get-movie-genre-data')
             .then(response => {
                 console.log(response.data)
                 setMovieGenreData(response.data); // Assuming the response data is an array of objects
@@ -74,7 +83,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-director-data')
+            axiosInstance.get('api/get-director-data')
             .then(response => {
                 console.log(response.data)
                 setDirectorData(response.data); // Assuming the response data is an array of objects
@@ -83,7 +92,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-trailer-data')
+            axiosInstance.get('api/get-trailer-data')
             .then(response => {
                 console.log(response.data)
                 setTrailerData(response.data); // Assuming the response data is an array of objects
@@ -92,7 +101,7 @@ const Home = () => {
                 console.error('There was an error!', error);
             });
 
-            axios.get(host + '/api/get-recommendation-data')
+            axiosInstance.get('api/get-recommendation-data')
             .then(response => {
                 console.log(response.data)
                 setRecommendationData(response.data); // Assuming the response data is an array of objects

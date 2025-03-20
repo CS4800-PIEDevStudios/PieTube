@@ -25,37 +25,51 @@ SECRET_KEY = 'django-insecure-zm#=^#g3v^i^k1a#(-&7j)l7+56u9v-0ir!y9(7%!)5oe=8o)_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
+ALLOWED_HOSTS = ['*', '23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
 
-# SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default: stores sessions in DB
-# SESSION_COOKIE_NAME = "sessionid"  # Default session cookie name
-# # Session expires after 1 hour of inactivity
-# SESSION_COOKIE_AGE = 3600
 
-# # Save the session to the database on every request
-# SESSION_SAVE_EVERY_REQUEST = True
+# CSRF_COOKIE_PATH = '/' 
+CSRF_COOKIE_AGE = 31449600  # 60 seconds * 60 minutes * 24 hours * 365 days
 
-# # Use a secure cookie for sessions (only over HTTPS)
-# SESSION_COOKIE_SECURE = False
 
-# # Prevent client-side JavaScript from accessing the session cookie
-# SESSION_COOKIE_HTTPONLY = False
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    'http://localhost:8000',
+	'http://127.0.0.1:8000',
+
+]
+
+
+CSRF_TRUSTED_ORIGINS = [
+	'http://127.0.0.1:8000',
+	'http://localhost:5173',
+    'http://localhost:8000',
+]
+
+
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True 
 
 # For development only
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ORIGIN = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
-# CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
-# CSRF_COOKIE_HTTPONLY = False  # Set to False if React needs to access it
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:5471",
-    "http://localhost:5173",
-    "http://localhost:5175",
-    "http://localhost:8000"
-]
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_COOKIE_SECURE = False  # Disable if not using HTTPS in development
+CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
+CSRF_COOKIE_SAMESITE = 'Lax'  # Allow cookies in cross-origin requests
+
+
+
+CORS_ALLOW_CREDENTIALS = True
+
+
+
+
+
+
+
 
 # Application definition
 
@@ -73,6 +87,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+	'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -80,8 +95,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'djangoproject.urls'

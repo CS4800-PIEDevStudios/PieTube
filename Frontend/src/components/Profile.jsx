@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import { CaretRightFill } from "react-bootstrap-icons"
+import axiosInstance from '../axiosConfig.js'
 
 const Profile = () => {
-    const [email, setEmail] = useState("first.last@gmail.com");
-    const [username, setUsername] = useState("Username");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [about, setAbout] = useState("");
 
     // Navigation hook
@@ -13,6 +14,16 @@ const Profile = () => {
     const handleSignOut = () => {
         console.log("User signed out");
     };
+
+    useEffect(() => {
+        axiosInstance.get('login-api/getProfileData')
+        .then(response => {
+            console.log(response.data[0])
+            setUsername(response.data[0].username)
+            setEmail(response.data[0].email)
+        })
+      }, []);
+
 
     return (
         <div className="justify-content-center p-5 bg-light" style={{minWidth:"500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px"}}>
