@@ -184,64 +184,33 @@ const Home = () => {
             </div>
 
             {/* Trending */}
-            {/* <div className='header-recommend float-start mb-3'>Trending</div>
-            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
-                {Array.from({ length: 6 }).map((_, index) => (
-                    <div key={index} className='thumbnail' style={{ position: 'relative', paddingBottom: '56.25%', backgroundColor: '#8B8B8B' }}>
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-
-                        </div>
-                    </div>
-                ))}
-            </div> */}
-
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
-            {Array.from({ length: 8 }).map((_, index) => (
-                <div key={index} className='thumbnail'>
-                
-                </div>
-            ))}
+                {Array.from({ length: 6 }).map((_, index) => (
+                    <div key={index} className='thumbnail'>
+                        
+                    </div>
+                ))}
             </div>
 
             {/* Recommended by Genre*/}
             <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
-            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-           </div>
+            <div className='mb-5 thumbnail-grid'>
+                {Array.from({ length: 6 }).map((_, index) => (
+                    <div key={index} className='thumbnail'>
+                    
+                    </div>
+                ))}
+            </div>
 
             {/* Recommended Movies*/}
             <div className='header-recommend float-start mb-3'>Recommended Movies</div>
-            <div className='mb-5' style={{display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', rowGap: '25px' }}>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
-                <div className='thumbnail'> </div>
+            <div className='mb-5 thumbnail-grid'>
+                {Array.from({ length: 18 }).map((_, index) => (
+                    <div key={index} className='thumbnail'>
+                        
+                    </div>
+                ))}
             </div>
         </div>
     );
