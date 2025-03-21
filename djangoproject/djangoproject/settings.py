@@ -38,11 +38,23 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5175',
     'http://localhost:8000',
 	'http://127.0.0.1:8000',
-    'https://23.20.205.143',
     'https://cs4800-piedevstudios.github.io',
 
 ]
 
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'X-CSRFToken',
+    'Authorization',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'OPTIONS',
+    'PUT',
+    'DELETE',
+]
 
 CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000',
