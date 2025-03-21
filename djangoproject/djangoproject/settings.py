@@ -67,7 +67,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SECURE = True 
 # SESSION_COOKIE_DOMAIN = 'localhost'
 
@@ -79,7 +79,7 @@ CORS_ORIGIN_ALLOW_ORIGIN = True
 
 CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHEN DEV
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
-CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests LAX WHEN DEV
+CSRF_COOKIE_SAMESITE = 'Lax'  # Allow cookies in cross-origin requests LAX WHEN DEV
 
 SESSION_COOKIE_DOMAIN = '.ec2-23-20-205-143.compute-1.amazonaws.com'
 CSRF_COOKIE_DOMAIN = '.ec2-23-20-205-143.compute-1.amazonaws.com'
