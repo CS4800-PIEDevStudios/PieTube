@@ -3,8 +3,6 @@ import { Link, redirect } from 'react-router-dom';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
 
-
-
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -45,6 +43,7 @@ const Login = () => {
         axiosInstance.get('login-api/checkAuth').then(res => {
           console.log('CSRF Token Set, Authenticated:', res.data);
         });
+        localStorage.setItem("isLoggedIn", true);
         window.location.href = '/PieTube/';
       }
     } catch (error) {
