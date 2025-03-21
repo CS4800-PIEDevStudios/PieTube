@@ -40,7 +40,6 @@ CORS_ALLOWED_ORIGINS = [
 	'http://127.0.0.1:8000',
     'https://23.20.205.143',
     'https://cs4800-piedevstudios.github.io',
-    'https://ec2-23-20-205-143.compute-1.amazonaws.com'
 
 ]
 
