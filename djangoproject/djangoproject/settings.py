@@ -62,9 +62,9 @@ CORS_ORIGIN_ALLOW_ORIGIN = True
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development
+CSRF_COOKIE_SECURE = False  # Disable if not using HTTPS in development
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
-CSRF_COOKIE_SAMESITE = 'Lax'  # Allow cookies in cross-origin requests
+CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests
 
 
 
