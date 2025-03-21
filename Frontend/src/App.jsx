@@ -30,18 +30,15 @@ const Layout = ({ children, header }) => {
 
 const App = () => {
   return (
-    <Router>
+    <Router basename='/PieTube'>
       <Suspense fallback={<div>Loading...</div>}>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
         <Header/>
         <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Routes>
-            <Route path="/PieTube" element={
+            <Route path="/" element={
               <Home />
               }/>
-            <Route path="/Changepassword" element={
-              <Changepassword />
-              }/>    
             <Route path="/Login" element={
               <Layout header={<Logoheader />}>
                 <Login />
