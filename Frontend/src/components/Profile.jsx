@@ -17,7 +17,7 @@ const Profile = () => {
         console.log('Response from Django Signout:', response.data);
         if (response.data.status === 'success') {
             localStorage.removeItem('isAuthenticated');
-            window.location.href = '/PieTube/';
+            navigate("/Login");
         }
     };
 

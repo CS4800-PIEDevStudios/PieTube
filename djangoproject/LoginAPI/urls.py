@@ -25,5 +25,5 @@ urlpatterns = [
     path('login-api/accountInfo', views.accountInfo, name="accountInfo"),
     path('login-api/checkAuth', views.checkAuth, name="checkAuth"),
     path('login-api/getProfileData', views.getProfileData, name="getProfileData"),
-
+    path('login-api/updatePassword', views.updatePassword, name="updatePassword"),
 ]

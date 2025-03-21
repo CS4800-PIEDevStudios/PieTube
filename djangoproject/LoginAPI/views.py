@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_POST
 from django.middleware.csrf import get_token
+from django.contrib.auth.hashers import make_password
 import djangoproject.DatabaseManager
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -28,7 +29,6 @@ def createAccount(request):
             user.save()
             print(user.password)
 
-
             # Return a response to the frontend
             return JsonResponse({'status': 'success', 'message': 'Data received'})
         except Exception as e:
@@ -41,8 +41,6 @@ def loginAccount(request):
         try:
             # Parse the JSON data from the request body
             data = json.loads(request.body)
-            csrf_token = get_token(request)
-            print("CSRF TOKEN " + str(csrf_token))
             user = authenticate(request, username=data.get('username'), password=data.get('password'))
             if user is not None:
                 login(request, user)
@@ -66,6 +64,23 @@ def checkAuth(request):
     else:
         print("USER IS NOT AUTHENTICATED")
         return JsonResponse({'authenticated': False})
+
+@require_POST  # Ensure only POST requests are allowed
+def updatePassword(request):
+        data = json.loads(request.body)
+        user = authenticate(request, username=request.user.username, password=data.get('oldPassword'))
+        if user is not None:
+            newPassword = data.get('newPassword')
+            confimPassword = data.get('confirmPassword')
+            if newPassword != confimPassword:
+                return JsonResponse({'status': 'error', 'message': 'Passwords do not match.'})
+            user.set_password(data.get('newPassword'))
+            user.save()
+
+            return JsonResponse({'status': 'success', 'message': 'Password updated successfully!'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Incorrect old password.'})
+            
 
 
 # Fetches profile data (ensure that user is logged in before this)

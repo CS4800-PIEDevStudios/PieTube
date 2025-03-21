@@ -10,13 +10,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
 
-  // useEffect(() => {
-  //   axiosInstance.get('login-api/checkAuth').then(res => {
-  //     console.log('CSRF Token Set, Authenticated:', res.data);
-  //   });
-  // }, []);
-
-
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
