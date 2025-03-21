@@ -50,7 +50,7 @@ const Profile = () => {
             </div>
 
             {/* Buttons for changing username, password, and about */}
-            <button className="d-flex custom-btn2 mb-3 px-2 justify-content-between align-items-center" onClick={() => navigate("/Changeusername")}>
+            <button className="d-flex custom-btn2 mb-3 px-2 justify-content-between align-items-center" onClick={() => navigate("/ChangeUsername")}>
                 <div>Change Username</div>
                 <div className="text-muted">Last changed 03/14/2025</div>
                 <CaretRightFill/>
