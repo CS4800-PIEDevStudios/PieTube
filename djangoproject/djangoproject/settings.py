@@ -34,6 +34,7 @@ CSRF_COOKIE_AGE = 31449600  # 60 seconds * 60 minutes * 24 hours * 365 days
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    'http://localhost:5174',
     'http://localhost:8000',
 	'http://127.0.0.1:8000',
 
@@ -43,6 +44,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000',
 	'http://localhost:5173',
+    'http://localhost:5174',
     'http://localhost:8000',
 ]
 
@@ -162,6 +164,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# USER MODEL
+
+AUTH_USER_MODEL = 'LoginAPI.CustomUser'
 
 
 # Static files (CSS, JavaScript, Images)

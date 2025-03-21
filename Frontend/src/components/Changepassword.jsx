@@ -34,7 +34,6 @@ const ChangePassword = () => {
         
             console.log('Response from Django:', response.data);
           } catch (error) {
-            setDisplayMessage('Something went wrong.');
             console.error('Error sending data to Django:', error);
           }
 

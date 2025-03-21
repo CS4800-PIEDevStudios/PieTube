@@ -26,4 +26,5 @@ urlpatterns = [
     path('login-api/checkAuth', views.checkAuth, name="checkAuth"),
     path('login-api/getProfileData', views.getProfileData, name="getProfileData"),
     path('login-api/updatePassword', views.updatePassword, name="updatePassword"),
+    path('login-api/updateAbout', views.updateAbout, name="updateAbout"),
 ]
