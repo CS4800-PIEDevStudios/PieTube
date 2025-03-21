@@ -11,8 +11,14 @@ const Profile = () => {
     // Navigation hook
     const navigate = useNavigate(); 
 
-    const handleSignOut = () => {
-        console.log("User signed out");
+    const handleSignOut = async(event) => {
+        event.preventDefault();
+        const response = await axiosInstance.post('login-api/logoutAccount', {});
+        console.log('Response from Django Signout:', response.data);
+        if (response.data.status === 'success') {
+            localStorage.removeItem('isAuthenticated');
+            window.location.href = '/PieTube/';
+        }
     };
 
     useEffect(() => {
@@ -37,8 +43,8 @@ const Profile = () => {
                 >
                     Change <br /> Profile <br /> Picture
                 </div>
-                <h5 className="text-start mx-3">{username}</h5>
-                <h5 className="flex-fill">{email}</h5>
+                <h5 className="text-start mx-3">Username:<br></br> {username}</h5>
+                <h5 className="flex-fill">Email:<br></br> {email}</h5>
             </div>
 
             {/* Buttons for changing username, password, and about */}
