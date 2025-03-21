@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zm#=^#g3v^i^k1a#(-&7j)l7+56u9v-0ir!y9(7%!)5oe=8o)_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
+ALLOWED_HOSTS = ['*', '23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost', 'cs4800-piedevstudios.github.io']
 
 
 # CSRF_COOKIE_PATH = '/' 
@@ -35,10 +35,12 @@ CSRF_COOKIE_AGE = 31449600  # 60 seconds * 60 minutes * 24 hours * 365 days
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     'http://localhost:5174',
+    'http://localhost:5175',
     'http://localhost:8000',
 	'http://127.0.0.1:8000',
     'https://23.20.205.143',
-    'https://cs4800-piedevstudios.github.io'
+    'https://cs4800-piedevstudios.github.io',
+    'https://ec2-23-20-205-143.compute-1.amazonaws.com/api/get-movie-data'
 
 ]
 
@@ -47,14 +49,17 @@ CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000',
 	'http://localhost:5173',
     'http://localhost:5174',
+    'http://localhost:5175',
     'http://localhost:8000',
     'https://23.20.205.143',
-    'https://cs4800-piedevstudios.github.io'
+    'https://cs4800-piedevstudios.github.io',
+    'https://ec2-23-20-205-143.compute-1.amazonaws.com/api/get-movie-data'
 ]
 
 
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True 
+# SESSION_COOKIE_DOMAIN = 'localhost'
 
 # For development only
 CORS_ORIGIN_ALLOW_ALL = True
@@ -65,7 +70,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHEN DEV
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
 CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests LAX WHEN DEV
-
 
 
 CORS_ALLOW_CREDENTIALS = True
