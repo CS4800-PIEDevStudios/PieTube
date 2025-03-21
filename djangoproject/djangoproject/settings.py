@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zm#=^#g3v^i^k1a#(-&7j)l7+56u9v-0ir!y9(7%!)5oe=8o)_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost', 'cs4800-piedevstudios.github.io']
+ALLOWED_HOSTS = ['*', '23.20.205.143', '127.0.0.1', 'pietube-database.cwl0gw24qtjq.us-east-1.rds.amazonaws.com', 'ec2-23-20-205-143.compute-1.amazonaws.com', 'localhost']
 
 
 # CSRF_COOKIE_PATH = '/' 
@@ -71,6 +71,8 @@ CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHE
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
 CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests LAX WHEN DEV
 
+SESSION_COOKIE_DOMAIN = 'ec2-23-20-205-143.compute-1.amazonaws.com'
+CSRF_COOKIE_DOMAIN = 'ec2-23-20-205-143.compute-1.amazonaws.com'
 
 CORS_ALLOW_CREDENTIALS = True
 
