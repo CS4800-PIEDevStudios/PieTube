@@ -1,1 +1,0 @@
-import{j as s,L as r}from"./index-ZE4-t0xB.js";const o=()=>s.jsxs("div",{children:[s.jsx("h1",{children:"Change Password"}),s.jsx(r,{to:"/profile",children:"Back to Profile"})]});export{o as default};
