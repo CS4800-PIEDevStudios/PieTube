@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 // FOR BASE URL: USE 'http://localhost:8000' DURING DEVELOPMENT AND USE PUBLIC IP DURING PRODUCTION
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://23.20.205.143',
   withCredentials: true,  // Important to include cookies (sessionid & csrftoken)
   xsrfCookieName: 'csrftoken',
   xsrfHeaderName: 'X-CSRFToken'

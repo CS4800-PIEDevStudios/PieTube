@@ -13,7 +13,7 @@ const ChangeUsername = () => {
 
         try {
             // Now, send the login POST request
-            const response = await axiosInstance.post('login-api/updatePassword', {
+            const response = await axiosInstance.post('login-api/updateUsername', {
               newUsername : newUsername,
               password : password
             });
@@ -21,18 +21,19 @@ const ChangeUsername = () => {
             console.log('Response from Django:', response.data);
           } catch (error) {
             console.error('Error sending data to Django:', error);
+            return;
           }
 
 
         console.log("Username changed successfully.");
-        window.location.reload();
         navigate("/Login");
+        window.location.reload();
     };
 
     return (
         <div className="justify-content-center p-5 bg-light" 
              style={{ minWidth: "500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px" }}>
-            <h1 className="text-center mb-4">Change Password</h1>
+            <h1 className="text-center mb-4">Change Username</h1>
 
             <form onSubmit={handleSubmit}>
                 {["New Username", "Confirm Password"].map((placeholder, index) => {

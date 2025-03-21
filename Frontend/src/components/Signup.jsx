@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 import axiosInstance from '../axiosConfig.js'
+import { useNavigate } from "react-router-dom"; 
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +11,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
 
+  // Navigation hook
+  const navigate = useNavigate(); 
 
   const handleEmailChange = (event) => {
     setEmailAddress(event.target.value);
@@ -37,6 +40,8 @@ const Signup = () => {
       });
       setDisplayMessage('Account created successfully!')
       console.log('Response from Django:', response.data);
+      navigate("/Login");
+      window.location.reload();
     } catch (error) {
       setDisplayMessage('Something went wrong.')
       console.error('Error sending data to Django:', error);

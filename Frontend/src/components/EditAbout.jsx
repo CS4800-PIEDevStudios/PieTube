@@ -60,7 +60,7 @@ const EditAbout = () => {
                         }}
                     />
                     <small className="text-muted">
-                        {aboutText.length}/{MAX_CHARACTERS} characters
+                        {aboutText?.length}/{MAX_CHARACTERS} characters
                     </small>
                 </div>
                 

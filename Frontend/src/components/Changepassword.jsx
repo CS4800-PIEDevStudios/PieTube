@@ -39,8 +39,8 @@ const ChangePassword = () => {
 
 
         console.log("Password changed successfully.");
-        window.location.reload();
         navigate("/Login");
+        window.location.reload();
     };
 
     return (

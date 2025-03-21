@@ -93,6 +93,18 @@ def updateAbout(request):
         else:
             return JsonResponse({'status': 'error', 'message': 'Something went wrong.'})
         
+@require_POST  # Ensure only POST requests are allowed
+def updateUsername(request):
+        data = json.loads(request.body)
+        user = authenticate(request, username=request.user.username, password=data.get('password'))
+        if user is not None:
+            user.username = data.get('newUsername')
+            user.save()
+            return JsonResponse({'status': 'success', 'message': 'About updated successfully!'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Something went wrong.'})
+
+
 # Fetches profile data (ensure that user is logged in before this)
 def getProfileData(request):
     if request.user.is_authenticated:

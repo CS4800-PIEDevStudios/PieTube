@@ -17,19 +17,25 @@ const Profile = () => {
         console.log('Response from Django Signout:', response.data);
         if (response.data.status === 'success') {
             localStorage.removeItem('isAuthenticated');
+            localStorage.setItem("isLoggedIn", false);
             navigate("/Login");
             window.location.reload();
         }
     };
 
-    useEffect(() => {
+
+  useEffect(() => {
+        if(localStorage.getItem('isLoggedIn') === 'false')
+        {
+        navigate("/Login");
+        }
+        
         axiosInstance.get('login-api/getProfileData')
         .then(response => {
             console.log(response.data[0])
             setUsername(response.data[0].username)
             setEmail(response.data[0].email)
-            localStorage.setItem("isLoggedIn", false);
-                    })
+        })
       }, []);
 
 

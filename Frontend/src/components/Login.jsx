@@ -2,12 +2,24 @@ import React, {useState, useEffect} from 'react';
 import { Link, redirect } from 'react-router-dom';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
+import { useNavigate } from "react-router-dom"; 
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
+  // Navigation hook
+  const navigate = useNavigate(); 
 
+  useEffect(() => {
+    console.log(localStorage.getItem('isLoggedIn'))
+    if(localStorage.getItem('isLoggedIn') === 'true')
+    {
+      navigate("/Profile");
+    }
+  },[]);
+
+  
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
