@@ -81,8 +81,8 @@ CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHE
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
 CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests LAX WHEN DEV
 
-SESSION_COOKIE_DOMAIN = 'ec2-23-20-205-143.compute-1.amazonaws.com'
-CSRF_COOKIE_DOMAIN = 'ec2-23-20-205-143.compute-1.amazonaws.com'
+SESSION_COOKIE_DOMAIN = '.ec2-23-20-205-143.compute-1.amazonaws.com'
+CSRF_COOKIE_DOMAIN = '.ec2-23-20-205-143.compute-1.amazonaws.com'
 
 CORS_ALLOW_CREDENTIALS = True
 
