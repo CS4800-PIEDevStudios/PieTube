@@ -4,6 +4,8 @@ import { Row, Ratio } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
+import KingKongThumb from '../assets/KingKongThumb.png';
+import LivingDeadThumb from '../assets/LivingDeadThumb.jpg';
 import axiosInstance from '../axiosConfig.js'
 
 const Home = () => {
@@ -197,7 +199,7 @@ const Home = () => {
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div key={index} className='thumbnail'>
-                        
+                        < img src = {LivingDeadThumb}/>
                     </div>
                 ))}
             </div>
@@ -207,7 +209,7 @@ const Home = () => {
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div key={index} className='thumbnail'>
-                    
+                        < img src = {KingKongThumb}/>
                     </div>
                 ))}
             </div>
@@ -217,7 +219,7 @@ const Home = () => {
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 18 }).map((_, index) => (
                     <div key={index} className='thumbnail'>
-                        
+                        < img src = {mepic}/>
                     </div>
                 ))}
             </div>
