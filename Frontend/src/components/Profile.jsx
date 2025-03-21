@@ -18,6 +18,7 @@ const Profile = () => {
         if (response.data.status === 'success') {
             localStorage.removeItem('isAuthenticated');
             navigate("/Login");
+            window.location.reload();
         }
     };
 
@@ -28,7 +29,7 @@ const Profile = () => {
             setUsername(response.data[0].username)
             setEmail(response.data[0].email)
             localStorage.setItem("isLoggedIn", false);
-        })
+                    })
       }, []);
 
 
