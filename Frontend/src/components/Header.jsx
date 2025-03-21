@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup } from 'react-bootstrap';
 import mepic from '../assets/me.png';
@@ -6,6 +6,14 @@ import pietubelogo from '../assets/pietubelogo.png';
 import { Filter, EmojiSunglasses } from 'react-bootstrap-icons';
 
 const Header = () => {
+  const [LoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
+    console.log(loggedInStatus);
+    setIsLoggedIn(loggedInStatus);
+  },[]);
+
     return (
       <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow mb-5 px-5 justify-content-between'>
         <Navbar.Brand>
@@ -30,12 +38,22 @@ const Header = () => {
               <Filter width="40" height="40"></Filter>
             </button>
           </InputGroup>
-          <Link to="/Signup">
+
+          {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
+          {LoggedIn ? (
+            <Link to="/Signup">
             <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
               <EmojiSunglasses width="20" height="30" className='mr-2'></EmojiSunglasses>
               Sign Up
             </button>
-          </Link>
+          </Link> 
+          ) : (
+            <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
+            <Link to="/Profile" >
+                <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+            </Link>
+          </div>
+          )}
       </Navbar>
     );
   };

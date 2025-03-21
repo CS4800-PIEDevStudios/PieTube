@@ -27,6 +27,7 @@ const Profile = () => {
             console.log(response.data[0])
             setUsername(response.data[0].username)
             setEmail(response.data[0].email)
+            localStorage.setItem("isLoggedIn", false);
         })
       }, []);
 

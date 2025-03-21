@@ -37,7 +37,6 @@ const EditAbout = () => {
                         {aboutText.length}/{MAX_CHARACTERS} characters
                     </small>
                 </div>
-
                 
                 <div>
                     {/* Save Button */}
