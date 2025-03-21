@@ -14,45 +14,44 @@ const EditAbout = () => {
     };
 
     return (
-        <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
             <div
-                className="p-4 bg-light"
-                style={{
-                    borderRadius: "20px",
-                    boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)",
-                    maxWidth: "1200px",
-                    width: "50pw",
-                }}
+                className="d-flex flex-column justify-content-between p-4 bg-light"
+                style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px", minHeight:"450px"}}
             >
-                <h1 className="text-center mb-4">Edit About</h1>
+                <h1 className="text-center my-4">Edit About</h1>
 
-                {/* Textarea for user input */}
-                <textarea
-                    className="form-control mb-3"
-                    rows={5}
-                    placeholder="Write Whatever..."
-                    value={aboutText}
-                    onChange={(e) => {
-                        if (e.target.value.length <= MAX_CHARACTERS) {
-                            setAboutText(e.target.value);
-                        }
-                    }}
-                />
-                <small className="text-muted">
-                    {aboutText.length}/{MAX_CHARACTERS} characters
-                </small>
+                <div>
+                    {/* Textarea for user input */}
+                    <textarea
+                        className="form-control mb-3"
+                        rows={5}
+                        placeholder="Write Whatever..."
+                        value={aboutText}
+                        onChange={(e) => {
+                            if (e.target.value.length <= MAX_CHARACTERS) {
+                                setAboutText(e.target.value);
+                            }
+                        }}
+                    />
+                    <small className="text-muted">
+                        {aboutText.length}/{MAX_CHARACTERS} characters
+                    </small>
+                </div>
 
-                {/* Save Button */}
-                <button className="custom-btn mb-3" onClick={handleSaveAbout}>
-                    Save Changes
-                </button>
+                
+                <div>
+                    {/* Save Button */}
+                    <button className="custom-btn mb-3" onClick={handleSaveAbout}>
+                        Save Changes
+                    </button>
 
-                {/* Back to Profile Link */}
-                <Link to="/profile" className="custom-btn">
-                    Back to Profile
-                </Link>
+                    {/* Back to Profile Link */}
+                    <Link to="/profile">
+                    <button className="custom-btn"> Back to Profile </button> 
+                    </Link>
+                </div>
+
             </div>
-        </div>
     );
 };
 
