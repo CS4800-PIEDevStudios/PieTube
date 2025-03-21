@@ -62,7 +62,6 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5174',
     'http://localhost:5175',
     'http://localhost:8000',
-    'https://23.20.205.143',
     'https://cs4800-piedevstudios.github.io',
     'https://ec2-23-20-205-143.compute-1.amazonaws.com'
 ]
@@ -73,10 +72,10 @@ SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_DOMAIN = 'localhost'
 
 # For development only
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ORIGIN = True
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHEN DEV
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
