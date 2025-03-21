@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Form, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
 import axiosInstance from '../axiosConfig.js'
 
@@ -93,6 +94,9 @@ const Signup = () => {
               />
             </InputGroup>
             <button class="custom-btn" type="submit">Create Account</button>
+            <Link to="/Login">
+                  <Button variant="link"> Back to Login </Button>
+            </Link>
           </div>
         </div>
         <div>{displayMessage}</div>
