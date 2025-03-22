@@ -152,43 +152,17 @@ const Home = () => {
                 <button                     
                     onMouseEnter={() => startScrolling(20)} 
                     onMouseLeave={stopScrolling} 
-                    className='scroll-arrow' style={{zIndex: 1, right: "0", background: "linear-gradient(to left, rgba(0, 0, 0, 0.9 ) 35%, transparent 90%)", height: "100%", borderRadius: "0px 20px 20px 0px"}}>
+                    className='scroll-arrow mr-3' style={{zIndex: 1, right: "0", background: "linear-gradient(to left, rgba(0, 0, 0, 0.9 ) 35%, transparent 90%)", height: "100%", borderRadius: "0px 20px 20px 0px"}}>
                     <ChevronRight width="40" height="40" />
                 </button>
 
                 {/* Scrollable Container */}
-                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-3 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
-                    <div className='genre-blob'> Genre </div>
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-5 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                    {Array.from({ length: 25 }).map((_, index) => (
+                        <div key={index} className='genre-blob'>
+                            Genre
+                        </div>
+                    ))}
                 </Row>
             </div>
 
