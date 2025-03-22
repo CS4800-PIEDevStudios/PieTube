@@ -34,33 +34,54 @@ CSRF_COOKIE_AGE = 31449600  # 60 seconds * 60 minutes * 24 hours * 365 days
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    'http://localhost:5174',
+    'http://localhost:5175',
     'http://localhost:8000',
 	'http://127.0.0.1:8000',
+    'https://cs4800-piedevstudios.github.io',
 
 ]
 
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'X-CSRFToken',
+    'Authorization',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'OPTIONS',
+    'PUT',
+    'DELETE',
+]
 
 CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000',
 	'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
     'http://localhost:8000',
+    'https://cs4800-piedevstudios.github.io',
+    'https://ec2-23-20-205-143.compute-1.amazonaws.com'
 ]
 
 
-SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SECURE = True 
 
 # For development only
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ORIGIN = True
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_COOKIE_SECURE = False  # Disable if not using HTTPS in development
+CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHEN DEV
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
-CSRF_COOKIE_SAMESITE = 'Lax'  # Allow cookies in cross-origin requests
+CSRF_COOKIE_SAMESITE = 'Lax'  # Allow cookies in cross-origin requests LAX WHEN DEV
 
-
+# SESSION_COOKIE_DOMAIN = '.cs4800-piedevstudios.github.io'
+# CSRF_COOKIE_DOMAIN = '.cs4800-piedevstudios.github.io'
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -162,6 +183,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# USER MODEL
+
+AUTH_USER_MODEL = 'LoginAPI.CustomUser'
 
 
 # Static files (CSS, JavaScript, Images)

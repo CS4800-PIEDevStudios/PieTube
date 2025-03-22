@@ -23,7 +23,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-              <Link to="/PieTube" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link>
+              <Link to="/" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link>
               <Link to="/Profile" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Profile </Link>
               <Link to="/Login" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Login </Link>					
 					</Nav>

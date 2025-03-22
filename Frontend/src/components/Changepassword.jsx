@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
+import axiosInstance from '../axiosConfig.js'
 
 const ChangePassword = () => {
     const navigate = useNavigate();
@@ -13,14 +14,33 @@ const ChangePassword = () => {
         setShowPasswords(!showPasswords);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (newPassword !== confirmPassword) {
             alert("New passwords do not match.");
             return;
         }
+
+        try {
+
+        
+            // Now, send the login POST request
+            const response = await axiosInstance.post('login-api/updatePassword', {
+              oldPassword: oldPassword,
+              newPassword: newPassword,
+              confirmPassword: confirmPassword
+            });
+        
+            console.log('Response from Django:', response.data);
+          } catch (error) {
+            console.error('Error sending data to Django:', error);
+          }
+
+
         console.log("Password changed successfully.");
-        navigate("/profile");
+        navigate("/Login");
+        window.location.reload();
     };
 
     return (

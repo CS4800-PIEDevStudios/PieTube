@@ -1,16 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from '../axiosConfig.js';
+
+
+
+
 
 const EditAbout = () => {
     const MAX_CHARACTERS = 500;
     const [aboutText, setAboutText] = useState("");
 
-    const handleSaveAbout = () => {
+
+    useEffect(() => {
+        axiosInstance.get('login-api/getProfileData')
+        .then(response => {
+            setAboutText(response.data[0].about)
+        })
+    }, []);
+
+
+    const handleSaveAbout = async () => {
         if (aboutText.trim() === "") {
             alert("Please enter something about yourself.");
             return;
         }
         console.log("About Text Saved:", aboutText);
+        try {
+
+        
+            // Now, send the login POST request
+            const response = await axiosInstance.post('login-api/updateAbout', {
+              about: aboutText,
+            });
+        
+            console.log('Response from Django:', response.data);
+          } catch (error) {
+            console.error('Error sending data to Django:', error);
+          }
     };
 
     return (
@@ -34,7 +60,7 @@ const EditAbout = () => {
                         }}
                     />
                     <small className="text-muted">
-                        {aboutText.length}/{MAX_CHARACTERS} characters
+                        {aboutText?.length}/{MAX_CHARACTERS} characters
                     </small>
                 </div>
                 
