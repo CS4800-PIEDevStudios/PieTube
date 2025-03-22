@@ -30,7 +30,7 @@ const Layout = ({ children, header }) => {
 
 const App = () => {
   return (
-    <Router basename='/PieTube'>
+    <Router basename='/'>
       <Suspense fallback={<div>Loading...</div>}>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
         <Header/>

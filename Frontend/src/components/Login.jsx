@@ -56,7 +56,7 @@ const Login = () => {
           console.log('CSRF Token Set, Authenticated:', res.data);
         });
         localStorage.setItem("isLoggedIn", true);
-        window.location.href = '/PieTube/';
+        window.location.href = '/';
       }
     } catch (error) {
       setDisplayMessage('Something went wrong.');

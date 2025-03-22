@@ -27,7 +27,8 @@ const Profile = () => {
   useEffect(() => {
         if(localStorage.getItem('isLoggedIn') === 'false')
         {
-        navigate("/Login");
+            navigate("/Login");
+            return;
         }
         
         axiosInstance.get('login-api/getProfileData')
