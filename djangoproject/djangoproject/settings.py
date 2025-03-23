@@ -67,7 +67,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True 
 
 # For development only
@@ -78,7 +78,7 @@ CORS_ORIGIN_ALLOW_ORIGIN = True
 
 CSRF_COOKIE_SECURE = True  # Disable if not using HTTPS in development FALSE WHEN DEV
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to the CSRF cookie
-CSRF_COOKIE_SAMESITE = 'Lax'  # Allow cookies in cross-origin requests LAX WHEN DEV
+CSRF_COOKIE_SAMESITE = 'None'  # Allow cookies in cross-origin requests LAX WHEN DEV
 
 # SESSION_COOKIE_DOMAIN = '.cs4800-piedevstudios.github.io'
 # CSRF_COOKIE_DOMAIN = '.cs4800-piedevstudios.github.io'
