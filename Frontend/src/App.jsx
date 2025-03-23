@@ -15,6 +15,8 @@ const Profile = lazy(() => import('./components/Profile'));
 const Changepassword = lazy(() => import('./components/Changepassword'));
 const Changeusername = lazy(() => import('./components/Changeusername'));
 const EditAbout = lazy(() => import('./components/EditAbout'));
+const MovieDescription = lazy(() => import('./components/MovieDescription'));
+const MoviePlayer = lazy(() => import('./components/MoviePlayer'));
 
 const Layout = ({ children, header }) => {
   return (
@@ -61,6 +63,12 @@ const App = () => {
               } />
             <Route path="/EditAbout" element={
               <EditAbout />
+              } />
+            <Route path="/MovieDescription" element={
+              <MovieDescription />
+              } />
+            <Route path="/MoviePlayer" element={
+              <MoviePlayer />
               } />
           </Routes>
         </div>
