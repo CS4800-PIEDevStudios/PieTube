@@ -105,3 +105,25 @@ body {
       grid-template-columns: repeat(1, minmax(300px, 1fr));
   }
 }
+
+.movie-player {
+  aspect-ratio: 16/9;
+  width: 100%;
+  border: none;
+}
+
+.movie-player-genre-blob {
+  margin: 3px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #F5F5F5;
+  color: #000000;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+.hr {
+  border-top: 1px solid #F5F5F5;
+  margin: 1em 0;
+  width: 100%;
+}
