@@ -62,6 +62,12 @@ const App = () => {
             <Route path="/EditAbout" element={
               <EditAbout />
               } />
+            <Route path="/MovieDescription" element={
+              <MovieDescription />
+              } />
+            <Route path="/MoviePlayer" element={
+              <MoviePlayer />
+              } />
           </Routes>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Ratio } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
-import pietubelogo from '../assets/pietubelogo.png';
 import mepic from '../assets/me.png';
 import KingKongThumb from '../assets/KingKongThumb.png';
 import LivingDeadThumb from '../assets/LivingDeadThumb.jpg';
@@ -19,6 +18,9 @@ const Home = () => {
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
     
+    // Navigation hook
+    const navigate = useNavigate(); 
+
     useEffect(() => {
         axiosInstance.get('login-api/checkAuth')
           .then(res => {
@@ -168,12 +170,14 @@ const Home = () => {
                 </Row>
             </div>
 
+            {/* <iframe allowfullscreen scrolling="no" src="https://vidsrc.dev/embed/movie/tt29623480" height="1000px"></iframe> */}
+
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 6 }).map((_, index) => (
-                    <div key={index} className='thumbnail'>
-                        < img src = {LivingDeadThumb}/>
+                    <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
+                        <img src = {LivingDeadThumb} />
                     </div>
                 ))}
             </div>
@@ -182,8 +186,8 @@ const Home = () => {
             <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 6 }).map((_, index) => (
-                    <div key={index} className='thumbnail'>
-                        < img src = {KingKongThumb}/>
+                    <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
+                        <img src = {KingKongThumb}/>
                     </div>
                 ))}
             </div>
@@ -192,7 +196,7 @@ const Home = () => {
             <div className='header-recommend float-start mb-3'>Recommended Movies</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 18 }).map((_, index) => (
-                    <div key={index} className='thumbnail'>
+                    <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
                         < img src = {mepic}/>
                     </div>
                 ))}
