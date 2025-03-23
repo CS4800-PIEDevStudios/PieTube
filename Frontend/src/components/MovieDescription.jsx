@@ -8,7 +8,7 @@ const MovieDescription = () => {
     return (
         <div>
             <h1>Movie Description page</h1>
-            <button className='custom-btn' > Watch Now </button>
+            <button className='custom-btn' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
         </div>
     );
 };
