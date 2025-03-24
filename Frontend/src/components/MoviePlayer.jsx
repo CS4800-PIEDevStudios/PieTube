@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Row } from 'react-bootstrap';
-import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock } from 'react-bootstrap-icons';
+import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
 import spiderman from '../assets/spiderman.jpg';
 import { use } from 'react';
 
 const MoviePlayer = () => {
+    // filler
     const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
     const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
     const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
 
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
+    const [isWatchListed, setIsWatchListed] = useState(true);
 
     function toggleIsClickedThumbsUp () {
         if (!isClickedThumbsDown) {
@@ -24,6 +26,9 @@ const MoviePlayer = () => {
         }
         setIsClickedThumbsDown(!isClickedThumbsDown);
     }
+    function toggleIsWatchListed () {
+        setIsWatchListed(!isWatchListed);
+    }
 
     return (
         <div className='d-flex flex-column w-100 pt-5' style={{backgroundColor:"#E1E1E1"}}> 
@@ -31,16 +36,18 @@ const MoviePlayer = () => {
                 <iframe
                     allowFullScreen={true}
                     className='movie-player'
+                    // filler
                     src="https://vidsrc.dev/embed/movie/tt9362722"
                 ></iframe>
 
             </div>
-            <button className='custom-btn align-self-end mr-5' style={{fontSize:"1.5rem", width:"200px"}}> <Clock/> Watch List </button>
+            <button className='d-flex custom-btn align-self-end align-items-center justify-content-center mr-5' style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}} onClick={toggleIsWatchListed}> {isWatchListed ? (<Clock/> ) : (<CheckLg/>)} Watch List </button>
 
             <hr/>
 
             <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative' style={{color: "#f5f5f5", paddingInline:"100px", paddingBlock:"50px"}}>
                 {/* Background image */}
+                {/* filler background */}
                 <img src={spiderman} className='movie-player-background-thumbnail'></img>
                 {/* Left side */}
                 <div className='d-flex flex-column align-items-start flex-wrap mx-5 position-relative' style={{width:"1200px", zIndex:"2"}}>
@@ -88,6 +95,7 @@ const MoviePlayer = () => {
                     <div className='hr'/>
                     {/* Description start */}
                     <div id='Description' style={{textAlign:'start'}}>
+                        {/* filler description */}
                         Traveling across the multiverse, Miles Morales meets a new team of Spider-People, made up of heroes from different dimensions.
                         But when the heroes clash over how to deal with a new threat, Miles finds himself at a crossroads.
                     </div> 
