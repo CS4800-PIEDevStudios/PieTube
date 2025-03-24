@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Row } from 'react-bootstrap';
-import { HandThumbsDown, HandThumbsUp, StarFill, Clock } from 'react-bootstrap-icons';
+import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock } from 'react-bootstrap-icons';
 import spiderman from '../assets/spiderman.jpg';
 
 const MoviePlayer = () => {
@@ -9,7 +9,7 @@ const MoviePlayer = () => {
     const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
 
     return (
-        <div className='d-flex flex-column w-100'> 
+        <div className='d-flex flex-column w-100 pt-5' style={{backgroundColor:"#E1E1E1"}}> 
             <div id='MoviePlayer' className='d-flex flex-column align-self-center w-50'>
                 <iframe
                     allowFullScreen={true}
@@ -22,11 +22,11 @@ const MoviePlayer = () => {
 
             <hr/>
 
-            <div id='MoviePlayerDescription' className='d-flex my-5 bg-secondary w-100 justify-content-between position-relative' style={{color: "#f5f5f5", paddingInline:"100px", paddingBlock:"50px"}}>
+            <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative' style={{color: "#f5f5f5", paddingInline:"100px", paddingBlock:"50px"}}>
                 {/* Background image */}
                 <img src={spiderman} className='movie-player-background-thumbnail'></img>
                 {/* Left side */}
-                <div className='d-flex flex-column align-items-start flex-wrap mx-5 position-relative' style={{width:"1500px"}}>
+                <div className='d-flex flex-column align-items-start flex-wrap mx-5 position-relative' style={{width:"1200px", zIndex:"2"}}>
                     <p id='Title'style={{fontSize:"4rem"}}> Spider-Man: Across the Spider-Verse </p>
                     {/* Genre start */}
                     <div id='Genres' className='d-flex flex-wrap'>
@@ -78,7 +78,7 @@ const MoviePlayer = () => {
                 </div>
                 {/* Left Side end */}
                 {/* Right side */}
-                <div className='d-flex mx-5 align-items-end position-relative'>
+                <div className='d-flex mx-5 align-items-end position-relative' style={{zIndex:"2"}}>
                     {/* Stats Start*/}
                     <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
                         <div id='LikeButtons' className='d-flex mb-3' style={{columnGap:"10px"}}>
