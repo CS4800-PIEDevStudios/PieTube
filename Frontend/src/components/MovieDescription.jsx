@@ -125,16 +125,16 @@ const MovieDescription = () => {
         </div>
 
         {/* Poster and Ratings */}
-        <div className='d-flex flex-column align-items-center ms-3'>
+        <div className='d-flex flex-column align-items-center ms-3 text-white'>
             <div id='MoviePoster' className='movie-player-thumbnail img-fluid'>
                 <img src={spiderman} alt='Spider-Man: Across the Spider-Verse Movie Poster' style={{ width: '200px', borderRadius: '10px' }} />
             </div>
-            <div className='d-flex flex-column align-items-center mt-3'>
+            <div className='d-flex flex-column align-items-center mt-3 text-white'>
                 <h1><StarFill /> 8.5/10</h1>
                 <h3>437k</h3>
             </div>
         </div>
-    </div>
+        </div>
 
         {/* Trailer Section */}
         <div className='d-flex justify-content-center w-100 mt-5'>
