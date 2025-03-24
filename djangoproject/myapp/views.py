@@ -12,7 +12,7 @@ def getMovieData(request):
 
 
 
-def genre_filtering(request):
+def genreFiltering(request):
 	genre_ids = request.GET.getlist('genres')
 	genre_ids_str = ','.join(genre_ids)
 	result = djangoproject.DatabaseManager.fetchData(f"""

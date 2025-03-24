@@ -28,4 +28,5 @@ urlpatterns = [
     path('api/get-trailer-data', views.getTrailerData, name="getTrailerData"),
     path('api/get-director-data', views.getDirectorData, name="getDirectorData"),
     path('api/get-recommendation-data', views.getRecommendationData, name="getRecommendationData"),
+    path('api/filter-genres', views.genreFiltering, name = "genreFiltering"),
 ]
