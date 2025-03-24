@@ -6,7 +6,7 @@ const Logoheader = () => {
     return (
       <div>
         <Link to="/" >
-            <img src={pietubelogo} class="mb-5" style={{maxHeight: "40px"}}/> 
+            <img src={pietubelogo} class="my-5" style={{maxHeight: "40px"}}/> 
         </Link>
       </div>
     );

@@ -41,7 +41,7 @@ const Profile = () => {
 
 
     return (
-        <div className="justify-content-center p-5 bg-light" style={{minWidth:"500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px"}}>
+        <div className="justify-content-center p-5 bg-light mt-5" style={{minWidth:"500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px"}}>
             <h1 className="text-center mb-4">Settings</h1>
 
             <div className="d-flex align-items-center mb-4">

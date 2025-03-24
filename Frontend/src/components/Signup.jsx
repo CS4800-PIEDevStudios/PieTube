@@ -51,7 +51,7 @@ const Signup = () => {
 
   return (
     <form onSubmit = {handleSubmit}>
-        <div class="p-5 bg-light" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
+        <div class="p-5 bg-light mb-5" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
           <h1>Sign up</h1>
           <div class="text-left">
             <Form.Label htmlFor="basic-url">Enter Username</Form.Label>

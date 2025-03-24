@@ -39,6 +39,37 @@ body {
   font-size: 1.5rem;
 }
 
+.profile-pic {
+  min-width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.navbar {
+  color: #000000;
+  font-size: 1.5rem;
+}
+
+.logo {
+  max-height: 40px;
+}
+
+@media (max-width: 1920px) {
+  .genre-blob {
+    font-size: 1.25rem;
+  }
+  .profile-pic {
+    min-width: 60px;
+    height: 60px;
+  }
+  .navbar {
+    font-size: 1.25rem;
+  }
+  .logo {
+    max-height: 30px;
+  }
+}
+
 .header-recommend {
   text-align: left;
   margin-left: 15px;
@@ -67,7 +98,7 @@ body {
 
 .thumbnail-grid {
   display: grid;
-  grid-template-columns: repeat(8, minmax(256px, 1fr));
+  grid-template-columns: repeat(8, minmax(128px, 1fr));
   row-gap: 15px;
 }
 
@@ -80,46 +111,45 @@ body {
   object-fit: cover;
 }
 
-
-@media (max-width: 2304px) {
+@media (max-width: 1280px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(7, minmax(256px, 1fr));
+      grid-template-columns: repeat(7, minmax(128px, 1fr));
   }
 }
 
-@media (max-width: 2048px) {
+@media (max-width: 1152px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(6, minmax(256px, 1fr));
-  }
-}
-
-@media (max-width: 1792px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(5, minmax(256px, 1fr));
-  }
-}
-
-@media (max-width: 1664px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(4, minmax(256px, 1fr));
-  }
-}
-
-@media (max-width: 1536px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(3, minmax(256px, 1fr));
+      grid-template-columns: repeat(6, minmax(128px, 1fr));
   }
 }
 
 @media (max-width: 1024px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(2, minmax(256px, 1fr));
+      grid-template-columns: repeat(5, minmax(128px, 1fr));
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 896px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(1, minmax(300px, 1fr));
+      grid-template-columns: repeat(4, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(3, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(2, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 512px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(1, minmax(128px, 1fr));
   }
 }
 
