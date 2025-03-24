@@ -5,6 +5,7 @@ import spiderman from '../assets/spiderman.jpg';
 import { use } from 'react';
 
 const MoviePlayer = () => {
+    // filler
     const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
     const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
     const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
@@ -31,6 +32,7 @@ const MoviePlayer = () => {
                 <iframe
                     allowFullScreen={true}
                     className='movie-player'
+                    // filler
                     src="https://vidsrc.dev/embed/movie/tt9362722"
                 ></iframe>
 
@@ -41,6 +43,7 @@ const MoviePlayer = () => {
 
             <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative' style={{color: "#f5f5f5", paddingInline:"100px", paddingBlock:"50px"}}>
                 {/* Background image */}
+                {/* filler background */}
                 <img src={spiderman} className='movie-player-background-thumbnail'></img>
                 {/* Left side */}
                 <div className='d-flex flex-column align-items-start flex-wrap mx-5 position-relative' style={{width:"1200px", zIndex:"2"}}>
@@ -88,6 +91,7 @@ const MoviePlayer = () => {
                     <div className='hr'/>
                     {/* Description start */}
                     <div id='Description' style={{textAlign:'start'}}>
+                        {/* filler description */}
                         Traveling across the multiverse, Miles Morales meets a new team of Spider-People, made up of heroes from different dimensions.
                         But when the heroes clash over how to deal with a new threat, Miles finds himself at a crossroads.
                     </div> 

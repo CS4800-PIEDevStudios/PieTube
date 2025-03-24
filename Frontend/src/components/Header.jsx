@@ -17,7 +17,7 @@ const Header = () => {
     return (
       <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow  px-5 justify-content-between'>
         <Navbar.Brand>
-          <Link to="/PieTube" className='flex-fill' >
+          <Link to="/" className='flex-fill' >
               <img src={pietubelogo} className='mr-3' style={{maxHeight: "40px"}}/> 
           </Link>
         </Navbar.Brand>
