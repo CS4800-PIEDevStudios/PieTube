@@ -138,6 +138,13 @@ const Home = () => {
         }
     };
 
+    const genres = [
+        "Action", "Adventure", "Animation", "Comedy", "Crime", 
+        "Documentary", "Drama", "Family", "Fantasy", "Historical", 
+        "Horror", "Musical", "Mystery", "Romance", "Science Fiction", 
+        "Thriller", "War", "Western", "Biography", "Sports", 
+        "Superhero", "Noir", "Satire", "Teen", "Disaster"
+      ];
 
     return (
         
@@ -148,7 +155,7 @@ const Home = () => {
                 <button  
                     onMouseEnter={() => startScrolling(-20)} 
                     onMouseLeave={stopScrolling} 
-                    className='scroll-arrow' style={{zIndex: 1, left:"0", background: "linear-gradient(to right, rgba(0, 0, 0, 0.9 ) 35%, transparent 90%)", height: "100%", borderRadius: "20px 0px 0px 20px"}}>
+                    className='scroll-arrow' style={{zIndex: 1, left:"0", background: "linear-gradient(to right, rgba(0, 0, 0, 1 ) 35%, transparent 90%)", height: "100%", borderRadius: "20px 0px 0px 20px"}}>
                     <ChevronLeft width="40" height="40"/>
                 </button>
 
@@ -162,11 +169,13 @@ const Home = () => {
 
                 {/* Scrollable Container */}
                 <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-5 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-                    {Array.from({ length: 25 }).map((_, index) => (
-                        <div key={index} className='genre-blob'>
-                            Genre
-                        </div>
-                    ))}
+                    {genres.map((genre, index) => (
+                        <React.Fragment key={index}>
+                            <div className='genre-blob'>
+                            {genre}
+                            </div>
+                        </React.Fragment>
+                    ))} 
                 </Row>
             </div>
 
@@ -175,7 +184,7 @@ const Home = () => {
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
-                {Array.from({ length: 6 }).map((_, index) => (
+                {Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
                         <img src = {LivingDeadThumb} />
                     </div>
@@ -185,7 +194,7 @@ const Home = () => {
             {/* Recommended by Genre*/}
             <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
             <div className='mb-5 thumbnail-grid'>
-                {Array.from({ length: 6 }).map((_, index) => (
+                {Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
                         <img src = {KingKongThumb}/>
                     </div>
@@ -195,7 +204,7 @@ const Home = () => {
             {/* Recommended Movies*/}
             <div className='header-recommend float-start mb-3'>Recommended Movies</div>
             <div className='mb-5 thumbnail-grid'>
-                {Array.from({ length: 18 }).map((_, index) => (
+                {Array.from({ length: 24 }).map((_, index) => (
                     <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
                         < img src = {mepic}/>
                     </div>

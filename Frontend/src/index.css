@@ -52,17 +52,16 @@ body {
 .thumbnail {
   margin-inline: 12px;
   background-color: #E1E1E1;
-  border-radius: 20px;
   object-fit: cover;
   position: relative;
-  padding-bottom: 56.25%;
+  aspect-ratio: 2/3;
   overflow: hidden;
   white-space: nowrap;
 }
 
 .thumbnail-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(256px, 1fr));
+  grid-template-columns: repeat(8, minmax(256px, 1fr));
   row-gap: 15px;
 }
 
@@ -75,6 +74,18 @@ body {
   object-fit: cover;
 }
 
+
+@media (max-width: 2304px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(7, minmax(256px, 1fr));
+  }
+}
+
+@media (max-width: 2048px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(6, minmax(256px, 1fr));
+  }
+}
 
 @media (max-width: 1792px) {
   .thumbnail-grid {
@@ -110,6 +121,9 @@ body {
   aspect-ratio: 16/9;
   width: 100%;
   border: none;
+  box-shadow: 0px 0px 80px rgba(0, 0, 0, 1);
+  margin-block: 100px;
+  overflow: hidden;
 }
 
 .movie-player-genre-blob {
@@ -126,4 +140,29 @@ body {
   border-top: 1px solid #F5F5F5;
   margin: 1em 0;
   width: 100%;
+}
+
+.movie-player-thumbnail {
+  aspect-ratio: 2/3;
+  margin-left: 50px;
+}
+
+.movie-player-thumbnail img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 300px;
+  max-height: 450px;
+  min-width: 200px;
+}
+
+.movie-player-background-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
