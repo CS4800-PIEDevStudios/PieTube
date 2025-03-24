@@ -11,7 +11,7 @@ const Header = () => {
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
     console.log(loggedInStatus);
-    setIsLoggedIn(loggedInStatus);
+    setIsLoggedIn(loggedInStatus); 
   },[]);
 
     return (

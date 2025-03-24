@@ -2,11 +2,28 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock } from 'react-bootstrap-icons';
 import spiderman from '../assets/spiderman.jpg';
+import { use } from 'react';
 
 const MoviePlayer = () => {
     const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
     const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
     const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
+
+    const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
+    const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
+
+    function toggleIsClickedThumbsUp () {
+        if (!isClickedThumbsDown) {
+            setIsClickedThumbsDown(true)
+        }
+        setIsClickedThumbsUp(!isClickedThumbsUp);
+    }
+    function toggleIsClickedThumbsDown () {
+        if (!isClickedThumbsUp) {
+            setIsClickedThumbsUp(true)
+        }
+        setIsClickedThumbsDown(!isClickedThumbsDown);
+    }
 
     return (
         <div className='d-flex flex-column w-100 pt-5' style={{backgroundColor:"#E1E1E1"}}> 
@@ -82,8 +99,17 @@ const MoviePlayer = () => {
                     {/* Stats Start*/}
                     <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
                         <div id='LikeButtons' className='d-flex mb-3' style={{columnGap:"10px"}}>
-                            <HandThumbsUp width="50" height="50"/>
-                            <HandThumbsDown width="50" height="50"/>   
+                            {isClickedThumbsUp ? (
+                                <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50"/>
+                                ) : (
+                                <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50"/>
+                                )}
+                            {isClickedThumbsDown ? (
+                                <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50"/>
+                                ) : (
+                                <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50"/>
+                                )}
+                               
                         </div>
                         <div className='d-flex' style={{gap:"5px", fontSize:"1.25rem", whiteSpace:"nowrap"}}>
                             <div id='Date'> 2023 </div>
