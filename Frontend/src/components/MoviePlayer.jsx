@@ -37,7 +37,7 @@ const MoviePlayer = () => {
                     allowFullScreen={true}
                     className='movie-player'
                     // filler
-                    src="https://vidsrc.dev/embed/movie/tt29603959"
+                    src="https://vidsrc.dev/embed/movie/tt9362722"
                 ></iframe>
 
             </div>
