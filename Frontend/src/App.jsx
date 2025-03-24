@@ -17,6 +17,7 @@ const Changeusername = lazy(() => import('./components/Changeusername'));
 const EditAbout = lazy(() => import('./components/EditAbout'));
 const MovieDescription = lazy(() => import('./components/MovieDescription'));
 const MoviePlayer = lazy(() => import('./components/MoviePlayer'));
+const SearchResults = lazy(() => import('./components/SearchResults'));
 
 const Layout = ({ children, header }) => {
   return (
@@ -69,6 +70,9 @@ const App = () => {
               } />
             <Route path="/MoviePlayer" element={
               <MoviePlayer />
+              } />
+            <Route path="/SearchResults" element={
+              <SearchResults />
               } />
           </Routes>
         </div>
