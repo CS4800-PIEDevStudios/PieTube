@@ -54,6 +54,10 @@ body {
   max-height: 40px;
 }
 
+.title {
+  font-size: 4rem;
+}
+
 @media (max-width: 1920px) {
   .genre-blob {
     font-size: 1.25rem;
@@ -67,6 +71,9 @@ body {
   }
   .logo {
     max-height: 30px;
+  }
+  .title {
+    font-size: 2.5rem;
   }
 }
 
@@ -217,3 +224,4 @@ body {
   );
   z-index: 1;
 }
+

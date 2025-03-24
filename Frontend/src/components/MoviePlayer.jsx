@@ -37,7 +37,7 @@ const MoviePlayer = () => {
                     allowFullScreen={true}
                     className='movie-player'
                     // filler
-                    src="https://vidsrc.dev/embed/movie/tt9362722"
+                    src="https://vidsrc.dev/embed/movie/tt29603959"
                 ></iframe>
 
             </div>
@@ -51,7 +51,7 @@ const MoviePlayer = () => {
                 <img src={spiderman} className='movie-player-background-thumbnail'></img>
                 {/* Left side */}
                 <div className='d-flex flex-column align-items-start flex-wrap mx-5 position-relative' style={{width:"1200px", zIndex:"2"}}>
-                    <p id='Title'style={{fontSize:"4rem"}}> Spider-Man: Across the Spider-Verse </p>
+                    <p id='Title' className='title'> Spider-Man: Across the Spider-Verse </p>
                     {/* Genre start */}
                     <div id='Genres' className='d-flex flex-wrap'>
                         {genres.map((genre, index) => (
@@ -108,14 +108,14 @@ const MoviePlayer = () => {
                     <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
                         <div id='LikeButtons' className='d-flex mb-3' style={{columnGap:"10px"}}>
                             {isClickedThumbsUp ? (
-                                <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50"/>
+                                <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50" style={{cursor:"pointer"}}/>
                                 ) : (
-                                <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50"/>
+                                <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50" style={{cursor:"pointer"}}/>
                                 )}
                             {isClickedThumbsDown ? (
-                                <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50"/>
+                                <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
                                 ) : (
-                                <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50"/>
+                                <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
                                 )}
                                
                         </div>
