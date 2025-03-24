@@ -11,11 +11,11 @@ const Header = () => {
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
     console.log(loggedInStatus);
-    setIsLoggedIn(loggedInStatus);
+    setIsLoggedIn(loggedInStatus); 
   },[]);
 
     return (
-      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow mb-5 px-5 justify-content-between'>
+      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow  px-5 justify-content-between'>
         <Navbar.Brand>
           <Link to="/PieTube" className='flex-fill' >
               <img src={pietubelogo} className='mr-3' style={{maxHeight: "40px"}}/> 
@@ -43,7 +43,7 @@ const Header = () => {
           {LoggedIn ? (
             <Link to="/Signup">
             <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
-              <EmojiSunglasses width="20" height="30" className='mr-2'></EmojiSunglasses>
+              <EmojiSunglasses width="20" height="30" className='mr-2'/>
               Sign Up
             </button>
           </Link> 
