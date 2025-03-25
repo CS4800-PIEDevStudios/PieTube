@@ -43,9 +43,7 @@ const MoviePlayer = () => {
             </div>
             <button className='d-flex custom-btn align-self-end align-items-center justify-content-center mr-5' style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}} onClick={toggleIsWatchListed}> {isWatchListed ? (<Clock/> ) : (<CheckLg/>)} Watch List </button>
 
-            <hr/>
-
-            <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative' style={{color: "#f5f5f5", paddingInline:"100px", paddingBlock:"50px"}}>
+            <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative'>
                 {/* Background image */}
                 {/* filler background */}
                 <img src={spiderman} className='movie-player-background-thumbnail'></img>
@@ -117,9 +115,8 @@ const MoviePlayer = () => {
                                 ) : (
                                 <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
                                 )}
-                               
                         </div>
-                        <div className='d-flex' style={{gap:"5px", fontSize:"1.25rem", whiteSpace:"nowrap"}}>
+                        <div className='stats'>
                             <div id='Date'> 2023 </div>
                             -
                             <div id='AgeRating'> PG </div>
