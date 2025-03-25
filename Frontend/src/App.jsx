@@ -28,9 +28,6 @@ const Layout = ({ children, header }) => {
   );
 };
 
-
-
-
 const App = () => {
   return (
     <Router basename='/'>

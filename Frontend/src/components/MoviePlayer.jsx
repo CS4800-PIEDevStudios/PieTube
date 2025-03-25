@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Row } from 'react-bootstrap';
 import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
 import spiderman from '../assets/spiderman.jpg';
-import { use } from 'react';
 
 const MoviePlayer = () => {
     // filler
