@@ -28,9 +28,9 @@ const Header = () => {
         {/* Links */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-              <Link to="/" className='navbar flex-fill'> Home </Link>
-              <Link to="/Profile" className='navbar flex-fill'> Profile </Link>
-              <Link to="/Login" className='navbar flex-fill'> Login </Link>					
+              <Link to="/" className='headerbar flex-fill'> Home </Link>
+              <Link to="/Profile" className='headerbar flex-fill'> Profile </Link>
+              <Link to="/Login" className='headerbar flex-fill'> Login </Link>					
 					</Nav>
           {/* Search bar */}
           <InputGroup className="ml-5 w-25 flex-fill">
