@@ -50,10 +50,10 @@ const MovieDescription = () => {
                 <div id='AgeRating'>PG</div> -
                 <div id='Duration'>2h 20m</div>
             </div>
-            <button className='custom-btn' onClick={() => navigate("/MoviePlayer")}>
+            <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}>
                 Watch Now
             </button>
-            <button className='custom-btn'>
+            <button className='description-page-button'>
                 <Clock /> Watch List
             </button>
 
