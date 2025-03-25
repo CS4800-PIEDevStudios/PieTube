@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock } from 'react-bootstrap-icons';
+import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
 import spiderman from '../assets/spiderman.jpg';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,29 +10,37 @@ const MovieDescription = () => {
 
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
+    const [isWatchListed, setIsWatchListed] = useState(true);
+    
     const navigate = useNavigate();
 
-    const toggleIsClickedThumbsUp = () => {
+    function toggleIsClickedThumbsUp () {
         if (!isClickedThumbsDown) {
-            setIsClickedThumbsDown(true);
+            setIsClickedThumbsDown(true)
         }
         setIsClickedThumbsUp(!isClickedThumbsUp);
-    };
-
-    const toggleIsClickedThumbsDown = () => {
+    }
+    function toggleIsClickedThumbsDown () {
         if (!isClickedThumbsUp) {
-            setIsClickedThumbsUp(true);
+            setIsClickedThumbsUp(true)
         }
         setIsClickedThumbsDown(!isClickedThumbsDown);
-    };
+    }
+
+    function toggleIsWatchListed () {
+        setIsWatchListed(!isWatchListed);
+    }
 
     return (
         <div id="MovieDescription" className='d-flex flex-column w-100 position-relative'>
             <img src={spiderman} className='movie-description-background-thumbnail'></img>
+
             {/* Movie Details Section */}
             <div className='d-flex flex-column p-5' style={{ zIndex: 2 }}>
+                
                 {/* Title details and Poster */}
                 <div className='d-flex align-items-start'>
+
                     {/* Title and stats */}
                     <div className='d-flex flex-column align-items-start' style={{ flex: 1 }}>
                         <p className='title'>Spider-Man: Across the Spider-Verse</p>
@@ -45,7 +53,9 @@ const MovieDescription = () => {
                                 <div id='Duration'>2h 20m</div>
                             </div>
                             <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
-                            <button className='description-page-button'> <Clock /> Watch List </button>
+                            <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
+                            </button>
+
                             {/* Like/Dislike Buttons */}
                             <div id='LikeButtons' className='d-flex' style={{ gap: "10px" }}>
                                 {isClickedThumbsUp ? (
@@ -60,9 +70,11 @@ const MovieDescription = () => {
                                 )}
                             </div>
                             {/* End like buttons */}
+
                         </div>
                     </div>
                     {/* End title details */}
+
                     {/* Poster and Ratings */}
                     <div className='d-flex flex-column align-items-center ms-3 text-white'>
                         <div id='MoviePoster' className='movie-player-thumbnail img-fluid'>
@@ -74,8 +86,10 @@ const MovieDescription = () => {
                         </div>
                     </div>
                     {/* Poster and Rating end */}
+
                 </div>
                 {/* Title details and Poster end*/}
+
                 {/* Bottom Description */}
                 <div className='d-flex'>
                     <div className='d-flex flex-column'>
@@ -89,6 +103,7 @@ const MovieDescription = () => {
                         </div>
                         {/* Line break */}
                         <div className='hr'/>
+                        
                         {/* Contributors start */}
                         <div id='Contributors' className='mt-3'>
                             <div id='Directors' className='d-flex'>
@@ -115,8 +130,10 @@ const MovieDescription = () => {
                             </div>
                         </div>
                         {/* Contributors end */}
+
                         {/* Line break */}
                         <div className='hr'/>
+
                         {/* Description */}
                         <div id='Description' style={{ textAlign: 'start'}}>
                             {/* filler description */}
@@ -125,6 +142,7 @@ const MovieDescription = () => {
                         </div>
                         {/* Description end */}
                     </div>
+
                     {/* Trailer Section */}
                     <div className='d-flex flex-column justify-content-center'>
                         <h2 className='mb-3'>Trailer</h2>
