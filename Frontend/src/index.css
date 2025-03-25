@@ -39,6 +39,44 @@ body {
   font-size: 1.5rem;
 }
 
+.profile-pic {
+  min-width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.headerbar {
+  color: #000000;
+  font-size: 1.5rem;
+}
+
+.logo {
+  max-height: 40px;
+}
+
+.title {
+  font-size: 4rem;
+}
+
+@media (max-width: 1920px) {
+  .genre-blob {
+    font-size: 1.25rem;
+  }
+  .profile-pic {
+    min-width: 60px;
+    height: 60px;
+  }
+  .navbar {
+    font-size: 1.25rem;
+  }
+  .logo {
+    max-height: 30px;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
 .header-recommend {
   text-align: left;
   margin-left: 15px;
@@ -67,7 +105,7 @@ body {
 
 .thumbnail-grid {
   display: grid;
-  grid-template-columns: repeat(8, minmax(256px, 1fr));
+  grid-template-columns: repeat(8, minmax(128px, 1fr));
   row-gap: 15px;
 }
 
@@ -80,46 +118,45 @@ body {
   object-fit: cover;
 }
 
-
-@media (max-width: 2304px) {
+@media (max-width: 1280px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(7, minmax(256px, 1fr));
+      grid-template-columns: repeat(7, minmax(128px, 1fr));
   }
 }
 
-@media (max-width: 2048px) {
+@media (max-width: 1152px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(6, minmax(256px, 1fr));
-  }
-}
-
-@media (max-width: 1792px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(5, minmax(256px, 1fr));
-  }
-}
-
-@media (max-width: 1664px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(4, minmax(256px, 1fr));
-  }
-}
-
-@media (max-width: 1536px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(3, minmax(256px, 1fr));
+      grid-template-columns: repeat(6, minmax(128px, 1fr));
   }
 }
 
 @media (max-width: 1024px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(2, minmax(256px, 1fr));
+      grid-template-columns: repeat(5, minmax(128px, 1fr));
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 896px) {
   .thumbnail-grid {
-      grid-template-columns: repeat(1, minmax(300px, 1fr));
+      grid-template-columns: repeat(4, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(3, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(2, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 512px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(1, minmax(128px, 1fr));
   }
 }
 
@@ -148,6 +185,40 @@ body {
   width: 100%;
 }
 
+.movie-description-background-thumbnail {
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  object-fit: cover;
+  object-position: 0% 25%;
+}
+
+#MovieDescription {
+  color: #f5f5f5;
+  padding-inline: 100px;
+  padding-block: 50px;
+  height: 100vh;
+}
+
+#MovieDescription::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25), /* Dark overlay at the top */
+    rgba(0, 0, 0, 1) /* Lighter overlay at the bottom */
+  );
+  z-index: 1;
+}
+
+
 .movie-player-thumbnail {
   aspect-ratio: 2/3;
   margin-left: 50px;
@@ -173,6 +244,13 @@ body {
   object-fit: cover;
 }
 
+#MoviePlayerDescription {
+  color: #f5f5f5;
+  padding-inline: 100px;
+  padding-block: 50px;
+  height: 100vh
+}
+
 #MoviePlayerDescription::before {
   content: '';
   position: absolute;
@@ -186,4 +264,42 @@ body {
     rgba(0, 0, 0, 0.9) /* Lighter overlay at the bottom */
   );
   z-index: 1;
+}
+
+/* ===== Title and Metadata ===== */
+.movie-title {
+  font-size: 4rem;
+  font-weight: normal;
+  text-align: left;
+  color: white;
+}
+
+.movie-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.stats{
+  display: flex;
+  gap: 5px;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+.description-page-button {
+  font-size: 1.3rem;
+  width: 200px;
+  background-color: white;
+  color: black; 
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.description-page-button:hover {
+  background-color: #f0f0f0;
 }

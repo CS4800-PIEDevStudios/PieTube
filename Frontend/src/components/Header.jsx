@@ -18,19 +18,19 @@ const Header = () => {
   },[]);
 
     return (
-      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow  px-5 justify-content-between'>
+      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow px-5 justify-content-between'>
         {/* Logo */}
         <Navbar.Brand>
           <Link to="/" className='flex-fill' >
-              <img src={pietubelogo} className='mr-3' style={{maxHeight: "40px"}}/> 
+              <img src={pietubelogo} className='logo mr-3'/> 
           </Link>
         </Navbar.Brand>
         {/* Links */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-              <Link to="/" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Home </Link>
-              <Link to="/Profile" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Profile </Link>
-              <Link to="/Login" className='flex-fill' style={{color:'#000000', fontSize:'1.5rem'}}> Login </Link>					
+              <Link to="/" className='headerbar flex-fill'> Home </Link>
+              <Link to="/Profile" className='headerbar flex-fill'> Profile </Link>
+              <Link to="/Login" className='headerbar flex-fill'> Login </Link>					
 					</Nav>
           {/* Search bar */}
           <InputGroup className="ml-5 w-25 flex-fill">
@@ -57,7 +57,7 @@ const Header = () => {
             </button>
           </Link> 
           ) : (
-            <div className='mx-5 rounded-circle 'style={{ minWidth:'80px', height:'80px', overflow:'hidden'}}>
+            <div className='mx-5 rounded-circle profile-pic'>
             <Link to="/Profile" >
                 <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
             </Link>

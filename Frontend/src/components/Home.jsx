@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import mepic from '../assets/me.png';
 import KingKongThumb from '../assets/KingKongThumb.png';
-import LivingDeadThumb from '../assets/LivingDeadThumb.jpg';
+import spiderman from '../assets/spiderman.jpg';
 import axiosInstance from '../axiosConfig.js'
 
 const Home = () => {
@@ -186,7 +186,7 @@ const Home = () => {
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
-                        <img src = {LivingDeadThumb} />
+                        <img src = {spiderman} />
                     </div>
                 ))}
             </div>

@@ -43,15 +43,13 @@ const MoviePlayer = () => {
             </div>
             <button className='d-flex custom-btn align-self-end align-items-center justify-content-center mr-5' style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}} onClick={toggleIsWatchListed}> {isWatchListed ? (<Clock/> ) : (<CheckLg/>)} Watch List </button>
 
-            <hr/>
-
-            <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative' style={{color: "#f5f5f5", paddingInline:"100px", paddingBlock:"50px"}}>
+            <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative'>
                 {/* Background image */}
                 {/* filler background */}
                 <img src={spiderman} className='movie-player-background-thumbnail'></img>
                 {/* Left side */}
                 <div className='d-flex flex-column align-items-start flex-wrap mx-5 position-relative' style={{width:"1200px", zIndex:"2"}}>
-                    <p id='Title'style={{fontSize:"4rem"}}> Spider-Man: Across the Spider-Verse </p>
+                    <p id='Title' className='title'> Spider-Man: Across the Spider-Verse </p>
                     {/* Genre start */}
                     <div id='Genres' className='d-flex flex-wrap'>
                         {genres.map((genre, index) => (
@@ -108,18 +106,17 @@ const MoviePlayer = () => {
                     <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
                         <div id='LikeButtons' className='d-flex mb-3' style={{columnGap:"10px"}}>
                             {isClickedThumbsUp ? (
-                                <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50"/>
+                                <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50" style={{cursor:"pointer"}}/>
                                 ) : (
-                                <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50"/>
+                                <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50" style={{cursor:"pointer"}}/>
                                 )}
                             {isClickedThumbsDown ? (
-                                <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50"/>
+                                <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
                                 ) : (
-                                <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50"/>
+                                <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
                                 )}
-                               
                         </div>
-                        <div className='d-flex' style={{gap:"5px", fontSize:"1.25rem", whiteSpace:"nowrap"}}>
+                        <div className='stats'>
                             <div id='Date'> 2023 </div>
                             -
                             <div id='AgeRating'> PG </div>
