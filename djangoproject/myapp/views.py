@@ -10,6 +10,22 @@ def getMovieData(request):
 
 	return JsonResponse(result, safe=False)
 
+
+
+def genre_filtering(request):
+	genre_ids = request.GET.getlist('genres')
+	genre_ids_str = ','.join(genre_ids)
+	result = djangoproject.DatabaseManager.fetchData(f"""
+        SELECT DISTINCT m.id, m.title 
+        FROM PieTube.Movie AS m
+        INNER JOIN PieTube.MovieGenre AS mg ON m.id = mg.movie_id
+        WHERE mg.genre_id IN ({genre_ids_str})
+    """)
+	return JsonResponse(result, safe=False)
+
+
+
+
 def getUserData(request):
 
 	result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.auth_user")

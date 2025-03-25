@@ -41,52 +41,21 @@ const MovieDescription = () => {
             <div className='d-flex flex-column p-5' style={{ zIndex: 2 }}>
                 
             {/* Title and Metadata */}
-            <div className='d-flex flex-row align-items-start justify-content-between'>
-                <div className='d-flex flex-column' style={{ flex: 1 }}>
-                    <p id='Title' style={{ fontSize: "4rem", fontWeight: "normal", textAlign:"left" }}>Spider-Man: Across the Spider-Verse</p>
-                    <div className='d-flex align-items-center' style={{ gap: "20px", marginBottom: "20px" }}>
-                        <div className='d-flex' style={{ gap: "10px", fontSize: "1.25rem", whiteSpace: "nowrap" }}>
-                            <div id='Date'>2023</div> -
-                            <div id='AgeRating'>PG</div> -
-                            <div id='Duration'>2h 20m</div>
-                        </div>
-                        <button 
-                            className='custom-btn' 
-                            onClick={() => navigate("/MoviePlayer")} 
-                            style={{ 
-                                fontSize: "1.30rem", 
-                                width: "200px", 
-                                backgroundColor: "white", 
-                                color: "black", 
-                                border: "none", 
-                                borderRadius: "20px", 
-                                padding: "10px 20px", 
-                                cursor: "pointer", 
-                                transition: "background-color 0.3s ease" 
-                            }}
-                            onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"} 
-                            onMouseLeave={(e) => e.target.style.backgroundColor = "white"}
-                        >
-                            Watch Now
-                        </button>
-                        <button 
-                            className='custom-btn' 
-                            style={{ 
-                                fontSize: "1.30rem", 
-                                width: "200px", 
-                                backgroundColor: "white", 
-                                color: "black", 
-                                border: "none", 
-                                borderRadius: "20px", 
-                                padding: "10px 20px", 
-                                cursor: "pointer", 
-                                transition: "background-color 0.3s ease" 
-                            }}
-                            onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"} 
-                            onMouseLeave={(e) => e.target.style.backgroundColor = "white"}
-                        >
-                            <Clock /> Watch List
-                        </button>
+<div className='d-flex flex-row align-items-start justify-content-between'>
+    <div className='d-flex flex-column' style={{ flex: 1 }}>
+        <p className='movie-title'>Spider-Man: Across the Spider-Verse</p>
+        <div className='movie-metadata'>
+            <div className='metadata-text'>
+                <div id='Date'>2023</div> -
+                <div id='AgeRating'>PG</div> -
+                <div id='Duration'>2h 20m</div>
+            </div>
+            <button className='custom-btn' onClick={() => navigate("/MoviePlayer")}>
+                Watch Now
+            </button>
+            <button className='custom-btn'>
+                <Clock /> Watch List
+            </button>
 
             {/* Like/Dislike Buttons */}
             <div id='LikeButtons' className='d-flex' style={{ gap: "10px" }}>
@@ -156,16 +125,16 @@ const MovieDescription = () => {
         </div>
 
         {/* Poster and Ratings */}
-        <div className='d-flex flex-column align-items-center ms-3'>
+        <div className='d-flex flex-column align-items-center ms-3 text-white'>
             <div id='MoviePoster' className='movie-player-thumbnail img-fluid'>
                 <img src={spiderman} alt='Spider-Man: Across the Spider-Verse Movie Poster' style={{ width: '200px', borderRadius: '10px' }} />
             </div>
-            <div className='d-flex flex-column align-items-center mt-3'>
+            <div className='d-flex flex-column align-items-center mt-3 text-white'>
                 <h1><StarFill /> 8.5/10</h1>
                 <h3>437k</h3>
             </div>
         </div>
-    </div>
+        </div>
 
         {/* Trailer Section */}
         <div className='d-flex justify-content-center w-100 mt-5'>
