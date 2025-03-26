@@ -8,10 +8,18 @@ const ChangePassword = () => {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [showPasswords, setShowPasswords] = useState(false);
+    const [showPasswords, setShowPasswords] = useState({
+        old: false,
+        new: false,
+        confirm: false
 
-    const togglePasswordVisibility = () => {
-        setShowPasswords(!showPasswords);
+    });
+
+    const togglePasswordVisibility = (field) => {
+        setShowPasswords(prevState => ({
+            ...prevState,
+            [field]: !prevState[field]
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -49,39 +57,41 @@ const ChangePassword = () => {
             <h1 className="text-center mb-4">Change Password</h1>
 
             <form onSubmit={handleSubmit}>
-                {["Old Password", "New Password", "Confirm New Password"].map((placeholder, index) => {
-                    const passwordValue = index === 0 ? oldPassword : index === 1 ? newPassword : confirmPassword;
-                    const setPasswordValue = index === 0 ? setOldPassword : index === 1 ? setNewPassword : setConfirmPassword;
+                {[
+                    { label: "Old Password", value: oldPassword, onChange: setOldPassword, key: "old" },
+                    { label: "New Password", value: newPassword, onChange: setNewPassword, key: "new" },
+                    { label: "Confirm New Password", value: confirmPassword, onChange: setConfirmPassword, key: "confirm" }
+                ].map(({ label, value, onChange, key }) => (
 
-                    return (
-                        <div className="mb-3" key={placeholder} style={{ position: "relative" }}>
+                        <div className="mb-3" key={key} style={{ position: "relative" }}>
+                            <label htmlFor={key} className="form-label">{label}</label>
                             <input
-                                type={showPasswords ? "text" : "password"}
+                                type={showPasswords[key] ? "text" : "password"}
                                 className="form-control"
-                                placeholder={placeholder}
-                                value={passwordValue}
-                                onChange={(e) => setPasswordValue(e.target.value)}
+                                id={key}
+                                placeholder={label}
+                                value={value}
+                                onChange={(e) => onChange(e.target.value)}
                                 required
                                 style={{ paddingRight: "40px" }}
                             />
                             <button 
                                 type="button" 
-                                onClick={togglePasswordVisibility}
+                                onClick={() => togglePasswordVisibility(key)}
                                 style={{ 
                                     position: "absolute", 
                                     right: "10px", 
                                     top: "50%", 
-                                    transform: "translateY(-50%)", 
+                                    transform: "translateY(-5%)", 
                                     border: "none", 
                                     background: "none", 
                                     cursor: "pointer" 
                                 }}
                             >
-                                {showPasswords ? <EyeSlash size={20} /> : <Eye size={20} />}
+                                {showPasswords[key] ? <EyeSlash size={20} /> : <Eye size={20} />}
                             </button>
                         </div>
-                    );
-                })}
+                ))}
 
                 <button type="submit" className="custom-btn w-100 mb-2 text-center">
                     Submit
