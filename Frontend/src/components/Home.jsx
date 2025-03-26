@@ -30,6 +30,8 @@ const Home = () => {
               console.log('User not authenticated')
             }
           });
+
+          fetchData();
       }, []);
 
     const fetchData = () => {
@@ -184,9 +186,9 @@ const Home = () => {
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
-                {Array.from({ length: 8 }).map((_, index) => (
-                    <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
-                        <img src = {spiderman} />
+                {movieData.map((_, index) => (
+                    <div key={index} className='thumbnail' role="button" onClick={() => navigate(`/MovieDescription/${movieData[index].MovieID}`)}>
+                        <img src = {movieData[index].Poster} />
                     </div>
                 ))}
             </div>

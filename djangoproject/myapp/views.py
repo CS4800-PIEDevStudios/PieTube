@@ -3,6 +3,8 @@ from django.http import JsonResponse
 import mysql.connector
 from django.db import connection
 import djangoproject.DatabaseManager
+import json
+from django.views.decorators.http import require_POST
 
 def getMovieData(request):
 	
@@ -10,7 +12,12 @@ def getMovieData(request):
 
 	return JsonResponse(result, safe=False)
 
-
+@require_POST
+def getMovieDataByID(request):
+	data = json.loads(request.body)
+	id = data.get('id')
+	result = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.Movie WHERE MovieID = {id}")
+	return JsonResponse(result, safe=False)
 
 def genreFiltering(request):
 	genre_ids = request.GET.getlist('genres')
