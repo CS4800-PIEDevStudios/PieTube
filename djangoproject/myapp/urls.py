@@ -30,4 +30,6 @@ urlpatterns = [
     path('api/get-recommendation-data', views.getRecommendationData, name="getRecommendationData"),
     path('api/filter-genres', views.genreFiltering, name = "genreFiltering"),
     path('api/get-movie-by-id', views.getMovieDataByID, name = "getMovieDataByID"),
+    path('api/get-movie-genres-by-id', views.getMovieGenresByID, name = "getMovieGenresDataByID"),
+    path('api/get-movie-actors-by-id', views.getMovieActorsByID, name = "getMovieActorsDataByID"),
 ]

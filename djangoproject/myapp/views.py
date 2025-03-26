@@ -19,6 +19,27 @@ def getMovieDataByID(request):
 	result = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.Movie INNER JOIN PieTube.Director ON PieTube.Movie.DirectorID = PieTube.Director.DirectorID WHERE MovieID = {id} ;")
 	return JsonResponse(result, safe=False)
 
+def getMovieGenresByID(request):
+	data = json.loads(request.body)
+	id = data.get('id')
+	result = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.MovieGenre INNER JOIN PieTube.Genre ON PieTube.MovieGenre.GenreID = PieTube.Genre.GenreID WHERE MovieID = {id};")
+	print(result)
+	resultArray = []
+	for i in result:
+		resultArray.append(i["GenreName"])
+	return JsonResponse(resultArray, safe=False)
+
+def getMovieActorsByID(request):
+	data = json.loads(request.body)
+	id = data.get('id')
+	result = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.MovieRole INNER JOIN PieTube.Actor ON PieTube.MovieRole.ActorID = PieTube.Actor.ActorID WHERE MovieID = {id};")
+	print(result)
+	resultArray = []
+	for i in result:
+		resultArray.append(i["Name"])
+	return JsonResponse(resultArray, safe=False)
+
+
 def genreFiltering(request):
 	genre_ids = request.GET.getlist('genres')
 	genre_ids_str = ','.join(genre_ids)
