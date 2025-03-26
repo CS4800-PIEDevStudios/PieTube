@@ -32,18 +32,14 @@ const MovieDescription = () => {
     }
 
     return (
-        <div id="MovieDescription" className='d-flex flex-column w-100 position-relative'>
+        <div id="MovieDescription" className='d-flex flex-column w-100 position-relative justify-content-center'>
             <img src={spiderman} className='movie-description-background-thumbnail'></img>
-
             {/* Movie Details Section */}
             <div className='d-flex flex-column p-5' style={{ zIndex: 2 }}>
-                
                 {/* Title details and Poster */}
-                <div className='d-flex align-items-start'
-                style= {{ position: 'relative', top: '200px'}}>
-
+                <div className='d-flex align-items-start'>
                     {/* Title and stats */}
-                    <div className='d-flex flex-column align-items-start' style={{ flex: 1 }}>
+                    <div className='d-flex flex-column align-items-start align-self-end' style={{ flex: 1}}>
                         <p className='title'>Spider-Man: Across the Spider-Verse</p>
                         <div className='movie-stats'>
                             <div className='stats'>
@@ -77,26 +73,26 @@ const MovieDescription = () => {
                     {/* End title details */}
 
                     {/* Poster and Ratings */}
-                    <div className='d-flex flex-column align-items-center ms-3 text-white'>
-                        <div id='MoviePoster' className='movie-player-thumbnail img-fluid'>
-                            <img src={spiderman} alt='Spider-Man: Across the Spider-Verse Movie Poster' style={{ width: '200px', borderRadius: '10px' }} />
-                        </div>
-                        <div className='d-flex flex-column align-items-center mt-3 text-white'>
+                    <div className='d-flex align-items-end' style={{gap:"20px", whiteSpace:'nowrap'}}>
+                        <div className='d-flex flex-column align-items-end'>
                             <h1><StarFill /> 8.5/10</h1>
                             <h3>437k</h3>
                         </div>
+                        <div id='MoviePoster' className='movie-player-thumbnail'>
+                            <img src={spiderman} alt='Spider-Man: Across the Spider-Verse Movie Poster'/>
+                        </div>
                     </div>
                     {/* Poster and Rating end */}
-
                 </div>
                 {/* Title details and Poster end*/}
 
                 {/* Bottom Description */}
-                <div className='d-flex'>
-                    <div className='d-flex flex-column'>
+                <div className='d-flex' style={{gap:'100px'}}>
+                    {/* Description */}
+                    <div className='d-flex flex-column flex-fill' style={{maxWidth:'1500px'}}>
                         {/* Genres */}
                         <div id='Genres' className='d-flex flex-wrap' 
-                        style={{ gap: "15px", position: 'relative', bottom: '65px' }}>
+                        style={{ gap: "15px", position: 'relative'}}>
                             {genres.map((genre, index) => (
                                 <div key={index} className='movie-player-genre-blob'>
                                     {genre}
@@ -113,7 +109,7 @@ const MovieDescription = () => {
                                 <div className='d-flex align-text-bottom'>
                                     {directors.map((director, index) => (
                                         <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2' style={{ lineHeight: "1" , fontSize:'1.3rem' }}>{director}</p>
+                                            <p className='mx-2 mt-2' style={{ fontSize:'1.3rem' }}>{director}</p>
                                             {index < directors.length - 1 && <span className='mt-2'>-</span>}
                                         </React.Fragment>
                                     ))}
@@ -124,7 +120,7 @@ const MovieDescription = () => {
                                 <div className='d-flex align-text-bottom'>
                                     {writers.map((writer, index) => (
                                         <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2' style={{ lineHeight: "1", fontSize:'1.3rem' }}>{writer}</p>
+                                            <p className='mx-2 mt-2' style={{ fontSize:'1.3rem' }}>{writer}</p>
                                             {index < writers.length - 1 && <span className='mt-2'>-</span>}
                                         </React.Fragment>
                                     ))}
@@ -146,21 +142,19 @@ const MovieDescription = () => {
                     </div>
 
                     {/* Trailer Section */}
-                    <div className='d-flex flex-column justify-content-center'>
-                        <h2 className='mb-3'>Trailer</h2>
-                        <div className='d-flex align-self-end w-100'>
-                            <iframe
-                                className='embed-responsive-item'
-                                src="https://www.youtube.com/embed/shW9i6k8cB0"
-                                style={{ 
-                                    height: '400px', 
-                                    borderRadius: '10px',
-                                    width: '100%',  
-                                    maxWidth: '800px',
-                                    aspectRatio: '16/9'
-                                }}
-                            />
-                        </div>
+                    <div className='d-flex flex-column align-items-end flex-fill'>
+                        <h2 className='mt-3 align-self-start'>Trailer</h2>
+                        <iframe
+                            className='embed-responsive-item'
+                            src="https://www.youtube.com/embed/shW9i6k8cB0"
+                            style={{ 
+                                height: '400px', 
+                                borderRadius: '10px',
+                                width: '100%',  
+                                maxWidth: '800px',
+                                aspectRatio:'16/9'
+                            }}
+                        />
                     </div>
                 </div>
                 {/* Bottom Description */}
