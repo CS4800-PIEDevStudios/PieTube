@@ -170,7 +170,7 @@ const Home = () => {
                 </button>
 
                 {/* Scrollable Container */}
-                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-3 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none', borderRadius: "20p"}}>
+                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-3 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none', borderRadius: "20px"}}>
                     {genres.map((genre, index) => (
                         <React.Fragment key={index}>
                             <div className='genre-blob'>
