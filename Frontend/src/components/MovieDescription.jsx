@@ -78,8 +78,8 @@ const MovieDescription = () => {
                             <h1><StarFill /> 8.5/10</h1>
                             <h3>437k</h3>
                         </div>
-                        <div id='MoviePoster' className='movie-player-thumbnail'>
-                            <img src={spiderman} alt='Spider-Man: Across the Spider-Verse Movie Poster'/>
+                        <div id='MoviePoster' className='movie-description-thumbnail'>
+                            <img src={spiderman}/>
                         </div>
                     </div>
                     {/* Poster and Rating end */}
@@ -147,13 +147,6 @@ const MovieDescription = () => {
                         <iframe
                             className='embed-responsive-item'
                             src="https://www.youtube.com/embed/shW9i6k8cB0"
-                            style={{ 
-                                height: '400px', 
-                                borderRadius: '10px',
-                                width: '100%',  
-                                maxWidth: '800px',
-                                aspectRatio:'16/9'
-                            }}
                         />
                     </div>
                 </div>
