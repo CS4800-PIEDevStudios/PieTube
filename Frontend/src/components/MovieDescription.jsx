@@ -74,7 +74,7 @@ const MovieDescription = () => {
 
                     {/* Poster and Ratings */}
                     <div className='d-flex align-items-end' style={{gap:"20px", whiteSpace:'nowrap'}}>
-                        <div className='d-flex flex-column align-items-end'>
+                        <div id='Rating' className='d-flex flex-column align-items-end'>
                             <h1><StarFill /> 8.5/10</h1>
                             <h3>437k</h3>
                         </div>
@@ -94,7 +94,7 @@ const MovieDescription = () => {
                         <div id='Genres' className='d-flex flex-wrap' 
                         style={{ gap: "15px", position: 'relative'}}>
                             {genres.map((genre, index) => (
-                                <div key={index} className='movie-player-genre-blob'>
+                                <div key={index} className='movie-description-genre-blob'>
                                     {genre}
                                 </div>
                             ))}
@@ -109,7 +109,7 @@ const MovieDescription = () => {
                                 <div className='d-flex align-text-bottom'>
                                     {directors.map((director, index) => (
                                         <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2' style={{ fontSize:'1.3rem' }}>{director}</p>
+                                            <p className='mx-2 mt-2'>{director}</p>
                                             {index < directors.length - 1 && <span className='mt-2'>-</span>}
                                         </React.Fragment>
                                     ))}
@@ -120,7 +120,7 @@ const MovieDescription = () => {
                                 <div className='d-flex align-text-bottom'>
                                     {writers.map((writer, index) => (
                                         <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2' style={{ fontSize:'1.3rem' }}>{writer}</p>
+                                            <p className='mx-2 mt-2'>{writer}</p>
                                             {index < writers.length - 1 && <span className='mt-2'>-</span>}
                                         </React.Fragment>
                                     ))}
@@ -133,7 +133,7 @@ const MovieDescription = () => {
                         <div className='hr'/>
 
                         {/* Description */}
-                        <div id='Description' style={{ textAlign: 'start', fontSize:'1.2rem'}}>
+                        <div id='Description' style={{ textAlign: 'start'}}>
                             {/* filler description */}
                             Traveling across the multiverse, Miles Morales meets a new team of Spider-People, made up of heroes from different dimensions.
                             But when the heroes clash over how to deal with a new threat, Miles finds himself at a crossroads.

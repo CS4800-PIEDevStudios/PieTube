@@ -66,41 +66,6 @@ body {
   aspect-ratio: 16/9;
 }
 
-@media (max-width: 1920px) {
-  .genre-blob {
-    font-size: 1.25rem;
-  }
-  .profile-pic {
-    min-width: 60px;
-    height: 60px;
-  }
-  .navbar {
-    font-size: 1.25rem;
-  }
-  .logo {
-    max-height: 30px;
-  }
-  .title {
-    font-size: 2.5rem;
-  }
-  .movie-description-thumbnail img{
-    object-fit: cover;
-    max-width: 100px;
-  }
-  .description-page-button {
-    font-size: 1rem;
-    width: 100px;
-    background-color: white;
-    color: black; 
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-}
-
 .header-recommend {
   text-align: left;
   margin-left: 15px;
@@ -194,6 +159,16 @@ body {
 }
 
 .movie-player-genre-blob {
+  margin: 3px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #F5F5F5;
+  color: #000000;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+.movie-description-genre-blob {
   margin: 3px;
   padding-block: 5px;
   padding-inline: 10px;
@@ -369,4 +344,87 @@ body {
 }
 .search-results:hover {
   background-color: #E1E1E1;
+}
+
+#Contributors p {
+  font-size: 1.3rem;
+}
+
+#Contributors h3 {
+  font-size: 2rem;
+}
+
+#Description {
+  font-size: 1.2rem;
+}
+
+
+@media (max-width: 1920px) {
+  .genre-blob {
+    font-size: 1.25rem;
+  }
+  .profile-pic {
+    min-width: 60px;
+    height: 60px;
+  }
+  .navbar {
+    font-size: 1.25rem;
+  }
+  .logo {
+    max-height: 30px;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .movie-description-thumbnail img{
+    object-fit: cover;
+    max-width: 175px;
+  } 
+  .description-page-button {
+    font-size: .9rem;
+    width: 120px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    white-space: nowrap;
+  }
+  
+  #Contributors p {
+    font-size: 1rem;
+  }
+  
+  #Contributors h3 {
+    font-size: 1.70rem;
+  }
+  .movie-description-genre-blob {
+    margin: 1px;
+    padding-block: 5px;
+    padding-inline: 10px;
+    font-size: .9rem;
+  }
+  .stats{
+    font-size: 1.2rem;
+  }
+
+  #Rating h1{
+    font-size: 1.75rem;
+  }
+  #Rating h3{
+    font-size: 1.25rem;
+  }
+
+  #Contributors {
+    margin-top: 0;
+  }
+
+  #Description {
+    font-size: 1rem;
+  }
+
+  #MoviePoster {
+    padding-top: 5rem;
+  }
+
+  #MovieDescriptionTrailer h2 {
+    font-size: 1.25rem;
+  }
 }
