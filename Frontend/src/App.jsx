@@ -62,7 +62,7 @@ const App = () => {
             <Route path="/EditAbout" element={
               <EditAbout />
               } />
-            <Route path="/MovieDescription" element={
+            <Route path="/MovieDescription/:id" element={
               <MovieDescription />
               } />
             <Route path="/MoviePlayer" element={

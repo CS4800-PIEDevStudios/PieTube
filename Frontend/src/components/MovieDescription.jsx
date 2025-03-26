@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
 import spiderman from '../assets/spiderman.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../axiosConfig.js'
 
 const MovieDescription = () => {
     const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
     const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
     const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
-
+    const [movieData, setMovieData] = useState([]);
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
-    
+    const { id } = useParams();
     const navigate = useNavigate();
 
     function toggleIsClickedThumbsUp () {
@@ -31,23 +32,35 @@ const MovieDescription = () => {
         setIsWatchListed(!isWatchListed);
     }
 
+    useEffect(() => {
+        GetMovieData()
+      }, []);
+
+    async function GetMovieData()
+    {
+        const response = await axiosInstance.post('api/get-movie-by-id', {
+            id: id
+          });
+        setMovieData(response.data[0]);
+        console.log(response.data[0]);
+    }
     return (
         <div id="MovieDescription" className='d-flex flex-column w-100 position-relative justify-content-center'>
-            <img src={spiderman} className='movie-description-background-thumbnail'></img>
+            <img src={movieData.Poster} className='movie-description-background-thumbnail'></img>
             {/* Movie Details Section */}
             <div className='d-flex flex-column p-5' style={{ zIndex: 2 }}>
                 {/* Title details and Poster */}
                 <div className='d-flex align-items-start'>
                     {/* Title and stats */}
                     <div className='d-flex flex-column align-items-start align-self-end' style={{ flex: 1}}>
-                        <p className='title'>Spider-Man: Across the Spider-Verse</p>
+                        <p className='title'>{movieData.Title}</p>
                         <div className='movie-stats'>
                             <div className='stats'>
-                                <div id='Date'>2023</div> 
-                                -
-                                <div id='AgeRating'>PG</div> 
-                                -
-                                <div id='Duration'>2h 20m</div>
+                                <div id='Date'>{movieData.ReleaseDate}</div> 
+                                |
+                                <div id='AgeRating'>{movieData.AgeRating}</div> 
+                                |
+                                <div id='Duration'>{movieData.Duration} minutes</div>
                             </div>
                             <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
@@ -75,11 +88,11 @@ const MovieDescription = () => {
                     {/* Poster and Ratings */}
                     <div className='d-flex align-items-end' style={{gap:"20px", whiteSpace:'nowrap'}}>
                         <div id='Rating' className='d-flex flex-column align-items-end'>
-                            <h1><StarFill /> 8.5/10</h1>
+                            <h1><StarFill /> {movieData.Rating}</h1>
                             <h3>437k</h3>
                         </div>
                         <div id='MoviePoster' className='movie-description-thumbnail'>
-                            <img src={spiderman}/>
+                            <img src={movieData.Poster}/>
                         </div>
                     </div>
                     {/* Poster and Rating end */}
@@ -135,8 +148,7 @@ const MovieDescription = () => {
                         {/* Description */}
                         <div id='Description' style={{ textAlign: 'start'}}>
                             {/* filler description */}
-                            Traveling across the multiverse, Miles Morales meets a new team of Spider-People, made up of heroes from different dimensions.
-                            But when the heroes clash over how to deal with a new threat, Miles finds himself at a crossroads.
+                            {movieData.Summary}
                         </div>
                         {/* Description end */}
                     </div>
@@ -146,7 +158,7 @@ const MovieDescription = () => {
                         <h2 className='mt-3 align-self-start'>Trailer</h2>
                         <iframe
                             className='embed-responsive-item'
-                            src="https://www.youtube.com/embed/shW9i6k8cB0"
+                            src={movieData.Trailer}
                         />
                     </div>
                 </div>
