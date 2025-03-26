@@ -60,7 +60,7 @@ const MovieDescription = () => {
                                 |
                                 <div id='AgeRating'>{movieData.AgeRating}</div> 
                                 |
-                                <div id='Duration'>{movieData.Duration} minutes</div>
+                                <div id='Duration'>{movieData.Duration} mins</div>
                             </div>
                             <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
@@ -118,14 +118,9 @@ const MovieDescription = () => {
                         {/* Contributors start */}
                         <div id='Contributors' className='mt-3'>
                             <div id='Directors' className='d-flex'>
-                                <h3 className='mr-3'>Directors</h3>
+                                <h3 className='mr-3'>Director</h3>
                                 <div className='d-flex align-text-bottom'>
-                                    {directors.map((director, index) => (
-                                        <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2'>{director}</p>
-                                            {index < directors.length - 1 && <span className='mt-2'>-</span>}
-                                        </React.Fragment>
-                                    ))}
+                                    <p className='mx-2 mt-2'>{movieData.Name}</p>
                                 </div>
                             </div>
                             <div id='Writers' className='d-flex'>
