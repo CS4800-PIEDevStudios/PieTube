@@ -34,7 +34,7 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
         <Header/>
-        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <Routes>
             <Route path="/" element={
               <Home />
