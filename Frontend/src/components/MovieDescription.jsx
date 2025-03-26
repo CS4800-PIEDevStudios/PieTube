@@ -142,7 +142,7 @@ const MovieDescription = () => {
                     </div>
 
                     {/* Trailer Section */}
-                    <div className='d-flex flex-column align-items-end flex-fill'>
+                    <div id='MovieDescriptionTrailer' className='d-flex flex-column align-items-end flex-fill'>
                         <h2 className='mt-3 align-self-start'>Trailer</h2>
                         <iframe
                             className='embed-responsive-item'

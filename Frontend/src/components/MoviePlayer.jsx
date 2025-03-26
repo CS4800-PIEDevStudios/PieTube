@@ -35,7 +35,7 @@ const MoviePlayer = () => {
                     allowFullScreen={true}
                     className='movie-player'
                     // filler
-                    src="https://vidsrc.dev/embed/movie/tt9362722"
+                    src="https://vidsrc.to/embed/movie/385687"
                 ></iframe>
 
             </div>
@@ -99,7 +99,7 @@ const MoviePlayer = () => {
                 </div>
                 {/* Left Side end */}
                 {/* Right side */}
-                <div className='d-flex mx-5 align-items-end position-relative' style={{zIndex:"2"}}>
+                <div className='d-flex mx-5 align-items-end position-relative' style={{zIndex:"2", gap:"30px"}}>
                     {/* Stats Start*/}
                     <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
                         <div id='LikeButtons' className='d-flex mb-3' style={{columnGap:"10px"}}>
