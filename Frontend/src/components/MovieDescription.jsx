@@ -5,10 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js'
 
 const MovieDescription = () => {
-    const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
-    const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
     const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
     const [movieData, setMovieData] = useState([]);
+    const [genreData, setGenreData] = useState([]);
+    const [actorData, setActorData] = useState([]);
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
@@ -41,8 +41,21 @@ const MovieDescription = () => {
         const response = await axiosInstance.post('api/get-movie-by-id', {
             id: id
           });
+
         setMovieData(response.data[0]);
         console.log(response.data[0]);
+
+        const genres = await axiosInstance.post('api/get-movie-genres-by-id', {
+            id: id
+        });
+        setGenreData(genres.data);
+        console.log(genres.data);
+
+        const actors = await axiosInstance.post('api/get-movie-actors-by-id', {
+            id: id
+        });
+        setActorData(actors.data);
+        console.log(actors.data);
     }
     return (
         <div id="MovieDescription" className='d-flex flex-column w-100 position-relative justify-content-center'>
@@ -60,7 +73,7 @@ const MovieDescription = () => {
                                 |
                                 <div id='AgeRating'>{movieData.AgeRating}</div> 
                                 |
-                                <div id='Duration'>{movieData.Duration} minutes</div>
+                                <div id='Duration'>{movieData.Duration} mins</div>
                             </div>
                             <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
@@ -89,7 +102,7 @@ const MovieDescription = () => {
                     <div className='d-flex align-items-end' style={{gap:"20px", whiteSpace:'nowrap'}}>
                         <div id='Rating' className='d-flex flex-column align-items-end'>
                             <h1><StarFill /> {movieData.Rating}</h1>
-                            <h3>437k</h3>
+                            {/* <h3>437k</h3> */}
                         </div>
                         <div id='MoviePoster' className='movie-description-thumbnail'>
                             <img src={movieData.Poster}/>
@@ -106,7 +119,7 @@ const MovieDescription = () => {
                         {/* Genres */}
                         <div id='Genres' className='d-flex flex-wrap' 
                         style={{ gap: "15px", position: 'relative'}}>
-                            {genres.map((genre, index) => (
+                            {genreData.map((genre, index) => (
                                 <div key={index} className='movie-description-genre-blob'>
                                     {genre}
                                 </div>
@@ -118,22 +131,17 @@ const MovieDescription = () => {
                         {/* Contributors start */}
                         <div id='Contributors' className='mt-3'>
                             <div id='Directors' className='d-flex'>
-                                <h3 className='mr-3'>Directors</h3>
+                                <h3 className='mr-3'>Director</h3>
                                 <div className='d-flex align-text-bottom'>
-                                    {directors.map((director, index) => (
-                                        <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2'>{director}</p>
-                                            {index < directors.length - 1 && <span className='mt-2'>-</span>}
-                                        </React.Fragment>
-                                    ))}
+                                    <p className='mx-2 mt-2'>{movieData.Name}</p>
                                 </div>
                             </div>
                             <div id='Writers' className='d-flex'>
-                                <h3 className='mr-3'>Writers</h3>
+                                <h3 className='mr-3'>Actors</h3>
                                 <div className='d-flex align-text-bottom'>
-                                    {writers.map((writer, index) => (
+                                    {actorData.map((actor, index) => (
                                         <React.Fragment key={index}>
-                                            <p className='mx-2 mt-2'>{writer}</p>
+                                            <p className='mx-2 mt-2'>{actor}</p>
                                             {index < writers.length - 1 && <span className='mt-2'>-</span>}
                                         </React.Fragment>
                                     ))}
