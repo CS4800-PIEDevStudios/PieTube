@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import spiderman from '../assets/spiderman.jpg';
 import { StarFill } from 'react-bootstrap-icons';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const VideoCard = () => {
+    // Navigation hook
+    const navigate = useNavigate(); 
     const genres = [
         "Action", "Adventure", "Animation", "Comedy", "Crime", 
         "Documentary", "Drama", "Family", "Fantasy", "Historical", 
@@ -12,7 +15,7 @@ const VideoCard = () => {
       ];
 
     return (
-        <div className="search-results d-flex" style={{gap:"30px"}}>
+        <div className="search-results d-flex" style={{gap:"30px"}} onClick={() => navigate("/MoviePlayer")}>
         {/* Thumbnail */}
         <div className='video-card-thumbnail'>
             <img src={spiderman}/>

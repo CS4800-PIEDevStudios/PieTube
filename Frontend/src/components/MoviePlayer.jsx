@@ -45,9 +45,8 @@ const MoviePlayer = () => {
                     allowFullScreen={true}
                     className='movie-player'
                     // filler
-                    src="https://player.vidsrc.co/embed/movie/tt0441773"
+                    src="https://archive.org/embed/Lady_Frankenstein"
                 ></iframe>
-
             </div>
 
             {/*Button*/}
