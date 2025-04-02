@@ -73,9 +73,9 @@ const MovieDescription = () => {
                                 |
                                 <div id='AgeRating'>{movieData.AgeRating}</div> 
                                 |
-                                <div id='Duration'>{movieData.Duration} mins</div>
+                                <div id='Duration'>{movieData.Duration} min</div>
                             </div>
-                            <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
+                            <button className='description-page-button' onClick={() => navigate(`/MoviePlayer/${id}`)}> Watch Now </button>
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
                             </button>
 

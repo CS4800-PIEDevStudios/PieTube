@@ -65,7 +65,7 @@ const App = () => {
             <Route path="/MovieDescription/:id" element={
               <MovieDescription />
               } />
-            <Route path="/MoviePlayer" element={
+            <Route path="/MoviePlayer/:id" element={
               <MoviePlayer />
               } />
             <Route path="/SearchResults" element={
