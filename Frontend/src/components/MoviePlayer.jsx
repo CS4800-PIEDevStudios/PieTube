@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
+import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg, InfoCircle } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import spiderman from '../assets/spiderman.jpg';
 
 const MoviePlayer = () => {
+    const navigate = useNavigate();
+    
     // filler
     const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
     const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
@@ -11,6 +14,7 @@ const MoviePlayer = () => {
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
+    
 
     function toggleIsClickedThumbsUp () {
         if (!isClickedThumbsDown) {
@@ -18,14 +22,20 @@ const MoviePlayer = () => {
         }
         setIsClickedThumbsUp(!isClickedThumbsUp);
     }
+
     function toggleIsClickedThumbsDown () {
         if (!isClickedThumbsUp) {
             setIsClickedThumbsUp(true)
         }
         setIsClickedThumbsDown(!isClickedThumbsDown);
     }
+
     function toggleIsWatchListed () {
         setIsWatchListed(!isWatchListed);
+    }
+
+    function handleMovieInfoClick() {
+        navigate('/MovieDescription');
     }
 
     return (
@@ -35,11 +45,27 @@ const MoviePlayer = () => {
                     allowFullScreen={true}
                     className='movie-player'
                     // filler
-                    src="https://player.vidsrc.co/embed/movie/tt0441773"
+                    src="https://archive.org/embed/Lady_Frankenstein"
                 ></iframe>
+            </div>
+
+            {/*Button*/}
+            <div className='d-flex align-self-end mr-5' style={{ columnGap: "20px" }}>
+                <button 
+                    className='d-flex custom-btn align-items-center justify-content-center' 
+                    style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}}
+                    onClick={handleMovieInfoClick}>
+                        <InfoCircle/> Movie Info
+                </button>
+
+            <button 
+                    className='d-flex custom-btn align-items-center justify-content-center' 
+                    style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}} 
+                    onClick={toggleIsWatchListed}
+                    >{isWatchListed ? <Clock/> : <CheckLg/>} Watch List
+                </button>
 
             </div>
-            <button className='d-flex custom-btn align-self-end align-items-center justify-content-center mr-5' style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}} onClick={toggleIsWatchListed}> {isWatchListed ? (<Clock/> ) : (<CheckLg/>)} Watch List </button>
 
             <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative'>
                 {/* Background image */}

@@ -322,6 +322,14 @@ body {
   white-space: nowrap;
 }
 
+.video-card-stats{
+  display: flex;
+  gap: 5px;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+
 .description-page-button {
   font-size: 1.3rem;
   width: 200px;
@@ -358,6 +366,9 @@ body {
   font-size: 1.2rem;
 }
 
+.video-card-movie-title {
+  font-size: 2.75rem;
+}
 
 @media (max-width: 1920px) {
   .genre-blob {
@@ -420,11 +431,35 @@ body {
     font-size: 1rem;
   }
 
-  #MoviePoster {
-    padding-top: 5rem;
-  }
-
   #MovieDescriptionTrailer h2 {
     font-size: 1.25rem;
+  }
+
+  .video-card-genre-blob {
+    font-size: .8rem;
+    margin: 0px;
+  }
+
+  .video-card-movie-title {
+    font-size: 1.3rem;
+  }
+
+  .video-card-rating h1 {
+    font-size: 1.75rem;
+  }
+  .video-card-rating h3 {
+    font-size: 1.25rem;
+  }
+
+  .search-results-text h1 {
+    font-size: 2.25rem;
+  }
+
+  .search-results-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .video-card-stats {
+    font-size: .9rem;
   }
 }
