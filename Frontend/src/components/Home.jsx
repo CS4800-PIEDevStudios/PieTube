@@ -17,6 +17,8 @@ const Home = () => {
     const [directorData, setDirectorData] = useState([]);
     const [trailerData, setTrailerData] = useState([]);
     const [recommendationData, setRecommendationData] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [filteredMovies, setFilteredMovies] = useState([]);
     
     // Navigation hook
     const navigate = useNavigate(); 
@@ -115,6 +117,40 @@ const Home = () => {
             });
     };
 
+    // Function to fetch movies by selected genres
+    const fetchMoviesByGenres = () => {
+        if (selectedGenres.length === 0) {
+            setFilteredMovies([]);
+            return;
+        }
+
+        axiosInstance.get('api/filter-genres', {
+            params: {
+                genres: selectedGenres
+            }
+        })
+        .then(response => {
+            setFilteredMovies(response.data);
+        })
+        .catch(error => {
+            console.error('Error filtering by genres:', error);
+        });
+    };
+
+    useEffect(() => {
+        fetchMoviesByGenres();
+    }, [selectedGenres]);
+
+    const toggleGenre = (genre) => {
+        setSelectedGenres(prev => {
+            if (prev.includes(genre)) {
+                return prev.filter(g => g !== genre);
+            } else {
+                return [...prev, genre];
+            }
+        });
+    };
+
     const ref = useRef(null);
     const [scrollInterval, setScrollInterval] = useState(null);
 
@@ -171,13 +207,33 @@ const Home = () => {
                 <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-5 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
                     {genres.map((genre, index) => (
                         <React.Fragment key={index}>
-                            <div className='genre-blob'>
+                            <div 
+                                className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
+                                onClick={() => toggleGenre(genre)}
+                            >
                             {genre}
                             </div>
                         </React.Fragment>
                     ))} 
                 </Row>
             </div>
+
+            {/* Filtered Movies Section - Only shows when genres are selected */}
+            {selectedGenres.length > 0 && (
+                <div className='mb-5'>
+                    <div className='header-recommend float-start mb-3'>
+                        {`Movies in: ${selectedGenres.join(', ')}`}
+                    </div>
+                    <div className='mb-5 thumbnail-grid'>
+                        {filteredMovies.map((movie, index) => (
+                            <div key={index} className='thumbnail' role="button" onClick={() => navigate(`/MovieDescription/${movie.id}`)}>
+                                <img src={spiderman} alt={movie.title} />
+                                <div className="thumbnail-title">{movie.title}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* <iframe allowfullscreen scrolling="no" src="https://vidsrc.dev/embed/movie/tt29623480" height="1000px"></iframe> */}
 

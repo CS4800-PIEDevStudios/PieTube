@@ -25,7 +25,6 @@ def genreFiltering(request):
 
 
 
-
 def getUserData(request):
 
 	result = djangoproject.DatabaseManager.fetchData("SELECT * FROM PieTube.auth_user")
