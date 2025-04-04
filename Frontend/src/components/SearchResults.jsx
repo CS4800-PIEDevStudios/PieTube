@@ -1,19 +1,19 @@
+import VideoCard from "./VideoCard";
 const SearchResults = () => {
     return (
-        <div className="d-flex flex-column w-50 pt-5" style={{height:"100vh"}}>
+        <div className="d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px"}}>
             {/* Header */}
-            <div className="d-flex flex-column align-self-start align-items-start">
+            <div className="search-results-text d-flex flex-column align-self-start align-items-start">
                 <h1>Results for:</h1>
-                <h3 className="text-muted">Spider-man: Across the Spider-Verse</h3>
+                <h3 className='text-muted'>Spider-man: Across the Spider-Verse</h3>
             </div>
-            {/* Results */}
-            <div className="d-flex flex">
-                {Array.from({ length: 8 }).map((_, index) => (
-                    <div key={index} className='thumbnail' role="button">
-                        <img src = {KingKongThumb}/>
-                    </div>
-                ))}
-            </div>
+            {/* VideoCards */}
+            <VideoCard/>    
+            <VideoCard/>  
+            <VideoCard/>  
+            <VideoCard/>  
+            <VideoCard/>  
+            <VideoCard/>  
         </div>
     );
 };

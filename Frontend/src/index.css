@@ -86,25 +86,19 @@ body {
   font-size: 4rem;
 }
 
+#MovieDescriptionTrailer iframe {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  min-width: 400px;
+  aspect-ratio: 16/9;
+}
+
 @media (max-width: 1920px) {
   .genre-blob {
     font-size: 0.8rem;
     padding: 2px 8px;
   }
-  .profile-pic {
-    min-width: 60px;
-    height: 60px;
-  }
-  .navbar {
-    font-size: 1.25rem;
-  }
-  .logo {
-    max-height: 30px;
-  }
-  .title {
-    font-size: 2.5rem;
-  }
-}
 
 .header-recommend {
   text-align: left;
@@ -208,6 +202,26 @@ body {
   font-size: 1em;
 }
 
+.movie-description-genre-blob {
+  margin: 3px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #F5F5F5;
+  color: #000000;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+.video-card-genre-blob {
+  margin: 3px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #E1E1E1;
+  color: #000000;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
 .hr {
   border-top: 1px solid #F5F5F5;
   margin: 1em 0;
@@ -229,6 +243,7 @@ body {
   color: #f5f5f5;
   padding-inline: 100px;
   padding-block: 50px;
+  position:relative;
   height: 100vh;
 }
 
@@ -247,10 +262,19 @@ body {
   z-index: 1;
 }
 
+.movie-description-thumbnail {
+  aspect-ratio: 2/3;
+}
+
+.movie-description-thumbnail img {
+  object-fit: cover;
+  max-width: 300px;
+  max-height: 450px;
+  min-width: 100px;
+}
 
 .movie-player-thumbnail {
   aspect-ratio: 2/3;
-  margin-left: 50px;
 }
 
 .movie-player-thumbnail img {
@@ -262,6 +286,22 @@ body {
   max-width: 300px;
   max-height: 450px;
   min-width: 200px;
+}
+
+.video-card-thumbnail {
+  aspect-ratio: 2/3;
+}
+
+.video-card-thumbnail img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 300px;
+  max-height: 450px;
+  min-width: 200px;
+  border-radius: 10px;
 }
 
 .movie-player-background-thumbnail {
@@ -277,7 +317,6 @@ body {
   color: #f5f5f5;
   padding-inline: 100px;
   padding-block: 50px;
-  height: 100vh
 }
 
 #MoviePlayerDescription::before {
@@ -317,6 +356,14 @@ body {
   white-space: nowrap;
 }
 
+.video-card-stats{
+  display: flex;
+  gap: 5px;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+
 .description-page-button {
   font-size: 1.3rem;
   width: 200px;
@@ -331,4 +378,122 @@ body {
 
 .description-page-button:hover {
   background-color: #f0f0f0;
+}
+
+.search-results {
+  padding-right: 10px;
+  border-radius: 20px;
+}
+.search-results:hover {
+  background-color: #E1E1E1;
+}
+
+#Contributors p {
+  font-size: 1.3rem;
+}
+
+#Contributors h3 {
+  font-size: 2rem;
+}
+
+#Description {
+  font-size: 1.2rem;
+}
+
+.video-card-movie-title {
+  font-size: 2.75rem;
+}
+
+@media (max-width: 1920px) {
+  .genre-blob {
+    font-size: 1.25rem;
+  }
+  .profile-pic {
+    min-width: 60px;
+    height: 60px;
+  }
+  .navbar {
+    font-size: 1.25rem;
+  }
+  .logo {
+    max-height: 30px;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .movie-description-thumbnail img{
+    object-fit: cover;
+    max-width: 175px;
+  } 
+  .description-page-button {
+    font-size: .9rem;
+    width: 120px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    white-space: nowrap;
+  }
+  
+  #Contributors p {
+    font-size: 1rem;
+  }
+  
+  #Contributors h3 {
+    font-size: 1.70rem;
+  }
+  .movie-description-genre-blob {
+    margin: 1px;
+    padding-block: 5px;
+    padding-inline: 10px;
+    font-size: .9rem;
+  }
+  .stats{
+    font-size: 1.2rem;
+  }
+
+  #Rating h1{
+    font-size: 1.75rem;
+  }
+  #Rating h3{
+    font-size: 1.25rem;
+  }
+
+  #Contributors {
+    margin-top: 0;
+  }
+
+  #Description {
+    font-size: 1rem;
+  }
+
+  #MovieDescriptionTrailer h2 {
+    font-size: 1.25rem;
+  }
+
+  .video-card-genre-blob {
+    font-size: .8rem;
+    margin: 0px;
+  }
+
+  .video-card-movie-title {
+    font-size: 1.3rem;
+  }
+
+  .video-card-rating h1 {
+    font-size: 1.75rem;
+  }
+  .video-card-rating h3 {
+    font-size: 1.25rem;
+  }
+
+  .search-results-text h1 {
+    font-size: 2.25rem;
+  }
+
+  .search-results-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .video-card-stats {
+    font-size: .9rem;
+  }
 }

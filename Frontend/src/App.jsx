@@ -28,16 +28,13 @@ const Layout = ({ children, header }) => {
   );
 };
 
-
-
-
 const App = () => {
   return (
     <Router basename='/'>
       <Suspense fallback={<div>Loading...</div>}>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
         <Header/>
-        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <Routes>
             <Route path="/" element={
               <Home />
@@ -65,10 +62,10 @@ const App = () => {
             <Route path="/EditAbout" element={
               <EditAbout />
               } />
-            <Route path="/MovieDescription" element={
+            <Route path="/MovieDescription/:id" element={
               <MovieDescription />
               } />
-            <Route path="/MoviePlayer" element={
+            <Route path="/MoviePlayer/:id" element={
               <MoviePlayer />
               } />
             <Route path="/SearchResults" element={
