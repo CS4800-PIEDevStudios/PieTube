@@ -7,10 +7,7 @@ import axiosInstance from '../axiosConfig.js'
 const MoviePlayer = () => {
     const navigate = useNavigate();
     
-    // filler
-    const genres = ["Action", "Adventure", "Animation", "Sci-Fi", "Fantasy"];
-    const directors = ["Joaquim Dos Santos", "Kemp Powers", "Justin K. Thompson"];
-    const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
+    // filler..
     const { id } = useParams();
     
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
@@ -76,7 +73,7 @@ const MoviePlayer = () => {
                     allowFullScreen={true}
                     className='movie-player'
                     // filler
-                    src="https://archive.org/embed/Lady_Frankenstein"
+                    src={movieData.EmbedLink}
                 ></iframe>
             </div>
 
@@ -129,10 +126,10 @@ const MoviePlayer = () => {
                         <div id='Writers' className='d-flex'>
                             <h3 className='mr-3'> Actors </h3>
                             <div className='d-flex align-text-bottom'>
-                                {actorData.map((writer, index) => (
+                                {actorData.map((actor, index) => (
                                     <React.Fragment key={index}>
-                                        <p className='mx-2 mt-2'>{writer}</p>
-                                        {index < writers.length - 1 && <span className='mt-2'>-</span>}
+                                        <p className='mx-2 mt-2'>{actor}</p>
+                                        {index < actorData.length - 1 && <span className='mt-2'>-</span>}
                                     </React.Fragment>
                                 ))}
                             </div>
