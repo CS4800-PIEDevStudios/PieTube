@@ -1,1 +1,0 @@
-import{j as e,L as s}from"./index-Co2KiF9Q.js";import{p as o}from"./pietubelogo-D9FUKKsA.js";const i=()=>e.jsx("div",{children:e.jsx(s,{to:"/PieTube",children:e.jsx("img",{src:o,class:"mb-5",style:{maxHeight:"40px"}})})});export{i as default};

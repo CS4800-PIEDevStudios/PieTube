@@ -1,0 +1,1 @@
+import{j as s,L as e}from"./index-Dn26kxWp.js";import{p as o}from"./pietubelogo-DnnOb2RF.js";const i=()=>s.jsx("div",{children:s.jsx(e,{to:"/",children:s.jsx("img",{src:o,class:"my-5",style:{maxHeight:"40px"}})})});export{i as default};
