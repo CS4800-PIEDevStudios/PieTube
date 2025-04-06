@@ -35,7 +35,7 @@ const Header = () => {
           {/* Search bar */}
           <InputGroup className="ml-5 w-25 flex-fill">
             <Form.Control
-              placeholder="TEWSTS"
+              placeholder="Search"
               aria-label="Search"
               aria-describedby="basic-addon2"
               style={{backgroundColor:'#E1E1E1', borderRadius:'10px 0 0 10px', border:'none', height:'50px', maxWidth:'1000px'}}
