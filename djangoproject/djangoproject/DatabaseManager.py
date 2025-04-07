@@ -1,19 +1,10 @@
 from django.db import connection
 
-def fetchData(query):
+def fetchData(query, params=None):
     with connection.cursor() as cursor:
-        
-        # Execute the query
-        cursor.execute(query)
-        
-        # Fetch column names from cursor.description
+        cursor.execute(query, params)  # Prevent SQL injection
         columns = [col[0] for col in cursor.description]
-        
-        # Fetch all rows and convert them to dictionaries
-        results = []
-        for row in cursor.fetchall():
-            results.append(dict(zip(columns, row)))
-        
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
     return results
 
 def insertData(query):

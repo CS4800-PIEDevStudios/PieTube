@@ -128,7 +128,7 @@ const Home = () => {
 
         axiosInstance.get('api/filter-genres', {
             params: {
-                genres: selectedGenres
+                genres: selectedGenres.join(',')
             }
         })
         .then(response => {
@@ -223,14 +223,13 @@ const Home = () => {
             {/* Filtered Movies Section - Only shows when genres are selected */}
             {selectedGenres.length > 0 && (
                 <div className='mb-5'>
-                    <div className='header-recommend float-start mb-3'>
+                    <div className='header-recommend mb-3'>
                         {`Movies in: ${selectedGenres.join(', ')}`}
                     </div>
                     <div className='mb-5 thumbnail-grid'>
                         {filteredMovies.map((movie, index) => (
-                            <div key={index} className='thumbnail' role="button" onClick={() => navigate(`/MovieDescription/${movie.id}`)}>
-                                <img src={spiderman} alt={movie.title} />
-                                <div className="thumbnail-title">{movie.title}</div>
+                            <div key={index} className='thumbnail' role="button" onClick={() => navigate(`/MovieDescription/${movie.MovieID}`)}>
+                                <img src={movie.Poster} alt={movie.Title} />
                             </div>
                         ))}
                     </div>

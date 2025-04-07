@@ -5,6 +5,7 @@ from django.db import connection
 import djangoproject.DatabaseManager
 import json
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 def getMovieData(request):
 	
@@ -18,6 +19,7 @@ def getMovieDataByID(request):
 	id = data.get('id')
 	result = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.Movie INNER JOIN PieTube.Director ON PieTube.Movie.DirectorID = PieTube.Director.DirectorID WHERE MovieID = {id} ;")
 	return JsonResponse(result, safe=False)
+
 
 def getMovieGenresByID(request):
 	data = json.loads(request.body)
@@ -39,17 +41,31 @@ def getMovieActorsByID(request):
 		resultArray.append(i["Name"])
 	return JsonResponse(resultArray, safe=False)
 
-
 def genreFiltering(request):
-	genre_ids = request.GET.getlist('genres')
-	genre_ids_str = ','.join(genre_ids)
-	result = djangoproject.DatabaseManager.fetchData(f"""
-        SELECT DISTINCT m.id, m.title 
+    genre_names = request.GET.get('genres', '')  # Get raw string
+    genre_names = genre_names.split(',')  # Split into a list
+
+    if not genre_names or genre_names == ['']:
+        return JsonResponse({"error": "No genres provided"}, status=400)
+
+
+
+    # Dynamically create placeholders for SQL query
+    placeholders = ', '.join(['%s'] * len(genre_names))
+
+    query = f"""
+        SELECT DISTINCT m.MovieID, m.Title, m.Poster
         FROM PieTube.Movie AS m
-        INNER JOIN PieTube.MovieGenre AS mg ON m.id = mg.movie_id
-        WHERE mg.genre_id IN ({genre_ids_str})
-    """)
-	return JsonResponse(result, safe=False)
+        INNER JOIN PieTube.MovieGenre AS mg ON m.MovieID = mg.MovieID
+        INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID
+        WHERE g.GenreName IN ({placeholders})
+    """
+
+    result = djangoproject.DatabaseManager.fetchData(query, genre_names)  # Pass individual values
+    return JsonResponse(result, safe=False)
+
+
+
 
 
 
