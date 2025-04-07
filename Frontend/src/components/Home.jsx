@@ -237,8 +237,6 @@ const Home = () => {
                 </div>
             )}
 
-            {/* <iframe allowfullscreen scrolling="no" src="https://vidsrc.dev/embed/movie/tt29623480" height="1000px"></iframe> */}
-
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>

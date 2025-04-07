@@ -12,7 +12,7 @@ const VideoCard = () => {
         "Horror", "Musical", "Mystery", "Romance", "Science Fiction", 
         "Thriller", "War", "Western", "Biography", "Sports", 
         "Superhero", "Noir", "Satire", "Teen", "Disaster"
-      ];
+    ];
 
     return (
         <div className="search-results d-flex" style={{gap:"30px"}} onClick={() => navigate("/MoviePlayer")}>

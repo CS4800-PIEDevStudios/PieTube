@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg, InfoCircle } from 'react-bootstrap-icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import spiderman from '../assets/spiderman.jpg';
-import axiosInstance from '../axiosConfig.js'
+import axiosInstance from '../axiosConfig.js';
 
 const MoviePlayer = () => {
     const navigate = useNavigate();
@@ -62,10 +61,6 @@ const MoviePlayer = () => {
         setIsWatchListed(!isWatchListed);
     }
 
-    function handleMovieInfoClick() {
-        navigate('/MovieDescription');
-    }
-
     return (
         <div className='d-flex flex-column w-100 pt-5' style={{backgroundColor:"#E1E1E1"}}> 
             <div id='MoviePlayer' className='d-flex flex-column align-self-center w-50'>
@@ -82,7 +77,7 @@ const MoviePlayer = () => {
                 <button 
                     className='d-flex custom-btn align-items-center justify-content-center' 
                     style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}}
-                    onClick={handleMovieInfoClick}>
+                    onClick={() => navigate(`/MovieDescription/${movieData.MovieID}`)}>
                         <InfoCircle/> Movie Info
                 </button>
 

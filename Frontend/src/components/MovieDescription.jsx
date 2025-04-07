@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
-import spiderman from '../assets/spiderman.jpg';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js'
 
