@@ -5,7 +5,7 @@ body {
 /* Orange */
 .custom-btn {
   color: #f5f5f5;
-  background: #CD853F;
+  background: #CD853F ;
   border-radius: 10px;
   border: transparent 2px solid;
   width: 100%;
@@ -29,14 +29,71 @@ body {
   padding-block: 5px;
 }
 
+.search-btn {
+  color: #f5f5f5;
+  background: #CD853F !important;
+  border-radius: 10px;
+  border: transparent 2px solid;
+  width: 50%;
+  padding-block: 5px;
+}
+
+.reset-btn {
+  color: #000000 !important;
+  background: #E1E1E1 !important;
+  border-radius: 10px;
+  border: transparent 2px solid;
+  width: 50%;
+  padding-block: 5px;
+}
+
 .genre-blob {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: unset !important;
   margin-right: 10px;
   padding-block: 5px;
   padding-inline: 10px;
   background-color: #CD853F;
   color: #f5f5f5;
   border-radius: 20px;
+  display: inline-block;
   font-size: 1.5rem;
+  cursor : pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.genre-blob.selected-genre{
+  background-color: #a66c32;
+  color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.filter-genre-blob.selected-genre{
+  background-color: #86d754;
+  color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.filter-genre-blob.excluded-genre{
+  background-color: #e55a5a;
+  color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.thumbnail-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+  white-space: normal;
 }
 
 .profile-pic {
@@ -107,48 +164,6 @@ body {
   object-fit: cover;
 }
 
-@media (max-width: 1280px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(7, minmax(128px, 1fr));
-  }
-}
-
-@media (max-width: 1152px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(6, minmax(128px, 1fr));
-  }
-}
-
-@media (max-width: 1024px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(5, minmax(128px, 1fr));
-  }
-}
-
-@media (max-width: 896px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(4, minmax(128px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(3, minmax(128px, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(2, minmax(128px, 1fr));
-  }
-}
-
-@media (max-width: 512px) {
-  .thumbnail-grid {
-      grid-template-columns: repeat(1, minmax(128px, 1fr));
-  }
-}
-
 .movie-player {
   aspect-ratio: 16/9;
   width: 100%;
@@ -187,6 +202,17 @@ body {
   border-radius: 20px;
   font-size: 1.5rem;
 }
+
+.filter-genre-blob {
+  margin: 3px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #E1E1E1;
+  color: #000000;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
 
 .hr {
   border-top: 1px solid #F5F5F5;
@@ -370,10 +396,74 @@ body {
   font-size: 2.75rem;
 }
 
+.btn-close {
+  border: none;
+  background-color: transparent;
+}
+
+.modal-50w {
+  max-width: none !important;
+  width: 50%  !important;
+}
+
+.modal-content {
+  border-radius: 30px !important;  
+  border: none !important;
+  user-select: none;
+}
+
+#AgeRating input {
+  margin-top: .8rem !important;
+}
+
+@media (max-width: 1280px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(7, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 1152px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(6, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(5, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 896px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(4, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(3, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(2, minmax(128px, 1fr));
+  }
+}
+
+@media (max-width: 512px) {
+  .thumbnail-grid {
+      grid-template-columns: repeat(1, minmax(128px, 1fr));
+  }
+}
+
 @media (max-width: 1920px) {
   .genre-blob {
-    font-size: 1.25rem;
+    font-size: 0.8rem;
+    padding: 2px 8px;
   }
+
   .profile-pic {
     min-width: 60px;
     height: 60px;
@@ -462,4 +552,5 @@ body {
   .video-card-stats {
     font-size: .9rem;
   }
+
 }

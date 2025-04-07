@@ -4,13 +4,15 @@ import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
 import mepic from '../assets/me.png';
 import pietubelogo from '../assets/pietubelogo.png';
 import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
+import GenreFilter from './GenreFilter';
 
 const Header = () => {
-    // Navigation hook
-    const navigate = useNavigate(); 
+  // Navigation hook
+  const navigate = useNavigate(); 
 
   const [LoggedIn, setIsLoggedIn] = useState(false);
-
+  const [showFilter, setShowFilter] = useState(false);
+  
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
     console.log(loggedInStatus);
@@ -43,9 +45,14 @@ const Header = () => {
             {/* Search button */}
             <Button variant="outline-secondary" style={{borderRadius:'0 10px 10px 0', width: '60px'}} onClick={() => navigate("/SearchResults")}> <Search/></Button>
             {/* Filter */}
-            <button className="mx-3" style={{border:"none", backgroundColor:"transparent"}}>
+            <button className="mx-3" style={{border:"none", backgroundColor:"transparent"}}
+            onClick={() => setShowFilter(true)}>
               <Filter width="40" height="40"></Filter>
             </button>
+            <GenreFilter 
+                show={showFilter} 
+                onHide={() => setShowFilter(false)} 
+            />
           </InputGroup>
 
           {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
