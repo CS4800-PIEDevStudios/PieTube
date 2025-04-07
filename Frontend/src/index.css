@@ -5,7 +5,7 @@ body {
 /* Orange */
 .custom-btn {
   color: #f5f5f5;
-  background: #CD853F !important;
+  background: #CD853F ;
   border-radius: 10px;
   border: transparent 2px solid;
   width: 100%;
@@ -62,6 +62,13 @@ body {
   cursor : pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  user-select: none;
+}
+
+.genre-blob.selected-genre{
+  background-color: #a66c32;
+  color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .filter-genre-blob.selected-genre{
