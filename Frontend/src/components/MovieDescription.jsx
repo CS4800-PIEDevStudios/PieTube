@@ -135,7 +135,7 @@ const MovieDescription = () => {
                                 </div>
                             </div>
                             <div id='Writers' className='d-flex'>
-                                <h3 className='mr-3'>Actors</h3>
+                                <h3 className='mr-3'>Cast</h3>
                                 <div className='d-flex align-text-bottom'>
                                     {actorData.map((actor, index) => (
                                         <React.Fragment key={index}>
