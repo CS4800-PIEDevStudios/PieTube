@@ -47,6 +47,17 @@ const GenreFilter = ({show, onHide}) => {
     return '';
   };
 
+  const handleSearch = () => {
+    onHide();
+    setSelectedGenres([]);
+    setExcludedGenres([]);
+    setSelectedRating(null);
+    localStorage.setItem('isFromFilter', true);
+    navigate("/SearchResults", {
+      state: { selectedGenres: selectedGenres }
+    });
+  }
+
   return (
     <div className='d-flex justify-content align-items-center'>
       <Modal 
@@ -117,13 +128,7 @@ const GenreFilter = ({show, onHide}) => {
           }}>
             Reset
           </button>
-          <button className='search-btn mx-5 my-2' onClick={() => { 
-            navigate("/SearchResults"); 
-            onHide();
-            setSelectedGenres([]);
-            setExcludedGenres([]);
-            setSelectedRating(null);
-            }}>
+          <button className='search-btn mx-5 my-2' onClick={handleSearch}>
             Search
           </button>
         </Modal.Footer>

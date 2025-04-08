@@ -12,12 +12,25 @@ const Header = () => {
 
   const [LoggedIn, setIsLoggedIn] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [inputText, setInputText] = useState('');
   
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
     console.log(loggedInStatus);
     setIsLoggedIn(loggedInStatus); 
   },[]);
+
+  const handleSearchBar = () => {
+    navigate("/SearchResults", {
+      state: {savedText: inputText}
+    });
+  };
+
+  const handleKeyPress = e => {
+    if (e.keyCode === 13) {
+      handleSearchBar();
+    }
+  }
 
     return (
       <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow px-5 justify-content-between' style={{zIndex:2}}>
@@ -40,18 +53,21 @@ const Header = () => {
               placeholder="Search"
               aria-label="Search"
               aria-describedby="basic-addon2"
+              value={ inputText }
+              onChange= {(e) => setInputText(e.target.value)}
+              onKeyDown={handleKeyPress}
               style={{backgroundColor:'#E1E1E1', borderRadius:'10px 0 0 10px', border:'none', height:'50px', maxWidth:'1000px'}}
             />
             {/* Search button */}
-            <Button variant="outline-secondary" style={{borderRadius:'0 10px 10px 0', width: '60px'}} onClick={() => navigate("/SearchResults")}> <Search/></Button>
+            <Button variant="outline-secondary" style={{borderRadius:'0 10px 10px 0', width: '60px'}} onClick={ handleSearchBar }> <Search/></Button>
             {/* Filter */}
             <button className="mx-3" style={{border:"none", backgroundColor:"transparent"}}
-            onClick={() => setShowFilter(true)}>
+              onClick={() => setShowFilter(true)}>
               <Filter width="40" height="40"></Filter>
             </button>
             <GenreFilter 
-                show={showFilter} 
-                onHide={() => setShowFilter(false)} 
+              show={showFilter} 
+              onHide={() => setShowFilter(false)} 
             />
           </InputGroup>
 
@@ -64,7 +80,7 @@ const Header = () => {
             </button>
           </Link> 
           ) : (
-            <div className='mx-5 rounded-circle profile-pic'>
+          <div className='mx-5 rounded-circle profile-pic'>
             <Link to="/Profile" >
                 <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
             </Link>
