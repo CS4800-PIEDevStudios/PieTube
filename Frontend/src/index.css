@@ -433,6 +433,11 @@ body {
   color: #F5F5F5;
 }
 
+.modal-body {
+  margin-bottom: 100px;
+  row-gap: 50px;
+}
+
 @media (max-width: 1280px) {
   .thumbnail-grid {
       grid-template-columns: repeat(7, minmax(128px, 1fr));
@@ -477,7 +482,7 @@ body {
 
 @media (max-width: 1920px) {
   .genre-blob {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     padding: 2px 8px;
   }
 
@@ -569,5 +574,19 @@ body {
   .video-card-stats {
     font-size: .9rem;
   }
+
+  .modal-body-header  {
+    font-size: 1.75rem;
+  }
+
+  .filter-genre-blob {
+    font-size: 1rem;
+  }
+
+  .modal-body {
+    margin-bottom: 30px;
+    row-gap: 25px;
+  }
+  
 
 }

@@ -83,10 +83,10 @@ const GenreFilter = ({show, onHide}) => {
               <XLg width="20" height="20"/>
           </button>
         </Modal.Header>
-        <Modal.Body className='d-flex flex-column' style={{marginBottom:"100px", rowGap:"50px"}}>
+        <Modal.Body className='modal-body d-flex flex-column'>
           {/* Genres */}
           <div>
-            <h2 className='mx-5 m-3'> Genres</h2>
+            <h2 className='modal-body-header mx-5 m-3'> Genres</h2>
             <div id='Genres' className='d-flex flex-wrap mx-5' style={{ gap: "10px"}}>
                 {genres.map((genre, index) => (
                   <div 
@@ -102,8 +102,8 @@ const GenreFilter = ({show, onHide}) => {
 
           {/* Age Rating */}
           <div>
-            <h2 className='mx-5 m-3'> Age Rating</h2>
-            <div>
+            <h2 className='modal-body-header mx-5 m-3'> Age Rating</h2>
+            <div> 
               <Form>
               <div id="AgeRating" className='d-flex flex-wrap mx-5' style={{ gap: "10px", fontSize:"1.5rem"}}>
                 {ratings.map((rating) => (
