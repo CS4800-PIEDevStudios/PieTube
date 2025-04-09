@@ -15,6 +15,9 @@ const ChangePassword = () => {
 
     });
 
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
     const togglePasswordVisibility = (field) => {
         setShowPasswords(prevState => ({
             ...prevState,
@@ -22,18 +25,49 @@ const ChangePassword = () => {
         }));
     };
 
+    const validatePassword = (password) => {
+
+        //length
+        if (password.length < 8 || password.length > 20) {
+            return "Password must be between 8-20 characters";
+        }
+        
+        //need one number
+        if (!/\d/.test(password)) {
+            return "Password must contain at least one number";
+        }
+        
+        //need special character
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            return "Password must contain at least one special character";
+        }
+        
+        return null;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
 
         if (newPassword !== confirmPassword) {
-            alert("New passwords do not match.");
+            setError("New passwords do not match.");
+            return;
+        }
+
+        if (oldPassword === newPassword) {
+            setError("New password must be different from old password.");
+            return;
+        }
+
+        const passwordError = validatePassword(newPassword);
+        if (passwordError) {
+            setError(passwordError);
             return;
         }
 
         try {
-
         
-            // Now, send the login POST request
+        // Now, send the login POST request
             const response = await axiosInstance.post('login-api/updatePassword', {
               oldPassword: oldPassword,
               newPassword: newPassword,
@@ -41,14 +75,19 @@ const ChangePassword = () => {
             });
         
             console.log('Response from Django:', response.data);
+            console.log("Password changed successfully.");
+            navigate("/Login");
+            window.location.reload();
+
           } catch (error) {
+
             console.error('Error sending data to Django:', error);
-          }
-
-
-        console.log("Password changed successfully.");
-        navigate("/Login");
-        window.location.reload();
+            if (error.response && error.response.data) {
+                setError(error.response.data.message || "Failed to change password");
+            } else {
+                setError("Failed to change password. Please try again.");
+            }
+        }
     };
 
     return (
@@ -56,7 +95,21 @@ const ChangePassword = () => {
              style={{ minWidth: "500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px" }}>
             <h1 className="text-center mb-4">Change Password</h1>
 
-            <form onSubmit={handleSubmit}>
+            {/* error message */}
+            {error && (
+                <div className="alert alert-danger" role="alert">
+                    {error}
+                </div>
+            )}
+
+            {/* success message */}
+             {success && (
+                <div className="alert alert-success" role="alert">
+                    {success}
+                </div>
+            )}
+
+            <form onSubmit={handleSubmit} style={{ textAlign: "left"}}>
                 {[
                     { label: "Old Password", value: oldPassword, onChange: setOldPassword, key: "old" },
                     { label: "New Password", value: newPassword, onChange: setNewPassword, key: "new" },
