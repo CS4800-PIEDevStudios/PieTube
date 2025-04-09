@@ -8,9 +8,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproject.settings')
 django.setup()
 
 # MAKE SURE THESE ARE ALL CORRECT BEFORE ADDING
-imdbID = "tt0099785" 
-trailer = "" # NEEDS TO BE EMBED LINK
-embed = "" # LINK FROM INTERNET ARCHIVE
+imdbID = "tt0057701" 
+trailer = "https://www.youtube.com/embed/yubrwPJYc7E?si=ofHZJ9p5qG5KfowZ" # NEEDS TO BE EMBED LINK
+embed = "https://archive.org/embed/TheYesterdayMachine1963" # LINK FROM INTERNET ARCHIVE
 
 
 
@@ -41,6 +41,7 @@ if response.status_code == 200:
     poster = data["Poster"]
     actorList = actors.split(", ")
     genreList = genre.split(", ")
+    print(genreList)
     directorList = director.split(", ")
 
     # Insert into Director Table
@@ -61,6 +62,13 @@ if response.status_code == 200:
         actorID = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.Actor WHERE Name=\"{actor}\";")
         actorID = actorID[0]['ActorID']
         djangoproject.DatabaseManager.insertData(f"INSERT IGNORE INTO PieTube.MovieRole (ActorID, MovieID) VALUES ({actorID}, {movieID});")
+
+    # Insert into Genre Table
+    for genre in genreList:
+        djangoproject.DatabaseManager.insertData(f"INSERT IGNORE INTO PieTube.Genre (GenreName) VALUES (\"{genre}\");")
+        genreID = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.Genre WHERE GenreName=\"{genre}\";")
+        genreID = genreID[0]['GenreID']
+        djangoproject.DatabaseManager.insertData(f"INSERT IGNORE INTO PieTube.MovieGenre (GenreID, MovieID) VALUES ({genreID}, {movieID});")
 
 
     print(title)
