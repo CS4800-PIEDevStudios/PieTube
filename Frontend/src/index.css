@@ -416,6 +416,23 @@ body {
   margin-top: .8rem !important;
 }
 
+.rating-blob {
+  border: 2px solid #000000;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #F5F5F5;
+  color: #000000;
+  font-size: 1.75rem;
+  min-width: 80px;
+}
+
+.selected-rating {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #CD853F;
+  color: #F5F5F5;
+}
+
 @media (max-width: 1280px) {
   .thumbnail-grid {
       grid-template-columns: repeat(7, minmax(128px, 1fr));

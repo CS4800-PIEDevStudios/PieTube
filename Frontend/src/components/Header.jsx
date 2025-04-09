@@ -16,18 +16,20 @@ const Header = () => {
   
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
-    console.log(loggedInStatus);
     setIsLoggedIn(loggedInStatus); 
   },[]);
 
   const handleSearchBar = () => {
-    navigate("/SearchResults", {
-      state: {savedText: inputText}
-    });
+    if (inputText.trim()) { // Only search if there's actual text
+      localStorage.setItem('isFromFilter', false);
+      navigate("/SearchResults", {
+        state: { savedText: inputText }
+      });
+    }
   };
 
   const handleKeyPress = e => {
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       handleSearchBar();
     }
   }

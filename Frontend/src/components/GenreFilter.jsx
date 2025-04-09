@@ -54,7 +54,10 @@ const GenreFilter = ({show, onHide}) => {
     setSelectedRating(null);
     localStorage.setItem('isFromFilter', true);
     navigate("/SearchResults", {
-      state: { selectedGenres: selectedGenres }
+      state: { 
+        selectedGenres, 
+        selectedRating
+      }
     });
   }
 
@@ -84,15 +87,13 @@ const GenreFilter = ({show, onHide}) => {
             <h2 className='mx-5 m-3'> Genres</h2>
             <div id='Genres' className='d-flex flex-wrap mx-5' style={{ gap: "10px"}}>
                 {genres.map((genre, index) => (
-                  <React.Fragment key={index}>
-                    <div 
-                      key={index}
-                      className={`filter-genre-blob ${getGenreClass(genre)}`}
-                      onClick={() => toggleGenre(genre)}
-                    >
-                      {genre}
-                    </div>
-                  </React.Fragment>
+                  <div 
+                    key={index}
+                    className={`filter-genre-blob ${getGenreClass(genre)}`}
+                    onClick={() => toggleGenre(genre)}
+                  >
+                    {genre}
+                  </div>
                 ))}
             </div>
           </div>

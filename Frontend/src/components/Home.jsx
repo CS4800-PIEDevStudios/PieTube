@@ -208,14 +208,12 @@ const Home = () => {
                 {/* Scrollable Container */}
                 <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-3 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none', borderRadius: "20px"}}>
                     {genres.map((genre, index) => (
-                        <React.Fragment key={index}>
-                            <div 
-                                className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
-                                onClick={() => toggleGenre(genre)}
-                            >
-                            {genre}
-                            </div>
-                        </React.Fragment>
+                        <div 
+                            className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
+                            onClick={() => toggleGenre(genre)}
+                        >
+                        {genre}
+                        </div>
                     ))} 
                 </Row>
             </div>
@@ -235,7 +233,6 @@ const Home = () => {
                     </div>
                 </div>
             )}
-
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
