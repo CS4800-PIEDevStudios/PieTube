@@ -44,7 +44,7 @@ const SearchResults = () => {
             )
         } else {
             return (
-                <h2 className='text-muted'>{savedText}</h2>
+                <h2 className='search-result-header-text text-muted'>{savedText}</h2>
             )
         }
     }

@@ -147,6 +147,7 @@ body {
   aspect-ratio: 2/3;
   overflow: hidden;
   white-space: nowrap;
+  border-radius: 5px;
 }
 
 .thumbnail-grid {
@@ -426,11 +427,10 @@ body {
   min-width: 80px;
 }
 
-.selected-rating {
-  padding: 10px;
-  border-radius: 20px;
+.rating-blob.selected-rating {
   background-color: #CD853F;
   color: #F5F5F5;
+  border: none;
 }
 
 .modal-body {
@@ -587,6 +587,14 @@ body {
     margin-bottom: 30px;
     row-gap: 25px;
   }
-  
 
+  .rating-blob {
+    padding: 7px;
+    font-size: 1.2rem;
+    min-width: 50px;
+  }
+
+  .search-result-header-text {
+    font-size: 1.5rem;
+  }
 }
