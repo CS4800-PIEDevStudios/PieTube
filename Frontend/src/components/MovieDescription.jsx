@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js'
 
 const MovieDescription = () => {
-    const writers = ["Phil Lord", "Christopher Miller", "Dave Callaham"];
     const [movieData, setMovieData] = useState([]);
     const [genreData, setGenreData] = useState([]);
     const [actorData, setActorData] = useState([]);
@@ -73,9 +72,9 @@ const MovieDescription = () => {
                                 |
                                 <div id='AgeRating'>{movieData.AgeRating}</div> 
                                 |
-                                <div id='Duration'>{movieData.Duration} mins</div>
+                                <div id='Duration'>{movieData.Duration} min</div>
                             </div>
-                            <button className='description-page-button' onClick={() => navigate("/MoviePlayer")}> Watch Now </button>
+                            <button className='description-page-button' onClick={() => navigate(`/MoviePlayer/${id}`)}> Watch Now </button>
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
                             </button>
 
@@ -142,7 +141,7 @@ const MovieDescription = () => {
                                     {actorData.map((actor, index) => (
                                         <React.Fragment key={index}>
                                             <p className='mx-2 mt-2'>{actor}</p>
-                                            {index < writers.length - 1 && <span className='mt-2'>-</span>}
+                                            {index < actorData.length - 1 && <span className='mt-2'>-</span>}
                                         </React.Fragment>
                                     ))}
                                 </div>

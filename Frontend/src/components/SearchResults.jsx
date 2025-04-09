@@ -1,9 +1,9 @@
 import VideoCard from "./VideoCard";
 const SearchResults = () => {
     return (
-        <div className="d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px", marginTop:"100px"}}>
+        <div className="d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px"}}>
             {/* Header */}
-            <div className="d-flex flex-column align-self-start align-items-start">
+            <div className="search-results-text d-flex flex-column align-self-start align-items-start">
                 <h1>Results for:</h1>
                 <h3 className='text-muted'>Spider-man: Across the Spider-Verse</h3>
             </div>

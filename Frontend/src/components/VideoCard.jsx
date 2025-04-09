@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import spiderman from '../assets/spiderman.jpg';
 import { StarFill } from 'react-bootstrap-icons';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const VideoCard = () => {
+    // Navigation hook
+    const navigate = useNavigate(); 
     const genres = [
         "Action", "Adventure", "Animation", "Comedy", "Crime", 
         "Documentary", "Drama", "Family", "Fantasy", "Historical", 
@@ -12,7 +15,7 @@ const VideoCard = () => {
       ];
 
     return (
-        <div className="search-results d-flex" style={{gap:"30px"}}>
+        <div className="search-results d-flex" style={{gap:"30px"}} onClick={() => navigate("/MoviePlayer")}>
         {/* Thumbnail */}
         <div className='video-card-thumbnail'>
             <img src={spiderman}/>
@@ -23,8 +26,8 @@ const VideoCard = () => {
             <div className='d-flex justify-content-between mt-3'>
                 {/* Title */}
                 <div className='d-flex flex-column'>
-                    <h1 style={{fontSize:"2.75rem"}}>Spider-Man: Across the Spider-Verse</h1>
-                    <div className='stats' style={{fontSize:"1.5rem"}}>
+                    <h1 className="video-card-movie-title">Spider-Man: Across the Spider-Verse</h1>
+                    <div className='video-card-stats'>
                         <div id='Date'>2023</div> 
                         -
                         <div id='AgeRating'>PG</div> 
@@ -34,7 +37,7 @@ const VideoCard = () => {
                 </div>
                 {/* Title end */}
                 {/* Rating */}
-                <div className='d-flex flex-column align-items-end'>
+                <div className='video-card-rating d-flex flex-column align-items-end'>
                     <h1><StarFill /> 8.5/10</h1>
                     <h3 className='text-muted' >437k</h3>
                 </div>
