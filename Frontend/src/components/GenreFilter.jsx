@@ -53,12 +53,14 @@ const GenreFilter = ({show, onHide}) => {
     setExcludedGenres([]);
     setSelectedRating(null);
     localStorage.setItem('isFromFilter', true);
+    
     navigate("/SearchResults", {
       state: { 
         selectedGenres, 
         selectedRating
       }
     });
+    window.location.reload();
   }
 
   return (
