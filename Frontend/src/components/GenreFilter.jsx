@@ -7,7 +7,7 @@ const GenreFilter = ({show, onHide}) => {
   const navigate = useNavigate(); 
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
-  const [selectedRating, setSelectedRating] = useState(null);
+  const [selectedRatings, setSelectedRatings] = useState([]);
 
   const genres = [
     "Action", "Adventure", "Animation", "Comedy", "Crime", 
@@ -23,12 +23,21 @@ const GenreFilter = ({show, onHide}) => {
     { value: "PG-13", label: "PG-13" },
     { value: "R", label: "R" },
     { value: "NC-17", label: "NC-17" },
-    { value: "M", label: "M" }
+    { value: "M", label: "M" },
+    { value: "NR", label: "NR" },
+    { value: "Passed", label: "Passed" },
+    { value: "Approved", label: "Approved" }
   ];
 
-  const handleRatingChange = (e) => {
-    setSelectedRating(e.target.value);
-  };
+  const toggleRating = (ratingValue) => {
+    if (selectedRatings.includes(ratingValue)) {
+        setSelectedRatings(prev => prev.filter(r => r !== ratingValue)); //if rating already selected, unselect it
+    } else {
+        setSelectedRatings(prev => [...prev, ratingValue]); //else add rating to list
+    }
+};
+
+
 
   const toggleGenre = (genre) => {
     if (selectedGenres.includes(genre)) {
@@ -63,7 +72,7 @@ const GenreFilter = ({show, onHide}) => {
               <Filter width="40" height="40"/>
               <Modal.Title id="contained-modal-title-vcenter">Filter</Modal.Title>
           </div>
-          <button class="btn-close" onClick={onHide} aria-label="Close">
+          <button className="btn-close" onClick={onHide} aria-label="Close">
               <XLg width="20" height="20"/>
           </button>
         </Modal.Header>
@@ -94,13 +103,13 @@ const GenreFilter = ({show, onHide}) => {
               <div id="AgeRating" className='d-flex flex-wrap mx-5' style={{ gap: "10px", fontSize:"1.5rem"}}>
                 {ratings.map((rating) => (
                   <Form.Check
-                    key={rating.value}
-                    type='radio'
-                    id={`rating-${rating.value}`}
-                    label={rating.label}
-                    value={rating.value}
-                    checked={selectedRating === rating.value}
-                    onChange={handleRatingChange}
+                  key={rating.value}
+                  type="checkbox"
+                  id={`rating-${rating.value}`}
+                  label={rating.label}
+                  value={rating.value}
+                  checked={selectedRatings.includes(rating.value)}
+                  onChange={(e) => toggleRating(rating.value)}
                   />
                 ))}
               </div>
@@ -118,11 +127,11 @@ const GenreFilter = ({show, onHide}) => {
             Reset
           </button>
           <button className='search-btn mx-5 my-2' onClick={() => { 
-            navigate("/SearchResults"); 
+            navigate("/SearchResults", {state: { selectedGenres, excludedGenres, selectedRatings }}); //move to search results, pass genres and ratings as params
             onHide();
             setSelectedGenres([]);
             setExcludedGenres([]);
-            setSelectedRating(null);
+            setSelectedRatings([]);
             }}>
             Search
           </button>
