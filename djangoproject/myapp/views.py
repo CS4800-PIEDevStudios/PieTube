@@ -103,27 +103,32 @@ def genreFiltering(request):	#function for filtering by genre, called by Home an
     else:
         exclusion_placeholders = ""
 
-#SQL query, use f""" so placeholders can be passed. COMMENT ON SQL TEXT EVENTUALLY
+	#SQL query, use f""" so placeholders can be passed. COMMENT ON SQL TEXT EVENTUALLY
+    exclusion_clause = ""
+    if excluded_genres:
+        exclusion_clause = f"""
+            AND m.MovieID NOT IN (
+                SELECT DISTINCT mg.MovieID 
+                FROM PieTube.MovieGenre AS mg 
+                INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID 
+                WHERE g.GenreName IN ({exclusion_placeholders})
+            )
+        """
     query = f"""
-    	SELECT DISTINCT m.MovieID, m.Title, m.Poster, m.Summary, 
-    	GROUP_CONCAT(DISTINCT g.GenreName ORDER BY g.GenreName SEPARATOR ', ') AS Genres
-    	FROM PieTube.Movie AS m
-    	INNER JOIN PieTube.MovieGenre AS mg ON m.MovieID = mg.MovieID
-    	INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID
-    	WHERE m.MovieID IN (
-        	SELECT DISTINCT mg.MovieID
-        	FROM PieTube.MovieGenre AS mg
-        	INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID
-        	WHERE g.GenreName IN ({placeholders})
-    	)
-		{f"""AND m.MovieID NOT IN (
-			SELECT DISTINCT mg.MovieID 
-			FROM PieTube.MovieGenre AS mg 
-			INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID 
-			WHERE g.GenreName IN ({exclusion_placeholders})
-			)""" if excluded_genres else ""}
-    	GROUP BY m.MovieID
-	"""
+		SELECT DISTINCT m.MovieID, m.Title, m.Poster, m.Summary, 
+		GROUP_CONCAT(DISTINCT g.GenreName ORDER BY g.GenreName SEPARATOR ', ') AS Genres
+		FROM PieTube.Movie AS m
+		INNER JOIN PieTube.MovieGenre AS mg ON m.MovieID = mg.MovieID
+		INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID
+		WHERE m.MovieID IN (
+			SELECT DISTINCT mg.MovieID
+			FROM PieTube.MovieGenre AS mg
+			INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID
+			WHERE g.GenreName IN ({placeholders})
+		)
+		{exclusion_clause}
+		GROUP BY m.MovieID
+		"""
 
 	
     if excluded_genres: params = genre_names + excluded_genres 
