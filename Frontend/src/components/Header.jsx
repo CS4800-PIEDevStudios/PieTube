@@ -32,12 +32,16 @@ const Header = () => {
 
   const handleTrending = () => {
     localStorage.setItem('HeaderName', 'trending');
-    window.location.reload();
+    if (location.pathname === '/SearchResults') {
+      window.location.reload();
+    }
   }
 
   const handleWatchList = () => {
     localStorage.setItem('HeaderName', 'watchList');
-    window.location.reload();
+    if (location.pathname === '/SearchResults') {
+      window.location.reload();
+    }
   }
 
   const handleKeyPress = e => {
