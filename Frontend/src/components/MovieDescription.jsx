@@ -4,15 +4,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js'
 
 const MovieDescription = () => {
+    // Use states
     const [movieData, setMovieData] = useState([]);
     const [genreData, setGenreData] = useState([]);
     const [actorData, setActorData] = useState([]);
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
+
+    //Parameter hook
     const { id } = useParams();
+
+    // Navigation hook
     const navigate = useNavigate();
 
+    // Function for like/dislike button
     function toggleIsClickedThumbsUp () {
         if (!isClickedThumbsDown) {
             setIsClickedThumbsDown(true)
@@ -26,10 +32,12 @@ const MovieDescription = () => {
         setIsClickedThumbsDown(!isClickedThumbsDown);
     }
 
+    // Function for Watch List button
     function toggleIsWatchListed () {
         setIsWatchListed(!isWatchListed);
     }
 
+    //Fetching movie data
     useEffect(() => {
         GetMovieData()
       }, []);
@@ -39,7 +47,6 @@ const MovieDescription = () => {
         const response = await axiosInstance.post('api/get-movie-by-id', {
             id: id
           });
-
         setMovieData(response.data[0]);
         console.log(response.data[0]);
 
@@ -55,6 +62,7 @@ const MovieDescription = () => {
         setActorData(actors.data);
         console.log(actors.data);
     }
+
     return (
         <div id="MovieDescription" className='d-flex flex-column w-100 position-relative justify-content-center'>
             <img src={movieData.Poster} className='movie-description-background-thumbnail'></img>
@@ -76,7 +84,6 @@ const MovieDescription = () => {
                             <button className='description-page-button' onClick={() => navigate(`/MoviePlayer/${id}`)}> Watch Now </button>
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
                             </button>
-
                             {/* Like/Dislike Buttons */}
                             <div id='LikeButtons' className='d-flex' style={{ gap: "10px" }}>
                                 {isClickedThumbsUp ? (
@@ -125,7 +132,6 @@ const MovieDescription = () => {
                         </div>
                         {/* Line break */}
                         <div className='hr'/>
-                        
                         {/* Contributors start */}
                         <div id='Contributors' className='mt-3'>
                             <div id='Directors' className='d-flex'>
@@ -168,7 +174,7 @@ const MovieDescription = () => {
                         />
                     </div>
                 </div>
-                {/* Bottom Description */}
+                {/* Bottom Description end*/}
             </div>
         </div>
     );
