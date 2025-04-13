@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
 import axiosInstance from '../axiosConfig.js'
-import { useNavigate } from "react-router-dom"; 
 
 const Signup = () => {
+  // Use states
   const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +14,7 @@ const Signup = () => {
 
   // Navigation hook
   const navigate = useNavigate(); 
+
 
   const handleEmailChange = (event) => {
     setEmailAddress(event.target.value);
@@ -52,8 +53,11 @@ const Signup = () => {
   return (
     <form onSubmit = {handleSubmit}>
         <div class="p-5 bg-light mb-5" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
+          {/* Header */}
           <h1>Sign up</h1>
+          {/* Input forms */}
           <div class="text-left">
+            {/* Username */}
             <Form.Label htmlFor="basic-url">Enter Username</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
@@ -65,6 +69,7 @@ const Signup = () => {
                 aria-describedby="basic-addon2"
               />
             </InputGroup>
+            {/* Email */}
             <p>Enter Email Address</p>
             <InputGroup className="mb-3">
               <Form.Control
@@ -76,6 +81,7 @@ const Signup = () => {
                 aria-describedby="basic-addon2"
               />
             </InputGroup>
+            {/* Password */}
             <p>Enter Password</p>
             <InputGroup className="mb-3">
               <Form.Control
@@ -87,6 +93,7 @@ const Signup = () => {
                 aria-describedby="basic-addon2"
               />
             </InputGroup>
+            {/* Confirm password */}
             <p>Confirm Password</p>
             <InputGroup className="mb-3">
               <Form.Control
@@ -98,10 +105,9 @@ const Signup = () => {
                 aria-describedby="basic-addon2"
               />
             </InputGroup>
+            {/* Buttons */}
             <button class="custom-btn" type="submit">Create Account</button>
-            <Link to="/Login">
-                  <Button variant="link"> Back to Login </Button>
-            </Link>
+            <Button variant="link" onClick={() => navigate("/Login")}> Back to Login </Button>
           </div>
         </div>
         <div>{displayMessage}</div>

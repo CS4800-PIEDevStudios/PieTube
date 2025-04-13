@@ -4,9 +4,11 @@ import { XLg, Filter } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
 const GenreFilter = ({show, onHide}) => {
-  const navigate = useNavigate(); 
+  // Use states
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
+  // Navigation hook
+  const navigate = useNavigate(); 
   const [selectedRatings, setSelectedRatings] = useState([]);
 
   const genres = [
@@ -56,6 +58,31 @@ const GenreFilter = ({show, onHide}) => {
     return '';
   };
 
+  //Rating selection functions
+  const handleRatingChange = (e) => {
+    setSelectedRating(e.target.value);
+  };
+  
+
+  const handleSearch = () => {
+    // Hides filter
+    onHide();
+    // Resets all options when clicked
+    setSelectedGenres([]);
+    setExcludedGenres([]);
+    setSelectedRating(null);
+    // Variable to choose header for Search Results page
+    localStorage.setItem('isFromFilter', true);
+    localStorage.setItem('HeaderName', 'searchResults')
+    navigate("/SearchResults", {
+      state: { //Transfers data
+        selectedGenres, 
+        selectedRating
+      }
+    });
+    window.location.reload();
+  }
+
   return (
     <div className='d-flex justify-content align-items-center'>
       <Modal 
@@ -67,38 +94,38 @@ const GenreFilter = ({show, onHide}) => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
       >
+        {/* Genre filter header */}
         <Modal.Header>
+          {/* Title */}
           <div className='d-flex' style={{gap:"10px"}}>           
               <Filter width="40" height="40"/>
               <Modal.Title id="contained-modal-title-vcenter">Filter</Modal.Title>
           </div>
-          <button className="btn-close" onClick={onHide} aria-label="Close">
+          {/* Close button */}
+          <button class="btn-close" onClick={onHide} aria-label="Close">
               <XLg width="20" height="20"/>
           </button>
         </Modal.Header>
-        <Modal.Body className='d-flex flex-column' style={{marginBottom:"100px", rowGap:"50px"}}>
+        <Modal.Body className='modal-body d-flex flex-column'>
           {/* Genres */}
           <div>
-            <h2 className='mx-5 m-3'> Genres</h2>
+            <h2 className='modal-body-header mx-5 m-3'> Genres</h2>
             <div id='Genres' className='d-flex flex-wrap mx-5' style={{ gap: "10px"}}>
                 {genres.map((genre, index) => (
-                  <React.Fragment key={index}>
-                    <div 
-                      key={index}
-                      className={`filter-genre-blob ${getGenreClass(genre)}`}
-                      onClick={() => toggleGenre(genre)}
-                    >
-                      {genre}
-                    </div>
-                  </React.Fragment>
+                  <div 
+                    key={index}
+                    className={`filter-genre-blob ${getGenreClass(genre)}`}
+                    onClick={() => toggleGenre(genre)}
+                  >
+                    {genre}
+                  </div>
                 ))}
             </div>
           </div>
-
           {/* Age Rating */}
           <div>
-            <h2 className='mx-5 m-3'> Age Rating</h2>
-            <div>
+            <h2 className='modal-body-header mx-5 m-3'> Age Rating</h2>
+            <div> 
               <Form>
               <div id="AgeRating" className='d-flex flex-wrap mx-5' style={{ gap: "10px", fontSize:"1.5rem"}}>
                 {ratings.map((rating) => (
@@ -116,10 +143,11 @@ const GenreFilter = ({show, onHide}) => {
               </Form>
             </div>
           </div>
-
         </Modal.Body>
+        {/* Buttons */}
         <Modal.Footer className='d-flex flex-column m-3'>
           <button className="reset-btn mx-5 my-2" onClick={() => {
+            // Resets all options when clicked
             setSelectedGenres([]);
             setExcludedGenres([]);
             setSelectedRating(null);
