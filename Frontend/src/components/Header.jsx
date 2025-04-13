@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
+import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
 import mepic from '../assets/me.png';
 import pietubelogo from '../assets/pietubelogo.png';
-import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
 import GenreFilter from './GenreFilter';
 
 const Header = () => {
-  // Navigation hook
-  const navigate = useNavigate(); 
-
+  // Use states
   const [LoggedIn, setIsLoggedIn] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [inputText, setInputText] = useState('');
   
+  // Navigation hook
+  const navigate = useNavigate(); 
+
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
     setIsLoggedIn(loggedInStatus); 
@@ -30,25 +31,27 @@ const Header = () => {
     }
   };
 
+  //Submits searchbar input when pressing enter key
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleSearchBar();
+    }
+  }
+
   const handleTrending = () => {
     localStorage.setItem('HeaderName', 'trending');
-    if (location.pathname === '/SearchResults') {
+    if (location.pathname === '/SearchResults') { //Reloads page if user is already on search results page to change header
       window.location.reload();
     }
   }
 
   const handleWatchList = () => {
     localStorage.setItem('HeaderName', 'watchList');
-    if (location.pathname === '/SearchResults') {
+    if (location.pathname === '/SearchResults') { //Reloads page if user is already on search results page to change header
       window.location.reload();
     }
   }
 
-  const handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      handleSearchBar();
-    }
-  }
 
     return (
       <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow px-5 justify-content-between' style={{zIndex:2}}>
