@@ -5,7 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const VideoCard = () => {
     // Navigation hook
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+     
     const genres = [
         "Action", "Adventure", "Animation", "Comedy", "Crime", 
         "Documentary", "Drama", "Family", "Fantasy", "Historical", 
