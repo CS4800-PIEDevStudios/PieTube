@@ -8,9 +8,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproject.settings')
 django.setup()
 
 # MAKE SURE THESE ARE ALL CORRECT BEFORE ADDING
-imdbID = "tt0057701" 
-trailer = "https://www.youtube.com/embed/yubrwPJYc7E?si=ofHZJ9p5qG5KfowZ" # NEEDS TO BE EMBED LINK
-embed = "https://archive.org/embed/TheYesterdayMachine1963" # LINK FROM INTERNET ARCHIVE
+imdbID = "tt0030832" 
+trailer = "https://www.youtube.com/embed/Fqm9WCxSG5Q?si=kO0pwkrXQSMWrDbs" # NEEDS TO BE EMBED LINK
+embed = "https://archive.org/embed/tarzan_and_the_green_goddess" # LINK FROM INTERNET ARCHIVE
 
 
 

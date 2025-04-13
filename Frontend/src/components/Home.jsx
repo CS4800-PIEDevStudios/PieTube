@@ -246,8 +246,7 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* Recommended by Genre*/}
-            <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
+            {/* <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
@@ -256,7 +255,6 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* Recommended Movies*/}
             <div className='header-recommend float-start mb-3'>Recommended Movies</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 24 }).map((_, index) => (
@@ -264,7 +262,7 @@ const Home = () => {
                         < img src = {mepic}/>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };
