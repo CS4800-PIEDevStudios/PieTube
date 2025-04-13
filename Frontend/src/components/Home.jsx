@@ -53,7 +53,6 @@ const Home = () => {
             setFilteredMovies([]);
             return;
         }
-
         axiosInstance.get('api/filter-genres', {
             params: {
                 genres: selectedGenres.join(',')
