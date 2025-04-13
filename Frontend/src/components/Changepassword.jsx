@@ -17,6 +17,7 @@ const ChangePassword = () => {
     // Navigation hook
     const navigate = useNavigate();
 
+    {/* Show/hide password eyes */}
     const togglePasswordVisibility = (field) => {
         setShowPasswords(prevState => ({
             ...prevState,
@@ -26,7 +27,7 @@ const ChangePassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //Error message
+        // User error message
         if (newPassword !== confirmPassword) {
             alert("New passwords do not match.");
             return;

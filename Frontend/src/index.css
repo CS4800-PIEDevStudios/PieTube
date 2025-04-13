@@ -438,6 +438,13 @@ body {
   row-gap: 50px;
 }
 
+.about {
+  border-radius: 20px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25);
+  min-width:500px;
+  min-height:450px;
+}
+
 @media (max-width: 1280px) {
   .thumbnail-grid {
       grid-template-columns: repeat(7, minmax(128px, 1fr));
