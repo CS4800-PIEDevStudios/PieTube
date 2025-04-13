@@ -22,12 +22,23 @@ const Header = () => {
   const handleSearchBar = () => {
     if (inputText.trim()) { // Only search if there's actual text
       localStorage.setItem('isFromFilter', false);
+      localStorage.setItem('HeaderName', 'searchResults');
       navigate("/SearchResults", {
         state: { savedText: inputText }
       });
       window.location.reload();
     }
   };
+
+  const handleTrending = () => {
+    localStorage.setItem('HeaderName', 'trending');
+    window.location.reload();
+  }
+
+  const handleWatchList = () => {
+    localStorage.setItem('HeaderName', 'watchList');
+    window.location.reload();
+  }
 
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
@@ -47,8 +58,8 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
               <Link to="/" className='headerbar flex-fill'> Home </Link>
-              <Link to="/Profile" className='headerbar flex-fill'> Profile </Link>
-              <Link to="/Login" className='headerbar flex-fill'> Login </Link>					
+              <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
+              <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>					
 					</Nav>
           {/* Search bar */}
           <InputGroup className="ml-5 w-25 flex-fill">

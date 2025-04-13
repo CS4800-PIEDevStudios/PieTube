@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import VideoCard from "./VideoCard";
 
 const SearchResults = () => {
+    const [headerName, setHeaderName] = useState('');
     const [fromFilter, setFromFilter] = useState(false);
     const location = useLocation();
     const savedText = location.state?.savedText || '';
@@ -13,47 +14,54 @@ const SearchResults = () => {
 
     useEffect(() => {
         const fromFilterStatus = localStorage.getItem('isFromFilter') === 'true'; 
-        console.log(fromFilterStatus);
+        const nameOfHeader = localStorage.getItem('HeaderName');
         setFromFilter(fromFilterStatus);
+        setHeaderName(nameOfHeader);
     }, []);
 
     const renderHeader = () => {
-        if (fromFilter) {
+        if (headerName === 'searchResults') {
             return (
-                <div className='d-flex flex-column' style={{ rowGap: "20px" }}>
-                {/* Display ratings only if not from filter */}
-                    <div className="d-flex flex-wrap" style={{ gap: "10px" }}>
-                        {ratings.map(rating => (
-                            <div
-                                key={rating}
-                                className={`rating-blob ${selectedRating === rating ? 'selected-rating' : ''}`}
-                            >
-                                {rating}
+                <>
+                    <h1>Results for:</h1>
+                    {fromFilter ? (
+                        <div className='d-flex flex-column' style={{ rowGap: "20px" }}>
+                            <div className="d-flex flex-wrap" style={{ gap: "10px" }}>
+                                {ratings.map(rating => (
+                                    <div
+                                        key={rating}
+                                        className={`rating-blob ${selectedRating === rating ? 'selected-rating' : ''}`}
+                                    >
+                                        {rating}
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                
-                <div className='d-flex justify-items-start'>
-                    {selectedGenres.map((genre, index) => (
-                        <span key={index} className="filter-genre-blob">
-                            {genre}
-                        </span>
-                    ))}
-                </div>
-            </div>
-            )
-        } else {
-            return (
-                <h2 className='search-result-header-text text-muted'>{savedText}</h2>
-            )
+                        
+                            <div className='d-flex justify-items-start'>
+                                {selectedGenres.map((genre, index) => (
+                                    <span key={index} className="filter-genre-blob">
+                                        {genre}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <h2 className='search-result-header-text text-muted'>{savedText}</h2>
+                    )}
+                </>
+            );
+        } else if (headerName === 'watchList') {
+            return <h1>Watch List</h1>;
+        } else if (headerName === 'trending') {
+            return <h1>Trending</h1>;
         }
-    }
+        return null;
+    };
 
     return (
         <div className="d-flex flex-column w-50 pt-5 pb-5" style={{ gap: "50px" }}>
             {/* Header */}
             <div className="search-results-text d-flex flex-column align-self-start align-items-start">
-                <h1>Results for:</h1>
                 {renderHeader()}
             </div>
 

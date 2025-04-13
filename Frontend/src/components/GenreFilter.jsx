@@ -53,7 +53,7 @@ const GenreFilter = ({show, onHide}) => {
     setExcludedGenres([]);
     setSelectedRating(null);
     localStorage.setItem('isFromFilter', true);
-    
+    localStorage.setItem('HeaderName', 'searchResults')
     navigate("/SearchResults", {
       state: { 
         selectedGenres, 
