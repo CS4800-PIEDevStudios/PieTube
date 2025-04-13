@@ -11,12 +11,38 @@ const MovieDescription = () => {
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
-
-    //Parameter hook
+    
+    // Filler...
     const { id } = useParams();
 
     // Navigation hook
     const navigate = useNavigate();
+
+    //Fetching movie data
+    useEffect(() => {
+        GetMovieData()
+        }, []);
+
+    async function GetMovieData()
+    {
+        const response = await axiosInstance.post('api/get-movie-by-id', {
+            id: id
+            });
+        setMovieData(response.data[0]);
+        console.log(response.data[0]);
+
+        const genres = await axiosInstance.post('api/get-movie-genres-by-id', {
+            id: id
+        });
+        setGenreData(genres.data);
+        console.log(genres.data);
+
+        const actors = await axiosInstance.post('api/get-movie-actors-by-id', {
+            id: id
+        });
+        setActorData(actors.data);
+        console.log(actors.data);
+    }
 
     // Function for like/dislike button
     function toggleIsClickedThumbsUp () {
@@ -35,32 +61,6 @@ const MovieDescription = () => {
     // Function for Watch List button
     function toggleIsWatchListed () {
         setIsWatchListed(!isWatchListed);
-    }
-
-    //Fetching movie data
-    useEffect(() => {
-        GetMovieData()
-      }, []);
-
-    async function GetMovieData()
-    {
-        const response = await axiosInstance.post('api/get-movie-by-id', {
-            id: id
-          });
-        setMovieData(response.data[0]);
-        console.log(response.data[0]);
-
-        const genres = await axiosInstance.post('api/get-movie-genres-by-id', {
-            id: id
-        });
-        setGenreData(genres.data);
-        console.log(genres.data);
-
-        const actors = await axiosInstance.post('api/get-movie-actors-by-id', {
-            id: id
-        });
-        setActorData(actors.data);
-        console.log(actors.data);
     }
 
     return (

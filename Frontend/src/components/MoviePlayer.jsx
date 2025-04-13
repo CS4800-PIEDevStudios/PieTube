@@ -4,19 +4,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js';
 
 const MoviePlayer = () => {
-    const navigate = useNavigate();
-    
-    // filler..
-    const { id } = useParams();
-    
+    //Use states
     const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
     const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
-    
     const [movieData, setMovieData] = useState([]);
     const [genreData, setGenreData] = useState([]);
     const [actorData, setActorData] = useState([]);
 
+    // Filler...
+    const { id } = useParams();
+
+    // Navigation hook
+    const navigate = useNavigate();
+
+    //Fetching movie data
     useEffect(() => {
         GetMovieData()
       }, []);
@@ -43,13 +45,13 @@ const MoviePlayer = () => {
         console.log(actors.data);
     }
 
+    // Function for like/dislike button
     function toggleIsClickedThumbsUp () {
         if (!isClickedThumbsDown) {
             setIsClickedThumbsDown(true)
         }
         setIsClickedThumbsUp(!isClickedThumbsUp);
     }
-
     function toggleIsClickedThumbsDown () {
         if (!isClickedThumbsUp) {
             setIsClickedThumbsUp(true)
@@ -57,12 +59,14 @@ const MoviePlayer = () => {
         setIsClickedThumbsDown(!isClickedThumbsDown);
     }
 
+    // Function for Watch List button
     function toggleIsWatchListed () {
         setIsWatchListed(!isWatchListed);
     }
 
     return (
         <div className='d-flex flex-column w-100 pt-5' style={{backgroundColor:"#E1E1E1"}}> 
+            {/* Movie player iframe */}
             <div id='MoviePlayer' className='d-flex flex-column align-self-center w-50'>
                 <iframe
                     allowFullScreen={true}
@@ -80,14 +84,12 @@ const MoviePlayer = () => {
                     onClick={() => navigate(`/MovieDescription/${movieData.MovieID}`)}>
                         <InfoCircle/> Movie Info
                 </button>
-
-            <button 
+                <button 
                     className='d-flex custom-btn align-items-center justify-content-center' 
                     style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}} 
                     onClick={toggleIsWatchListed}
                     >{isWatchListed ? <Clock/> : <CheckLg/>} Watch List
                 </button>
-
             </div>
 
             <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative'>
