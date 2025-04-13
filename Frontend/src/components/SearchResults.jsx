@@ -3,8 +3,11 @@ import { useLocation } from 'react-router-dom';
 import VideoCard from "./VideoCard";
 
 const SearchResults = () => {
+    // Use states
     const [headerName, setHeaderName] = useState('');
     const [fromFilter, setFromFilter] = useState(false);
+
+    //Location states
     const location = useLocation();
     const savedText = location.state?.savedText || '';
     const selectedGenres = location.state?.selectedGenres || [];
@@ -19,14 +22,17 @@ const SearchResults = () => {
         setHeaderName(nameOfHeader);
     }, []);
 
+    //Choose between headers based on where user clicked in from
     const renderHeader = () => {
         if (headerName === 'searchResults') {
             return (
                 <>
                     <h1>Results for:</h1>
+                    {/* Shows chosen genres and age rating if coming from genre filter, otherwise text from search bar */}
                     {fromFilter ? (
                         <div className='d-flex flex-column' style={{ rowGap: "20px" }}>
                             <div className="d-flex flex-wrap" style={{ gap: "10px" }}>
+                                {/* Age ratings */}
                                 {ratings.map(rating => (
                                     <div
                                         key={rating}
@@ -36,7 +42,7 @@ const SearchResults = () => {
                                     </div>
                                 ))}
                             </div>
-                        
+                            {/* Genres */}
                             <div className='d-flex justify-items-start'>
                                 {selectedGenres.map((genre, index) => (
                                     <span key={index} className="filter-genre-blob">
@@ -46,6 +52,7 @@ const SearchResults = () => {
                             </div>
                         </div>
                     ) : (
+                        // Text entered into search bar
                         <h2 className='search-result-header-text text-muted'>{savedText}</h2>
                     )}
                 </>
@@ -66,6 +73,7 @@ const SearchResults = () => {
             </div>
 
             {/* VideoCards */}
+            {/* Replace with map later */}
             <VideoCard />    
             <VideoCard />  
             <VideoCard />  
