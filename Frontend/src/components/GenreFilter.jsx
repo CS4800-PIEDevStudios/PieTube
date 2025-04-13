@@ -4,10 +4,13 @@ import { XLg, Filter } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
 const GenreFilter = ({show, onHide}) => {
-  const navigate = useNavigate(); 
+  // Use states
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
   const [selectedRating, setSelectedRating] = useState(null);
+
+  // Navigation hook
+  const navigate = useNavigate(); 
 
   const genres = [
     "Action", "Adventure", "Animation", "Comedy", "Crime", 
@@ -26,10 +29,7 @@ const GenreFilter = ({show, onHide}) => {
     { value: "M", label: "M" }
   ];
 
-  const handleRatingChange = (e) => {
-    setSelectedRating(e.target.value);
-  };
-
+  // Genre selection functions
   const toggleGenre = (genre) => {
     if (selectedGenres.includes(genre)) {
       setSelectedGenres(prev => prev.filter(g => g !== genre));
@@ -47,15 +47,24 @@ const GenreFilter = ({show, onHide}) => {
     return '';
   };
 
+  //Rating selection functions
+  const handleRatingChange = (e) => {
+    setSelectedRating(e.target.value);
+  };
+  
+
   const handleSearch = () => {
+    // Hides filter
     onHide();
+    // Resets all options when clicked
     setSelectedGenres([]);
     setExcludedGenres([]);
     setSelectedRating(null);
+    // Variable to choose header for Search Results page
     localStorage.setItem('isFromFilter', true);
     localStorage.setItem('HeaderName', 'searchResults')
     navigate("/SearchResults", {
-      state: { 
+      state: { //Transfers data
         selectedGenres, 
         selectedRating
       }
@@ -74,11 +83,14 @@ const GenreFilter = ({show, onHide}) => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
       >
+        {/* Genre filter header */}
         <Modal.Header>
+          {/* Title */}
           <div className='d-flex' style={{gap:"10px"}}>           
               <Filter width="40" height="40"/>
               <Modal.Title id="contained-modal-title-vcenter">Filter</Modal.Title>
           </div>
+          {/* Close button */}
           <button class="btn-close" onClick={onHide} aria-label="Close">
               <XLg width="20" height="20"/>
           </button>
@@ -99,7 +111,6 @@ const GenreFilter = ({show, onHide}) => {
                 ))}
             </div>
           </div>
-
           {/* Age Rating */}
           <div>
             <h2 className='modal-body-header mx-5 m-3'> Age Rating</h2>
@@ -121,10 +132,11 @@ const GenreFilter = ({show, onHide}) => {
               </Form>
             </div>
           </div>
-
         </Modal.Body>
+        {/* Buttons */}
         <Modal.Footer className='d-flex flex-column m-3'>
           <button className="reset-btn mx-5 my-2" onClick={() => {
+            // Resets all options when clicked
             setSelectedGenres([]);
             setExcludedGenres([]);
             setSelectedRating(null);
