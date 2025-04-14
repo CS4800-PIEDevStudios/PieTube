@@ -1,4 +1,4 @@
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import VideoCard from "./VideoCard";
 import axiosInstance from '../axiosConfig.js';
 import { useState, useEffect } from 'react';
@@ -9,9 +9,6 @@ const SearchResults = () => {
     const [headerName, setHeaderName] = useState('');
     const [fromFilter, setFromFilter] = useState(false);
 
-    // Navigation hook
-    const navigate = useNavigate();
-
     // Location
     const location = useLocation()
     const {selectedGenres, excludedGenres, selectedRatings, savedText} = location.state || {};  //retreive selected genres
@@ -21,7 +18,8 @@ const SearchResults = () => {
     useEffect(() => {
         let genreResults = [];
         let ratingResults = [];
-        
+        let allResults = [];
+
         //Fetches genre data
         if (selectedGenres?.length) {
             axiosInstance.get('api/filter-genres', {
@@ -45,6 +43,15 @@ const SearchResults = () => {
             })
             .catch(error => console.error('Error fetching age rating results:', error));
         }
+        console.log("TEST")
+        axiosInstance.get('api/get-movie-data')
+        .then(response => {
+            allResults = response.data;
+            checkFinalResults();
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
 
         // Returns matching movies
         const checkFinalResults = () => {
@@ -58,8 +65,10 @@ const SearchResults = () => {
             } else if (ratingResults.length) {
                 setSearchResults(ratingResults);
             } else {
-                setSearchResults([]);
+                setSearchResults(allResults);
             }
+
+            console.log("SEARCH RESULTS" + searchResults)
         };
     }, [selectedGenres, excludedGenres, selectedRatings]);
 
@@ -138,7 +147,6 @@ const SearchResults = () => {
         return null;
     };
 
-    
     return (
         <div className="search-results-container d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px",}}>
             {/* Header */}
@@ -146,28 +154,6 @@ const SearchResults = () => {
                 {renderHeader()}
             </div>
             {/* VideoCards */}
-            {/* {searchResults.length > 0 ? (
-                searchResults.map((movie, index) => (
-                    <div key={index} className="search-results d-flex" style={{ gap: "30px" }}>
-                        <div className='video-card-thumbnail' role="button" onClick={() => navigate(`/MovieDescription/${movie.MovieID}`)}>
-                            <img src={movie.Poster} alt={movie.Title} />
-                        </div>
-                        <div className='d-flex flex-column'>
-                            <h1 className="video-card-movie-title">{movie.Title}</h1>
-                            <p className="video-card-summary">{movie.Summary}</p>
-                            <div id = 'Genres' className ='d-flex flex-wrap' style={{ gap: "8 px"}}>
-                                {movie.Genres?.map((genre, index) => (
-                                    <div key={index} className='video-card-genre-blob'>
-                                        {genre}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                ))
-            ) : (
-                <h3 className='search-results-subtitle text-muted'>No matching results found.</h3>
-            )} */}
             {searchResults.length > 0 ? (
                 searchResults.map((movie) => (
                     <VideoCard
