@@ -96,7 +96,7 @@ const Header = () => {
             <Link to="/Login">
             <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
               <EmojiSunglasses width="20" height="30" className='mr-2'/>
-              Sign Up
+              Sign In
             </button>
           </Link> 
           ) : (
