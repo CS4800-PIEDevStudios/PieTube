@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import { XLg, Filter } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
 const GenreFilter = ({show, onHide}) => {
-  const navigate = useNavigate(); 
+  // Use states
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
-  const [selectedRating, setSelectedRating] = useState(null);
+
+  // Navigation hook
+  const navigate = useNavigate(); 
+  const [selectedRatings, setSelectedRatings] = useState([]);
 
   const genres = [
     "Action", "Adventure", "Animation", "Comedy", "Crime", 
@@ -23,12 +26,19 @@ const GenreFilter = ({show, onHide}) => {
     { value: "PG-13", label: "PG-13" },
     { value: "R", label: "R" },
     { value: "NC-17", label: "NC-17" },
-    { value: "M", label: "M" }
+    { value: "M", label: "M" },
+    { value: "NR", label: "NR" },
+    { value: "Passed", label: "Passed" },
+    { value: "Approved", label: "Approved" }
   ];
 
-  const handleRatingChange = (e) => {
-    setSelectedRating(e.target.value);
-  };
+  const toggleRating = (ratingValue) => {
+    if (selectedRatings.includes(ratingValue)) {
+        setSelectedRatings(prev => prev.filter(r => r !== ratingValue)); //if rating already selected, unselect it
+    } else {
+        setSelectedRatings(prev => [...prev, ratingValue]); //else add rating to list
+    }
+};
 
   const toggleGenre = (genre) => {
     if (selectedGenres.includes(genre)) {
@@ -47,15 +57,30 @@ const GenreFilter = ({show, onHide}) => {
     return '';
   };
 
+  //Rating selection functions
+  const handleRatingChange = (e) => {
+    setSelectedRatings(e.target.value);
+  };
+  
+
   const handleSearch = () => {
+    // Hides filter
     onHide();
+    // Resets all options when clicked
     setSelectedGenres([]);
     setExcludedGenres([]);
-    setSelectedRating(null);
+    setSelectedRatings([]);
+    // Variable to choose header for Search Results page
     localStorage.setItem('isFromFilter', true);
+    localStorage.setItem('HeaderName', 'searchResults')
     navigate("/SearchResults", {
-      state: { selectedGenres: selectedGenres }
+      state: { //Transfers data
+        selectedGenres, 
+        selectedRatings,
+        excludedGenres
+      }
     });
+    window.location.reload();
   }
 
   return (
@@ -69,62 +94,63 @@ const GenreFilter = ({show, onHide}) => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
       >
+        {/* Genre filter header */}
         <Modal.Header>
+          {/* Title */}
           <div className='d-flex' style={{gap:"10px"}}>           
               <Filter width="40" height="40"/>
               <Modal.Title id="contained-modal-title-vcenter">Filter</Modal.Title>
           </div>
+          {/* Close button */}
           <button class="btn-close" onClick={onHide} aria-label="Close">
               <XLg width="20" height="20"/>
           </button>
         </Modal.Header>
-        <Modal.Body className='d-flex flex-column' style={{marginBottom:"100px", rowGap:"50px"}}>
+        <Modal.Body className='modal-body d-flex flex-column'>
           {/* Genres */}
           <div>
-            <h2 className='mx-5 m-3'> Genres</h2>
+            <h2 className='modal-body-header mx-5 m-3'> Genres</h2>
             <div id='Genres' className='d-flex flex-wrap mx-5' style={{ gap: "10px"}}>
                 {genres.map((genre, index) => (
-                  <React.Fragment key={index}>
-                    <div 
-                      key={index}
-                      className={`filter-genre-blob ${getGenreClass(genre)}`}
-                      onClick={() => toggleGenre(genre)}
-                    >
-                      {genre}
-                    </div>
-                  </React.Fragment>
+                  <div 
+                    key={index}
+                    className={`filter-genre-blob ${getGenreClass(genre)}`}
+                    onClick={() => toggleGenre(genre)}
+                  >
+                    {genre}
+                  </div>
                 ))}
             </div>
           </div>
-
           {/* Age Rating */}
           <div>
-            <h2 className='mx-5 m-3'> Age Rating</h2>
-            <div>
+            <h2 className='modal-body-header mx-5 m-3'> Age Rating</h2>
+            <div> 
               <Form>
               <div id="AgeRating" className='d-flex flex-wrap mx-5' style={{ gap: "10px", fontSize:"1.5rem"}}>
                 {ratings.map((rating) => (
                   <Form.Check
-                    key={rating.value}
-                    type='radio'
-                    id={`rating-${rating.value}`}
-                    label={rating.label}
-                    value={rating.value}
-                    checked={selectedRating === rating.value}
-                    onChange={handleRatingChange}
+                  key={rating.value}
+                  type="checkbox"
+                  id={`rating-${rating.value}`}
+                  label={rating.label}
+                  value={rating.value}
+                  checked={selectedRatings.includes(rating.value)}
+                  onChange={(e) => toggleRating(rating.value)}
                   />
                 ))}
               </div>
               </Form>
             </div>
           </div>
-
         </Modal.Body>
+        {/* Buttons */}
         <Modal.Footer className='d-flex flex-column m-3'>
           <button className="reset-btn mx-5 my-2" onClick={() => {
+            // Resets all options when clicked
             setSelectedGenres([]);
             setExcludedGenres([]);
-            setSelectedRating(null);
+            setSelectedRating([]);
           }}>
             Reset
           </button>

@@ -4,115 +4,43 @@ import { Row } from 'react-bootstrap';
 import { ChevronRight, ChevronLeft } from 'react-bootstrap-icons';
 import mepic from '../assets/me.png';
 import KingKongThumb from '../assets/KingKongThumb.png';
-import spiderman from '../assets/spiderman.jpg';
 import axiosInstance from '../axiosConfig.js'
 
 const Home = () => {
+    // Use states
+    const [scrollInterval, setScrollInterval] = useState(null);
     const [movieData, setMovieData] = useState([]);
-    const [userData, setUserData] = useState([]);
-    const [actorData, setActorData] = useState([]);
-    const [genreData, setGenreData] = useState([]);
-    const [movieRoleData, setMovieRoleData] = useState([]);
-    const [movieGenreData, setMovieGenreData] = useState([]);
-    const [directorData, setDirectorData] = useState([]);
-    const [trailerData, setTrailerData] = useState([]);
-    const [recommendationData, setRecommendationData] = useState([]);
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     
     // Navigation hook
     const navigate = useNavigate(); 
 
-    useEffect(() => {
-        axiosInstance.get('login-api/checkAuth')
-          .then(res => {
-            if (res.data.authenticated) {
-              console.log(res.data.username)
-            } else {
-              console.log('User not authenticated')
-            }
-          });
+    const ref = useRef(null);
 
+    const genres = [
+        "Action", "Adventure", "Animation", "Comedy", "Crime", 
+        "Documentary", "Drama", "Family", "Fantasy", "Historical", 
+        "Horror", "Musical", "Mystery", "Romance", "Science Fiction", 
+        "Thriller", "War", "Western", "Biography", "Sports", 
+        "Superhero", "Noir", "Satire", "Teen", "Disaster"
+      ];
+
+    useEffect(() => {
           fetchData();
       }, []);
 
+    useEffect(() => {
+        fetchMoviesByGenres();
+    }, [selectedGenres]);
+
+    //Fetch movie data
     const fetchData = () => {
         console.log("fetching...");
         axiosInstance.get('api/get-movie-data')
             .then(response => {
                 console.log(response.data)
                 setMovieData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-user-data')
-            .then(response => {
-                console.log(response.data)
-                setUserData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-actor-data')
-            .then(response => {
-                console.log(response.data)
-                setActorData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-genre-data')
-            .then(response => {
-                console.log(response.data)
-                setGenreData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-            axiosInstance.get('api/get-movie-role-data')
-            .then(response => {
-                console.log(response.data)
-                setMovieRoleData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-movie-genre-data')
-            .then(response => {
-                console.log(response.data)
-                setMovieGenreData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-director-data')
-            .then(response => {
-                console.log(response.data)
-                setDirectorData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-trailer-data')
-            .then(response => {
-                console.log(response.data)
-                setTrailerData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-            axiosInstance.get('api/get-recommendation-data')
-            .then(response => {
-                console.log(response.data)
-                setRecommendationData(response.data); // Assuming the response data is an array of objects
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -125,7 +53,6 @@ const Home = () => {
             setFilteredMovies([]);
             return;
         }
-
         axiosInstance.get('api/filter-genres', {
             params: {
                 genres: selectedGenres.join(',')
@@ -139,10 +66,7 @@ const Home = () => {
         });
     };
 
-    useEffect(() => {
-        fetchMoviesByGenres();
-    }, [selectedGenres]);
-
+    //Genre select for genre scrolling bar
     const toggleGenre = (genre) => {
         setSelectedGenres(prev => {
             if (prev.includes(genre)) {
@@ -153,10 +77,7 @@ const Home = () => {
         });
     };
 
-    const ref = useRef(null);
-    const [scrollInterval, setScrollInterval] = useState(null);
-
-
+    //Functions for genre scrolling bar
     const startScrolling = (scrollOffset) => {
         if (scrollInterval) return; // Prevent multiple intervals
 
@@ -176,16 +97,7 @@ const Home = () => {
         }
     };
 
-    const genres = [
-        "Action", "Adventure", "Animation", "Comedy", "Crime", 
-        "Documentary", "Drama", "Family", "Fantasy", "Historical", 
-        "Horror", "Musical", "Mystery", "Romance", "Science Fiction", 
-        "Thriller", "War", "Western", "Biography", "Sports", 
-        "Superhero", "Noir", "Satire", "Teen", "Disaster"
-      ];
-
     return (
-        
         <div className='d-flex flex-column mt-5' style={{ marginInline: "150px", overflowX: "hidden", marginTop:"100px"}}>
             {/* Genres */}
             <div className='mb-5 ml-3 position-relative' >
@@ -208,14 +120,12 @@ const Home = () => {
                 {/* Scrollable Container */}
                 <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-3 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none', borderRadius: "20px"}}>
                     {genres.map((genre, index) => (
-                        <React.Fragment key={index}>
-                            <div 
-                                className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
-                                onClick={() => toggleGenre(genre)}
-                            >
-                            {genre}
-                            </div>
-                        </React.Fragment>
+                        <div 
+                            className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
+                            onClick={() => toggleGenre(genre)}
+                        >
+                        {genre}
+                        </div>
                     ))} 
                 </Row>
             </div>
@@ -235,7 +145,6 @@ const Home = () => {
                     </div>
                 </div>
             )}
-
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
@@ -246,8 +155,7 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* Recommended by Genre*/}
-            <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
+            {/* <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
@@ -256,7 +164,6 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* Recommended Movies*/}
             <div className='header-recommend float-start mb-3'>Recommended Movies</div>
             <div className='mb-5 thumbnail-grid'>
                 {Array.from({ length: 24 }).map((_, index) => (
@@ -264,11 +171,10 @@ const Home = () => {
                         < img src = {mepic}/>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };
-
 
 export default Home;
 

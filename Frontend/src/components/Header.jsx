@@ -1,34 +1,54 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
+import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
 import mepic from '../assets/me.png';
 import pietubelogo from '../assets/pietubelogo.png';
-import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
 import GenreFilter from './GenreFilter';
 
 const Header = () => {
-  // Navigation hook
-  const navigate = useNavigate(); 
-
+  // Use states
   const [LoggedIn, setIsLoggedIn] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [inputText, setInputText] = useState('');
   
+  // Navigation hook
+  const navigate = useNavigate(); 
+
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
-    console.log(loggedInStatus);
     setIsLoggedIn(loggedInStatus); 
   },[]);
 
   const handleSearchBar = () => {
-    navigate("/SearchResults", {
-      state: {savedText: inputText}
-    });
+    if (inputText.trim()) { // Only search if there's actual text
+      localStorage.setItem('isFromFilter', false);
+      localStorage.setItem('HeaderName', 'searchResults');
+      navigate("/SearchResults", {
+        state: { savedText: inputText }
+      });
+      window.location.reload();
+    }
   };
 
+  //Submits searchbar input when pressing enter key
   const handleKeyPress = e => {
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       handleSearchBar();
+    }
+  }
+
+  const handleTrending = () => {
+    localStorage.setItem('HeaderName', 'trending');
+    if (location.pathname === '/SearchResults') { //Reloads page if user is already on search results page to change header
+      window.location.reload();
+    }
+  }
+
+  const handleWatchList = () => {
+    localStorage.setItem('HeaderName', 'watchList');
+    if (location.pathname === '/SearchResults') { //Reloads page if user is already on search results page to change header
+      window.location.reload();
     }
   }
 
@@ -44,8 +64,8 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
               <Link to="/" className='headerbar flex-fill'> Home </Link>
-              <Link to="/Profile" className='headerbar flex-fill'> Profile </Link>
-              <Link to="/Login" className='headerbar flex-fill'> Login </Link>					
+              <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
+              <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>					
 					</Nav>
           {/* Search bar */}
           <InputGroup className="ml-5 w-25 flex-fill">
@@ -73,10 +93,10 @@ const Header = () => {
 
           {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
           {LoggedIn ? (
-            <Link to="/Signup">
+            <Link to="/Login">
             <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
               <EmojiSunglasses width="20" height="30" className='mr-2'/>
-              Sign Up
+              Sign In
             </button>
           </Link> 
           ) : (

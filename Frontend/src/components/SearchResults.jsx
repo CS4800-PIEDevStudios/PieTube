@@ -1,60 +1,169 @@
-import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import VideoCard from "./VideoCard";
+import axiosInstance from '../axiosConfig.js';
+import { useState, useEffect } from 'react';
 
 const SearchResults = () => {
-    const [fromFilter, setFromFilter] = useState(false); // Fixed typo: userState → useState
-    const location = useLocation();
-    const savedText = location.state?.savedText || '';
-    const selectedGenres = location.state?.selectedGenres || [];
+    // Use states
+    const [searchResults, setSearchResults] = useState([]); 
+    const [headerName, setHeaderName] = useState('');
+    const [fromFilter, setFromFilter] = useState(false);
 
-    const ratings = [ "G", "PG", "PG-13", "R", "NC-17", "M" ];
+    // Location
+    const location = useLocation()
+    const {selectedGenres, excludedGenres, selectedRatings, savedText} = location.state || {};  //retreive selected genres
+
+    const ratings = [ "G", "PG", "PG-13", "R", "NC-17", "M", "NR", "Passed", "Approved" ];
 
     useEffect(() => {
-        const fromFilterStatus = localStorage.getItem('isFromFilter') === 'true'; // Fixed comparison
+        let genreResults = [];
+        let ratingResults = [];
+        let allResults = [];
+
+        //Fetches genre data
+        if (selectedGenres?.length) {
+            axiosInstance.get('api/filter-genres', {
+                params: { genres: selectedGenres.join(','), excludedGenres: excludedGenres.join(',') }
+            })
+            .then(response => {
+                genreResults = response.data;
+                checkFinalResults();
+            })
+            .catch(error => console.error('Error fetching genre search results:', error));
+        }
+
+        //Fetches age rating data
+        if (selectedRatings?.length) {
+            axiosInstance.get('api/filter-age-rating', {
+                params: { ratings: selectedRatings.join(',') }
+            })
+            .then(response => {
+                ratingResults = response.data;
+                checkFinalResults();
+            })
+            .catch(error => console.error('Error fetching age rating results:', error));
+        }
+        console.log("TEST")
+        axiosInstance.get('api/get-movie-data')
+        .then(response => {
+            allResults = response.data;
+            checkFinalResults();
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+
+        // Returns matching movies
+        const checkFinalResults = () => {
+            if (genreResults.length && ratingResults.length) {
+                const finalResults = genreResults.filter(movie => 
+                    ratingResults.some(ratingMovie => ratingMovie.MovieID === movie.MovieID)
+                );
+                setSearchResults(finalResults);
+            } else if (genreResults.length) {
+                setSearchResults(genreResults);
+            } else if (ratingResults.length) {
+                setSearchResults(ratingResults);
+            } else {
+                setSearchResults(allResults);
+            }
+
+            console.log("SEARCH RESULTS" + searchResults)
+        };
+    }, [selectedGenres, excludedGenres, selectedRatings]);
+
+
+    useEffect(() => {
+        const fromFilterStatus = localStorage.getItem('isFromFilter') === 'true'; 
+        const nameOfHeader = localStorage.getItem('HeaderName');
         setFromFilter(fromFilterStatus);
+        setHeaderName(nameOfHeader);
     }, []);
 
+    //Choose between headers based on where user clicked in from
+    const renderHeader = () => {
+        if (headerName === 'searchResults') {
+            return (
+                <>
+                    <h1 className='search-results-header'>Results for:</h1>
+                    {/* Shows chosen genres and age rating if coming from genre filter, otherwise text from search bar */}
+                    {fromFilter ? (
+                        <div className='d-flex flex-column' style={{ rowGap: "20px" }}>
+                            {/* Age ratings */}
+                            <div className="d-flex flex-wrap" style={{ gap: "10px" }}>
+                                {ratings.map(rating => (
+                                    <div
+                                        key={rating}
+                                        className={`rating-blob ${selectedRatings?.includes(rating) ? 'selected-rating' : ''}`}
+                                    >
+                                        {rating}
+                                </div>
+                                ))}
+                            </div>
+                            {/* Genres */}
+                            <div className="genre-filters-container d-flex flex-wrap align-items-center" style={{ gap: "10px" }}>
+                                {/* Included Genres */}
+                                <div className="d-flex flex-wrap" style={{ gap: "10px" }}>
+                                    {selectedGenres?.length > 0 ? (
+                                        selectedGenres.map((genre, index) => (
+                                            <span key={`included-${index}`} className="filter-genre-blob">
+                                                {genre}
+                                            </span>
+                                        ))
+                                    ) : (
+                                        <h2 className="text-muted">No included genres</h2>
+                                    )}
+                                </div>
+
+                                {/* Separator if both types exist */}
+                                {selectedGenres?.length > 0 && excludedGenres?.length > 0 && (
+                                    <h2 className="text-muted mx-2">|</h2>
+                                )}
+
+                                {/* Excluded Genres */}
+                                {excludedGenres?.length > 0 && (
+                                    <div className="d-flex flex-wrap align-items-center" style={{ gap: "10px" }}>
+                                        <h2 className="excluded-label">Excluded:</h2>
+                                        {excludedGenres.map((genre, index) => (
+                                            <span key={`excluded-${index}`} className="filter-genre-blob-excluded">
+                                                {genre}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ) : (
+                        // Text entered into search bar
+                        <h2 className='search-result-header-text text-muted'>{savedText}</h2>
+                    )}
+                </>
+            );
+        } else if (headerName === 'watchList') {
+            return <h1 className='search-results-header'> Watch List </h1>;
+        } else if (headerName === 'trending') {
+            return <h1 className='search-results-header'> Trending </h1>;
+        }
+        return null;
+    };
+
     return (
-        <div className="d-flex flex-column w-50 pt-5 pb-5" style={{ gap: "50px" }}>
+        <div className="search-results-container d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px",}}>
             {/* Header */}
             <div className="search-results-text d-flex flex-column align-self-start align-items-start">
-                <h1>Results for:</h1>
-
-                {fromFilter ? (
-                    <h2 className='text-muted'>{savedText}</h2>
-                ) : (
-                    <div>
-                        <div>
-                            {ratings.map((ratings, index) => (
-                                <React.Fragment key={index}>
-                                    <div 
-                                        className={` ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
-                                    >
-                                    {ratings}
-                                    </div>
-                                </React.Fragment>
-                            ))}
-                        </div>
-                        <div>
-                        {selectedGenres.map((genre, index) => (
-                            <span key={index} className="filter-genre-blob">
-                                {genre}
-                            </span>
-                        ))}
-                        </div>
-                    </div>
-
-                )}
+                {renderHeader()}
             </div>
-
             {/* VideoCards */}
-            <VideoCard />    
-            <VideoCard />  
-            <VideoCard />  
-            <VideoCard />  
-            <VideoCard />  
-            <VideoCard />  
+            {searchResults.length > 0 ? (
+                searchResults.map((movie) => (
+                    <VideoCard
+                        key={movie.MovieID}
+                        movie={movie}
+                    />
+                ))
+            ) : (
+                <h3 className='search-results-subtitle text-muted'>No matching results found.</h3>
+            )}
         </div>
     );
 };

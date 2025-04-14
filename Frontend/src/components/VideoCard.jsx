@@ -1,52 +1,63 @@
 import React, { useState, useRef, useEffect } from 'react';
-import spiderman from '../assets/spiderman.jpg';
 import { StarFill } from 'react-bootstrap-icons';
 import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../axiosConfig.js';
 
-const VideoCard = () => {
+const VideoCard = ({ movie }) => {
+    // Use states
+    const [movieData, setMovieData] = useState([]);
     // Navigation hook
-    const navigate = useNavigate(); 
-    const genres = [
-        "Action", "Adventure", "Animation", "Comedy", "Crime", 
-        "Documentary", "Drama", "Family", "Fantasy", "Historical", 
-        "Horror", "Musical", "Mystery", "Romance", "Science Fiction", 
-        "Thriller", "War", "Western", "Biography", "Sports", 
-        "Superhero", "Noir", "Satire", "Teen", "Disaster"
-    ];
+    const navigate = useNavigate();
 
+    // Filler...
+    const { id } = useParams();
+    
+    //Fetching movie data
+    useEffect(() => {
+        GetMovieData()
+        }, []);
+
+    async function GetMovieData()
+    {
+        console.log("Trying to get movie ID: " + movie.MovieID)
+        const response = await axiosInstance.post('api/get-movie-by-id', {
+            id: movie.MovieID
+            });
+        setMovieData(response.data[0]);
+        console.log(response.data[0]);
+    }
     return (
-        <div className="search-results d-flex" style={{gap:"30px"}} onClick={() => navigate("/MoviePlayer")}>
+        <div className="search-results d-flex" style={{gap:"30px"}} onClick={() => navigate(`/MovieDescription/${movie.MovieID}`)}>
         {/* Thumbnail */}
         <div className='video-card-thumbnail'>
-            <img src={spiderman}/>
+            <img src={movie.Poster}/>
         </div>
         {/* Description */}
-        <div className='d-flex flex-column'>
+        <div className='d-flex flex-column w-100'>
             {/* Header */}
             <div className='d-flex justify-content-between mt-3'>
                 {/* Title */}
                 <div className='d-flex flex-column'>
-                    <h1 className="video-card-movie-title">Spider-Man: Across the Spider-Verse</h1>
+                    <h1 className="video-card-movie-title">{movie.Title}</h1>
                     <div className='video-card-stats'>
-                        <div id='Date'>2023</div> 
-                        -
-                        <div id='AgeRating'>PG</div> 
-                        -
-                        <div id='Duration'>2h 20m</div>
+                        <div id='Date'>{movieData.ReleaseDate}</div> 
+                        |
+                        <div id='AgeRating'>{movieData.AgeRating}</div> 
+                        |
+                        <div id='Duration'>{movieData.Duration} min</div>
                     </div>
                 </div>
                 {/* Title end */}
                 {/* Rating */}
                 <div className='video-card-rating d-flex flex-column align-items-end'>
-                    <h1><StarFill /> 8.5/10</h1>
-                    <h3 className='text-muted' >437k</h3>
+                    <h1><StarFill /> {movieData.Rating} </h1>
                 </div>
                 {/* Rating end */}
             </div>
             {/* Header end */}
                     {/* Genres */}
                     <div id='Genres' className='d-flex flex-wrap' style={{ gap: "10px" }}>
-                        {genres.map((genre, index) => (
+                        {movie.Genres?.map((genre, index) => (
                             <div key={index} className='video-card-genre-blob'>
                                 {genre}
                             </div>

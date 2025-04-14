@@ -8,16 +8,36 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 import json
 
+# Get the active user
 User = get_user_model()
 
 @csrf_protect
 def createAccount(request):
+    """
+    Handles user account creation via a POST request.
+
+    Expects a JSON payload in the following format:
+    {
+        "data": {
+            "username": "desired_username",
+            "emailAddress": "user@example.com",
+            "password": "securePassword123",
+            "confirmPassword": "securePassword123"
+        }
+    }
+
+    Returns:
+        JsonResponse with success or error status and message.
+        - 200 on success
+        - 400 on client-side errors (e.g., passwords don't match, invalid input)
+        - 405 if request method is not POST
+    """
+
     if request.method == 'POST':
         try:
             # Parse the JSON data from the request body
             data = json.loads(request.body)
             userInput = data.get('data')
-            print(userInput)
             if userInput.get('password') != userInput.get('confirmPassword'):
                 print("Passwords don't match")
                 return JsonResponse({'status': 'error',  'message': 'Confirm password does not match'}, status=400)
@@ -29,7 +49,6 @@ def createAccount(request):
                 password=userInput.get('password')
             )
             user.save()
-            print(user.password)
 
             # Return a response to the frontend
             return JsonResponse({'status': 'success', 'message': 'Data received'})
@@ -39,6 +58,23 @@ def createAccount(request):
 
 @csrf_protect
 def loginAccount(request):
+    """
+    Authenticates and logs in a user via a POST request.
+
+    Expects a JSON payload in the following format:
+    {
+        "username": "user123",
+        "password": "securePassword"
+    }
+
+    Returns:
+        JsonResponse:
+            - On success: { 'status': 'success', 'message': 'Logged in successfully' }
+            - On failure: { 'status': 'error', 'message': <error description> }
+            - HTTP 400 for bad credentials or input
+            - HTTP 405 if request method is not POST
+    """
+
     if request.method == 'POST':
         try:
             # Parse the JSON data from the request body
@@ -48,7 +84,7 @@ def loginAccount(request):
                 login(request, user)
                 return JsonResponse({'status': 'success', 'message': 'Logged in successfully'})
             else:
-                return JsonResponse({'status': 'error', 'Invalid Credentials': str(e)}, status=400)
+                return JsonResponse({'status': 'error', 'message': 'Invalid username or password'}, status=400)
             
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
@@ -56,72 +92,152 @@ def loginAccount(request):
 
 @ensure_csrf_cookie
 def checkAuth(request):
-    print("Session Key:", request.session.session_key)
-    print("User:", request.user)
-    print("Is Authenticated:", request.user.is_authenticated)
-    print("Session Data:", request.session.items())
+    """
+    Checks if the current user is authenticated.
+
+    This view is useful for frontend apps to verify session-based login state.
+    It also ensures the CSRF cookie is set on the response, which is required
+    for secure POST/PUT/DELETE requests.
+
+    Returns:
+        JsonResponse:
+            - If authenticated: { 'authenticated': True, 'username': <username> }
+            - If not authenticated: { 'authenticated': False }
+    """
+
     if request.user.is_authenticated:
-        print("USER IS AUTHENTICATED")
         return JsonResponse({'authenticated': True, 'username': request.user.username})
     else:
-        print("USER IS NOT AUTHENTICATED")
         return JsonResponse({'authenticated': False})
 
-@require_POST  # Ensure only POST requests are allowed
+@require_POST
 def updatePassword(request):
-        data = json.loads(request.body)
-        user = authenticate(request, username=request.user.username, password=data.get('oldPassword'))
-        if user is not None:
-            newPassword = data.get('newPassword')
-            confimPassword = data.get('confirmPassword')
-            if newPassword != confimPassword:
-                return JsonResponse({'status': 'error', 'message': 'Passwords do not match.'})
-            user.set_password(data.get('newPassword'))
-            user.save()
+    """
+    Allows an authenticated user to update their password.
 
-            return JsonResponse({'status': 'success', 'message': 'Password updated successfully!'})
-        else:
-            return JsonResponse({'status': 'error', 'message': 'Incorrect old password.'})
+    Expects a JSON payload in the following format:
+    {
+        "oldPassword": "currentPassword123",
+        "newPassword": "newSecurePassword456",
+        "confirmPassword": "newSecurePassword456"
+    }
+
+    Returns:
+        JsonResponse:
+            - On success: { 'status': 'success', 'message': 'Password updated successfully!' }
+            - On error: { 'status': 'error', 'message': <error description> }
+    """
+    data = json.loads(request.body)
+    user = authenticate(request, username=request.user.username, password=data.get('oldPassword'))
+    if user is not None:
+        newPassword = data.get('newPassword')
+        confimPassword = data.get('confirmPassword')
+        if newPassword != confimPassword:
+            return JsonResponse({'status': 'error', 'message': 'Passwords do not match.'})
+        user.set_password(data.get('newPassword'))
+        user.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Password updated successfully!'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Incorrect old password.'})
             
-@require_POST  # Ensure only POST requests are allowed
+@require_POST
 def updateAbout(request):
-        data = json.loads(request.body)
-        user = request.user
-        if user is not None:
-            djangoproject.DatabaseManager.insertData("UPDATE  LoginAPI_customuser SET about = '" + data.get('about') + "' WHERE id = " + str(user.id) + ";")
-            return JsonResponse({'status': 'success', 'message': 'About updated successfully!'})
-        else:
-            return JsonResponse({'status': 'error', 'message': 'Something went wrong.'})
+    """
+    Updates the 'about' section for the currently authenticated user.
+
+    Expects a JSON payload like:
+    {
+        "about": "A few words about me..."
+    }
+
+    Returns:
+        JsonResponse:
+            - On success: { 'status': 'success', 'message': 'About updated successfully!' }
+            - On error: { 'status': 'error', 'message': <error description> }
+    """
+
+    data = json.loads(request.body)
+    user = request.user
+    if user is not None:
+        djangoproject.DatabaseManager.insertData("UPDATE  LoginAPI_customuser SET about = '" + data.get('about') + "' WHERE id = " + str(user.id) + ";")
+        return JsonResponse({'status': 'success', 'message': 'About updated successfully!'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Something went wrong.'})
         
-@require_POST  # Ensure only POST requests are allowed
+@require_POST
 def updateUsername(request):
-        data = json.loads(request.body)
-        user = authenticate(request, username=request.user.username, password=data.get('password'))
-        if user is not None:
-            user.username = data.get('newUsername')
-            user.save()
-            return JsonResponse({'status': 'success', 'message': 'About updated successfully!'})
-        else:
-            return JsonResponse({'status': 'error', 'message': 'Something went wrong.'})
+    """
+    Updates the username of the currently authenticated user
+    after verifying their password.
+
+    Expects a JSON payload in the format:
+    {
+        "password": "currentPassword123",
+        "newUsername": "new_username"
+    }
+
+    Returns:
+        JsonResponse:
+            - On success: { 'status': 'success', 'message': 'Username updated successfully!' }
+            - On failure: { 'status': 'error', 'message': <error description> }
+    """
+    data = json.loads(request.body)
+    user = authenticate(request, username=request.user.username, password=data.get('password'))
+    if user is not None:
+        user.username = data.get('newUsername')
+        user.save()
+        return JsonResponse({'status': 'success', 'message': 'About updated successfully!'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Something went wrong.'})
 
 
 # Fetches profile data (ensure that user is logged in before this)
 def getProfileData(request):
+    """
+    Retrieves the full profile data for the currently authenticated user.
+
+    Returns:
+        JsonResponse:
+            - On success: JSON representation of the user object (excluding sensitive fields).
+            - On failure: { 'status': 'error', 'message': 'User Not Logged In' }
+    """
+
     if request.user.is_authenticated:
         result = djangoproject.DatabaseManager.fetchData("SELECT * FROM LoginAPI_customuser WHERE id = '" + str(request.user.id)+ "';")
         return JsonResponse(result, safe=False)
     else:
         return JsonResponse({'status': 'error', 'message': 'User Not Logged In'}, status=405)
     
-@require_POST  # Ensure only POST requests are allowed
+@require_POST
 def logoutAccount(request):
+    """
+    Logs the currently authenticated user out of the application.
+
+    This view ensures that the user's session is terminated, and they are
+    logged out.
+
+    Returns:
+        JsonResponse:
+            - On success: { 'status': 'success', 'message': 'Logged out successfully' }
+            - On failure: { 'status': 'error', 'message': 'User already logged out' }
+    """
+
     logout(request)  # Log the user out
     return JsonResponse({'status': 'success', 'message': 'Logged out successfully'})
 
-@csrf_exempt  # Disable CSRF for simplicity (use proper CSRF handling in production)
+
 def accountInfo(request):
-    print("Account Info")
-    print(request.user)
+    """
+    Retrieves account information for the currently authenticated user.
+
+    This view returns the username of the logged-in user.
+
+    Returns:
+        JsonResponse:
+            - On success: { 'status': 'success', 'username': <username> }
+            - On failure: { 'status': 'error', 'message': 'User not authenticated' }
+    """
     return JsonResponse({'status': 'success', 'username': request.user.username})
 
 
