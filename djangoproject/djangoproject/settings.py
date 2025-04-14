@@ -104,7 +104,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',      
     'django.contrib.messages',  
     'rest_framework',
-    'myapp',
+    'MovieAPI',
     'LoginAPI',
     'corsheaders'
 ]
