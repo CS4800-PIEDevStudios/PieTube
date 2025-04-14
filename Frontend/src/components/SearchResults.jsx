@@ -21,7 +21,8 @@ const SearchResults = () => {
     useEffect(() => {
         let genreResults = [];
         let ratingResults = [];
-        
+        let allResults = [];
+
         //Fetches genre data
         if (selectedGenres?.length) {
             axiosInstance.get('api/filter-genres', {
@@ -44,7 +45,19 @@ const SearchResults = () => {
                 checkFinalResults();
             })
             .catch(error => console.error('Error fetching age rating results:', error));
+
+    
+
         }
+        console.log("TEST")
+        axiosInstance.get('api/get-movie-data')
+        .then(response => {
+            allResults = response.data;
+            checkFinalResults();
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
 
         // Returns matching movies
         const checkFinalResults = () => {
@@ -58,8 +71,10 @@ const SearchResults = () => {
             } else if (ratingResults.length) {
                 setSearchResults(ratingResults);
             } else {
-                setSearchResults([]);
+                setSearchResults(allResults);
             }
+
+            console.log("SEARCH RESULTS" + searchResults)
         };
     }, [selectedGenres, excludedGenres, selectedRatings]);
 
