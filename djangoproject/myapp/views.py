@@ -86,27 +86,41 @@ def getMovieActorsByID(request):
 
 
 
-def genreFiltering(request):	#function for filtering by genre, called by Home and GenreFilter
-    genre_names = request.GET.get('genres', '') #get genre names as one long string
-    genre_names = genre_names.split(',')  #split into a list
+def genreFiltering(request):	# function for filtering by genre, called by Home and GenreFilter
+	"""
+    Retrieves movie data for movies in specific genres.
+    
+    Expects a GET request in either of the following formats:
+    {
+		GET /api/movies?genres=Genre,Genre
+        GET /api/movies?genres=Genre,Genre&excludedGenres=Genre,Genre
+    }
 
-    excluded_genres = request.GET.get('excludedGenres', '').split(',') #do same for genres to exclude
+    Returns:
+        JsonResponse:
+            - On success: Movie ID, title, poster, summary, and genres for each movie that meets the submitted parameters.
+            - On failure: { 'status': 'error', 'message': <error description> }
+    """
+	genre_names = request.GET.get('genres', '') 	# get genre names as one long string
+	genre_names = genre_names.split(',')  			# split into a list
+
+	excluded_genres = request.GET.get('excludedGenres', '').split(',') #do same for genres to exclude
 
 
-    if not genre_names: #error message for when api is called without proper params
-        return JsonResponse({"error": "No genres provided"}, status=400)
+	if not genre_names: 							# error message for when api is called without proper params
+		return JsonResponse({"error": "No genres provided"}, status=400)
 
 
-    placeholders = ', '.join(['%s'] * len(genre_names))	#create placeholder for SQL query
-    if excluded_genres:
-        exclusion_placeholders = ', '.join(['%s'] * len(excluded_genres)) 
-    else:
-        exclusion_placeholders = ""
+	placeholders = ', '.join(['%s'] * len(genre_names))	# create placeholder for SQL query
+	if excluded_genres:
+		exclusion_placeholders = ', '.join(['%s'] * len(excluded_genres)) 
+	else:
+		exclusion_placeholders = ""
 
-	#SQL query, use f""" so placeholders can be passed. COMMENT ON SQL TEXT EVENTUALLY
-    exclusion_clause = ""
-    if excluded_genres:
-        exclusion_clause = f"""
+	# SQL query, use f""" so placeholders can be passed. COMMENT ON SQL TEXT EVENTUALLY
+	exclusion_clause = ""	# set exclusion clause to be blank by default
+	if excluded_genres:		# if exclusion parameters are passed, include query to exclude movies with those genres
+		exclusion_clause = f"""
             AND m.MovieID NOT IN (
                 SELECT DISTINCT mg.MovieID 
                 FROM PieTube.MovieGenre AS mg 
@@ -114,7 +128,9 @@ def genreFiltering(request):	#function for filtering by genre, called by Home an
                 WHERE g.GenreName IN ({exclusion_placeholders})
             )
         """
-    query = f"""
+	# query to find data for all movies with at least one genre in the passed genre_names and without any in 
+	# the passed excluded_genres
+	query = f"""
 		SELECT DISTINCT m.MovieID, m.Title, m.Poster, m.Summary, 
 		GROUP_CONCAT(DISTINCT g.GenreName ORDER BY g.GenreName SEPARATOR ', ') AS Genres
 		FROM PieTube.Movie AS m
@@ -131,22 +147,22 @@ def genreFiltering(request):	#function for filtering by genre, called by Home an
 		"""
 
 	
-    if excluded_genres: params = genre_names + excluded_genres 
-    else: params = genre_names
+	if excluded_genres: params = genre_names + excluded_genres # if genres are being excluded, include them in params
+	else: params = genre_names	#if no genres excluded, just include genre_names in passed params
     		
-    result = djangoproject.DatabaseManager.fetchData(query, params)  #fetch movies in genres
+	result = djangoproject.DatabaseManager.fetchData(query, params)  # fetch movies in given genres
 
-    for movie in result:
-        movie["Genres"] = movie.get("Genres", "").split(", ") if movie.get("Genres") else []
-
-
-    return JsonResponse(result, safe=False)	#pass genres
+	for movie in result:	# iterate through each movie
+		movie["Genres"] = movie.get("Genres", "").split(", ") if movie.get("Genres") else []	# properly format each movie
 
 
+	return JsonResponse(result, safe=False)	# pass movie data as JSON
 
 
-def ageRatingFiltering(request):
-    selected_ratings = request.GET.get('ratings', '').split(',')
+
+
+def ageRatingFiltering(request):	# function for filtering by Age rating
+    selected_ratings = request.GET.get('ratings', '').split(',')	# use request.GET to retrieve ratings
 
     if not selected_ratings:
         return JsonResponse({"error": "No age ratings provided"}, status=400)
