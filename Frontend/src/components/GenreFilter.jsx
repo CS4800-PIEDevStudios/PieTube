@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import { XLg, Filter } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ const GenreFilter = ({show, onHide}) => {
   // Use states
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
+
   // Navigation hook
   const navigate = useNavigate(); 
   const [selectedRatings, setSelectedRatings] = useState([]);
@@ -39,8 +40,6 @@ const GenreFilter = ({show, onHide}) => {
     }
 };
 
-
-
   const toggleGenre = (genre) => {
     if (selectedGenres.includes(genre)) {
       setSelectedGenres(prev => prev.filter(g => g !== genre));
@@ -60,7 +59,7 @@ const GenreFilter = ({show, onHide}) => {
 
   //Rating selection functions
   const handleRatingChange = (e) => {
-    setSelectedRating(e.target.value);
+    setSelectedRatings(e.target.value);
   };
   
 
@@ -70,14 +69,15 @@ const GenreFilter = ({show, onHide}) => {
     // Resets all options when clicked
     setSelectedGenres([]);
     setExcludedGenres([]);
-    setSelectedRating(null);
+    setSelectedRatings([]);
     // Variable to choose header for Search Results page
     localStorage.setItem('isFromFilter', true);
     localStorage.setItem('HeaderName', 'searchResults')
     navigate("/SearchResults", {
       state: { //Transfers data
         selectedGenres, 
-        selectedRating
+        selectedRatings,
+        excludedGenres
       }
     });
     window.location.reload();
@@ -150,17 +150,11 @@ const GenreFilter = ({show, onHide}) => {
             // Resets all options when clicked
             setSelectedGenres([]);
             setExcludedGenres([]);
-            setSelectedRating(null);
+            setSelectedRating([]);
           }}>
             Reset
           </button>
-          <button className='search-btn mx-5 my-2' onClick={() => { 
-            navigate("/SearchResults", {state: { selectedGenres, excludedGenres, selectedRatings }}); //move to search results, pass genres and ratings as params
-            onHide();
-            setSelectedGenres([]);
-            setExcludedGenres([]);
-            setSelectedRatings([]);
-            }}>
+          <button className='search-btn mx-5 my-2' onClick={handleSearch}>
             Search
           </button>
         </Modal.Footer>

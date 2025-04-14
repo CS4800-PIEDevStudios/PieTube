@@ -107,7 +107,6 @@ const MovieDescription = () => {
                     <div className='d-flex align-items-end' style={{gap:"20px", whiteSpace:'nowrap'}}>
                         <div id='Rating' className='d-flex flex-column align-items-end'>
                             <h1><StarFill /> {movieData.Rating}</h1>
-                            {/* <h3>437k</h3> */}
                         </div>
                         <div id='MoviePoster' className='movie-description-thumbnail'>
                             <img src={movieData.Poster}/>
