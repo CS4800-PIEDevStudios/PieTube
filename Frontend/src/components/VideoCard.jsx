@@ -19,8 +19,9 @@ const VideoCard = ({ movie }) => {
 
     async function GetMovieData()
     {
+        console.log("Trying to get movie ID: " + movie.MovieID)
         const response = await axiosInstance.post('api/get-movie-by-id', {
-            id: id
+            id: movie.MovieID
             });
         setMovieData(response.data[0]);
         console.log(response.data[0]);
