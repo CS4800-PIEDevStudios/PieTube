@@ -52,7 +52,6 @@ const Header = () => {
     }
   }
 
-
     return (
       <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow px-5 justify-content-between' style={{zIndex:2}}>
         {/* Logo */}
@@ -94,7 +93,7 @@ const Header = () => {
 
           {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
           {LoggedIn ? (
-            <Link to="/Signup">
+            <Link to="/Login">
             <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
               <EmojiSunglasses width="20" height="30" className='mr-2'/>
               Sign Up
