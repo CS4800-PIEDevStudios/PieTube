@@ -22,7 +22,6 @@ urlpatterns = [
     path('login-api/createAccount', views.createAccount, name="createAccount"),
     path('login-api/loginAccount', views.loginAccount, name="loginAccount"),
     path('login-api/logoutAccount', views.logoutAccount, name="logoutAccount"),
-    path('login-api/accountInfo', views.accountInfo, name="accountInfo"),
     path('login-api/checkAuth', views.checkAuth, name="checkAuth"),
     path('login-api/getProfileData', views.getProfileData, name="getProfileData"),
     path('login-api/updatePassword', views.updatePassword, name="updatePassword"),

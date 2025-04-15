@@ -227,21 +227,6 @@ def logoutAccount(request):
     return JsonResponse({'status': 'success', 'message': 'Logged out successfully'})
 
 
-def accountInfo(request):
-    """
-    Retrieves account information for the currently authenticated user.
-
-    This view returns the username of the logged-in user.
-
-    Returns:
-        JsonResponse:
-            - On success: { 'status': 'success', 'username': <username> }
-            - On failure: { 'status': 'error', 'message': 'User not authenticated' }
-    """
-    return JsonResponse({'status': 'success', 'username': request.user.username})
-
-
-
 
 
 
