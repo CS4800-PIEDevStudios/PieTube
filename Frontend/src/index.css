@@ -599,6 +599,34 @@ body {
     font-size: .9rem;
   }
 
+    /* profile picture */
+  .profile-pic-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; 
+    background-color: #6c757d; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+    font-size: 12px; 
+    cursor: pointer; 
+    overflow: hidden; 
+    text-align: center;
+    position: relative; 
+    
+  }
+
+  .profile-pic-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+
+  .profile-pic-container:hover {
+    background-color: #5a6268;
+  }
+
   .modal-body-header  {
     font-size: 1.75rem;
   }
