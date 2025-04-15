@@ -14,6 +14,9 @@ const ChangePassword = () => {
         confirm: false
     });
 
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
     // Navigation hook
     const navigate = useNavigate();
 
@@ -25,11 +28,44 @@ const ChangePassword = () => {
         }));
     };
 
+    const validatePassword = (password) => {
+
+        //length
+        if (password.length < 8 || password.length > 20) {
+            return "Password must be between 8-20 characters";
+        }
+        
+        //need one number
+        if (!/\d/.test(password)) {
+            return "Password must contain at least one number";
+        }
+        
+        //need special character
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            return "Password must contain at least one special character";
+        }
+        
+        return null;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
+
         // User error message
         if (newPassword !== confirmPassword) {
-            alert("New passwords do not match.");
+            setError("New passwords do not match.");
+            return;
+        }
+
+        if (oldPassword === newPassword) {
+            setError("New password must be different from old password.");
+            return;
+        }
+
+        const passwordError = validatePassword(newPassword);
+        if (passwordError) {
+            setError(passwordError);
             return;
         }
         // Updates password
@@ -42,9 +78,19 @@ const ChangePassword = () => {
             });
         
             console.log('Response from Django:', response.data);
+            console.log("Password changed successfully.");
+            navigate("/Login");
+            window.location.reload();
+
           } catch (error) {
+
             console.error('Error sending data to Django:', error);
-          }
+            if (error.response && error.response.data) {
+                setError(error.response.data.message || "Failed to change password");
+            } else {
+                setError("Failed to change password. Please try again.");
+            }
+        }
         console.log("Password changed successfully.");
         // Go back to login page if successfully changed
         navigate("/Login");
@@ -55,8 +101,22 @@ const ChangePassword = () => {
         <div className="justify-content-center p-5 bg-light" style={{ minWidth: "500px", boxShadow: "0px 0px 30px rgba(20, 12, 12, 0.25)", borderRadius: "20px" }}>
             {/* Header */}
             <h1 className="text-center mb-4">Change Password</h1>
-            {/* Input forms */}
-            <form onSubmit={handleSubmit}>
+
+            {/* error message */}
+            {error && (
+                <div className="alert alert-danger" role="alert">
+                    {error}
+                </div>
+            )}
+
+            {/* success message */}
+             {success && (
+                <div className="alert alert-success" role="alert">
+                    {success}
+                </div>
+            )}
+
+            <form onSubmit={handleSubmit} style={{ textAlign: "left"}}>
                 {[
                     { label: "Old Password", value: oldPassword, onChange: setOldPassword, key: "old" },
                     { label: "New Password", value: newPassword, onChange: setNewPassword, key: "new" },
