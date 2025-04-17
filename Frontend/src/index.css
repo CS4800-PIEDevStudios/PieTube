@@ -47,6 +47,12 @@ body {
   padding-block: 5px;
 }
 
+.trash {
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+}
+
 .genre-blob {
   width: auto !important;
   min-width: unset !important;

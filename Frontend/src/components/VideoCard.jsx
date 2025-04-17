@@ -1,21 +1,36 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { StarFill } from 'react-bootstrap-icons';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { StarFill, Trash } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js';
 
-const VideoCard = ({ movie }) => {
+const VideoCard = ({ movie, headerName }) => {
     // Use states
     const [movieData, setMovieData] = useState([]);
     // Navigation hook
     const navigate = useNavigate();
-
-    // Filler...
-    const { id } = useParams();
     
     //Fetching movie data
     useEffect(() => {
         GetMovieData()
-        }, []);
+    }, []);
+
+    {/* CornerIcon has trash can if from watch list otherwise shows rating*/}
+    const renderRatingsOrTrash = () => {
+        if (headerName === 'watchList') {
+            return (
+                <button className='trash' onClick={handleButtonClick}><Trash width="40" height="40"/></button>
+            )
+        } else {
+            return (
+                <h1><StarFill /> {movieData.Rating} </h1>
+            )
+        }
+    }
+
+    const handleButtonClick = (event) => {
+        event.stopPropagation(); // Stop the click from reaching the div
+        console.log('Button clicked');
+    };
 
     async function GetMovieData()
     {
@@ -48,11 +63,11 @@ const VideoCard = ({ movie }) => {
                     </div>
                 </div>
                 {/* Title end */}
-                {/* Rating */}
+                {/* CornerIcon has trash can if from watch list otherwise shows rating*/}
                 <div className='video-card-rating d-flex flex-column align-items-end'>
-                    <h1><StarFill /> {movieData.Rating} </h1>
+                    {renderRatingsOrTrash()}
                 </div>
-                {/* Rating end */}
+                {/* CornerIcon end */}
             </div>
             {/* Header end */}
                     {/* Genres */}
