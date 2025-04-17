@@ -164,11 +164,13 @@ def genreFiltering(request):	# function for filtering by genre, called by Home a
 def ageRatingFiltering(request):	# function for filtering by Age rating
     selected_ratings = request.GET.get('ratings', '').split(',')	# use request.GET to retrieve ratings
 
-    if not selected_ratings:
+    if not selected_ratings:    # if no parameters retrieved, send an error message
         return JsonResponse({"error": "No age ratings provided"}, status=400)
 
-    placeholders = ', '.join(['%s'] * len(selected_ratings))
+    placeholders = ', '.join(['%s'] * len(selected_ratings))    # format age ratings
 
+
+    # SQL query to filter out movies that dont have the selected age ratings
     query = f"""
         SELECT DISTINCT m.MovieID, m.Title, m.Poster, m.Summary, m.AgeRating
         FROM PieTube.Movie AS m
@@ -176,9 +178,9 @@ def ageRatingFiltering(request):	# function for filtering by Age rating
         ORDER BY m.Title
     """
 
-    result = djangoproject.DatabaseManager.fetchData(query, selected_ratings)
+    result = djangoproject.DatabaseManager.fetchData(query, selected_ratings)    # perform query
 
-    return JsonResponse(result, safe=False)
+    return JsonResponse(result, safe=False)    #pass results as JSON
 
 
 
