@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg, InfoCircle } from 'react-bootstrap-icons';
+import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js';
 
@@ -178,6 +179,33 @@ const MoviePlayer = () => {
                     {/* MoviePoster end */}
                 </div>
                 {/* Right side end */}
+            </div>
+
+            {/* Comment Section */}
+            <div className='d-flex flex-column w-50 align-self-center'>
+                {/* Comments header */}
+                <div className='d-flex pb-3' style={{gap: "15px"}}>
+                    <h1> Comments </h1>
+                    <h1 className='text-muted'> 40 </h1>
+                </div>
+                <InputGroup>
+                    <Form.Control
+                        placeholder="Add a comment"
+                        aria-label="comment"
+                        aria-describedby="basic-addon2"
+                        style={{
+                            backgroundColor: "#E1E1E1",
+                            height: "250px",
+                            borderRadius: "10px",
+                            border: "#8B8B8B solid 2px",
+                            fontSize: "1.75rem",
+                            padding: "15px", 
+                            resize: "none"
+                        }}
+                        as="textarea" // Use textarea for multi-line input if needed
+                    />
+                </InputGroup>
+                <button className='comment-submit-btn m-3'> Submit </button>     
             </div>
         </div>
     );
