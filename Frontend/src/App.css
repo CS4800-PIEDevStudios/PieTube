@@ -2,3 +2,17 @@
     margin: 0 auto;
     text-align: center;
   }
+
+  body {
+    background: linear-gradient(-45deg, #ececec, #acacac, #868686, #dbdbdb);
+    background-size: 800% 800%;
+    animation: gradientBG 15s ease infinite;
+  }
+  
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  
+  
