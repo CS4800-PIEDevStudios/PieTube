@@ -113,6 +113,10 @@ body {
   font-size: 1.5rem;
 }
 
+.navbar-header {
+  box-shadow: 0 2px 50px #CD853F;
+}
+
 .logo {
   max-height: 40px;
 }

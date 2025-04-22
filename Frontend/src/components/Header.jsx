@@ -54,7 +54,7 @@ const Header = () => {
   }
 
     return (
-      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow px-5 justify-content-between' style={{zIndex:2}}>
+      <Navbar bg="light" data-bs-theme="light" className='navbar-header d-flex w-100 px-5 justify-content-between' style={{zIndex:2}}>
         {/* Logo */}
         <Navbar.Brand>
           <Link to="/" className='flex-fill' >
