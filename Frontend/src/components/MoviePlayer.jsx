@@ -1,13 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg, InfoCircle } from 'react-bootstrap-icons';
-import { Form, InputGroup, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { StarFill, Clock, CheckLg, InfoCircle } from 'react-bootstrap-icons';
 import { useNavigate, useParams } from 'react-router-dom';
+import LikeButtons from './LikeButtons.jsx'
+import CommentSection from './CommentSection.jsx'
 import axiosInstance from '../axiosConfig.js';
 
 const MoviePlayer = () => {
     //Use states
-    const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
-    const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
     const [movieData, setMovieData] = useState([]);
     const [genreData, setGenreData] = useState([]);
@@ -44,20 +43,6 @@ const MoviePlayer = () => {
         });
         setActorData(actors.data);
         console.log(actors.data);
-    }
-
-    // Function for like/dislike button
-    function toggleIsClickedThumbsUp () {
-        if (!isClickedThumbsDown) {
-            setIsClickedThumbsDown(true)
-        }
-        setIsClickedThumbsUp(!isClickedThumbsUp);
-    }
-    function toggleIsClickedThumbsDown () {
-        if (!isClickedThumbsUp) {
-            setIsClickedThumbsUp(true)
-        }
-        setIsClickedThumbsDown(!isClickedThumbsDown);
     }
 
     // Function for Watch List button
@@ -122,7 +107,7 @@ const MoviePlayer = () => {
                             </div>
                         </div>
                         <div id='Writers' className='d-flex'>
-                            <h3 className='mr-3'> Actors </h3>
+                            <h3 className='mr-3'> Cast </h3>
                             <div className='d-flex align-text-bottom'>
                                 {actorData.map((actor, index) => (
                                     <React.Fragment key={index}>
@@ -148,18 +133,7 @@ const MoviePlayer = () => {
                 <div className='d-flex mx-5 align-items-end position-relative' style={{zIndex:"2", gap:"30px"}}>
                     {/* Stats Start*/}
                     <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
-                        <div id='LikeButtons' className='d-flex mb-3' style={{columnGap:"10px"}}>
-                            {isClickedThumbsUp ? (
-                                <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50" style={{cursor:"pointer"}}/>
-                                ) : (
-                                <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50" style={{cursor:"pointer"}}/>
-                                )}
-                            {isClickedThumbsDown ? (
-                                <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
-                                ) : (
-                                <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50" style={{cursor:"pointer"}}/>
-                                )}
-                        </div>
+                        <LikeButtons size={50}/>
                         <div className='stats'>
                             <div id='Date'> {movieData.ReleaseDate} </div>
                             |
@@ -182,31 +156,7 @@ const MoviePlayer = () => {
             </div>
 
             {/* Comment Section */}
-            <div className='d-flex flex-column w-50 align-self-center'>
-                {/* Comments header */}
-                <div className='d-flex pb-3' style={{gap: "15px"}}>
-                    <h1> Comments </h1>
-                    <h1 className='text-muted'> 40 </h1>
-                </div>
-                <InputGroup>
-                    <Form.Control
-                        placeholder="Add a comment"
-                        aria-label="comment"
-                        aria-describedby="basic-addon2"
-                        style={{
-                            backgroundColor: "#E1E1E1",
-                            height: "250px",
-                            borderRadius: "10px",
-                            border: "#8B8B8B solid 2px",
-                            fontSize: "1.75rem",
-                            padding: "15px", 
-                            resize: "none"
-                        }}
-                        as="textarea" // Use textarea for multi-line input if needed
-                    />
-                </InputGroup>
-                <button className='comment-submit-btn m-3'> Submit </button>     
-            </div>
+            <CommentSection />
         </div>
     );
 };
