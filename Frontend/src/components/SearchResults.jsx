@@ -82,7 +82,7 @@ const SearchResults = () => {
     }, []);
 
     return (
-        <div className="search-results-container d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px",}}>
+        <div className="search-results-container d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px" }}>
             {/* Header */}
             <div className="search-results-text d-flex flex-column align-self-start align-items-start">
                 <RenderSearchHeader 
