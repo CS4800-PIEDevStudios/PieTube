@@ -51,7 +51,7 @@ const MoviePlayer = () => {
     }
 
     return (
-        <div className='d-flex flex-column w-100 pt-5' style={{backgroundColor:"#E1E1E1"}}> 
+        <div className='d-flex flex-column w-100 pt-5'> 
             {/* Movie player iframe */}
             <div id='MoviePlayer' className='d-flex flex-column align-self-center w-50'>
                 <iframe
