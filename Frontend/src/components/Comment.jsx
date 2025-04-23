@@ -3,7 +3,7 @@ import LikeButtons from './LikeButtons.jsx'
 
 const Comment = () => {
     return (
-        <div className='d-flex flex-column my-5'>
+        <div className='comment-containter d-flex flex-column my-2'>
             <div className='d-flex justify-content-between'>
                 {/* Profile */}
                 <div className='d-flex' style={{gap:"20px"}}>

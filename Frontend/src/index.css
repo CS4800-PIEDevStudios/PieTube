@@ -514,6 +514,13 @@ body {
   font-size: 1.5rem;
 }
 
+.comment-containter {
+  background-color: #F5F5F5;
+  padding: 40px;
+  border-radius: 20px;
+  border: 5px solid #E1E1E1;
+}
+
 @media (max-width: 1280px) {
   .thumbnail-grid {
       grid-template-columns: repeat(7, minmax(128px, 1fr));

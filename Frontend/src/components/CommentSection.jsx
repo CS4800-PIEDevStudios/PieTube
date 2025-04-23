@@ -15,7 +15,7 @@ const CommentSection = () => {
                 aria-label="comment"
                 aria-describedby="basic-addon2"
                 style={{
-                    backgroundColor: "#E1E1E1",
+                    backgroundColor: "#F5F5F5",
                     height: "250px",
                     borderRadius: "10px",
                     border: "#8B8B8B solid 2px",
