@@ -20,6 +20,8 @@ const Header = () => {
     setIsLoggedIn(loggedInStatus); 
   },[]);
 
+  
+  //Changes headerName variable and saves inputted text
   const handleSearchBar = () => {
     if (inputText.trim()) { // Only search if there's actual text
       localStorage.setItem('isFromFilter', false);
@@ -28,7 +30,7 @@ const Header = () => {
         state: { savedText: inputText }
       });
       window.location.reload();
-    }
+    } 
   };
 
   //Submits searchbar input when pressing enter key
@@ -38,22 +40,21 @@ const Header = () => {
     }
   }
 
+  //Changes headerName variable
   const handleTrending = () => {
     localStorage.setItem('HeaderName', 'trending');
     if (location.pathname === '/SearchResults') { //Reloads page if user is already on search results page to change header
       window.location.reload();
     }
   }
-
+  
+  //Changes headerName variable
   const handleWatchList = () => {
     localStorage.setItem('HeaderName', 'watchList');
-    if (location.pathname === '/SearchResults') { //Reloads page if user is already on search results page to change header
-      window.location.reload();
-    }
   }
 
     return (
-      <Navbar bg="light" data-bs-theme="light" className='d-flex w-100 shadow px-5 justify-content-between' style={{zIndex:2}}>
+      <Navbar bg="light" data-bs-theme="light" className='navbar-header d-flex w-100 px-5 justify-content-between' style={{zIndex:2}}>
         {/* Logo */}
         <Navbar.Brand>
           <Link to="/" className='flex-fill' >
@@ -65,7 +66,11 @@ const Header = () => {
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
               <Link to="/" className='headerbar flex-fill'> Home </Link>
               <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
-              <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>					
+              {LoggedIn ? (
+                  <Link to="/Login" className='headerbar flex-fill'> Watch List </Link>
+                ) : (
+                  <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
+                )}					
 					</Nav>
           {/* Search bar */}
           <InputGroup className="ml-5 w-25 flex-fill">

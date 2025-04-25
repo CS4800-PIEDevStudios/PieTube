@@ -7,10 +7,10 @@ const GenreFilter = ({show, onHide}) => {
   // Use states
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [excludedGenres, setExcludedGenres] = useState([]);
+  const [selectedRatings, setSelectedRatings] = useState([]);
 
   // Navigation hook
   const navigate = useNavigate(); 
-  const [selectedRatings, setSelectedRatings] = useState([]);
 
   const genres = [
     "Action", "Adventure", "Animation", "Comedy", "Crime", 
@@ -56,12 +56,6 @@ const GenreFilter = ({show, onHide}) => {
     if (excludedGenres.includes(genre)) return 'excluded-genre';
     return '';
   };
-
-  //Rating selection functions
-  const handleRatingChange = (e) => {
-    setSelectedRatings(e.target.value);
-  };
-  
 
   const handleSearch = () => {
     // Hides filter
@@ -150,7 +144,7 @@ const GenreFilter = ({show, onHide}) => {
             // Resets all options when clicked
             setSelectedGenres([]);
             setExcludedGenres([]);
-            setSelectedRating([]);
+            setSelectedRatings([]);
           }}>
             Reset
           </button>

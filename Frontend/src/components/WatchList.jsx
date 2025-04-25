@@ -2,19 +2,20 @@ import { useLocation } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js';
 import { useState, useEffect } from 'react';
 import VideoCard from './VideoCard';
-import RenderSearchHeader from './RenderSearchHeader.jsx';
 
-const SearchResults = () => {
+const WatchList = () => {
     // Use states
     const [searchResults, setSearchResults] = useState([]); 
     const [headerName, setHeaderName] = useState('');
-    const [fromFilter, setFromFilter] = useState(false);
 
     // Location
     const location = useLocation()
-    const {selectedGenres, excludedGenres, selectedRatings, savedText} = location.state || {};  //retreive selected genres
+    const {selectedGenres, excludedGenres, selectedRatings} = location.state || {};  //retreive selected genres
 
-    const ratings = [ "G", "PG", "PG-13", "R", "NC-17", "M", "NR", "Passed", "Approved" ];
+    useEffect(() => {
+        const nameOfHeader = localStorage.getItem('HeaderName');
+        setHeaderName(nameOfHeader);
+    }, []);
 
     useEffect(() => {
         let genreResults = [];
@@ -73,26 +74,11 @@ const SearchResults = () => {
         };
     }, [selectedGenres, excludedGenres, selectedRatings]);
 
-
-    useEffect(() => {
-        const fromFilterStatus = localStorage.getItem('isFromFilter') === 'true'; 
-        const nameOfHeader = localStorage.getItem('HeaderName');
-        setFromFilter(fromFilterStatus);
-        setHeaderName(nameOfHeader);
-    }, []);
-
     return (
-        <div className="search-results-container d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px" }}>
+        <div className="search-results-container d-flex flex-column w-50 pt-5 pb-5" style={{ gap:"50px",}}>
             {/* Header */}
             <div className="search-results-text d-flex flex-column align-self-start align-items-start">
-                <RenderSearchHeader 
-                    headerName={headerName}
-                    fromFilter={fromFilter}
-                    selectedGenres={selectedGenres}
-                    excludedGenres={excludedGenres}
-                    selectedRatings={selectedRatings}
-                    savedText={savedText}
-                />
+                <h1 className='search-results-header'> Watch List </h1>
             </div>
             {/* VideoCards */}
             {searchResults.length > 0 ? (
@@ -104,10 +90,10 @@ const SearchResults = () => {
                     />
                 ))
             ) : (
-                <h3 className='search-results-subtitle text-muted'>No matching results found.</h3>
+                <h3 className='search-results-subtitle text-muted'>Watch List is empty</h3>
             )}
         </div>
     );
 };
 
-export default SearchResults;
+export default WatchList;

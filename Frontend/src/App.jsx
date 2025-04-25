@@ -18,6 +18,7 @@ const EditAbout = lazy(() => import('./components/EditAbout'));
 const MovieDescription = lazy(() => import('./components/MovieDescription'));
 const MoviePlayer = lazy(() => import('./components/MoviePlayer'));
 const SearchResults = lazy(() => import('./components/SearchResults'));
+const WatchList = lazy(() => import('./components/WatchList'));
 
 const Layout = ({ children, header }) => {
   return (
@@ -70,6 +71,9 @@ const App = () => {
               } />
             <Route path="/SearchResults" element={
               <SearchResults />
+              } />
+            <Route path="/WatchList" element={
+              <WatchList />
               } />
           </Routes>
         </div>
