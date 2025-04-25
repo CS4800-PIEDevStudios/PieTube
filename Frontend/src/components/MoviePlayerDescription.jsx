@@ -12,11 +12,9 @@ const MoviePlayerDescription = ({movieData, genreData, actorData}) => {
                 {/* Genre start */}
                 <div id='Genres' className='d-flex flex-wrap'>
                     {genreData.map((genre, index) => (
-                        <React.Fragment key={index}>
-                            <div className='movie-player-genre-blob'>
-                            {genre}
-                            </div>
-                        </React.Fragment>
+                        <div key= {index} className='movie-player-genre-blob'>
+                        {genre}
+                        </div>
                     ))} 
                 </div>
                 {/* Genre end */}
@@ -67,7 +65,6 @@ const MoviePlayerDescription = ({movieData, genreData, actorData}) => {
                     </div>
                     <h3> Rating </h3>
                     <h1> <StarFill/> {movieData.Rating}</h1>
-                    {/* <h3> 437k </h3> */}
                 </div>
                 {/* Stats end */}
                 {/* MoviePoster start */}
