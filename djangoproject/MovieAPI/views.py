@@ -182,7 +182,72 @@ def ageRatingFiltering(request):	# function for filtering by Age rating
 
     return JsonResponse(result, safe=False)    #pass results as JSON
 
+@require_POST
+def createComment(request):
+	user = request.user
+	print(user)
+	data = json.loads(request.body)
+	print(data)
+	MovieID = data.get("MovieID")
+	content = data.get("content")
+	print("Movie ID", MovieID)
+	print("content", content)
+	query = f"INSERT INTO PieTube.comments (MovieID, UserID, content) VALUES ({MovieID}, {user.id}, \'{content}\');"
+	result = djangoproject.DatabaseManager.insertData(query)
+	print(result)
+	return JsonResponse(result, safe=False)
 
+def getComments(request):
+
+	data = json.loads(request.body)
+	MovieID = data.get("MovieID")
+
+	if MovieID == None:
+		return JsonResponse("Null MovieID", safe=False, status=404)
+
+
+	print("COMMENTS",MovieID)
+	query = f'''
+		WITH RECURSIVE comment_tree AS (
+			SELECT 
+				c.id,
+				c.MovieID,
+				c.UserID,
+				u.username,
+				c.content,
+				c.ParentID,
+				c.created_at,
+				0 AS depth,
+				CAST(c.id AS CHAR(200)) AS path
+			FROM PieTube.comments c
+			JOIN PieTube.LoginAPI_customuser u ON c.UserID = u.id
+			WHERE c.MovieID = {MovieID} AND c.ParentID IS NULL
+
+			UNION ALL
+
+			SELECT 
+				c.id,
+				c.MovieID,
+				c.UserID,
+				u.username,
+				c.content,
+				c.ParentID,
+				c.created_at,
+				ct.depth + 1,
+				CONCAT(ct.path, ',', c.id)
+			FROM PieTube.comments c
+			JOIN PieTube.LoginAPI_customuser u ON c.UserID = u.id
+			INNER JOIN comment_tree ct ON c.ParentID = ct.id
+		)
+
+		SELECT * FROM comment_tree
+		ORDER BY path;
+
+	'''
+
+	result = djangoproject.DatabaseManager.fetchData(query)
+	print(result)
+	return JsonResponse(result, safe=False, status = 200)
 
 
 

@@ -156,7 +156,9 @@ const MoviePlayer = () => {
             </div>
 
             {/* Comment Section */}
-            <CommentSection />
+            <CommentSection
+            movie={movieData} 
+            />
         </div>
     );
 };

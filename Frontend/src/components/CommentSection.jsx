@@ -1,7 +1,45 @@
+import { useState, useEffec, useEffect } from 'react';
 import Comment from './Comment.jsx'
 import { Form, InputGroup } from 'react-bootstrap';
+import axiosInstance from '../axiosConfig.js'
 
-const CommentSection = () => {
+
+
+const CommentSection = ({movie}) => {
+    const [commentContent, setCommentContent] = useState('');
+    const [comments, setComments] = useState([]);
+
+    const createComment = async () => {
+        const response = await axiosInstance.post('api/create-comment', {
+            MovieID : movie.MovieID,
+            content : commentContent,
+        })
+
+        setCommentContent('');
+        // Refresh Comments
+        getComments();
+    }
+
+    useEffect(() => {
+        getComments();
+    }, [movie]);
+    
+
+    const getComments = async () => {
+        
+        console.log("MOVIE ID", movie)
+        const response = await axiosInstance.post('api/get-comments', {
+            MovieID : movie.MovieID
+        })
+        console.log("COMMNETS", response.data)
+        if(response.status===200)
+        {
+            setComments(response.data)
+        }
+        
+    }
+
+
     return (
         <div className='d-flex flex-column w-50 align-self-center'>
         {/* Comments header */}
@@ -24,17 +62,16 @@ const CommentSection = () => {
                     resize: "none"
                 }}
                 as="textarea" // Use textarea for multi-line input if needed
+                value={commentContent}
+                onChange={(e) => setCommentContent(e.target.value)}
             />
         </InputGroup>
-        <button className='comment-submit-btn m-3'> Submit </button> 
+        <button className='comment-submit-btn m-3' onClick={createComment}> Submit </button> 
         {/* Comments */}
         <div className='d-flex flex-column'>
-            <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/>
+        {comments.map(comment => (
+                    <Comment key={comment.id} comment={comment} />  
+        ))}
         </div>
     </div>
     );

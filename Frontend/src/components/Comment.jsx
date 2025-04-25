@@ -1,7 +1,10 @@
 import mepic from '../assets/me.png';
 import LikeButtons from './LikeButtons.jsx'
+import { formatDistanceToNow } from 'date-fns';
 
-const Comment = () => {
+
+const Comment = ({ comment }) => {
+const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { addSuffix: true });
     return (
         <div className='comment-containter d-flex flex-column my-2'>
             <div className='d-flex justify-content-between'>
@@ -13,8 +16,8 @@ const Comment = () => {
                     </div>
                     {/* Username */}
                     <div className='d-flex flex-column'>
-                        <h4> Username </h4>
-                        <h5 className='text-muted'> 2 days ago</h5>
+                        <h4> {comment.username} </h4>
+                        <h5 className='text-muted'>{relativeTime}</h5>
                     </div>
                 </div>
                 {/* Reply */}
@@ -26,7 +29,7 @@ const Comment = () => {
                 </div>
             </div>
             <div className='comment-text text-left my-2'>
-                Input text here Input text hereInput text hereInput text hereInput text hereInput text hereInput text hereInput text hereInput text hereInput text hereInput text here
+                {comment.content}
             </div>
         </div>
     );
