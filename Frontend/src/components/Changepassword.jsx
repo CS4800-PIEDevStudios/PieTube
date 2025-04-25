@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
 import axiosInstance from '../axiosConfig.js'
@@ -19,6 +19,21 @@ const ChangePassword = () => {
 
     // Navigation hook
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleBeforeUnload = (e) => {
+          if (!newPassword) {
+            e.preventDefault();
+            e.returnValue = "Are you sure you want to leave? Your password change wasn't confirmed.";
+          }
+        };
+      
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+      }, [newPassword]);
+      
 
     {/* Show/hide password eyes */}
     const togglePasswordVisibility = (field) => {
@@ -78,9 +93,11 @@ const ChangePassword = () => {
             });
         
             console.log('Response from Django:', response.data);
-            console.log("Password changed successfully.");
+            setSuccess("Your password has been changed successfully.");
+            setTimeout(() => {
             navigate("/Login");
             window.location.reload();
+            }, 2000);
 
           } catch (error) {
 
@@ -93,7 +110,7 @@ const ChangePassword = () => {
         }
         console.log("Password changed successfully.");
         // Go back to login page if successfully changed
-        navigate("/Login");
+        navigate("/Profile");
         window.location.reload();
     };
 
@@ -156,8 +173,17 @@ const ChangePassword = () => {
                 <button type="submit" className="custom-btn w-100 mb-2 text-center">
                     Submit
                 </button>
-                <button type="button" className="custom-btn2 w-100 text-center" onClick={() => navigate("/profile")}>
-                    Cancel
+                <button
+                type="button"
+                className="custom-btn2 w-100 text-center"
+                onClick={() => {
+                    if (!newPassword) {
+                    alert("Password change was not confirmed.");
+                    }
+                    navigate("/Profile");
+                }}
+                >
+                Cancel
                 </button>
             </form>
         </div>

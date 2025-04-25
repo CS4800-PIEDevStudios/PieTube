@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from '../axiosConfig.js'
 
@@ -6,9 +6,23 @@ const ChangeUsername = () => {
     //Use states
     const [newUsername, setNewUsername] = useState("");
     const [confirmUsername, setconfirmUsername] = useState("");
+    const [prevUsername, setPrevUsername] = useState("");
 
     //Navigation hook
     const navigate = useNavigate();
+
+    //Fetch Current Username
+    useEffect(() => {
+        const fetchUsername = async () => {
+          try {
+            const response = await axiosInstance.get('login-api/currentUsername');
+            setPrevUsername(response.data.username);
+          } catch (error) {
+            console.error("Failed to fetch current username:", error);
+          }
+        };
+        fetchUsername();
+      }, []);      
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,6 +31,11 @@ const ChangeUsername = () => {
             alert("New passwords do not match.");
             return;
         }
+        
+        if (newUsername === prevUsername) {
+            alert("Your new username cannot be the same as your previous one.");
+            return;
+          }
         //Updates username
         try {
             // Now, send the login POST request
