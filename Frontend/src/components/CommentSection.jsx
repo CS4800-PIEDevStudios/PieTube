@@ -26,7 +26,6 @@ const CommentSection = ({movie}) => {
     
 
     const getComments = async () => {
-        
         console.log("MOVIE ID", movie)
         const response = await axiosInstance.post('api/get-comments', {
             MovieID : movie.MovieID
@@ -36,12 +35,10 @@ const CommentSection = ({movie}) => {
         {
             setComments(response.data)
         }
-        
     }
 
-
     return (
-        <div className='d-flex flex-column w-50 align-self-center'>
+    <div className='d-flex flex-column w-50 align-self-center'>
         {/* Comments header */}
         <div className='d-flex pb-3' style={{gap: "15px"}}>
             <h1> Comments </h1>
@@ -69,9 +66,9 @@ const CommentSection = ({movie}) => {
         <button className='comment-submit-btn m-3' onClick={createComment}> Submit </button> 
         {/* Comments */}
         <div className='d-flex flex-column'>
-        {comments.map(comment => (
-                    <Comment key={comment.id} comment={comment} />  
-        ))}
+            {comments.map(comment => (
+                        <Comment key={comment.id} comment={comment} />  
+            ))}
         </div>
     </div>
     );
