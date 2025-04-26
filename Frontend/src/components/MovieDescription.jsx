@@ -58,8 +58,19 @@ const MovieDescription = () => {
         setIsClickedThumbsDown(!isClickedThumbsDown);
     }
 
+    async function addToWatchlist()
+    {
+        const response = await axiosInstance.post('api/add-watchlist',
+            {
+                MovieID: id,
+            }
+        );
+        console.log(response);
+    }
+
     // Function for Watch List button
     function toggleIsWatchListed () {
+        addToWatchlist();
         setIsWatchListed(!isWatchListed);
     }
 
