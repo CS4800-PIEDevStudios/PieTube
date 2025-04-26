@@ -49,6 +49,15 @@ const MovieDescription = () => {
         setIsWatchListed(!isWatchListed);
     }
 
+    async function addToWatchlist()
+    {
+        await axiosInstance.post("api/add-watchlist",
+            {
+                MovieID: id,
+            }
+        )
+    }
+
     return (
         <div id="MovieDescription" className='d-flex flex-column w-100 position-relative justify-content-center'>
             <img src={movieData.Poster} className='movie-description-background-thumbnail'></img>
