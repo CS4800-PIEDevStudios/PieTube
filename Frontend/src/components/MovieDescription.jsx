@@ -45,6 +45,7 @@ const MovieDescription = () => {
 
     // Function for Watch List button
     function toggleIsWatchListed () {
+        addToWatchlist();
         setIsWatchListed(!isWatchListed);
     }
 

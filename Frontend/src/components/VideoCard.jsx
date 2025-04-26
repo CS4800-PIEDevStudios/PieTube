@@ -3,7 +3,7 @@ import { StarFill, Trash } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js';
 
-const VideoCard = ({ movie, headerName }) => {
+const VideoCard = ({ movie, headerName, onDelete }) => {
     // Use states
     const [movieData, setMovieData] = useState([]);
     // Navigation hook
@@ -13,6 +13,17 @@ const VideoCard = ({ movie, headerName }) => {
     useEffect(() => {
         GetMovieData()
     }, []);
+
+    async function removeFromWatchlist()
+    {
+        const response = await axiosInstance.post('api/remove-watchlist',
+            {
+                MovieID: movie.MovieID,
+            }
+        );
+        console.log(response);
+    }
+
 
     {/* CornerIcon has trash can if from watch list otherwise shows rating*/}
     const renderRatingsOrTrash = () => {
@@ -29,6 +40,8 @@ const VideoCard = ({ movie, headerName }) => {
 
     const handleButtonClick = (event) => {
         event.stopPropagation(); // Stop the click from reaching the div
+        removeFromWatchlist();
+        onDelete(movie.MovieID);
         console.log('Button clicked');
     };
 

@@ -106,6 +106,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'MovieAPI',
     'LoginAPI',
+	'UserInteraction',
     'corsheaders'
 ]
 
