@@ -22,4 +22,7 @@ urlpatterns = [
     path('api/add-watchlist', views.add_watchlist, name="addWatchList"),
     path('api/remove-watchlist', views.remove_watchlist, name="removeWatchList"),
     path('api/get-watchlist', views.get_watchlist, name="getWatchList"),
+    path('api/add-like', views.add_like, name="addLike"),
+    path('api/remove-like', views.remove_like, name="removeLike"),
+    path('api/get-like', views.get_like, name="getLike"),
 ]

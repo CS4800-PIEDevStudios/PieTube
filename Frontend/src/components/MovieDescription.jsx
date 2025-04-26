@@ -71,7 +71,7 @@ const MovieDescription = () => {
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
                             </button>
                             {/* Like/Dislike Buttons */}
-                            <LikeButtons size={50}/>
+                            <LikeButtons size={50} id={id}/>
                             {/* End like buttons */}
                         </div>
                     </div>
