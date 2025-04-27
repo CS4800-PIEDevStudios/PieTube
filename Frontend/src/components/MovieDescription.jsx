@@ -49,6 +49,15 @@ const MovieDescription = () => {
         setIsWatchListed(!isWatchListed);
     }
 
+    async function addToWatchlist()
+    {
+        await axiosInstance.post("api/add-watchlist",
+            {
+                MovieID: id,
+            }
+        )
+    }
+
     return (
         <div id="MovieDescription" className='d-flex flex-column w-100 position-relative justify-content-center'>
             <img src={movieData.Poster} className='movie-description-background-thumbnail'></img>
@@ -71,7 +80,7 @@ const MovieDescription = () => {
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
                             </button>
                             {/* Like/Dislike Buttons */}
-                            <LikeButtons size={50}/>
+                            <LikeButtons size={50} id={id}/>
                             {/* End like buttons */}
                         </div>
                     </div>

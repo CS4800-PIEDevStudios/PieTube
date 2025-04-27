@@ -30,19 +30,16 @@ const MoviePlayer = () => {
           });
 
         setMovieData(response.data[0]);
-        console.log(response.data[0]);
 
         const genres = await axiosInstance.post('api/get-movie-genres-by-id', {
             id: id
         });
         setGenreData(genres.data);
-        console.log(genres.data);
 
         const actors = await axiosInstance.post('api/get-movie-actors-by-id', {
             id: id
         });
         setActorData(actors.data);
-        console.log(actors.data);
     }
 
     // Function for Watch List button

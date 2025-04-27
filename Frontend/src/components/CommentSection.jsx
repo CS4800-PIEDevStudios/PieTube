@@ -1,4 +1,4 @@
-import { useState, useEffec, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Comment from './Comment.jsx'
 import { Form, InputGroup } from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
@@ -26,7 +26,11 @@ const CommentSection = ({movie}) => {
     
 
     const getComments = async () => {
-        console.log("MOVIE ID", movie)
+        console.log("MOVIE ID", movie);
+        if(!movie.MovieID)
+        {
+            return;
+        }
         const response = await axiosInstance.post('api/get-comments', {
             MovieID : movie.MovieID
         })
@@ -67,7 +71,7 @@ const CommentSection = ({movie}) => {
         {/* Comments */}
         <div className='d-flex flex-column'>
             {comments.map(comment => (
-                        <Comment key={comment.id} comment={comment} />  
+                        <Comment key={comment.id} comment={comment} id={movie.MovieID} />  
             ))}
         </div>
     </div>
