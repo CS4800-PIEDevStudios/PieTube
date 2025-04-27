@@ -60,7 +60,7 @@ const MoviePlayer = () => {
             </div>
 
             {/*Button*/}
-            <div className='d-flex align-self-end mr-5' style={{ columnGap: "20px" }}>
+            <div className='d-flex align-self-end mx-5' style={{ columnGap: "20px" }}>
                 <button 
                     className='d-flex custom-btn align-items-center justify-content-center' 
                     style={{fontSize:"1.5rem", width:"200px", columnGap:"10px"}}
