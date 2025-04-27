@@ -42,7 +42,7 @@ const CommentSection = ({movie}) => {
         {/* Comments header */}
         <div className='d-flex pb-3' style={{gap: "15px"}}>
             <h1> Comments </h1>
-            <h1 className='text-muted'> 40 </h1>
+            {/* <h1 className='text-muted'> 40 </h1> */}
         </div>
         <InputGroup>
             <Form.Control

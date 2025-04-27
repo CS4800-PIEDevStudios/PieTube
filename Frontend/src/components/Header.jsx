@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
 import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
-import mepic from '../assets/me.png';
+import default_pfp from '../assets/Default_pfp.png';
 import pietubelogo from '../assets/pietubelogo.png';
 import GenreFilter from './GenreFilter';
 
@@ -107,7 +107,7 @@ const Header = () => {
           ) : (
           <div className='mx-5 rounded-circle profile-pic'>
             <Link to="/Profile" >
-                <Image src={mepic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                <Image src={default_pfp} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
             </Link>
           </div>
           )}

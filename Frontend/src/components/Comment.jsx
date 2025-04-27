@@ -1,7 +1,7 @@
 import mepic from '../assets/me.png';
 import LikeButtons from './LikeButtons.jsx'
 import { formatDistanceToNow } from 'date-fns';
-import { Collapse, Button } from 'react-bootstrap';
+import { Collapse, Button, InputGroup, Form } from 'react-bootstrap';
 
 const Comment = ({ comment }) => {
 const [openReply, setOpenReply] = useState(false);
@@ -57,7 +57,6 @@ const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { add
                             <button className='comment-submit-btn m-3'> Submit </button> 
                         </div>
                     </InputGroup>
-
                 </Collapse>
             </div>
         </div>
