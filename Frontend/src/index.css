@@ -47,6 +47,13 @@ body {
   padding-block: 5px;
 }
 
+.scrollable-container {
+  /* border-radius: 20px; */
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 .trash {
   border: none;
   background-color: transparent;
