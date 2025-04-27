@@ -45,6 +45,7 @@ def get_like(request):
     user = request.user
     data = json.loads(request.body)
     MovieID = data.get('MovieID')
+    print("MOVIE", MovieID)
     response = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.MovieLike WHERE UserID = {user.id} AND MovieID = {MovieID};")
     result = -1
     print(response)

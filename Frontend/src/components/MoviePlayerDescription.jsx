@@ -1,4 +1,5 @@
-import LikeButtons from './LikeButtons.jsx'
+import LikeButtons from './LikeButtons.jsx';
+import React, { useState, useEffect } from 'react';
 import { StarFill} from 'react-bootstrap-icons';
 const MoviePlayerDescription = ({movieData, genreData, actorData}) => {
     return (

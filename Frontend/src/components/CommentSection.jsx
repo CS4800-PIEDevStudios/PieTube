@@ -1,4 +1,4 @@
-import { useState, useEffec, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Comment from './Comment.jsx'
 import { Form, InputGroup } from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
@@ -67,7 +67,7 @@ const CommentSection = ({movie}) => {
         {/* Comments */}
         <div className='d-flex flex-column'>
             {comments.map(comment => (
-                        <Comment key={comment.id} comment={comment} />  
+                        <Comment key={comment.id} comment={comment} id={movie.MovieID} />  
             ))}
         </div>
     </div>

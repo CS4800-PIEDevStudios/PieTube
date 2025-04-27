@@ -1,9 +1,10 @@
 import mepic from '../assets/me.png';
 import LikeButtons from './LikeButtons.jsx'
+import React, { useState, useEffect } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { Collapse, Button } from 'react-bootstrap';
+import { Collapse, Button, InputGroup, Form } from 'react-bootstrap';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, id }) => {
 const [openReply, setOpenReply] = useState(false);
 const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { addSuffix: true });
 
@@ -26,7 +27,7 @@ const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { add
                 <div className='d-flex' style={{gap:"30px"}}>
                     <Button variant='link' onClick={() => setOpenReply(!openReply)}> <h5> Reply </h5> </Button>
                     <div className='d-flex'>
-                        <LikeButtons size={40}/>
+                        <LikeButtons size={40} id={id}/>
                     </div>
                 </div>
             </div>

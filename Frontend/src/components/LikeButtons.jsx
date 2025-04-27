@@ -46,6 +46,11 @@ const LikeButtons = ({size, id}) => {
 
     async function getLike()
     {
+        if(id===null)
+        {
+            return;
+        }
+
         const response = await axiosInstance.post("api/get-like",
             {
                 MovieID: id,
