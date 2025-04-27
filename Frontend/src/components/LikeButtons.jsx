@@ -20,7 +20,7 @@ const LikeButtons = ({size, id}) => {
 
     useEffect(() => {
         getLike();
-    }, [])
+    }, [id])
     
 
     async function dislike()
@@ -46,8 +46,10 @@ const LikeButtons = ({size, id}) => {
 
     async function getLike()
     {
-        if(id===null)
+        console.log("GETTING LIKES... ", id);
+        if(!id)
         {
+            console.log("ID NOT FOUND");
             return;
         }
 

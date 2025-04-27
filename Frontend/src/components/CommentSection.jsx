@@ -26,7 +26,11 @@ const CommentSection = ({movie}) => {
     
 
     const getComments = async () => {
-        console.log("MOVIE ID", movie)
+        console.log("MOVIE ID", movie);
+        if(!movie.MovieID)
+        {
+            return;
+        }
         const response = await axiosInstance.post('api/get-comments', {
             MovieID : movie.MovieID
         })

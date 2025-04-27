@@ -56,7 +56,7 @@ const MoviePlayerDescription = ({movieData, genreData, actorData}) => {
             <div className='d-flex mx-5 align-items-end position-relative' style={{zIndex:"2", gap:"30px"}}>
                 {/* Stats Start*/}
                 <div className='d-flex flex-column align-items-end' style={{rowGap:"5px"}}>
-                    <LikeButtons size={50}/>
+                    <LikeButtons size={50} id={movieData.MovieID}/>
                     <div className='stats'>
                         <div id='Date'> {movieData.ReleaseDate} </div>
                         |
