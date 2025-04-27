@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StarFill} from 'react-bootstrap-icons';
 const MoviePlayerDescription = ({movieData, genreData, actorData}) => {
     return (
-        <div id='MoviePlayerDescription' className='d-flex my-5 w-100 justify-content-between position-relative'>
+        <div id='MoviePlayerDescription' className='d-flex mt-5 w-100 justify-content-between position-relative'>
             {/* Background image */}
             {/* filler background */}
             <img src={movieData.Poster} className='movie-player-background-thumbnail'></img>
