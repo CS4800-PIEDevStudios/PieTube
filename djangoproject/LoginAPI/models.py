@@ -3,3 +3,4 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     about = models.TextField(blank=True, null=True)
+    profilePic = models.TextField(blank=True, null=True)
