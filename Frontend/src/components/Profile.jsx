@@ -3,7 +3,37 @@ import { useNavigate } from "react-router-dom";
 import { CaretRightFill } from "react-bootstrap-icons"
 import axiosInstance from '../axiosConfig.js'
 
+const SkeletonLoader = () => {
+    return (
+        <div className="justify-content-center p-5 bg-light mt-5" 
+        style={{ minWidth: "500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px" }}>
+            
+            {/* Skeleton title */}
+            <div className="skeleton skeleton-text mb-4" style={{ width: "150px", height: "40px", margin: "0 auto" }}></div>
+
+            {/* Skeleton profile info */}
+            <div className="d-flex align-items-center mb-4">
+                <div
+                    className="skeleton skeleton-pic"
+                    style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+                ></div>
+                <div className="ms-3 flex-grow-1">
+                    <div className="skeleton skeleton-text mb-2" style={{ width: "60%" }}></div>
+                    <div className="skeleton skeleton-text" style={{ width: "80%" }}></div>
+                </div>
+            </div>
+
+            {/* Skeleton buttons */}
+            <div className="skeleton skeleton-btn mb-3"></div>
+            <div className="skeleton skeleton-btn mb-3"></div>
+            <div className="skeleton skeleton-btn mb-3"></div>
+            <div className="skeleton skeleton-btn mb-3"></div>
+        </div>
+    );
+};
+
 const Profile = () => {
+
     // Use states
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -11,10 +41,8 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState(true); 
     const [profilePicUrl, setProfilePicUrl] = useState(null);
 
-    // Navigation hook
+    //Hooks
     const navigate = useNavigate(); 
-
-    // File input for profile
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -42,6 +70,11 @@ const Profile = () => {
                 setIsLoading(false);
             });
     }, [navigate]);
+
+    // Loading screen
+    if (isLoading) {
+        return <SkeletonLoader />;
+    }
 
     // Function for signing out
     const handleSignOut = async(event) => {
@@ -71,11 +104,6 @@ const Profile = () => {
     const handleProfilePicClick = () => {
         fileInputRef.current.click();
     };
-
-    // Loading screen
-    if (isLoading) {
-        return <div>Loading profile...</div>;
-    }
 
     return (
         <div className="justify-content-center p-5 bg-light mt-5" style={{minWidth:"500px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", borderRadius: "20px"}}>
