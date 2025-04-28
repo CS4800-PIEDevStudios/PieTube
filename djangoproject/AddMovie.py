@@ -49,7 +49,7 @@ if response.status_code == 200:
     directorID = djangoproject.DatabaseManager.fetchData(f"SELECT * FROM PieTube.Director WHERE Name=\"{directorList[0]}\";")
     directorID = directorID[0]['DirectorID']
 
-    
+    # Insert Trailer Web Craller here
 
     # Insert into Movie Table
     djangoproject.DatabaseManager.insertData(f"INSERT IGNORE INTO PieTube.Movie (DirectorID, Summary, Title, AgeRating, Rating, Duration, Language, ReleaseDate, Poster, Trailer, EmbedLink) VALUES ({directorID}, \"{description}\", \"{title}\", \"{ageRating}\", {rating}, \"{runtime}\", \"English\", \"{releaseDate}\", \"{poster}\", \"{trailer}\", \"{embed}\");")
