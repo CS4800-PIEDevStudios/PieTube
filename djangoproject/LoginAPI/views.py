@@ -7,6 +7,8 @@ import djangoproject.DatabaseManager
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 import json
+import boto3
+import uuid
 
 # Get the active user
 User = get_user_model()
@@ -227,7 +229,39 @@ def logoutAccount(request):
     return JsonResponse({'status': 'success', 'message': 'Logged out successfully'})
 
 
+@api_view(['POST'])
+def generate_presigned_url(request):
+    AWS_ACCESS_KEY_ID= ""
+    AWS_SECRET_ACCESS_KEY = ""
+    AWS_STORAGE_BUCKET_NAME = "pietube-media"
 
+    s3 = boto3.client('s3',
+                      aws_access_key_id=AWS_ACCESS_KEY_ID,
+                      aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+
+    file_name = request.data.get('file_name')
+    file_type = request.data.get('file_type')
+
+    if not file_name or not file_type:
+        return JsonResponse({"error": "Missing file name or type"}, status=400)
+
+    unique_filename = f"profile_pictures/{uuid.uuid4()}_{file_name}"
+
+    presigned_post = s3.generate_presigned_post(
+        Bucket=AWS_STORAGE_BUCKET_NAME,
+        Key=unique_filename,
+        Fields={"Content-Type": file_type},
+        Conditions=[
+            {"Content-Type": file_type}
+        ],
+        ExpiresIn=3600  # URL valid for 1 hour
+    )
+
+    return JsonResponse({
+        'url': presigned_post['url'],
+        'fields': presigned_post['fields'],
+        'file_url': f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{unique_filename}"
+    })
 
 
 
