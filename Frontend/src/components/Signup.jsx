@@ -163,7 +163,7 @@ const Signup = () => {
 
   return (
     <form onSubmit = {handleSubmit}>
-        <div className="p-5 bg-light mb-5" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
+        <div className="signup-container bg-light mb-5" style={{borderRadius: "20px", boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.25)", minWidth:"500px"}}>
           {/* Header */}
           <h1>Sign up</h1> 
 
