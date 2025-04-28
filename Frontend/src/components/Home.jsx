@@ -118,8 +118,8 @@ const Home = () => {
                 </button>
 
                 {/* Scrollable Container */}
-                <Row ref={ref} className="d-flex flex-nowrap gx-5 ml-3 mr-3 " style={{ whiteSpace: "nowrap", overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none', borderRadius: "20px"}}>
-                    {genres.map((genre, index) => (
+                <Row ref={ref} className="scrollable-container d-flex flex-nowrap gx-5 mx-3"  style={{borderRadius:"20px"}}>
+                    {genres.map((genre) => (
                         <div 
                             className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
                             onClick={() => toggleGenre(genre)}

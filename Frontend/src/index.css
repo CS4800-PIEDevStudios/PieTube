@@ -47,6 +47,13 @@ body {
   padding-block: 5px;
 }
 
+.scrollable-container {
+  /* border-radius: 20px; */
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 .trash {
   border: none;
   background-color: transparent;
@@ -175,6 +182,10 @@ body {
   object-fit: cover;
 }
 
+.movie-player-background {
+  background-color: #0c1116;
+}
+
 .movie-player {
   aspect-ratio: 16/9;
   width: 100%;
@@ -182,6 +193,7 @@ body {
   box-shadow: 0px 0px 80px rgba(0, 0, 0, 1);
   margin-block: 100px;
   overflow: hidden;
+  background-color: #86919a;
 }
 
 .movie-player-genre-blob {
@@ -236,6 +248,12 @@ body {
 
 .hr {
   border-top: 1px solid #F5F5F5;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.hr-2 {
+  border-top: 1px solid #000000;
   margin: 1em 0;
   width: 100%;
 }
@@ -486,7 +504,6 @@ body {
   overflow: hidden; 
   text-align: center;
   position: relative; 
-  
 }
 
 .profile-pic-container img {
@@ -497,6 +514,10 @@ body {
 
 .profile-pic-container:hover {
   background-color: #5a6268;
+}
+
+.comment-section-background {
+  background-color: #E1E1E1;
 }
 
 .comment-submit-btn {
@@ -519,6 +540,22 @@ body {
   padding: 40px;
   border-radius: 20px;
   border: 5px solid #E1E1E1;
+}
+.reply-containter {
+  background-color: #F5F5F5;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.reply-submit-btn {
+  color: #f5f5f5;
+  background: #CD853F ;
+  border-radius: 10px;
+  border: transparent 2px solid;
+  padding-block: 5px;
+  padding-inline: 50px;
+  font-size: 1.2rem;
+  align-self: end;
 }
 
 @media (max-width: 1280px) {

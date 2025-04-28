@@ -15,12 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("MovieAPI.urls")),
-    path('', include("LoginAPI.urls")),
-    path('', include("UserInteraction.urls"))
-	
+    path('api/add-watchlist', views.add_watchlist, name="addWatchList"),
+    path('api/remove-watchlist', views.remove_watchlist, name="removeWatchList"),
+    path('api/get-watchlist', views.get_watchlist, name="getWatchList"),
+    path('api/add-like', views.add_like, name="addLike"),
+    path('api/remove-like', views.remove_like, name="removeLike"),
+    path('api/get-like', views.get_like, name="getLike"),
 ]

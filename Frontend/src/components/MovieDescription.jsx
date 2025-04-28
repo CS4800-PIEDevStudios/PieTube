@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { HandThumbsDown, HandThumbsUp, HandThumbsDownFill, HandThumbsUpFill, StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
+import { StarFill, Clock, CheckLg } from 'react-bootstrap-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig.js'
+import LikeButtons from './LikeButtons.jsx'
 
 const MovieDescription = () => {
     // Use states
     const [movieData, setMovieData] = useState([]);
     const [genreData, setGenreData] = useState([]);
     const [actorData, setActorData] = useState([]);
-    const [isClickedThumbsUp, setIsClickedThumbsUp] = useState(true);
-    const [isClickedThumbsDown, setIsClickedThumbsDown] = useState(true);
     const [isWatchListed, setIsWatchListed] = useState(true);
     
     // Filler...
@@ -44,23 +43,19 @@ const MovieDescription = () => {
         console.log(actors.data);
     }
 
-    // Function for like/dislike button
-    function toggleIsClickedThumbsUp () {
-        if (!isClickedThumbsDown) {
-            setIsClickedThumbsDown(true)
-        }
-        setIsClickedThumbsUp(!isClickedThumbsUp);
-    }
-    function toggleIsClickedThumbsDown () {
-        if (!isClickedThumbsUp) {
-            setIsClickedThumbsUp(true)
-        }
-        setIsClickedThumbsDown(!isClickedThumbsDown);
-    }
-
     // Function for Watch List button
     function toggleIsWatchListed () {
+        addToWatchlist();
         setIsWatchListed(!isWatchListed);
+    }
+
+    async function addToWatchlist()
+    {
+        await axiosInstance.post("api/add-watchlist",
+            {
+                MovieID: id,
+            }
+        )
     }
 
     return (
@@ -85,20 +80,8 @@ const MovieDescription = () => {
                             <button className='description-page-button' onClick={toggleIsWatchListed}> {isWatchListed ? <Clock /> : <CheckLg />} Watch List
                             </button>
                             {/* Like/Dislike Buttons */}
-                            <div id='LikeButtons' className='d-flex' style={{ gap: "10px" }}>
-                                {isClickedThumbsUp ? (
-                                    <HandThumbsUp onClick={toggleIsClickedThumbsUp} width="50" height="50" />
-                                ) : (
-                                    <HandThumbsUpFill onClick={toggleIsClickedThumbsUp} width="50" height="50" />
-                                )}
-                                {isClickedThumbsDown ? (
-                                    <HandThumbsDown onClick={toggleIsClickedThumbsDown} width="50" height="50" />
-                                ) : (
-                                    <HandThumbsDownFill onClick={toggleIsClickedThumbsDown} width="50" height="50" />
-                                )}
-                            </div>
+                            <LikeButtons size={50} id={id}/>
                             {/* End like buttons */}
-
                         </div>
                     </div>
                     {/* End title details */}
