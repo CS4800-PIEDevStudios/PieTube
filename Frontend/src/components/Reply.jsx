@@ -23,7 +23,7 @@ const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { add
                 {/* Reply */}
                 <div className='d-flex' style={{gap:"30px"}}>
                     <div className='d-flex'>
-                        <LikeButtons size={40} id={id}/>
+                        {/* <LikeButtons size={40} id={id}/> */}
                     </div>
                 </div>
             </div>

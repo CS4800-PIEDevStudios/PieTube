@@ -35,5 +35,7 @@ urlpatterns = [
     path('api/filter-age-rating', views.ageRatingFiltering, name = "ageRatingFiltering"),
     path('api/search-movies', views.searchMovies, name='searchMovies'),
     path('api/create-comment', views.createComment, name = "createComment"),
-    path('api/get-comments', views.getComments, name = "getComments")
+    path('api/get-comments', views.getComments, name = "getComments"),
+    path('api/get-replies', views.getReplies, name = "getReplies"),
+    path('api/create-reply', views.createReply, name = "createReply"),
 ]

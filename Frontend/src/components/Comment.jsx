@@ -4,12 +4,48 @@ import React, { useState, useEffect } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Collapse, Button, InputGroup, Form } from 'react-bootstrap';
 import Reply from './Reply.jsx'
+import axiosInstance from '../axiosConfig.js'
 
 const Comment = ({ comment, id }) => {
 const [openReply, setOpenReply] = useState(false);
 const [replies, setReplies] = useState([]);
+const [content, setContent] = useState("");
 const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { addSuffix: true });
 
+useEffect(() => {
+    getReplies();
+}, [comment]);
+
+const getReplies = async () => {
+    console.log("MOVIE ID", id);
+    if(!id)
+    {
+        return;
+    }
+    const response = await axiosInstance.post('api/get-replies', {
+        MovieID : id,
+        ParentID : comment.id
+    });
+    console.log("replies", response.data);
+    if(response.status===200)
+    {
+        setReplies(response.data);
+    }
+}
+
+const createReply = async () => {
+    console.log("Creating Reply")
+
+    const response = await axiosInstance.post('api/create-reply', {
+        MovieID : id,
+        ParentID : comment.id,
+        content : content,
+    })
+
+    setContent('');
+    // Refresh Comments
+    getReplies();
+}
     return (
         <div className='comment-containter d-flex flex-column my-2'>
             <div className='d-flex justify-content-between'>
@@ -35,7 +71,7 @@ const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { add
                         <h5> Reply </h5> 
                     </Button>
                     <div className='d-flex'>
-                        <LikeButtons size={40} id={id}/>
+                        {/* <LikeButtons size={40} id={id}/> */}
                     </div>
                 </div>
             </div>
@@ -59,27 +95,22 @@ const relativeTime = formatDistanceToNow(new Date(comment.created_at+'Z'), { add
                                 width:"100%"
                             }}
                             as="textarea" // Use textarea for multi-line input if needed
-                            // value={commentContent}
-                            // onChange={(e) => setCommentContent(e.target.value)}
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
                         />
                         <div>
                             <Button variant="link" className='m-3' onClick={() => setOpenReply(false)}> Cancel </Button>
-                            <button className='reply-submit-btn m-3'> Submit </button> 
+                            <button className='reply-submit-btn m-3' onClick={createReply}> Submit </button> 
                         </div>
                     </InputGroup>
                 </Collapse>
             </div>
             <div className='d-flex flex-column'>
                 <h3 className='align-self-start mt-4'> Replies </h3>
-                {/* <Reply key={comment.id} comment={comment} id={movie.MovieID} />   */}
-                <Reply comment={comment} id={id} />  
-                <Reply comment={comment} id={id} />  
-                <Reply comment={comment} id={id} />  
-                <Reply comment={comment} id={id} />  
-                <Reply comment={comment} id={id} />  
-                {/* {replies.map(reply => (
-                    <Reply comment={comment} id={id} />  
-                ))} */}
+
+                {replies.map(reply => (
+                    <Reply key={reply.id} comment={reply} id={id} ParentID = {comment.id}/>  
+                ))}
             </div>
         </div>
     );

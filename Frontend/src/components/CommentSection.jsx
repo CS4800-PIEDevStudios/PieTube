@@ -73,7 +73,7 @@ const CommentSection = ({movie}) => {
                 {/* Comments */}
                 <div className='d-flex flex-column'>
                     {comments.map(comment => (
-                                <Comment key={comment.id} comment={comment} id={movie.MovieID} />  
+                        <Comment key={comment.id} comment={comment} id={movie.MovieID} />  
                     ))}
                 </div>
             </div>
