@@ -44,7 +44,17 @@ const MoviePlayer = () => {
 
     // Function for Watch List button
     function toggleIsWatchListed () {
+        addToWatchlist();
         setIsWatchListed(!isWatchListed);
+    }
+
+    async function addToWatchlist()
+    {
+        await axiosInstance.post("api/add-watchlist",
+            {
+                MovieID: id,
+            }
+        )
     }
 
     return (
