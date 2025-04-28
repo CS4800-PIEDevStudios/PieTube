@@ -17,6 +17,22 @@ const SearchResults = () => {
     const ratings = [ "G", "PG", "PG-13", "R", "NC-17", "M", "NR", "Passed", "Approved" ];
 
     useEffect(() => {
+        if (savedText && savedText.trim()) {
+            axiosInstance
+              .get('api/search-movies', {
+                params: { query: savedText }
+              })
+              .then(response => {
+                const titleMatches = response.data.title_matches || [];
+                const descriptionMatches = response.data.description_matches || [];
+                setSearchResults([...titleMatches, ...descriptionMatches]);
+              })
+              .catch(error =>
+                console.error('Error fetching text search results:', error)
+              );
+
+            return;
+          }
         let genreResults = [];
         let ratingResults = [];
         let allResults = [];

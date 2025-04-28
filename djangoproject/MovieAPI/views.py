@@ -247,7 +247,39 @@ def getComments(request):
 	return JsonResponse(result, safe=False, status = 200)
 
 
+def searchMovies(request):
+    query = request.GET.get('query', '').strip()
+    if not query:
+        return JsonResponse({"error": "no query"}, status=400)
+    
+    formatted_query = f"%{query}%"
 
+    title_query = "SELECT * FROM PieTube.Movie WHERE Title LIKE %s"
+    title_results = djangoproject.DatabaseManager.fetchData(title_query, [formatted_query])
+    
+
+    title_ids = [movie["MovieID"] for movie in title_results] if title_results else []
+    
+
+    if title_ids:
+        placeholders = ', '.join(['%s'] * len(title_ids))
+        description_query = f"""
+            SELECT * FROM PieTube.Movie 
+            WHERE Summary LIKE %s 
+              AND MovieID NOT IN ({placeholders})
+        """
+        params = [formatted_query] + title_ids
+        description_results = djangoproject.DatabaseManager.fetchData(description_query, params)
+    else:
+        description_query = "SELECT * FROM PieTube.Movie WHERE Summary LIKE %s"
+        description_results = djangoproject.DatabaseManager.fetchData(description_query, [formatted_query])
+    
+    response_data = {
+        "title_matches": title_results,
+        "description_matches": description_results,
+    }
+    
+    return JsonResponse(response_data, safe=False)
 
 # Retrieve all users
 def getUserData(request):

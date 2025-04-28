@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/get-movie-genres-by-id', views.getMovieGenresByID, name = "getMovieGenresDataByID"),
     path('api/get-movie-actors-by-id', views.getMovieActorsByID, name = "getMovieActorsDataByID"),
     path('api/filter-age-rating', views.ageRatingFiltering, name = "ageRatingFiltering"),
+    path('api/search-movies', views.searchMovies, name='searchMovies'),
     path('api/create-comment', views.createComment, name = "createComment"),
     path('api/get-comments', views.getComments, name = "getComments")
 ]
