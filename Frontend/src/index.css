@@ -728,3 +728,62 @@ body {
   /* Search Results end*/
   
 }
+    
+/* Error message styling */
+.invalid-feedback {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  display: block !important;
+  text-align: left !important;
+}
+
+/* Form container constraints */
+.p-5 {
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Input group constraints */
+.input-group {
+  max-width: 100%;
+}
+
+/* Form control constraints */
+.form-control {
+  max-width: 100%;
+}
+
+/* Skeleton loading effect */
+.skeleton {
+  background: linear-gradient(-90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+  background-size: 400% 400%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-text {
+  height: 20px;
+}
+
+.skeleton-btn {
+  height: 50px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.skeleton-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

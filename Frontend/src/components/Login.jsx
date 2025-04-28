@@ -56,7 +56,11 @@ const Login = () => {
         window.location.href = '/';
       }
     } catch (error) {
-      setDisplayMessage('Something went wrong.');
+      if (error.response && error.response.status === 401) {
+        setDisplayMessage('Incorrect username or password. Please try again.');
+      } else {
+        setDisplayMessage('Something went wrong. Please try again later.');
+      }
       console.error('Error sending data to Django:', error);
     }
   };
@@ -94,6 +98,11 @@ const Login = () => {
           </InputGroup>
           {/* Buttons */}
           <Button variant="link" onClick={() => navigate("/Changepassword")}> Forgot password? </Button>
+          {displayMessage && (
+          <div className={`mt-3 alert ${displayMessage.includes('Incorrect') ? 'alert-danger' : 'alert-success'}`} role="alert">
+            {displayMessage}
+          </div>
+        )}    
           <button class="custom-btn mt-4" type="submit">Submit</button>
           <Button variant="link" onClick={() => navigate("/Signup")}> Don't have an account? </Button>
         </div>        
