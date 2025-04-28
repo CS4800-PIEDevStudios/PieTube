@@ -62,7 +62,7 @@ const Header = () => {
           </Link>
         </Navbar.Brand>
         {/* Links */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle/>
 					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
               <Link to="/" className='headerbar flex-fill'> Home </Link>
               <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
@@ -76,8 +76,6 @@ const Header = () => {
           <InputGroup className="ml-5 w-25 flex-fill">
             <Form.Control
               placeholder="Search"
-              aria-label="Search"
-              aria-describedby="basic-addon2"
               value={ inputText }
               onChange= {(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyPress}

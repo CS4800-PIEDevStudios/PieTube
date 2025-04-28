@@ -4,7 +4,7 @@ const RenderSearchHeader = ({ headerName, fromFilter, selectedGenres, excludedGe
     if (headerName === 'searchResults') {
         return (
             <>
-                <h1 className='search-results-header'>Results for:</h1>
+                <h1>Results for:</h1>
                 {/* Shows chosen genres and age rating if coming from genre filter, otherwise text from search bar */}
                 {fromFilter ? (
                     <div className='d-flex flex-column' style={{ rowGap: "20px" }}>

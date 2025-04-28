@@ -98,9 +98,9 @@ const Home = () => {
     };
 
     return (
-        <div className='d-flex flex-column mt-5' style={{ marginInline: "150px", overflowX: "hidden", marginTop:"100px"}}>
+        <div className='d-flex flex-column mt-5' style={{ marginInline: "150px", overflowX: "hidden", marginTop:"100px", height:"100vh"}}>
             {/* Genres */}
-            <div className='mb-5 ml-3 position-relative' >
+            <div className='mb-5 ml-3 position-relative'> 
                 {/* Left Arrow Button */}
                 <button  
                     onMouseEnter={() => startScrolling(-20)} 
@@ -129,7 +129,7 @@ const Home = () => {
                     ))}  
                 </Row>
             </div>
-
+            
             {/* Filtered Movies Section - Only shows when genres are selected */}
             {selectedGenres.length > 0 && (
                 <div className='mb-5'>
