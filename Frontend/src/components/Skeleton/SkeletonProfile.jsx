@@ -1,3 +1,4 @@
+import './skeleton.css';
 const SkeletonLoader = () => {
     return (
         <div className="justify-content-center p-5 bg-light mt-5" 

@@ -4,8 +4,6 @@ import { lazy } from 'react';
 import './App.css';
 import axios from 'axios';
 
-
-
 const Home = lazy(() => import('./components/Home'));
 const Logoheader = lazy(() => import('./components/Logoheader'));
 const Header = lazy(() => import('./components/Header'));
