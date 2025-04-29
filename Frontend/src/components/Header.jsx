@@ -18,7 +18,6 @@ const Header = () => {
   const navigate = useNavigate(); 
   const location = useLocation();
   useEffect(() => {
-    /// FIX THIS
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
     fetchProfileData();
