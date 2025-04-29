@@ -53,7 +53,8 @@ const createReply = async () => {
                 <div className='d-flex' style={{gap:"20px"}}>
                     {/* Profile pic */}
                     <div className='rounded-circle profile-pic'>
-                        <img src={default_pfp} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                        {console.log(comment)}
+                        <img src={comment.profilePic} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                     </div>
                     {/* Username */}
                     <div className='d-flex flex-column'>

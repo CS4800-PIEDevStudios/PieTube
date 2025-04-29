@@ -9,6 +9,8 @@ from django.contrib.auth import get_user_model
 import json
 import boto3
 import uuid
+from dotenv import load_dotenv
+import os
 
 # Get the active user
 User = get_user_model()
@@ -229,18 +231,27 @@ def logoutAccount(request):
     return JsonResponse({'status': 'success', 'message': 'Logged out successfully'})
 
 
-@api_view(['POST'])
-def generate_presigned_url(request):
-    AWS_ACCESS_KEY_ID= ""
-    AWS_SECRET_ACCESS_KEY = ""
-    AWS_STORAGE_BUCKET_NAME = "pietube-media"
+def updateProfilePicture(request):
+    load_dotenv()  # Load environment variables from .env
+    # Now you can use
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+
+    user = request.user
+    data = json.loads(request.body)
+    if not user.is_authenticated:
+        return JsonResponse({"error": "User is not logged in"}, status=400)
+
 
     s3 = boto3.client('s3',
                       aws_access_key_id=AWS_ACCESS_KEY_ID,
                       aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
-    file_name = request.data.get('file_name')
-    file_type = request.data.get('file_type')
+    print(data)
+
+    file_name = data.get('file_name')
+    file_type = data.get('file_type')
 
     if not file_name or not file_type:
         return JsonResponse({"error": "Missing file name or type"}, status=400)
@@ -257,10 +268,14 @@ def generate_presigned_url(request):
         ExpiresIn=3600  # URL valid for 1 hour
     )
 
+    file_url = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{unique_filename}"
+
+    djangoproject.DatabaseManager.insertData(f"UPDATE PieTube.LoginAPI_customuser SET profilePic = \'{file_url}\' WHERE id = {user.id};")
+
     return JsonResponse({
         'url': presigned_post['url'],
         'fields': presigned_post['fields'],
-        'file_url': f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{unique_filename}"
+        'file_url': file_url
     })
 
 

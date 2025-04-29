@@ -1,26 +1,43 @@
 import React, {useState, useEffect} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
 import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
 import default_pfp from '../assets/Default_pfp.png';
 import pietubelogo from '../assets/pietubelogo.png';
 import GenreFilter from './GenreFilter';
+import axiosInstance from '../axiosConfig.js'
 
 const Header = () => {
   // Use states
   const [LoggedIn, setIsLoggedIn] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [inputText, setInputText] = useState('');
+  const [profilePicUrl, setProfilePicUrl] = useState(default_pfp);
   
   // Navigation hook
   const navigate = useNavigate(); 
-
+  const location = useLocation();
   useEffect(() => {
+    /// FIX THIS
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
-    setIsLoggedIn(loggedInStatus); 
-  },[]);
+    setIsLoggedIn(loggedInStatus);
+    fetchProfileData();
+  },[location]);
 
-  
+  function fetchProfileData()
+    {
+      console.log("fetching profile")
+        // Fetches profile data
+        axiosInstance.get('login-api/getProfileData')
+        .then(response => {
+                if (response.data[0].profilePic) {
+                    setProfilePicUrl(response.data[0].profilePic);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching profile data:', error);
+            })
+    }
   //Changes headerName variable and saves inputted text
   const handleSearchBar = () => {
     if (inputText.trim()) { // Only search if there's actual text
@@ -105,7 +122,7 @@ const Header = () => {
           ) : (
           <div className='mx-5 rounded-circle profile-pic'>
             <Link to="/Profile" >
-                <Image src={default_pfp} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                <Image src={profilePicUrl} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
             </Link>
           </div>
           )}

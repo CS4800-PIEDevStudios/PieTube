@@ -12,6 +12,7 @@ const Profile = () => {
     const [about, setAbout] = useState("");
     const [isLoading, setIsLoading] = useState(true); 
     const [profilePicUrl, setProfilePicUrl] = useState(null);
+    const [file, setFile] = useState(null);
 
     //Hooks
     const navigate = useNavigate(); 
@@ -24,15 +25,20 @@ const Profile = () => {
             return;
         }
         
+        fetchProfileData();
+    }, [navigate]);
+
+    function fetchProfileData()
+    {
         // Fetches profile data
         axiosInstance.get('login-api/getProfileData')
         .then(response => {
-            console.log(response.data[0])
+            // console.log(response.data[0])
             setUsername(response.data[0].username)
             setEmail(response.data[0].email)
             setAbout(response.data[0].about || "");
-                if (response.data[0].profile_pic) {
-                    setProfilePicUrl(response.data[0].profile_pic);
+                if (response.data[0].profilePic) {
+                    setProfilePicUrl(response.data[0].profilePic);
                 }
             })
             .catch(error => {
@@ -41,7 +47,7 @@ const Profile = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [navigate]);
+    }
 
     // Loading screen
     if (isLoading) {
@@ -61,16 +67,44 @@ const Profile = () => {
         }
     };
 
-    // Function for changing profile picture
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setProfilePicUrl(reader.result);
-            };
-            reader.readAsDataURL(file);
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+        console.log("Selected file:", selectedFile);
+    
+        // Now call upload manually here if you want immediate upload:
+        if (selectedFile) {
+            handleUpload(selectedFile);  // pass the file
         }
+    };
+    
+    const handleUpload = async (uploadFile) => {
+        console.log("Uploading file:", uploadFile);
+        if (!uploadFile) return;
+    
+        // Step 1: Get presigned URL
+        const presignedRes = await axiosInstance.post('/login-api/updateProfilePicture', {
+            file_name: uploadFile.name,
+            file_type: uploadFile.type
+        });
+    
+        const { url, fields, file_url } = presignedRes.data;
+    
+        // Step 2: Upload to S3
+        const formData = new FormData();
+        Object.entries(fields).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        formData.append('file', uploadFile);
+    
+        await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+        console.log(file_url);
+        // Step 3 (Optional): Update UI immediately
+        setProfilePicUrl(file_url);
+        fetchProfileData();
     };
 
     const handleProfilePicClick = () => {

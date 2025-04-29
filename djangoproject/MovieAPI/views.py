@@ -205,7 +205,7 @@ def getComments(request):
 
 	print("COMMENTS",MovieID)
 	query = f'''
-			SELECT c.id AS id, content, MovieID, UserID, ParentID, created_at, username FROM PieTube.comments c JOIN PieTube.LoginAPI_customuser u ON c.UserID = u.id 
+			SELECT c.id AS id, content, MovieID, UserID, ParentID, created_at, username, profilePic FROM PieTube.comments c JOIN PieTube.LoginAPI_customuser u ON c.UserID = u.id 
 			WHERE c.MovieID = {MovieID} AND c.ParentID IS NULL
 			'''
 	result = djangoproject.DatabaseManager.fetchData(query)
@@ -226,7 +226,7 @@ def getReplies(request):
 
 	print("COMMENTS",MovieID)
 	query = f'''
-			SELECT c.id AS id, content, MovieID, UserID, ParentID, created_at, username FROM PieTube.comments c JOIN PieTube.LoginAPI_customuser u ON c.UserID = u.id 
+			SELECT c.id AS id, content, MovieID, UserID, ParentID, created_at, username, profilePic FROM PieTube.comments c JOIN PieTube.LoginAPI_customuser u ON c.UserID = u.id 
 			WHERE c.MovieID = {MovieID} AND c.ParentID ={ParentID}
 			'''
 	result = djangoproject.DatabaseManager.fetchData(query)
