@@ -19,7 +19,7 @@ const Header = () => {
   const location = useLocation();
   useEffect(() => {
     /// FIX THIS
-    const loggedInStatus = localStorage.getItem('isLoggedIn') === 'false';
+    const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
     fetchProfileData();
   },[location]);
@@ -46,7 +46,7 @@ const Header = () => {
       navigate("/SearchResults", {
         state: { savedText: inputText }
       });
-      window.location.reload();
+      // window.location.reload();
     } 
   };
 
@@ -79,53 +79,52 @@ const Header = () => {
           </Link>
         </Navbar.Brand>
         {/* Links */}
-        <Navbar.Toggle/>
-					<Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-              <Link to="/" className='headerbar flex-fill'> Home </Link>
-              <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
-              {LoggedIn ? (
-                  <Link to="/Login" className='headerbar flex-fill'> Watch List </Link>
-                ) : (
-                  <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
-                )}					
-					</Nav>
-          {/* Search bar */}
-          <InputGroup className="ml-5 w-25 flex-fill">
-            <Form.Control
-              placeholder="Search"
-              value={ inputText }
-              onChange= {(e) => setInputText(e.target.value)}
-              onKeyDown={handleKeyPress}
-              style={{backgroundColor:'#E1E1E1', borderRadius:'10px 0 0 10px', border:'none', height:'50px', maxWidth:'1000px'}}
-            />
-            {/* Search button */}
-            <Button variant="outline-secondary" style={{borderRadius:'0 10px 10px 0', width: '60px'}} onClick={ handleSearchBar }> <Search/></Button>
-            {/* Filter */}
-            <button className="mx-3" style={{border:"none", backgroundColor:"transparent"}}
-              onClick={() => setShowFilter(true)}>
-              <Filter width="40" height="40"></Filter>
-            </button>
-            <GenreFilter 
-              show={showFilter} 
-              onHide={() => setShowFilter(false)} 
-            />
-          </InputGroup>
+        <Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
+            <Link to="/" className='headerbar flex-fill'> Home </Link>
+            <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
+            {LoggedIn ? (
+                <Link to="/Login" className='headerbar flex-fill'> Watch List </Link>
+              ) : (
+                <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
+              )}					
+        </Nav>
+        {/* Search bar */}
+        <InputGroup className="ml-5 w-25 flex-fill">
+          <Form.Control
+            placeholder="Search"
+            value={ inputText }
+            onChange= {(e) => setInputText(e.target.value)}
+            onKeyDown={handleKeyPress}
+            style={{backgroundColor:'#E1E1E1', borderRadius:'10px 0 0 10px', border:'none', height:'50px', maxWidth:'1000px'}}
+          />
+          {/* Search button */}
+          <Button variant="outline-secondary" style={{borderRadius:'0 10px 10px 0', width: '60px'}} onClick={ handleSearchBar }> <Search/></Button>
+          {/* Filter */}
+          <button className="mx-3" style={{border:"none", backgroundColor:"transparent"}}
+            onClick={() => setShowFilter(true)}>
+            <Filter width="40" height="40"></Filter>
+          </button>
+          <GenreFilter 
+            show={showFilter} 
+            onHide={() => setShowFilter(false)} 
+          />
+        </InputGroup>
 
-          {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
-          {LoggedIn ? (
-            <Link to="/Login">
-            <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
-              <EmojiSunglasses width="20" height="30" className='mr-2'/>
-              Sign In
-            </button>
-          </Link> 
-          ) : (
+        {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
+        {LoggedIn ? (
           <div className='mx-5 rounded-circle profile-pic'>
-            <Link to="/Profile" >
-                <Image src={profilePicUrl} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
-            </Link>
-          </div>
-          )}
+          <Link to="/Profile" >
+              <Image src={profilePicUrl} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+          </Link>
+        </div>
+        ) : (
+          <Link to="/Login">
+          <button className='rounded-pill custom-btn px-3 d-flex align-items-center'>
+            <EmojiSunglasses width="20" height="30" className='mr-2'/>
+            Sign In
+          </button>
+        </Link> 
+        )}
       </Navbar>
     );
   };

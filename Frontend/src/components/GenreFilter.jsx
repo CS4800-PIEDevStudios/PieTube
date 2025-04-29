@@ -97,7 +97,7 @@ const GenreFilter = ({show, onHide}) => {
           </div>
           {/* Close button */}
           <button class="btn-close" onClick={onHide} aria-label="Close">
-              <XLg width="20" height="20"/>
+              {/* <XLg width="20" height="20"/> */}
           </button>
         </Modal.Header>
         <Modal.Body className='modal-body d-flex flex-column'>
