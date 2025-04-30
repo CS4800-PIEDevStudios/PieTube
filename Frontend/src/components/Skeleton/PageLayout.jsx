@@ -4,6 +4,7 @@ import { useLoading } from './Loading';
 import SkeletonHome from "./SkeletonHome";
 import SkeletonHeader from "./SkeletonHeader";
 import SkeletonProfile from './SkeletonProfile';
+import SkeletonLogin from './SkeletonLogin';
 
 const PageLayout = ({ children }) => {
   const { isLoading } = useLoading();
