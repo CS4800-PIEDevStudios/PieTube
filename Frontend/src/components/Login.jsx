@@ -71,7 +71,7 @@ const Login = () => {
         {/* Header */}
         <h1>Sign in</h1>
         {/* Input forms  */}
-        <div class="text-left">
+        <div class="d-flex flex-column align-items-start">
           {/* Username */}
           <Form.Label>Enter Username</Form.Label>
           <InputGroup className="mb-3">

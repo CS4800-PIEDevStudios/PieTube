@@ -174,7 +174,7 @@ const Signup = () => {
         )}
 
           {/* Input forms */}
-          <div className="text-left">
+          <div className="d-flex flex-column align-items-start">
             {/* Username */}
             <Form.Label htmlFor="username">
               <RequiredField>Enter Username</RequiredField>
