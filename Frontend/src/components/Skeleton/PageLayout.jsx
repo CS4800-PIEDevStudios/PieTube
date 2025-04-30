@@ -5,6 +5,7 @@ import SkeletonHome from "./SkeletonHome";
 import SkeletonHeader from "./SkeletonHeader";
 import SkeletonProfile from './SkeletonProfile';
 import SkeletonLogin from './SkeletonLogin';
+import SkeletonSignup from './SkeletonSignup';
 
 const PageLayout = ({ children }) => {
   const { isLoading } = useLoading();
