@@ -29,14 +29,18 @@ const Header = () => {
         // Fetches profile data
         axiosInstance.get('login-api/getProfileData')
         .then(response => {
-                if (response.data[0].profilePic) {
-                    setProfilePicUrl(response.data[0].profilePic);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching profile data:', error);
-            })
+            if (response.data.authenticated === false) {
+              console.log("User not logged in");
+              setProfilePicUrl(default_pfp); // Default profile pic if user isn't logged in
+          } else if (response.data[0] && response.data[0].profilePic) {
+              setProfilePicUrl(response.data[0].profilePic);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching profile data:', error);
+        });
     }
+    
   //Changes headerName variable and saves inputted text
   const handleSearchBar = () => {
     if (inputText.trim()) { // Only search if there's actual text
