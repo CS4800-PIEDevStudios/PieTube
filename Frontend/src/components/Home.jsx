@@ -135,7 +135,7 @@ const Home = () => {
     };
 
     return (
-        <div className='d-flex flex-column mt-5' style={{ marginInline: "150px", overflowX: "hidden", marginTop:"100px", height:"100vh"}}>
+        <div className='d-flex flex-column mt-5' style={{ marginInline: "150px", overflowX: "hidden", marginTop:"100px", height:"90vh"}}>
             {/* Genres */}
             <div className='mb-5 ml-3 position-relative'> 
                 {/* Left Arrow Button */}
