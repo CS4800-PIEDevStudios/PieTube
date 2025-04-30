@@ -38,4 +38,5 @@ urlpatterns = [
     path('api/get-comments', views.getComments, name = "getComments"),
     path('api/get-replies', views.getReplies, name = "getReplies"),
     path('api/create-reply', views.createReply, name = "createReply"),
+    path('api/get-liked-genres', views.getLikedGenres, name = "getLikedGenres"),
 ]

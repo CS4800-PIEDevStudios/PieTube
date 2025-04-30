@@ -10,12 +10,12 @@ const Home = () => {
     // Use states
     const [scrollInterval, setScrollInterval] = useState(null);
     const [movieData, setMovieData] = useState([]);
-    const [selectedGenres, setSelectedGenres] = useState([]);
-    const [filteredMovies, setFilteredMovies] = useState([]);
-    
-    // Navigation hook
+    const [currentUser, setCurrentUser] = useState(null);
+    const [manualSelectedGenres, setManualSelectedGenres] = useState([]);
+    const [manualFilteredMovies, setManualFilteredMovies] = useState([]);
+    const [likedGenres, setLikedGenres] = useState([]);
+    const [recommendedMovies, setRecommendedMovies] = useState([]);
     const navigate = useNavigate(); 
-
     const ref = useRef(null);
 
     const genres = [
@@ -26,49 +26,86 @@ const Home = () => {
         "Superhero", "Noir", "Satire", "Teen", "Disaster"
       ];
 
-    useEffect(() => {
-          fetchData();
-      }, []);
-
-    useEffect(() => {
-        fetchMoviesByGenres();
-    }, [selectedGenres]);
-
-    //Fetch movie data
-    const fetchData = () => {
-        console.log("fetching...");
+      useEffect(() => {
         axiosInstance.get('api/get-movie-data')
-            .then(response => {
-                console.log(response.data)
-                setMovieData(response.data); // Assuming the response data is an array of objects
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    };
+          .then(response => {
+            setMovieData(response.data);
+          })
+          .catch(error => {
+            console.error('There was an error fetching movie data!', error);
+          });
+      }, []);
+    
 
-    // Function to fetch movies by selected genres
-    const fetchMoviesByGenres = () => {
-        if (selectedGenres.length === 0) {
-            setFilteredMovies([]);
-            return;
-        }
-        axiosInstance.get('api/filter-genres', {
-            params: {
-                genres: selectedGenres.join(',')
+      useEffect(() => {
+        axiosInstance.get('login-api/getProfileData', { withCredentials: true })
+          .then(response => {
+            console.log("Profile data:", response.data);
+            // Assuming the response is an array with one user object:
+            if (Array.isArray(response.data) && response.data.length > 0) {
+              setCurrentUser(response.data[0]);
+            } else {
+              setCurrentUser(response.data);
             }
-        })
-        .then(response => {
-            setFilteredMovies(response.data);
-        })
-        .catch(error => {
-            console.error('Error filtering by genres:', error);
-        });
-    };
+          })
+          .catch(error => {
+            console.error('Error fetching profile data:', error);
+          });
+      }, []);
+    
+
+      useEffect(() => {
+        if (manualSelectedGenres.length > 0) {
+          axiosInstance.get('api/filter-genres', {
+            params: { genres: manualSelectedGenres.join(',') }
+          })
+          .then(response => {
+            setManualFilteredMovies(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching movies for manual selection:', error);
+          });
+        } else {
+          setManualFilteredMovies([]);
+        }
+      }, [manualSelectedGenres]);
+    
+
+      useEffect(() => {
+        if (currentUser && currentUser.id) {
+          axiosInstance.get('api/get-liked-genres', {
+            params: { userID: currentUser.id }
+          })
+          .then(response => {
+            console.log("Liked genres:", response.data);
+            setLikedGenres(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching liked genres:', error);
+          });
+        }
+      }, [currentUser]);
+    
+
+      useEffect(() => {
+        if (likedGenres.length > 0) {
+          axiosInstance.get('api/filter-genres', {
+            params: { genres: likedGenres.join(',') }
+          })
+          .then(response => {
+            setRecommendedMovies(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching recommended movies:', error);
+          });
+        } else {
+          setRecommendedMovies([]);
+        }
+      }, [likedGenres]);
 
     //Genre select for genre scrolling bar
     const toggleGenre = (genre) => {
-        setSelectedGenres(prev => {
+        setManualSelectedGenres(prev => {
             if (prev.includes(genre)) {
                 return prev.filter(g => g !== genre);
             } else {
@@ -121,7 +158,7 @@ const Home = () => {
                 <Row ref={ref} className="scrollable-container d-flex flex-nowrap gx-5 mx-3"  style={{borderRadius:"20px"}}>
                     {genres.map((genre) => (
                         <div 
-                            className={`genre-blob ${selectedGenres.includes(genre) ? 'selected-genre' : ''}`}
+                            className={`genre-blob ${manualSelectedGenres.includes(genre) ? 'selected-genre' : ''}`}
                             onClick={() => toggleGenre(genre)}
                         >
                         {genre}
@@ -131,20 +168,26 @@ const Home = () => {
             </div>
             
             {/* Filtered Movies Section - Only shows when genres are selected */}
-            {selectedGenres.length > 0 && (
+            {manualSelectedGenres.length > 0 && (
                 <div className='mb-5'>
-                    <div className='header-recommend mb-3'>
-                        {`Movies in: ${selectedGenres.join(', ')}`}
+                <div className='header-recommend mb-3'>
+                    {`Movies in: ${manualSelectedGenres.join(', ')}`}
+                </div>
+                <div className='mb-5 thumbnail-grid'>
+                    {manualFilteredMovies.map((movie, index) => (
+                    <div 
+                        key={index} 
+                        className='thumbnail' 
+                        role="button" 
+                        onClick={() => navigate(`/MovieDescription/${movie.MovieID}`)}
+                    >
+                        <img src={movie.Poster} alt={movie.Title} />
                     </div>
-                    <div className='mb-5 thumbnail-grid'>
-                        {filteredMovies.map((movie, index) => (
-                            <div key={index} className='thumbnail' role="button" onClick={() => navigate(`/MovieDescription/${movie.MovieID}`)}>
-                                <img src={movie.Poster} alt={movie.Title} />
-                            </div>
-                        ))}
-                    </div>
+                    ))}
+                </div>
                 </div>
             )}
+
             {/* Trending */}
             <div className='header-recommend float-start mb-3'>Trending</div>
             <div className='mb-5 thumbnail-grid'>
@@ -155,23 +198,30 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* <div className='header-recommend float-start mb-3'>Recommended by Genre</div>
-            <div className='mb-5 thumbnail-grid'>
-                {Array.from({ length: 8 }).map((_, index) => (
-                    <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
-                        <img src = {KingKongThumb}/>
+            {/* Recommended Movies Section (only for logged-in users based on liked genres) */}
+            {currentUser && likedGenres.length > 0 && recommendedMovies.length > 0 && (
+                <div className='mb-5'>
+                <div className='header-recommend mb-3'>
+                    {`Recommended Movies Based on Your Likes`}
+                </div>
+                <div className='mb-5 thumbnail-grid'>
+                    {recommendedMovies.map((movie, index) => (
+                    <div 
+                        key={index} 
+                        className='thumbnail' 
+                        role="button" 
+                        onClick={() => navigate(`/MovieDescription/${movie.MovieID}`)}
+                    >
+                        <img src={movie.Poster} alt={movie.Title} />
                     </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+                </div>
+            )}
 
-            <div className='header-recommend float-start mb-3'>Recommended Movies</div>
-            <div className='mb-5 thumbnail-grid'>
-                {Array.from({ length: 24 }).map((_, index) => (
-                    <div key={index} className='thumbnail' role="button" onClick={() => navigate("/MovieDescription")}>
-                        < img src = {mepic}/>
-                    </div>
-                ))}
-            </div> */}
+
+
+
         </div>
     );
 };

@@ -83,6 +83,40 @@ def getMovieActorsByID(request):
 
 
 
+def getLikedGenres(request):
+    """
+    Retrieves distinct genres for movies liked by a user.
+    
+    Expects a GET request with the following parameter:
+        userID: The ID of the user whose liked genres will be fetched.
+    
+    Returns:
+        JsonResponse: A JSON array of liked genre names or an error message if the userID is missing.
+    """
+    #get the userID from the query parameters
+    user_id = request.GET.get('userID')
+    if not user_id:
+        return JsonResponse({"error": "userID parameter is required"}, status=400)
+    
+    #sql query to join MovieLike, MovieGenre, and Genre tables to find all liked genres for the given user
+    query = """
+        SELECT DISTINCT g.GenreName
+        FROM PieTube.MovieLike AS ml
+        INNER JOIN PieTube.MovieGenre AS mg ON ml.MovieID = mg.MovieID
+        INNER JOIN PieTube.Genre AS g ON mg.GenreID = g.GenreID
+        WHERE ml.UserID = %s AND ml.liked = 1;
+    """
+    params = [user_id]
+    
+    #perform query and extract genre names
+    result = djangoproject.DatabaseManager.fetchData(query, params)
+    liked_genres = [row["GenreName"] for row in result]
+    
+    return JsonResponse(liked_genres, safe=False)
+
+
+
+
 def genreFiltering(request):	# function for filtering by genre, called by Home and GenreFilter
 	"""
     Retrieves movie data for movies in specific genres.
