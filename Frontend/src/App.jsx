@@ -36,45 +36,47 @@ const App = () => {
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
         <Header/>
         <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Routes>
-            <Route path="/" element={
-              <Home />
-              }/>
-            <Route path="/Login" element={
-              <Layout header={<Logoheader />}>
-                <Login />
-              </Layout>
-              }/>
-            <Route path="/Signup" element={
-              <Layout header={<Logoheader />}>
-                <Signup />
-              </Layout>
-              }/>
-            <Route path="/Profile" element={
-                <Profile />
-              }/>
-            <Route path="/Changepassword" element={
-              <Changepassword />
-              }/>
-            <Route path="/Changeusername" element={
-              <Changeusername />
-              } />
-            <Route path="/EditAbout" element={
-              <EditAbout />
-              } />
-            <Route path="/MovieDescription/:id" element={
-              <MovieDescription />
-              } />
-            <Route path="/MoviePlayer/:id" element={
-              <MoviePlayer />
-              } />
-            <Route path="/SearchResults" element={
-              <SearchResults />
-              } />
-            <Route path="/WatchList" element={
-              <WatchList />
-              } />
-          </Routes>
+          <PageLayout>
+            <Routes>
+              <Route path="/" element={
+                <Home />
+                }/>
+              <Route path="/Login" element={
+                <Layout header={<Logoheader />}>
+                  <Login />
+                </Layout>
+                }/>
+              <Route path="/Signup" element={
+                <Layout header={<Logoheader />}>
+                  <Signup />
+                </Layout>
+                }/>
+              <Route path="/Profile" element={
+                  <Profile />
+                }/>
+              <Route path="/Changepassword" element={
+                <Changepassword />
+                }/>
+              <Route path="/Changeusername" element={
+                <Changeusername />
+                } />
+              <Route path="/EditAbout" element={
+                <EditAbout />
+                } />
+              <Route path="/MovieDescription/:id" element={
+                <MovieDescription />
+                } />
+              <Route path="/MoviePlayer/:id" element={
+                <MoviePlayer />
+                } />
+              <Route path="/SearchResults" element={
+                <SearchResults />
+                } />
+              <Route path="/WatchList" element={
+                <WatchList />
+                } />
+            </Routes>
+          </ PageLayout>
         </div>
       </div>
       </LoadingProvider>

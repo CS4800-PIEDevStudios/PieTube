@@ -84,35 +84,19 @@ const Header = () => {
         {/* Logo */}
         <Navbar.Brand>
           <Link to="/" className='flex-fill' >
-          {loading ? (
-            <div className="skeleton" style={{ width: '120px', height: '40px', borderRadius: '8px' }}></div>
-             ) : (
               <img src={pietubelogo} className='logo mr-3'/>
-             )} 
           </Link>
         </Navbar.Brand>
         {/* Links */}
         <Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-        {loading ? (
-          [...Array(3)].map((_, i) => (
-            <div key={i} className="skeleton mx-3" style={{ width: '80px', height: '30px', borderRadius: '5px' }}></div>
-          ))
-        ) : (
           <>
             <Link to="/" className='headerbar flex-fill'>Home</Link>
             <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}>Trending</Link>
             <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}>Watch List</Link>
           </>
-        )}
       </Nav>
         {/* Search bar */}
         <InputGroup className="ml-5 w-25 flex-fill">
-        {loading ? (
-        <div className="d-flex gap-3 align-items-center">
-          <div className="skeleton" style={{ width: '200px', height: '40px', borderRadius: '10px' }}></div>
-          <div className="skeleton" style={{ width: '40px', height: '40px', borderRadius: '50%' }}></div>
-        </div>
-      ) : (
         <>
           <Form.Control
             placeholder="Search"
@@ -133,13 +117,10 @@ const Header = () => {
             onHide={() => setShowFilter(false)} 
           />
         </>
-      )}
         </InputGroup>
 
-        {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
-        {loading ? (
-          <div className="skeleton rounded-circle" style={{ width: '40px', height: '40px' }}></div>
-        ) : LoggedIn ? (
+        {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}  
+        {LoggedIn ? (
           <div className='mx-5 rounded-circle profile-pic'>
           <Link to="/Profile" >
               <Image src={profilePicUrl} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
