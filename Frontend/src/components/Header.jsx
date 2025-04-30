@@ -49,7 +49,7 @@ const Header = () => {
       navigate("/SearchResults", {
         state: { savedText: inputText }
       });
-      // window.location.reload();
+      window.location.reload();
     } 
   };
 

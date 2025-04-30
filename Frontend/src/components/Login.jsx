@@ -107,7 +107,6 @@ const Login = () => {
           <Button variant="link" onClick={() => navigate("/Signup")}> Don't have an account? </Button>
         </div>        
       </div>
-      <div>{displayMessage}</div>
     </form>
   );
 };
