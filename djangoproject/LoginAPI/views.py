@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_POST, require_GET
+from django.contrib.auth.decorators import login_required
 from django.middleware.csrf import get_token
 from django.contrib.auth.hashers import make_password
 import djangoproject.DatabaseManager
@@ -294,5 +295,9 @@ def checkEmail(request):
         is_available = not User.objects.filter(email=email).exists()
         return JsonResponse({'available': is_available})
     return JsonResponse({'available': False})
+
+@login_required
+def currentUsername(request):
+    return JsonResponse({'username': request.user.username})
 
 
