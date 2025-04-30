@@ -1,6 +1,9 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
+import { LoadingProvider } from "./components/Skeleton/Loading";
+import PageLayout from "./components/Skeleton/PageLayout";
+import "./components/Skeleton/skeleton.css";
 import './App.css';
 
 const Home = lazy(() => import('./components/Home'));
@@ -29,6 +32,7 @@ const Layout = ({ children, header }) => {
 const App = () => {
   return (
     <Router basename='/'>
+      <LoadingProvider>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
         <Header/>
         <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
@@ -73,6 +77,7 @@ const App = () => {
           </Routes>
         </div>
       </div>
+      </LoadingProvider>
     </Router>
   );
 };
