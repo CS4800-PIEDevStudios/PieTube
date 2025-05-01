@@ -142,7 +142,7 @@ const Home = () => {
                 <button  
                     onMouseEnter={() => startScrolling(-20)} 
                     onMouseLeave={stopScrolling} 
-                    className='scroll-arrow' style={{zIndex: 1, left:"0", background: "linear-gradient(to right, rgb(0, 0, 0) 35%, transparent 90%)", height: "100%", borderRadius: "20px 0px 0px 20px"}}>
+                    className='scroll-arrow' style={{zIndex: 1, left:"0", background: "linear-gradient(to right, rgb(255, 166, 0) 50%, transparent 100%)", height: "100%", borderRadius: "20px 0px 0px 20px"}}>
                     <ChevronLeft width="40" height="40"/>
                 </button>
 
@@ -150,7 +150,7 @@ const Home = () => {
                 <button                     
                     onMouseEnter={() => startScrolling(20)} 
                     onMouseLeave={stopScrolling} 
-                    className='scroll-arrow mr-3' style={{zIndex: 1, right: "0", background: "linear-gradient(to left, rgba(0, 0, 0, 0.9) 35%, transparent 90%)", height: "100%", borderRadius: "0px 20px 20px 0px"}}>
+                    className='scroll-arrow mr-3' style={{zIndex: 1, right: "0", background: "linear-gradient(to left, rgb(255, 166, 0) 50%, transparent 90%)", height: "100%", borderRadius: "0px 20px 20px 0px"}}>
                     <ChevronRight width="40" height="40" />
                 </button>
 
