@@ -7,6 +7,9 @@ import SkeletonProfile from './SkeletonProfile';
 import SkeletonLogin from './SkeletonLogin';
 import SkeletonSignup from './SkeletonSignup';
 import SkeletonSearchResults from './SkeletonSearchResults';
+import SkeletonComments from './SkeletonComments'; 
+import SkeletonMoviePlayer from './SkeletonMoviePlayer'; 
+import SkeletonMovieDescription from './SkeletonMovieDescription';
 
 const PageLayout = ({ children }) => {
   const { isLoading } = useLoading();
@@ -19,6 +22,8 @@ const PageLayout = ({ children }) => {
   if (location.pathname === '/Login') return <SkeletonLogin />;
   if (location.pathname === '/Profile') return <SkeletonProfile />;
   if (location.pathname === '/SearchResults' || location.pathname === '/WatchList') return <SkeletonSearchResults />;
+  if (location.pathname === '/MoviePlayer') return <SkeletonMoviePlayer />;
+  if (location.pathname.startsWith('/MovieDescription/')) { return <SkeletonMovieDescription />;}
 
   return <div> <SkeletonSpinner /> </div>;
 };

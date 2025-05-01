@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup, Alert } from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
 
 const Login = () => {
@@ -8,6 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
+  const [alertVariant, setAlertVariant] = useState('success');
 
   // Navigation hook
   const navigate = useNavigate(); 
@@ -56,11 +57,7 @@ const Login = () => {
         window.location.href = '/';
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setDisplayMessage('Incorrect username or password. Please try again.');
-      } else {
-        setDisplayMessage('Something went wrong. Please try again later.');
-      }
+      setDisplayMessage('Incorrect username or password. Please try again.');
       console.error('Error sending data to Django:', error);
     }
   };
@@ -99,9 +96,9 @@ const Login = () => {
           {/* Buttons */}
           <Button variant="link" onClick={() => navigate("/Changepassword")}> Forgot password? </Button>
           {displayMessage && (
-          <div className={`mt-3 alert ${displayMessage.includes('Incorrect') ? 'alert-danger' : 'alert-success'}`} role="alert">
-            {displayMessage}
-          </div>
+            <Alert className='mt-3' variant='danger'>
+              {displayMessage}
+            </Alert>
           )}    
           <button class="custom-btn mt-4" type="submit">Submit</button>
           <Button variant="link" onClick={() => navigate("/Signup")}> Don't have an account? </Button>

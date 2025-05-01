@@ -102,7 +102,7 @@ const MovieDescription = () => {
                 {/* Bottom Description */}
                 <div className='d-flex' style={{gap:'100px'}}>
                     {/* Description */}
-                    <div className='d-flex flex-column flex-fill' style={{maxWidth:'1500px'}}>
+                    <div className='d-flex flex-column flex-fill' style={{maxWidth:'1500px'}} >
                         {/* Genres */}
                         <div id='Genres' className='d-flex flex-wrap' 
                         style={{ gap: "15px", position: 'relative'}}>
@@ -148,7 +148,7 @@ const MovieDescription = () => {
                     </div>
 
                     {/* Trailer Section */}
-                    <div id='MovieDescriptionTrailer' className='d-flex flex-column align-items-end flex-fill'>
+                    <div id='MovieDescriptionTrailer' className='d-flex flex-column align-items-end flex-fill' style={{maxWidth:'800px'}}>
                         <h2 className='mt-3 align-self-start'>Trailer</h2>
                         <iframe
                             className='embed-responsive-item'
