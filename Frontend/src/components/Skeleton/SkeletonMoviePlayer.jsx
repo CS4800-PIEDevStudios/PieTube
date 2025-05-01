@@ -16,7 +16,7 @@ const SkeletonMoviePlayer = () => {
             </div>
 
             {/* Movie description skeleton */}
-            <div className="skeleton skeleton-text d-flex flex-column " style={{ height: "500px"}}> </div>
+            <div className="skeleton skeleton-text d-flex flex-column " style={{ height: "50vh"}}> </div>
             
             {/* Comments section skeleton */}
             <SkeletonComments />
