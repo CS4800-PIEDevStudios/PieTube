@@ -92,7 +92,11 @@ const Header = () => {
           <>
             <Link to="/" className='headerbar flex-fill'>Home</Link>
             <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}>Trending</Link>
-            <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}>Watch List</Link>
+            {LoggedIn ? (
+                <Link to="/Login" className='headerbar flex-fill'> Watch List </Link>
+              ) : (
+                <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
+              )}	
           </>
       </Nav>
         {/* Search bar */}
