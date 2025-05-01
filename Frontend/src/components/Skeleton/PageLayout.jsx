@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useLoading } from './Loading';
-
+import SkeletonSpinner from './SkeletonSpinner';
 import SkeletonHome from "./SkeletonHome";
 // import SkeletonHeader from "./SkeletonHeader";
 import SkeletonProfile from './SkeletonProfile';
@@ -20,7 +20,7 @@ const PageLayout = ({ children }) => {
   if (location.pathname === '/Profile') return <SkeletonProfile />;
   if (location.pathname === '/SearchResults' || location.pathname === '/WatchList') return <SkeletonSearchResults />;
 
-  return <div className="skeleton" style={{ height: '300px' }}>Loading...</div>;
+  return <div> <SkeletonSpinner /> </div>;
 };
 
 export default PageLayout;
