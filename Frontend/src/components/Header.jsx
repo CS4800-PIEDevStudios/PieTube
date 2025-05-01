@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
 import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
+import SkeletonHeader from './Skeleton/SkeletonHeader';
 import default_pfp from '../assets/Default_pfp.png';
 import pietubelogo from '../assets/pietubelogo.png';
 import GenreFilter from './GenreFilter';
@@ -13,6 +14,7 @@ const Header = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [inputText, setInputText] = useState('');
   const [profilePicUrl, setProfilePicUrl] = useState(default_pfp);
+  const [loading, setLoading] = useState(true);
   
   // Navigation hook
   const navigate = useNavigate(); 
@@ -20,8 +22,9 @@ const Header = () => {
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
+    setLoading(true);
     fetchProfileData();
-  },[location]);
+  },[location.pathname]);
 
   function fetchProfileData()
     {
@@ -38,6 +41,9 @@ const Header = () => {
         })
         .catch(error => {
           console.error('Error fetching profile data:', error);
+        })
+        .finally(()=> {
+          setLoading(false);
         });
     }
     
@@ -72,27 +78,30 @@ const Header = () => {
   const handleWatchList = () => {
     localStorage.setItem('HeaderName', 'watchList');
   }
-
+  
     return (
       <Navbar bg="light" data-bs-theme="light" className='navbar-header d-flex w-100 px-5 justify-content-between' style={{zIndex:2}}>
         {/* Logo */}
         <Navbar.Brand>
           <Link to="/" className='flex-fill' >
-              <img src={pietubelogo} className='logo mr-3'/> 
+              <img src={pietubelogo} className='logo mr-3'/>
           </Link>
         </Navbar.Brand>
         {/* Links */}
         <Nav className='d-flex text-nowrap flex-fill flex-grow-1'>
-            <Link to="/" className='headerbar flex-fill'> Home </Link>
-            <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}> Trending </Link>
+          <>
+            <Link to="/" className='headerbar flex-fill'>Home</Link>
+            <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}>Trending</Link>
             {LoggedIn ? (
                 <Link to="/Login" className='headerbar flex-fill'> Watch List </Link>
               ) : (
                 <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
-              )}					
-        </Nav>
+              )}	
+          </>
+      </Nav>
         {/* Search bar */}
         <InputGroup className="ml-5 w-25 flex-fill">
+        <>
           <Form.Control
             placeholder="Search"
             value={ inputText }
@@ -111,9 +120,10 @@ const Header = () => {
             show={showFilter} 
             onHide={() => setShowFilter(false)} 
           />
+        </>
         </InputGroup>
 
-        {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}
+        {/* Chooses whether to have the sign up button or the profile pic if user is logged in */}  
         {LoggedIn ? (
           <div className='mx-5 rounded-circle profile-pic'>
           <Link to="/Profile" >
@@ -122,7 +132,7 @@ const Header = () => {
         </div>
         ) : (
           <Link to="/Login">
-          <button className='rounded-pill custom-btn px-3 d-flex align-items-center' style={{gap:"10px"}}>
+          <button className='rounded-pill custom-btn px-3 d-flex align-items-center' style={{gap:"8px"}}>
             <EmojiSunglasses width="20" height="30"/>
             Sign In
           </button>

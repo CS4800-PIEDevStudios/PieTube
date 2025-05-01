@@ -1,24 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Comment from './Comment.jsx'
 import { Form, InputGroup } from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
 
-
-
 const CommentSection = ({movie}) => {
+    const [LoggedIn, setIsLoggedIn] = useState(false);
     const [commentContent, setCommentContent] = useState('');
     const [comments, setComments] = useState([]);
 
     const createComment = async () => {
-        const response = await axiosInstance.post('api/create-comment', {
-            MovieID : movie.MovieID,
-            content : commentContent,
-        })
-
-        setCommentContent('');
-        // Refresh Comments
-        getComments();
+        if(!LoggedIn){
+            alert("You must be logged in to comment!");
+            return;
+        } else {
+            const response = await axiosInstance.post('api/create-comment', {
+                MovieID : movie.MovieID,
+                content : commentContent,
+            })
+    
+            setCommentContent('');
+            // Refresh Comments
+            getComments();
+        }
     }
+
+    useEffect(() => {
+        const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
+        setIsLoggedIn(loggedInStatus);
+    });
 
     useEffect(() => {
         getComments();
