@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Nav, Navbar, Image, Form, InputGroup, Button } from 'react-bootstrap';
 import { Filter, EmojiSunglasses, Search } from 'react-bootstrap-icons';
-import SkeletonHeader from './Skeleton/SkeletonHeader';
 import default_pfp from '../assets/Default_pfp.png';
 import pietubelogo from '../assets/pietubelogo.png';
 import GenreFilter from './GenreFilter';
+import AlertModal from './AlertModal.jsx';
 import axiosInstance from '../axiosConfig.js'
 
 const Header = () => {
@@ -15,6 +15,7 @@ const Header = () => {
   const [inputText, setInputText] = useState('');
   const [profilePicUrl, setProfilePicUrl] = useState(default_pfp);
   const [loading, setLoading] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
   
   // Navigation hook
   const navigate = useNavigate(); 
@@ -76,11 +77,25 @@ const Header = () => {
   
   //Changes headerName variable
   const handleWatchList = () => {
-    localStorage.setItem('HeaderName', 'watchList');
+    if (!LoggedIn) {
+      setShowAlert(true);
+      return;
+    } else {
+      localStorage.setItem('HeaderName', 'watchList');
+    }
+
   }
   
     return (
       <Navbar bg="light" data-bs-theme="light" className='navbar-header d-flex w-100 px-5 justify-content-between' style={{zIndex:2}}>
+          <GenreFilter 
+            show={showFilter} 
+            onHide={() => setShowFilter(false)} 
+          />
+          <AlertModal             
+              show={showAlert} 
+              onHide={() => setShowAlert(false)}
+          />
         {/* Logo */}
         <Navbar.Brand>
           <Link to="/" className='flex-fill' >
@@ -92,11 +107,7 @@ const Header = () => {
           <>
             <Link to="/" className='headerbar flex-fill'>Home</Link>
             <Link to="/SearchResults" className='headerbar flex-fill' onClick={handleTrending}>Trending</Link>
-            {LoggedIn ? (
-                <Link to="/Login" className='headerbar flex-fill'> Watch List </Link>
-              ) : (
-                <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
-              )}	
+            <Link to="/WatchList" className='headerbar flex-fill' onClick={handleWatchList}> Watch List </Link>
           </>
       </Nav>
         {/* Search bar */}
@@ -116,10 +127,6 @@ const Header = () => {
             onClick={() => setShowFilter(true)}>
             <Filter width="40" height="40"></Filter>
           </button>
-          <GenreFilter 
-            show={showFilter} 
-            onHide={() => setShowFilter(false)} 
-          />
         </>
         </InputGroup>
 

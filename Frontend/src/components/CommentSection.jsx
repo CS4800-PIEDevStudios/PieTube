@@ -1,16 +1,18 @@
 import { useState, useEffect, use } from 'react';
 import Comment from './Comment.jsx'
-import { Form, InputGroup } from 'react-bootstrap';
+import { Form, InputGroup} from 'react-bootstrap';
 import axiosInstance from '../axiosConfig.js'
+import AlertModal from './AlertModal.jsx';
 
 const CommentSection = ({movie}) => {
     const [LoggedIn, setIsLoggedIn] = useState(false);
     const [commentContent, setCommentContent] = useState('');
     const [comments, setComments] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
 
     const createComment = async () => {
         if(!LoggedIn){
-            alert("You must be logged in to comment!");
+            setShowAlert(true);
             return;
         } else {
             const response = await axiosInstance.post('api/create-comment', {
@@ -52,6 +54,10 @@ const CommentSection = ({movie}) => {
 
     return (
         <div className='comment-section-background d-flex flex-column align-items-center pt-5'>
+            <AlertModal             
+                show={showAlert} 
+                onHide={() => setShowAlert(false)}
+            />
             <div className='d-flex flex-column w-50 align-self-center'>
                 {/* Comments header */}
                 <div className='d-flex pb-3' style={{gap: "15px"}}>
