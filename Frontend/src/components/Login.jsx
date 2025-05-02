@@ -50,6 +50,7 @@ const Login = () => {
         password: password,
       });
       setDisplayMessage('Account Login Successful');
+      setAlertVariant('success');
       console.log('Response from Django:', response.data);
       // Authenticate user
       if (response.data.status === 'success') {
@@ -61,6 +62,7 @@ const Login = () => {
       }
     } catch (error) {
       setDisplayMessage('Incorrect username or password. Please try again.');
+      setAlertVariant('danger');
       console.error('Error sending data to Django:', error);
     }
   };
@@ -111,7 +113,7 @@ const Login = () => {
           {/* Buttons */}
           <Button variant="link" onClick={() => navigate("/Changepassword")}> Forgot password? </Button>
           {displayMessage && (
-            <Alert className='mt-3' variant='danger'>
+            <Alert className='mt-3' variant={alertVariant}>
               {displayMessage}
             </Alert>
           )}    
