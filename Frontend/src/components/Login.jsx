@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, InputGroup, Alert } from 'react-bootstrap';
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 import axiosInstance from '../axiosConfig.js'
 
 const Login = () => {
@@ -9,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [displayMessage, setDisplayMessage] = useState('');
   const [alertVariant, setAlertVariant] = useState('success');
+  const [showPassword, setShowPassword] = useState(false);
+
 
   // Navigation hook
   const navigate = useNavigate(); 
@@ -83,16 +86,28 @@ const Login = () => {
           </InputGroup>
           {/* Password */}
           <Form.Label>Enter Password</Form.Label>
-          <InputGroup >
+          <div className="position-relative w-100">
             <Form.Control
-              type = "password"
-              value = {password}
-              onChange = {handlePasswordChange}
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={handlePasswordChange}
               placeholder="Password"
-              aria-label="Password"
-              aria-describedby="basic-addon2"
+              style={{ paddingRight: "40px" }}
             />
-          </InputGroup>
+            <span 
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "black"
+              }}
+            >
+              {showPassword ? <EyeSlash size={20} /> : <Eye size={20} />}
+            </span>
+          </div>
           {/* Buttons */}
           <Button variant="link" onClick={() => navigate("/Changepassword")}> Forgot password? </Button>
           {displayMessage && (
