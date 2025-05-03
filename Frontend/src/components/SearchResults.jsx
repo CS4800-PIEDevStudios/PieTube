@@ -72,21 +72,32 @@ const SearchResults = () => {
 
         // Returns matching movies
         const checkFinalResults = () => {
-            if (genreResults.length && ratingResults.length) {
-                const finalResults = genreResults.filter(movie => 
-                    ratingResults.some(ratingMovie => ratingMovie.MovieID === movie.MovieID)
+            // If a rating filter was applied but no movies match, show nothing
+            if (selectedRatings?.length && ratingResults.length === 0) {
+                setSearchResults([]);
+                return;
+            }
+            
+            // If both genre and rating filters were applied, display both
+            if (selectedGenres?.length && selectedRatings?.length) {
+                const finalResults = genreResults.filter(movie =>
+                ratingResults.some(ratingMovie => ratingMovie.MovieID === movie.MovieID)
                 );
                 setSearchResults(finalResults);
-            } else if (genreResults.length) {
+            } 
+            // If only genre filter is applied
+            else if (selectedGenres?.length) {
                 setSearchResults(genreResults);
-            } else if (ratingResults.length) {
+            } 
+            // If only rating filter is applied
+            else if (selectedRatings?.length) {
                 setSearchResults(ratingResults);
-            } else {
+            } 
+            // If no filters were applied, show all results
+            else {
                 setSearchResults(allResults);
             }
-
-            console.log("SEARCH RESULTS" + searchResults)
-        };
+            };
     }, [selectedGenres, excludedGenres, selectedRatings]);
 
 
