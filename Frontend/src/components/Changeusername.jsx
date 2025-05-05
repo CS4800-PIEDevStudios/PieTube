@@ -28,7 +28,7 @@ const ChangeUsername = () => {
         e.preventDefault();
         // User error message
         if (newUsername !== confirmUsername) {
-            alert("New passwords do not match.");
+            alert("Usernames do not match.");
             return;
         }
         
@@ -38,16 +38,15 @@ const ChangeUsername = () => {
           }
         //Updates username
         try {
-            // Now, send the login POST request
-            const response = await axiosInstance.post('login-api/updateUsername', {
+          const response = await axiosInstance.post('login-api/updateUsername', {
               newUsername : newUsername,
               confirmUsername : confirmUsername
-            });
-            console.log('Response from Django:', response.data);
-          } catch (error) {
-            console.error('Error sending data to Django:', error);
-            return;
-          }
+          });
+          console.log('Response from Django:', response.data);
+      } catch (error) {
+          console.error('Error sending data to Django:', error);
+          return;
+      }
         console.log("Username changed successfully.");
         // Go back to login page if successfully changed
         navigate("/Login");
