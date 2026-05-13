@@ -1,47 +1,60 @@
-PieTube 🎬
+# PieTube 🎬
 
 PieTube is a full-stack movie streaming web application that allows users to browse and watch public domain movies. Users can create profiles, rate films, and organize their viewing experience through favorites and a watchlist system.
 
-🚀 Features
-🎥 Stream public domain movies
-⭐ Rate movies
-❤️ Favorite movies
-📺 Add movies to a personal watchlist
-👤 User authentication and profile system
-🖼️ Profile picture uploads
-🔎 Movie browsing and discovery
-🏗️ Tech Stack
+---
 
-Frontend
+## 🚀 Features
 
-React (Vite)
-Axios
-React Router
+- 🎥 Stream public domain movies  
+- ⭐ Rate movies  
+- ❤️ Favorite movies  
+- 📺 Add movies to a personal watchlist  
+- 👤 User authentication and profile system  
+- 🖼️ Profile picture uploads (stored in AWS S3)  
+- 🔎 Browse and discover movies  
 
-Backend
+---
 
-Django
-Django REST Framework
-MySQL
+## 🏗️ Tech Stack
 
-Infrastructure
+### Frontend
+- React (Vite)
+- Axios
+- React Router
 
-AWS EC2 (hosting frontend + backend)
-AWS S3 (profile picture storage)
-☁️ Deployment Architecture
-Frontend and backend are deployed on an AWS EC2 instance.
-Static and media files (including user profile images) are stored and served via an AWS S3 bucket.
-REST API handles communication between frontend and backend.
-🧑‍💻 Core Functionality
-User System
-Register / login / logout
-Profile customization with profile images stored in S3
-Persistent user sessions
-Movie System
-Browse public domain movie catalog
-View movie details
-Rate movies (user-based rating system)
-Personalization
-Add/remove favorites
-Manage watchlist
-View personalized profile activity
+### Backend
+- Django
+- Django REST Framework
+- MySQL
+
+### Cloud / Infrastructure
+- AWS EC2 (hosting full stack app)
+- AWS S3 (profile image storage)
+
+---
+
+## ☁️ Deployment Overview
+
+- The application is deployed on an **AWS EC2 instance**, hosting both frontend and backend services.
+- User-uploaded media (profile pictures) are stored in an **AWS S3 bucket**.
+- The backend exposes a REST API consumed by the React frontend.
+
+---
+
+## 👤 Core Functionality
+
+### User System
+- User registration and authentication
+- Session handling
+- Profile pages with customizable avatars
+
+### Movie System
+- Browse public domain movie library
+- View detailed movie information
+- Rate movies on a per-user basis
+
+### Personal Features
+- Add/remove favorites
+- Maintain a watchlist
+- View personalized user activity
